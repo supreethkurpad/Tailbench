@@ -1,0 +1,124 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.4,v 1.26 1999/06/07 19:05:26 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test append_rec, update_rec and truncate_rec
+#
+
+source $script_dir/vol.init
+if { $logging==0 } {
+    echo "Logging off: script not run. "
+} else {
+
+set_config_info
+
+set num_op 600 
+set id_width %08d
+
+set s [format data 1]
+
+sm begin_xct
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+
+set r1 [sm create_rec $f1 hdr12345 11 .]
+verbose r1 = $r1
+set read_result [sm read_rec $r1 0 0]
+verbose read of $r1: $read_result
+
+sm commit_xct
+
+sm begin_xct
+    verbose testing lock requests
+    # request medium duration since long can't be released before EOT
+    sm lock $r1 EX MEDIUM
+    set held [sm query_lock $r1] 
+    verbose held = $held
+    assert {expr [string compare $held "EX"]==0}
+
+    # make sure chain_xct retains lock
+    sm chain_xct
+    set held [sm query_lock $r1] 
+    verbose held = $held
+    assert {expr [string compare $held "EX"]==0}
+
+    sm unlock $r1
+    set held [sm query_lock $r1] 
+    verbose held = $held
+    assert {expr [string compare $held "NL"]==0}
+sm commit_xct
+
+###############################################
+#   append bytes
+#
+sm begin_xct
+
+set abort_check 2
+while {$abort_check >= 1} {
+    sm abort_xct
+    sm begin_xct
+
+    verbose appending $num_op data
+    for {set i 1} {$i <= $num_op} {incr i} {
+	set app [expr $i%10]
+	set app [expr {$app==0 ? "." : $app}]
+	sm append_rec $r1 $app
+    }
+    verbose read of $r1: [sm read_rec $r1 0 0]
+
+    verbose updating $num_op data
+    for {set i 1} {$i <= $num_op} {incr i} {
+	set data [expr {($i+1) % 10}]
+	set data [expr {$data==0 ? "." : $data}]
+	sm update_rec $r1 $i $data
+    }
+    verbose read of $r1: [sm read_rec $r1 0 0]
+
+    verbose truncating $num_op data
+    for {set i 1} {$i <= $num_op} {incr i} {
+	sm truncate_rec $r1 1
+    }
+    verbose read of $r1: $read_result
+
+    set abort_check [expr {$abort_check - 1}]
+}
+sm commit_xct
+
+dstats $f1
+dstats $volid
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+unset r1 read_result
+unset held app data id_width num_op f1 i s abort_check
+
+}
+

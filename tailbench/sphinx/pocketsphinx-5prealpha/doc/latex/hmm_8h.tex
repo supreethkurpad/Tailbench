@@ -1,0 +1,422 @@
+\section{src/libpocketsphinx/hmm.h File Reference}
+\label{hmm_8h}\index{src/libpocketsphinx/hmm.\+h@{src/libpocketsphinx/hmm.\+h}}
+
+
+Implementation of H\+MM base structure.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/fixpoint.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/listelem\+\_\+alloc.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}bin\+\_\+mdef.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ hmm\+\_\+context\+\_\+s}
+\item 
+struct \textbf{ hmm\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{hmm_8h_a5b6b9157cfaaec312508eaed602f0698}} 
+\#define \textbf{ M\+A\+X\+\_\+\+N\+\_\+\+F\+R\+A\+M\+ES}~M\+A\+X\+\_\+\+I\+N\+T32
+\begin{DoxyCompactList}\small\item\em Maximum number of frames in index, should be in sync with above. \end{DoxyCompactList}\item 
+\#define \textbf{ S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT}~10
+\begin{DoxyCompactList}\small\item\em Shift count for senone scores. \end{DoxyCompactList}\item 
+\#define \textbf{ W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE}~((int)0x\+E0000000)
+\begin{DoxyCompactList}\small\item\em Large \char`\"{}bad\char`\"{} score. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a9b38399b544dbb93bc9b7d0094e91db7}} 
+\#define \textbf{ T\+M\+A\+T\+\_\+\+W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE}~(-\/255)
+\begin{DoxyCompactList}\small\item\em Watch out, though! Transition matrix entries that are supposed to be \char`\"{}zero\char`\"{} don\textquotesingle{}t actually get that small due to quantization. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a2874ab52613ff781c96f570ec0eb0d98}} 
+\#define \textbf{ B\+E\+T\+T\+E\+R\+\_\+\+T\+H\+AN}~$>$
+\begin{DoxyCompactList}\small\item\em Is one score better than another? \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_aa930fb8fb6fce7f34bcf4018b81d7066}} 
+\#define \textbf{ W\+O\+R\+S\+E\+\_\+\+T\+H\+AN}~$<$
+\begin{DoxyCompactList}\small\item\em Is one score worse than another? \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a1eb055ab0e55008f27d78e7b07a55a1c}} 
+\#define \textbf{ H\+M\+M\+\_\+\+M\+A\+X\+\_\+\+N\+S\+T\+A\+TE}~5
+\begin{DoxyCompactList}\small\item\em Hard-\/coded limit on the number of emitting states. \end{DoxyCompactList}\item 
+\#define \textbf{ hmm\+\_\+context}(h)~(h)-\/$>$ctx
+\begin{DoxyCompactList}\small\item\em Access macros. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a9bb998720796e947722c4e0e36b55c61}} 
+\#define {\bfseries hmm\+\_\+is\+\_\+mpx}(h)~(h)-\/$>$mpx
+\item 
+\mbox{\label{hmm_8h_a3b6af4838a0485b4d44c04680e2e5bf6}} 
+\#define {\bfseries hmm\+\_\+in\+\_\+score}(h)~(h)-\/$>$score[0]
+\item 
+\mbox{\label{hmm_8h_ae7ff8a1aba5458c587868ebf5a9898d4}} 
+\#define {\bfseries hmm\+\_\+score}(h,  st)~(h)-\/$>$score[st]
+\item 
+\mbox{\label{hmm_8h_a196fd6a12e2d34e19d17f1338aa66727}} 
+\#define {\bfseries hmm\+\_\+out\+\_\+score}(h)~(h)-\/$>$out\+\_\+score
+\item 
+\mbox{\label{hmm_8h_a4569baec920021f78c92976049fabe1b}} 
+\#define {\bfseries hmm\+\_\+in\+\_\+history}(h)~(h)-\/$>$history[0]
+\item 
+\mbox{\label{hmm_8h_a1ad265671ea1ec72913641444adf3cda}} 
+\#define {\bfseries hmm\+\_\+history}(h,  st)~(h)-\/$>$history[st]
+\item 
+\mbox{\label{hmm_8h_ad2c9f925fe7f3edd761391e524ccbe81}} 
+\#define {\bfseries hmm\+\_\+out\+\_\+history}(h)~(h)-\/$>$out\+\_\+history
+\item 
+\mbox{\label{hmm_8h_a59323e9a29074f3d1fd4cc07b310785e}} 
+\#define {\bfseries hmm\+\_\+bestscore}(h)~(h)-\/$>$bestscore
+\item 
+\mbox{\label{hmm_8h_aef81c7d2e36140c8f9873b8a49fbbf12}} 
+\#define {\bfseries hmm\+\_\+frame}(h)~(h)-\/$>$frame
+\item 
+\mbox{\label{hmm_8h_ad00a55e9d9e9fdfa030da184cdb4c2ba}} 
+\#define {\bfseries hmm\+\_\+mpx\+\_\+ssid}(h,  st)~(h)-\/$>$senid[st]
+\item 
+\mbox{\label{hmm_8h_a1c0be1206da75b5c560524549de72f7d}} 
+\#define {\bfseries hmm\+\_\+nonmpx\+\_\+ssid}(h)~(h)-\/$>$ssid
+\item 
+\#define {\bfseries hmm\+\_\+ssid}(h,  st)
+\item 
+\#define {\bfseries hmm\+\_\+mpx\+\_\+senid}(h,  st)
+\item 
+\mbox{\label{hmm_8h_a45850600910ae0839f34792b00b5970b}} 
+\#define {\bfseries hmm\+\_\+nonmpx\+\_\+senid}(h,  st)~((h)-\/$>$senid[st])
+\item 
+\#define {\bfseries hmm\+\_\+senid}(h,  st)
+\item 
+\#define {\bfseries hmm\+\_\+senscr}(h,  st)
+\item 
+\mbox{\label{hmm_8h_a749193daefb4247e56dbc6b3f2d75c14}} 
+\#define {\bfseries hmm\+\_\+tmatid}(h)~(h)-\/$>$tmatid
+\item 
+\mbox{\label{hmm_8h_a3d6e71af2d2ce897e63a5ee8c5741593}} 
+\#define {\bfseries hmm\+\_\+tprob}(h,  i,  j)~(-\/(h)-\/$>$ctx-\/$>$tp[hmm\+\_\+tmatid(h)][i][j])
+\item 
+\mbox{\label{hmm_8h_a4ef324f17daafd4de126b88671c7e93c}} 
+\#define {\bfseries hmm\+\_\+n\+\_\+emit\+\_\+state}(h)~((h)-\/$>$n\+\_\+emit\+\_\+state)
+\item 
+\mbox{\label{hmm_8h_a16311c1d64310ad3a8af33eec0fbe9f1}} 
+\#define {\bfseries hmm\+\_\+n\+\_\+state}(h)~((h)-\/$>$n\+\_\+emit\+\_\+state + 1)
+\item 
+\mbox{\label{hmm_8h_a44d0b5515cb269bf9b95f62aada18cbb}} 
+\#define \textbf{ hmm\+\_\+context\+\_\+set\+\_\+senscore}(ctx,  senscr)~((ctx)-\/$>$senscore = (senscr))
+\begin{DoxyCompactList}\small\item\em Change the senone score array for a context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int32 \textbf{ frame\+\_\+idx\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Type for frame index values. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a87dd8e0478af63326664232541d2ade6}} 
+typedef struct \textbf{ hmm\+\_\+context\+\_\+s} {\bfseries hmm\+\_\+context\+\_\+t}
+\item 
+\mbox{\label{hmm_8h_a6f69b65f5fd63aa882fbe6002be74c13}} 
+typedef struct \textbf{ hmm\+\_\+s} {\bfseries hmm\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{hmm_8h_a4d6e2799cbe290112e8517adcab1b038}} 
+\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ \textbf{ hmm\+\_\+context\+\_\+init} (int32 n\+\_\+emit\+\_\+state, uint8 $\ast$$\ast$const $\ast$tp, int16 const $\ast$senscore, uint16 $\ast$const $\ast$sseq)
+\begin{DoxyCompactList}\small\item\em Create an H\+MM context. \end{DoxyCompactList}\item 
+void \textbf{ hmm\+\_\+context\+\_\+free} (\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em Free an H\+MM context. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_aa911ae0d1c0eba562692fbeebca90d78}} 
+void \textbf{ hmm\+\_\+init} (\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ctx, \textbf{ hmm\+\_\+t} $\ast$hmm, int mpx, int ssid, int tmatid)
+\begin{DoxyCompactList}\small\item\em Populate a previously-\/allocated H\+MM structure, allocating internal data. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a7440ced1649225beb6816bf62481e08b}} 
+void \textbf{ hmm\+\_\+deinit} (\textbf{ hmm\+\_\+t} $\ast$hmm)
+\begin{DoxyCompactList}\small\item\em Free an H\+MM structure, releasing internal data (but not the H\+MM structure itself). \end{DoxyCompactList}\item 
+void \textbf{ hmm\+\_\+clear} (\textbf{ hmm\+\_\+t} $\ast$h)
+\begin{DoxyCompactList}\small\item\em Reset the states of the H\+MM to the invalid condition. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a9561d7ffa1e61c99de2d2b900774152f}} 
+void \textbf{ hmm\+\_\+clear\+\_\+scores} (\textbf{ hmm\+\_\+t} $\ast$h)
+\begin{DoxyCompactList}\small\item\em Reset the scores of the H\+MM. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a0438bc7672ff9200274ffe7b5051eb92}} 
+void \textbf{ hmm\+\_\+normalize} (\textbf{ hmm\+\_\+t} $\ast$h, int32 bestscr)
+\begin{DoxyCompactList}\small\item\em Renormalize the scores in this H\+MM based on the given best score. \end{DoxyCompactList}\item 
+\mbox{\label{hmm_8h_a7285d01d533996d750c78e0d96042716}} 
+void \textbf{ hmm\+\_\+enter} (\textbf{ hmm\+\_\+t} $\ast$h, int32 score, int32 histid, int frame)
+\begin{DoxyCompactList}\small\item\em Enter an H\+MM with the given path score and history ID. \end{DoxyCompactList}\item 
+int32 \textbf{ hmm\+\_\+vit\+\_\+eval} (\textbf{ hmm\+\_\+t} $\ast$hmm)
+\begin{DoxyCompactList}\small\item\em Viterbi evaluation of given H\+MM. \end{DoxyCompactList}\item 
+int32 \textbf{ hmm\+\_\+dump\+\_\+vit\+\_\+eval} (\textbf{ hmm\+\_\+t} $\ast$hmm, F\+I\+LE $\ast$fp)
+\begin{DoxyCompactList}\small\item\em Like hmm\+\_\+vit\+\_\+eval, but dump H\+MM state and relevant senscr to fp first, for debugging;. \end{DoxyCompactList}\item 
+void \textbf{ hmm\+\_\+dump} (\textbf{ hmm\+\_\+t} $\ast$h, F\+I\+LE $\ast$fp)
+\begin{DoxyCompactList}\small\item\em For debugging, dump the whole H\+MM out. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of H\+MM base structure. 
+
+H\+MM data structure and operation.
+
+Hidden Markov Model base structures.
+
+For efficiency, this version is hardwired for two possible H\+MM topologies, but will fall back to others\+:
+
+5-\/state left-\/to-\/right H\+M\+Ms\+: (0 is the {\itshape emitting} entry state and E is a non-\/emitting exit state; the x\textquotesingle{}s indicate allowed transitions between source and destination states)\+:
+
+
+\begin{DoxyPre}
+              0   1   2   3   4   E (destination-states)
+          0   x   x   x
+          1       x   x   x
+          2           x   x   x
+          3               x   x   x
+          4                   x   x
+   (source-states)
+\end{DoxyPre}
+
+
+5-\/state topologies that contain a subset of the above transitions should work as well.
+
+3-\/state left-\/to-\/right H\+M\+Ms (similar notation as the 5-\/state topology above)\+:
+
+
+\begin{DoxyPre}
+              0   1   2   E (destination-states)
+          0   x   x   x
+          1       x   x   x
+          2           x   x 
+   (source-states)
+\end{DoxyPre}
+
+
+3-\/state topologies that contain a subset of the above transitions should work as well. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{hmm_8h_a3756f3c269d928924bf783f57c90adef}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+context@{hmm\+\_\+context}}
+\index{hmm\+\_\+context@{hmm\+\_\+context}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+context}
+{\footnotesize\ttfamily \#define hmm\+\_\+context(\begin{DoxyParamCaption}\item[{}]{h }\end{DoxyParamCaption})~(h)-\/$>$ctx}
+
+
+
+Access macros. 
+
+
+
+Definition at line 186 of file hmm.\+h.
+
+\mbox{\label{hmm_8h_a90d5493e8a3ef5826a1158e02e3b055c}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+mpx\+\_\+senid@{hmm\+\_\+mpx\+\_\+senid}}
+\index{hmm\+\_\+mpx\+\_\+senid@{hmm\+\_\+mpx\+\_\+senid}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+mpx\+\_\+senid}
+{\footnotesize\ttfamily \#define hmm\+\_\+mpx\+\_\+senid(\begin{DoxyParamCaption}\item[{}]{h,  }\item[{}]{st }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(hmm\_mpx\_ssid(h,st) == BAD_SENID \(\backslash\)
+                             ? BAD_SENID : (h)->ctx->sseq[hmm\_mpx\_ssid(h,st)][st])
+\end{DoxyCode}
+
+
+Definition at line 203 of file hmm.\+h.
+
+\mbox{\label{hmm_8h_ae3f2856c4774fe4ba0217bdf97410264}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+senid@{hmm\+\_\+senid}}
+\index{hmm\+\_\+senid@{hmm\+\_\+senid}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+senid}
+{\footnotesize\ttfamily \#define hmm\+\_\+senid(\begin{DoxyParamCaption}\item[{}]{h,  }\item[{}]{st }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(hmm\_is\_mpx(h)                                  \(\backslash\)
+                         ? hmm\_mpx\_senid(h,st) : hmm\_nonmpx\_senid(h,st))
+\end{DoxyCode}
+
+
+Definition at line 206 of file hmm.\+h.
+
+\mbox{\label{hmm_8h_a0c8de8756d4263b2a36957cb42075740}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+senscr@{hmm\+\_\+senscr}}
+\index{hmm\+\_\+senscr@{hmm\+\_\+senscr}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+senscr}
+{\footnotesize\ttfamily \#define hmm\+\_\+senscr(\begin{DoxyParamCaption}\item[{}]{h,  }\item[{}]{st }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(hmm\_senid(h,st) == BAD_SENID                  \(\backslash\)
+                          ? WORST_SCORE                                 \(\backslash\)
+                          : -(h)->ctx->senscore[hmm\_senid(h,st)])
+\end{DoxyCode}
+
+
+Definition at line 208 of file hmm.\+h.
+
+\mbox{\label{hmm_8h_a373c24cfb5d5e2d732b0b88f716c0d55}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+ssid@{hmm\+\_\+ssid}}
+\index{hmm\+\_\+ssid@{hmm\+\_\+ssid}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+ssid}
+{\footnotesize\ttfamily \#define hmm\+\_\+ssid(\begin{DoxyParamCaption}\item[{}]{h,  }\item[{}]{st }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(hmm\_is\_mpx(h)                                   \(\backslash\)
+                        ? hmm\_mpx\_ssid(h,st) : hmm\_nonmpx\_ssid(h))
+\end{DoxyCode}
+
+
+Definition at line 201 of file hmm.\+h.
+
+\mbox{\label{hmm_8h_af94da16e3e5b550b9be05b0f07402cc7}} 
+\index{hmm.\+h@{hmm.\+h}!S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT@{S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT}}
+\index{S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT@{S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT}!hmm.\+h@{hmm.\+h}}
+\subsubsection{S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT}
+{\footnotesize\ttfamily \#define S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT~10}
+
+
+
+Shift count for senone scores. 
+
+
+
+Definition at line 73 of file hmm.\+h.
+
+
+
+Referenced by ps\+\_\+latlink\+\_\+prob(), ps\+\_\+lattice\+\_\+posterior(), senone\+\_\+free(), senone\+\_\+init(), and tmat\+\_\+init().
+
+\mbox{\label{hmm_8h_a833f100ee293ad0f1c03f2a5ef9be77a}} 
+\index{hmm.\+h@{hmm.\+h}!W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE@{W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE}}
+\index{W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE@{W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE}!hmm.\+h@{hmm.\+h}}
+\subsubsection{W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE}
+{\footnotesize\ttfamily \#define W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE~((int)0x\+E0000000)}
+
+
+
+Large \char`\"{}bad\char`\"{} score. 
+
+This number must be \char`\"{}bad\char`\"{} enough so that 4 times W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE will not overflow. The reason for this is that the search doesn\textquotesingle{}t check the scores in a model before evaluating the model and it may require as many was 4 plies before the new \textquotesingle{}good\textquotesingle{} score can wipe out the initial W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE initialization. 
+
+Definition at line 84 of file hmm.\+h.
+
+
+
+Referenced by gauden\+\_\+free(), ps\+\_\+astar\+\_\+start(), and ps\+\_\+lattice\+\_\+write\+\_\+htk().
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\label{hmm_8h_ac9c9bae34d05f32736ae1743316737ef}} 
+\index{hmm.\+h@{hmm.\+h}!frame\+\_\+idx\+\_\+t@{frame\+\_\+idx\+\_\+t}}
+\index{frame\+\_\+idx\+\_\+t@{frame\+\_\+idx\+\_\+t}!hmm.\+h@{hmm.\+h}}
+\subsubsection{frame\+\_\+idx\+\_\+t}
+{\footnotesize\ttfamily typedef int32 \textbf{ frame\+\_\+idx\+\_\+t}}
+
+
+
+Type for frame index values. 
+
+Used in H\+MM indexes and backpointers and affects memory required.\+Due to limitations of F\+SG search implementation this value needs to be signed. 
+
+Definition at line 64 of file hmm.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{hmm_8h_af4c0cefb23087a0b1731b34048cfdaf9}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+clear@{hmm\+\_\+clear}}
+\index{hmm\+\_\+clear@{hmm\+\_\+clear}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+clear()}
+{\footnotesize\ttfamily void hmm\+\_\+clear (\begin{DoxyParamCaption}\item[{\textbf{ hmm\+\_\+t} $\ast$}]{h }\end{DoxyParamCaption})}
+
+
+
+Reset the states of the H\+MM to the invalid condition. 
+
+i.\+e., scores to W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE and hist to undefined. 
+
+Definition at line 183 of file hmm.\+c.
+
+
+
+Referenced by fsg\+\_\+psubtree\+\_\+pnode\+\_\+deactivate().
+
+\mbox{\label{hmm_8h_ab66534ad7970d49527f1b2a1e76bb05e}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+context\+\_\+free@{hmm\+\_\+context\+\_\+free}}
+\index{hmm\+\_\+context\+\_\+free@{hmm\+\_\+context\+\_\+free}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+context\+\_\+free()}
+{\footnotesize\ttfamily void hmm\+\_\+context\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ hmm\+\_\+context\+\_\+t} $\ast$}]{ctx }\end{DoxyParamCaption})}
+
+
+
+Free an H\+MM context. 
+
+\begin{DoxyNote}{Note}
+The transition matrices, senone scores, and senone sequence mapping are all assumed to be allocated externally, and will N\+OT be freed by this function. 
+\end{DoxyNote}
+
+
+Definition at line 80 of file hmm.\+c.
+
+\mbox{\label{hmm_8h_ad747fa967b5e414ad48fdffb9b767baf}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+dump@{hmm\+\_\+dump}}
+\index{hmm\+\_\+dump@{hmm\+\_\+dump}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+dump()}
+{\footnotesize\ttfamily void hmm\+\_\+dump (\begin{DoxyParamCaption}\item[{\textbf{ hmm\+\_\+t} $\ast$}]{h,  }\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+For debugging, dump the whole H\+MM out. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em h} & In/\+Out\+: H\+MM being updated \\
+\hline
+{\em fp} & An output file pointer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file hmm.\+c.
+
+
+
+Referenced by hmm\+\_\+dump\+\_\+vit\+\_\+eval().
+
+\mbox{\label{hmm_8h_a84947383bf7940f799918c37ece85cf0}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+dump\+\_\+vit\+\_\+eval@{hmm\+\_\+dump\+\_\+vit\+\_\+eval}}
+\index{hmm\+\_\+dump\+\_\+vit\+\_\+eval@{hmm\+\_\+dump\+\_\+vit\+\_\+eval}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+dump\+\_\+vit\+\_\+eval()}
+{\footnotesize\ttfamily int32 hmm\+\_\+dump\+\_\+vit\+\_\+eval (\begin{DoxyParamCaption}\item[{\textbf{ hmm\+\_\+t} $\ast$}]{hmm,  }\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+Like hmm\+\_\+vit\+\_\+eval, but dump H\+MM state and relevant senscr to fp first, for debugging;. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hmm} & In/\+Out\+: H\+MM being updated \\
+\hline
+{\em fp} & An output file pointer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 810 of file hmm.\+c.
+
+
+
+References hmm\+\_\+dump(), and hmm\+\_\+vit\+\_\+eval().
+
+\mbox{\label{hmm_8h_a24ed030b10cb07e12173b45d3800db4b}} 
+\index{hmm.\+h@{hmm.\+h}!hmm\+\_\+vit\+\_\+eval@{hmm\+\_\+vit\+\_\+eval}}
+\index{hmm\+\_\+vit\+\_\+eval@{hmm\+\_\+vit\+\_\+eval}!hmm.\+h@{hmm.\+h}}
+\subsubsection{hmm\+\_\+vit\+\_\+eval()}
+{\footnotesize\ttfamily int32 hmm\+\_\+vit\+\_\+eval (\begin{DoxyParamCaption}\item[{\textbf{ hmm\+\_\+t} $\ast$}]{hmm }\end{DoxyParamCaption})}
+
+
+
+Viterbi evaluation of given H\+MM. 
+
+\begin{DoxyNote}{Note}
+If this module were being used for tracking state segmentations, the dummy, non-\/emitting exit state would have to be updated separately. In the Viterbi DP diagram, transitions to the exit state occur from the current time; they are vertical transitions. Hence they should be made only after the history has been logged for the emitting states. But we\textquotesingle{}re not bothered with state segmentations, for now. So, we update the exit state as well. 
+\end{DoxyNote}
+
+
+Definition at line 789 of file hmm.\+c.
+
+
+
+Referenced by hmm\+\_\+dump\+\_\+vit\+\_\+eval().
+

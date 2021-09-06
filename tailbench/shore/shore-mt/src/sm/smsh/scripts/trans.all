@@ -1,0 +1,62 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: trans.all,v 1.15.4.4 2010/01/12 02:02:04 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+set do_file_create 1
+set nrecs 0
+set nrecsnow 0
+set f0 ""
+addcleanupvars {nrecs nrecsnow f0}
+addcleanupvars {do_file_create}
+addcleanupvars {docheckpoint}
+# addcleanupvars {errorInfo}
+# addcleanupvars {errorCode}
+source $script_dir/trans.tcl
+
+set scripts [list trans.4 trans.3 trans.2 trans.1]
+# set scripts [list trans.2]
+
+set docheckpoint 0
+echo RUNNING(from trans.all): (without checkpoint: $docheckpoint) scripts $scripts
+runscripts $scripts
+
+set docheckpoint 1
+echo RUNNING(from trans.all): (with checkpoint: $docheckpoint) scripts $scripts
+runscripts $scripts
+
+# deletecleanupvars {errorInfo}
+# deletecleanupvars {errorCode}
+deletecleanupvars {do_file_create}
+deletecleanupvars {docheckpoint}
+deletecleanupvars {nrecs nrecsnow f0}
+
+unset docheckpoint
+unset do_file_create
+
+# nrecs and nrecsnow set by procs in trans.tcl
+unset nrecs nrecsnow f0

@@ -1,0 +1,22 @@
+atomic_ops.o: atomic_ops.S /usr/include/stdc-predef.h \
+ ../../config/shore-config.h atomic_ops/amd64/atomic.s \
+ intel/sys/asm_linkage.h ia32/sys/asm_linkage.h intel/sys/stack.h \
+ ia32/sys/stack.h intel/sys/trap.h ia32/sys/trap.h
+
+/usr/include/stdc-predef.h:
+
+../../config/shore-config.h:
+
+atomic_ops/amd64/atomic.s:
+
+intel/sys/asm_linkage.h:
+
+ia32/sys/asm_linkage.h:
+
+intel/sys/stack.h:
+
+ia32/sys/stack.h:
+
+intel/sys/trap.h:
+
+ia32/sys/trap.h:

@@ -1,0 +1,13 @@
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 DM object constructed using constructor 1 (valid for publication: YES).
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Driver Global Settings:
+Parameter                               Default	Current	Default?
+Configured Customers:                   5000	1000
+Active Customers:                       5000	1000
+Scale Factor:                           500	300	NO
+Days of Initial Trades:                 300	500	NO
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Driver DM Settings:
+Parameter                               Value
+Unique ID:                              1
+RNGSeed:                                11066779731239108609
+

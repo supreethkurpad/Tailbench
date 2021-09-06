@@ -1,0 +1,161 @@
+\section{ps\+\_\+seg\+\_\+s Struct Reference}
+\label{structps__seg__s}\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+
+
+Base structure for hypothesis segmentation iterator.  
+
+
+
+
+{\ttfamily \#include $<$pocketsphinx\+\_\+internal.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structps__seg__s_a510362a2281e374c839397c3e5488515}} 
+\textbf{ ps\+\_\+segfuncs\+\_\+t} $\ast$ \textbf{ vt}
+\begin{DoxyCompactList}\small\item\em V-\/table of seg methods. \end{DoxyCompactList}\item 
+\mbox{\label{structps__seg__s_a14168ddcb60e094dad36c7c920a79bb3}} 
+\textbf{ ps\+\_\+search\+\_\+t} $\ast$ \textbf{ search}
+\begin{DoxyCompactList}\small\item\em Search object from whence this came. \end{DoxyCompactList}\item 
+\mbox{\label{structps__seg__s_a97a0dc7db931c7e3f98d23d21ce27f04}} 
+char const  $\ast$ \textbf{ word}
+\begin{DoxyCompactList}\small\item\em Word string (pointer into dictionary hash) \end{DoxyCompactList}\item 
+\textbf{ frame\+\_\+idx\+\_\+t} \textbf{ sf}
+\begin{DoxyCompactList}\small\item\em Start frame. \end{DoxyCompactList}\item 
+\textbf{ frame\+\_\+idx\+\_\+t} \textbf{ ef}
+\begin{DoxyCompactList}\small\item\em End frame. \end{DoxyCompactList}\item 
+int32 \textbf{ ascr}
+\begin{DoxyCompactList}\small\item\em Acoustic score. \end{DoxyCompactList}\item 
+int32 \textbf{ lscr}
+\begin{DoxyCompactList}\small\item\em Language model score. \end{DoxyCompactList}\item 
+int32 \textbf{ prob}
+\begin{DoxyCompactList}\small\item\em Log posterior probability. \end{DoxyCompactList}\item 
+int32 \textbf{ lback}
+\begin{DoxyCompactList}\small\item\em Language model backoff. \end{DoxyCompactList}\item 
+\mbox{\label{structps__seg__s_a2249c012b83c902f4f8ed8d98ded7d20}} 
+float32 \textbf{ lwf}
+\begin{DoxyCompactList}\small\item\em Language weight factor (for second-\/pass searches) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base structure for hypothesis segmentation iterator. 
+
+Definition at line 178 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structps__seg__s_a6f7706ec4c0d0ec8ecafaf0f29f41f4b}} 
+\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}!ascr@{ascr}}
+\index{ascr@{ascr}!ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+\subsubsection{ascr}
+{\footnotesize\ttfamily int32 ps\+\_\+seg\+\_\+s\+::ascr}
+
+
+
+Acoustic score. 
+
+
+
+Definition at line 184 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+seg\+\_\+prob().
+
+\mbox{\label{structps__seg__s_ab25ecc6af8d2695c6097cf7e934eadd4}} 
+\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}!ef@{ef}}
+\index{ef@{ef}!ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+\subsubsection{ef}
+{\footnotesize\ttfamily \textbf{ frame\+\_\+idx\+\_\+t} ps\+\_\+seg\+\_\+s\+::ef}
+
+
+
+End frame. 
+
+
+
+Definition at line 183 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+seg\+\_\+frames().
+
+\mbox{\label{structps__seg__s_a4d86c21f1ed2dc3eb3b1b1b37ce9bb48}} 
+\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}!lback@{lback}}
+\index{lback@{lback}!ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+\subsubsection{lback}
+{\footnotesize\ttfamily int32 ps\+\_\+seg\+\_\+s\+::lback}
+
+
+
+Language model backoff. 
+
+
+
+Definition at line 189 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+seg\+\_\+prob().
+
+\mbox{\label{structps__seg__s_a69e605f422eeed1a9c67437e8ddd8b08}} 
+\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}!lscr@{lscr}}
+\index{lscr@{lscr}!ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+\subsubsection{lscr}
+{\footnotesize\ttfamily int32 ps\+\_\+seg\+\_\+s\+::lscr}
+
+
+
+Language model score. 
+
+
+
+Definition at line 185 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+seg\+\_\+prob().
+
+\mbox{\label{structps__seg__s_ae683244d90d0a5339930b47757778432}} 
+\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}!prob@{prob}}
+\index{prob@{prob}!ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+\subsubsection{prob}
+{\footnotesize\ttfamily int32 ps\+\_\+seg\+\_\+s\+::prob}
+
+
+
+Log posterior probability. 
+
+
+
+Definition at line 186 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+seg\+\_\+prob().
+
+\mbox{\label{structps__seg__s_a885a599726cd0efba573d106d016e6e2}} 
+\index{ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}!sf@{sf}}
+\index{sf@{sf}!ps\+\_\+seg\+\_\+s@{ps\+\_\+seg\+\_\+s}}
+\subsubsection{sf}
+{\footnotesize\ttfamily \textbf{ frame\+\_\+idx\+\_\+t} ps\+\_\+seg\+\_\+s\+::sf}
+
+
+
+Start frame. 
+
+
+
+Definition at line 182 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+seg\+\_\+frames().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ pocketsphinx\+\_\+internal.\+h}\end{DoxyCompactItemize}

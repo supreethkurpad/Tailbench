@@ -1,0 +1,155 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: bng.init,v 1.11.2.4 2010/03/25 18:05:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# see if init has not been done
+set_config_info
+set i 0
+set err 0
+
+if {$volid == 0} {
+    # establish default volume id
+    set volid [lindex [lindex $smsh_device_list 0] 2]
+
+    verbose Volid = $volid
+
+    verbose creating devices
+
+    list volid_list
+    foreach i $smsh_device_list {
+
+	set dev  [lindex $i 0]
+	set size [lindex $i 1]
+	set vol  [lindex $i 2]
+
+	lappend volid_list $vol
+	
+	set force_arg force
+	set existing 0
+
+	if [ is_set dont_force_reformat ] {
+	    set force_arg noforce
+
+	    set err 0
+	    catch {sm mount_dev $dev $vol} err
+	    if {$err == 1} {
+		set force_arg noforce
+		verbose Result of mount: $err ...
+		set existing 1
+	    } else  {
+		set force_arg force
+	    }
+	    verbose "dismounting " $dev "..."
+	    catch {sm dismount_dev $dev} err
+	}
+
+	verbose formatting $dev $force_arg
+	catch {sm format_dev $dev $size $force_arg} err
+	unset force_arg
+
+	verbose "mounting " $dev "..."
+	set err 0
+	sm mount_dev $dev $vol
+	set vol_list [sm list_volumes $dev]
+	assert {expr [llength $vol_list] == 0}
+
+	set quota [sm get_device_quota $dev]
+	set size_page_align [expr ($size/($page_size/1024))*($page_size/1024)]
+
+	assert {expr [lindex $quota 0] == $size_page_align}
+	assert {expr [lindex $quota 1] == 0}
+
+
+	verbose creating volume $vol size $size on $dev
+	if { $existing == 0 } {
+	    verbose sm create_vol $dev $vol $size
+	    sm create_vol $dev $vol $size
+	    assert {expr [string compare [sm has_logical_id_index $vol] TRUE]}
+	}
+
+	set quota [sm get_device_quota $dev]
+	verbose dev quota: $quota
+	assert {expr [lindex $quota 0] == $size_page_align}
+	assert {expr [lindex $quota 1] <= $size_page_align}
+
+	set quota [sm get_volume_quota $vol]
+	verbose volume quota: $quota
+	assert {expr [lindex $quota 0] <= $size_page_align}
+	assert {expr [lindex $quota 1] > 0}
+	verbose checking that all volumes are present on device
+	set vol_list [sm list_volumes $dev]
+	verbose volumes on $dev are $vol_list
+	assert {expr [llength $vol_list] == 1}
+	assert {expr [string compare [lindex $vol_list 0] $vol.0.0.0:0] == 0}
+    }
+} else {
+    verbose Volid = $volid
+    list volid_list
+
+    verbose Re-mounting devices
+    foreach i $smsh_device_list {
+
+	set dev  [lindex $i 0]
+	set size [lindex $i 1]
+	set vol  [lindex $i 2]
+
+	set err 0
+	verbose "mounting " $dev $vol
+	catch {sm mount_dev $dev $vol} err
+	if {$err == 1} {
+	    verbose Result of mount: $err ...
+	}
+	set existing 1
+	lappend volid_list $vol
+
+	verbose checking that all volumes are present on device
+	set vol_list [sm list_volumes $dev]
+	assert {expr [llength $vol_list] == 1}
+	verbose volumes on $dev are $vol_list
+	assert {expr [string compare [lindex $vol_list 0] $vol.0.0.0:0] == 0}
+
+	set quota [sm get_device_quota $dev]
+	set size_page_align [expr ($size/($page_size/1024))*($page_size/1024)]
+	assert {expr [lindex $quota 0] == $size_page_align}
+    }
+}
+
+# somewhat arbitrary formats:
+set id_hdr_width %06d
+set id_body_width %08d
+
+unset i err 
+# unset volid_list -- this is used by bng.1
+
+checkpinstats  "end of bng.init"
+
+addcleanupvars {quota vol_list id_body_width size_page_align size dev
+				id_hdr_width vol existing}
+
+return "leaving bng.init"
+

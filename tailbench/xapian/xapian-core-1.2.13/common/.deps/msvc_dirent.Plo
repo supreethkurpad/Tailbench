@@ -1,0 +1,6 @@
+common/msvc_dirent.lo: common/msvc_dirent.cc /usr/include/stdc-predef.h \
+ config.h
+
+/usr/include/stdc-predef.h:
+
+config.h:

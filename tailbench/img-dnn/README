@@ -1,0 +1,4 @@
+In addition to the standard TailBench environment variables, the img-dnn client
+uses an environment variable, TBENCH_MNIST_DIR, to locate MNIST test data. This
+variable should point to the top-level directory of the MNIST dataset (e.g.
+${DATA_ROOT}/img-dnn/mnist. See run.sh for an example.

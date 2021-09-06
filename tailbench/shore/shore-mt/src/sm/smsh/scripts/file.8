@@ -1,0 +1,95 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.8,v 1.14.4.1 2009/10/08 20:52:30 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+source $script_dir/vol.init
+set_config_info
+
+# test for bug PR 307  (overwriting last slot)
+
+set id_body_1216 zvec1216
+set id_body_400 [format %0400d 1]
+
+sm begin_xct
+set fid [sm create_file $volid regular]
+sm commit_xct
+
+sm begin_xct
+
+verbose THE FOLLOWING MIGHT CAUSE ERROR :record does not fit
+verbose THIS IS OK as long as it does not get an assertion failure.
+
+set tot 1216
+# 4 for slot, 16 for tag , 0 for header
+set slotsize 4
+set tagsize 16
+set tot [expr { $tot + $slotsize + $tagsize }]
+
+verbose creating r0 size 1216
+set r0 [sm create_rec $fid "" 0 $id_body_1216]
+for {set i 0} {$i < 300} {incr i} {
+    sm create_rec $fid "" 0 "01234567"
+    set tot [expr { $tot + 8 + $slotsize + $tagsize }]
+}
+
+set catcherr 0
+verbose appending 400 to $r0 while total = $tot
+set res [catch { sm append_rec $r0  $id_body_400 } catcherr] 
+verbose $res
+if { $res == 1 } {
+	verbose Error is: $catcherr
+} else {
+	set tot [expr { $tot + 400 }]
+
+	for {set i 0} {$i < 100} {incr i} {
+		set tot [expr { $tot + 8 + $slotsize + $tagsize }]
+		sm create_rec $fid "" 0 "01234567"
+	}
+
+	verbose appending 400 to $r0 while total = $tot
+	set res [catch { sm append_rec $r0  $id_body_400 } catcherr] 
+	if { $res == 1 } {
+		verbose Error is: $catcherr
+	} else {
+		set tot [expr { $tot + 400 }]
+
+		for {set i 0} {$i < 100} {incr i} {
+			set tot [expr { $tot + 8 + $slotsize + $tagsize }]
+			sm create_rec $fid "" 0 "01234567"
+		}
+	}
+}
+verbose destroying $fid
+sm destroy_file $fid
+verbose committing
+sm commit_xct
+
+unset r0 res i
+unset tot fid id_body_1216 id_body_400 catcherr
+unset slotsize tagsize
+

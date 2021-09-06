@@ -1,0 +1,5 @@
+common/safe.lo: common/safe.cc /usr/include/stdc-predef.h config.h
+
+/usr/include/stdc-predef.h:
+
+config.h:

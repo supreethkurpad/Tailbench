@@ -1,0 +1,29 @@
+Distributions of Shore Storage Manager 
+
+5.0 : Thu Jun 7 15:25 2007
+      from starting point being the 4th interim release ...
+      1) removed the Imake-based configuration and replaced it with autoconf
+      2) changes ssh to smsh
+
+5.0.1: Sat Aug 18 15:37:16 CDT 2007
+      1) added the smsh scripts to the distr
+
+5.0.2-prelim: Tue Aug 21 15:04:47 CDT 2007
+       1) fixed 'make clean' bug in sthread/tests to get rid of tests/diskrw
+       2) fixed 'make clean' bug in smsh to clean up log* and volumes/*
+       3) increased volume size in .smshrc to allow all scripts to run
+                with default page size
+       4) removed logical OIDs
+       NOTE-> documents are NOT updated
+
+6.0.1-alpha: Mon May 24 10:15:01 MDT 2010
+
+This is a major overhaul of the storage manager.
+
+It is a port of the entire storage manager and its tests to true concurrent
+pthreads. It no longer uses sthreads and its primitives. This release
+is an extension of the SHORE-MT release (http:TODO) 
+
+Included are too many bug fixes and change to enumerate them.
+The documentation is strictly html; the .pdf files of prior releases
+are gone.

@@ -1,0 +1,94 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: all.perf,v 1.11.2.1 2009/10/08 20:52:28 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#   Time creation, updating, random updating, destroy of records 
+#
+# 
+
+source $script_dir/vol.init
+set scripts { }
+foreach i {0 1 2 3 4 5 6 7 8} {
+    lappend scripts cd.perf.$i
+}
+unset i 
+echo all.perf ABOUT TO RUN $scripts
+runscripts $scripts
+
+
+echo RUNNING file.perf
+source $script_dir/file.perf
+
+echo RUNNING file.perf2
+source $script_dir/file.perf2
+
+echo RUNNING file.perf3
+source $script_dir/file.perf3
+
+echo RUNNING write.perf 
+source $script_dir/write.perf
+
+echo RUNNING write.perf.restart
+source $script_dir/write.perf.restart
+
+echo RUNNING random.perf
+source $script_dir/random.perf
+
+echo RUNNING destroy.perf
+source $script_dir/destroy.perf
+
+set fid 0
+echo RUNNING create.perf
+source $script_dir/create.perf
+
+echo RUNNING lid.perf
+source $script_dir/lid.perf
+
+echo RUNNING lock.perf
+source $script_dir/lock.perf
+
+echo RUNNING loadrec.perf
+source $script_dir/loadrec.perf
+
+echo RUNNING simplewrite.perf
+source $script_dir/simplewrite.perf
+
+echo RUNNING alloc.perf
+source $script_dir/alloc.perf
+
+echo RUNNING alloc.perf.2
+source $script_dir/alloc.perf.2
+
+echo RUNNING read2.perf
+source $script_dir/read2.perf
+
+echo RUNNING file.many.perf
+source $script_dir/file.many.perf
+
+echo DONE
+

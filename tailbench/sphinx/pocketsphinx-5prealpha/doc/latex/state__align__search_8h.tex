@@ -1,0 +1,38 @@
+\section{src/libpocketsphinx/state\+\_\+align\+\_\+search.h File Reference}
+\label{state__align__search_8h}\index{src/libpocketsphinx/state\+\_\+align\+\_\+search.\+h@{src/libpocketsphinx/state\+\_\+align\+\_\+search.\+h}}
+
+
+State (and phone and word) alignment search.  
+
+
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pocketsphinx\+\_\+internal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ps\+\_\+alignment.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hmm.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ state\+\_\+align\+\_\+hist\+\_\+s}
+\begin{DoxyCompactList}\small\item\em History structure. \end{DoxyCompactList}\item 
+struct \textbf{ state\+\_\+align\+\_\+search\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Phone loop search structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{state__align__search_8h_a177ee88fd0b1e9f99bfa7cf7f9f256da}} 
+typedef struct \textbf{ state\+\_\+align\+\_\+hist\+\_\+s} {\bfseries state\+\_\+align\+\_\+hist\+\_\+t}
+\item 
+\mbox{\label{state__align__search_8h_a4559ae74ee038260ff66f432a7205aa8}} 
+typedef struct \textbf{ state\+\_\+align\+\_\+search\+\_\+s} {\bfseries state\+\_\+align\+\_\+search\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{state__align__search_8h_a037465636cb9d40dd1ebc1e04c0fd633}} 
+\textbf{ ps\+\_\+search\+\_\+t} $\ast$ {\bfseries state\+\_\+align\+\_\+search\+\_\+init} (const char $\ast$name, cmd\+\_\+ln\+\_\+t $\ast$config, \textbf{ acmod\+\_\+t} $\ast$acmod, \textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+State (and phone and word) alignment search. 
+

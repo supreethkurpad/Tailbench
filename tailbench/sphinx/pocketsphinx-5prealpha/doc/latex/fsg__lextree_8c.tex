@@ -1,0 +1,67 @@
+\section{src/libpocketsphinx/fsg\+\_\+lextree.c File Reference}
+\label{fsg__lextree_8c}\index{src/libpocketsphinx/fsg\+\_\+lextree.\+c@{src/libpocketsphinx/fsg\+\_\+lextree.\+c}}
+
+
+The collection of all the lextrees for the entire F\+SM.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/ckd\+\_\+alloc.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/err.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}fsg\+\_\+lextree.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ fsg\+\_\+glist\+\_\+linklist\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{fsg__lextree_8c_a7acaaaaea00ab148fa241f7ce86cab14}} 
+\#define {\bfseries \+\_\+\+\_\+\+F\+S\+G\+\_\+\+D\+B\+G\+\_\+\+\_\+}~0
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{fsg__lextree_8c_a0ed5b76987ef1e416b40a06a9d80902f}} 
+typedef struct \textbf{ fsg\+\_\+glist\+\_\+linklist\+\_\+t} {\bfseries fsg\+\_\+glist\+\_\+linklist\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{fsg__lextree_8c_a8c47b2983b3952886a4c889a711e1d65}} 
+\textbf{ fsg\+\_\+lextree\+\_\+t} $\ast$ \textbf{ fsg\+\_\+lextree\+\_\+init} (fsg\+\_\+model\+\_\+t $\ast$fsg, \textbf{ dict\+\_\+t} $\ast$dict, \textbf{ dict2pid\+\_\+t} $\ast$d2p, \textbf{ bin\+\_\+mdef\+\_\+t} $\ast$mdef, \textbf{ hmm\+\_\+context\+\_\+t} $\ast$ctx, int32 wip, int32 pip)
+\begin{DoxyCompactList}\small\item\em Create, initialize, and return a new phonetic lextree for the given F\+SG. \end{DoxyCompactList}\item 
+\mbox{\label{fsg__lextree_8c_a5c267f09b8dc214dd7deb41232d84726}} 
+void \textbf{ fsg\+\_\+lextree\+\_\+dump} (\textbf{ fsg\+\_\+lextree\+\_\+t} $\ast$lextree, F\+I\+LE $\ast$fp)
+\begin{DoxyCompactList}\small\item\em Print an F\+SG lextree to a file for debugging. \end{DoxyCompactList}\item 
+\mbox{\label{fsg__lextree_8c_a2f1ab965df1214f4d0e2008833aa20da}} 
+void \textbf{ fsg\+\_\+lextree\+\_\+free} (\textbf{ fsg\+\_\+lextree\+\_\+t} $\ast$lextree)
+\begin{DoxyCompactList}\small\item\em Free lextrees for an F\+SG. \end{DoxyCompactList}\item 
+\mbox{\label{fsg__lextree_8c_a3931da8d9c5b2709c58755d5f15faaf5}} 
+void {\bfseries fsg\+\_\+glist\+\_\+linklist\+\_\+free} (\textbf{ fsg\+\_\+glist\+\_\+linklist\+\_\+t} $\ast$glist)
+\item 
+\mbox{\label{fsg__lextree_8c_a98fd94d024df264025e30c909c82cb56}} 
+void \textbf{ fsg\+\_\+pnode\+\_\+add\+\_\+all\+\_\+ctxt} (\textbf{ fsg\+\_\+pnode\+\_\+ctxt\+\_\+t} $\ast$ctxt)
+\begin{DoxyCompactList}\small\item\em Set all flags on in the given context bitvector. \end{DoxyCompactList}\item 
+\mbox{\label{fsg__lextree_8c_aa9ff81fb4f5d873188fcf3be3f5fc18e}} 
+uint32 \textbf{ fsg\+\_\+pnode\+\_\+ctxt\+\_\+sub\+\_\+generic} (\textbf{ fsg\+\_\+pnode\+\_\+ctxt\+\_\+t} $\ast$src, \textbf{ fsg\+\_\+pnode\+\_\+ctxt\+\_\+t} $\ast$sub)
+\begin{DoxyCompactList}\small\item\em Generic variant for arbitrary size. \end{DoxyCompactList}\item 
+\mbox{\label{fsg__lextree_8c_a1d3204e8ce39bcb66c68b9ef1e2acb7d}} 
+void {\bfseries fsg\+\_\+psubtree\+\_\+dump\+\_\+node} (\textbf{ fsg\+\_\+lextree\+\_\+t} $\ast$tree, \textbf{ fsg\+\_\+pnode\+\_\+t} $\ast$node, F\+I\+LE $\ast$fp)
+\item 
+\mbox{\label{fsg__lextree_8c_a6dc55ff3873855fb7b2c0390aa072516}} 
+void \textbf{ fsg\+\_\+psubtree\+\_\+pnode\+\_\+deactivate} (\textbf{ fsg\+\_\+pnode\+\_\+t} $\ast$pnode)
+\begin{DoxyCompactList}\small\item\em Mark the given pnode as inactive (for search). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The collection of all the lextrees for the entire F\+SM. 
+
+\begin{DoxyAuthor}{Author}
+M K Ravishankar {\tt rkm@cs.\+cmu.\+edu} 
+
+Bhiksha Raj {\tt bhiksha@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}

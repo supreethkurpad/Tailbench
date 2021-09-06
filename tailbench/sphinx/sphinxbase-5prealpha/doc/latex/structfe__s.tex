@@ -1,0 +1,148 @@
+\section{fe\+\_\+s Struct Reference}
+\label{structfe__s}\index{fe\+\_\+s@{fe\+\_\+s}}
+
+
+Structure for the front-\/end computation.  
+
+
+
+
+{\ttfamily \#include $<$fe\+\_\+internal.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structfe__s_abe27cd07861a2f0042f5a83f3371d0fb}} 
+\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ {\bfseries config}
+\item 
+\mbox{\label{structfe__s_a4cdf2f8b372cfddb38a48dd770450af9}} 
+int {\bfseries refcount}
+\item 
+\mbox{\label{structfe__s_af79879861c60083c1c0135c380bfe8e2}} 
+float32 {\bfseries sampling\+\_\+rate}
+\item 
+\mbox{\label{structfe__s_a23ca679cec8c0643dd1fa32b4e925f00}} 
+int16 {\bfseries frame\+\_\+rate}
+\item 
+\mbox{\label{structfe__s_a62b189505f084007c3799faf3836b118}} 
+int16 {\bfseries frame\+\_\+shift}
+\item 
+\mbox{\label{structfe__s_ae652f41503dd7b853bff8de89340703d}} 
+float32 {\bfseries window\+\_\+length}
+\item 
+\mbox{\label{structfe__s_a72b5838a48f3a10c8ba3917d245093d0}} 
+int16 {\bfseries frame\+\_\+size}
+\item 
+\mbox{\label{structfe__s_a466b997c1f544043fb3ab6f2f89e97e7}} 
+int16 {\bfseries fft\+\_\+size}
+\item 
+\mbox{\label{structfe__s_a3783552280c06207510cbe576a76d1d9}} 
+uint8 {\bfseries fft\+\_\+order}
+\item 
+\mbox{\label{structfe__s_a9c876fb2d9be5f3acaad06ddebcdc4fe}} 
+uint8 {\bfseries feature\+\_\+dimension}
+\item 
+\mbox{\label{structfe__s_a05579b3906420cddd62fdf1ded7b63ce}} 
+uint8 {\bfseries num\+\_\+cepstra}
+\item 
+\mbox{\label{structfe__s_ac575bed8a61105f4302bd27246d4c33d}} 
+uint8 {\bfseries remove\+\_\+dc}
+\item 
+\mbox{\label{structfe__s_a7d3d6513ae6b60632d14c1e1d5dfe891}} 
+uint8 {\bfseries log\+\_\+spec}
+\item 
+\mbox{\label{structfe__s_ab08200d2bfc6d868536d802501525179}} 
+uint8 {\bfseries swap}
+\item 
+\mbox{\label{structfe__s_abd7b32a70dc6512134e39dd54d160689}} 
+uint8 {\bfseries dither}
+\item 
+\mbox{\label{structfe__s_a49f2e495d938acaf5c918059e99854e2}} 
+uint8 {\bfseries transform}
+\item 
+\mbox{\label{structfe__s_a254fc94d7868163fba6f2d8826d60fa6}} 
+uint8 {\bfseries remove\+\_\+noise}
+\item 
+\mbox{\label{structfe__s_a8479b916c411d6d0140bf4a16eb83437}} 
+uint8 {\bfseries remove\+\_\+silence}
+\item 
+\mbox{\label{structfe__s_aa7dc496e33955b7f06f83715c05ded8e}} 
+float32 {\bfseries pre\+\_\+emphasis\+\_\+alpha}
+\item 
+\mbox{\label{structfe__s_a0f42573b9f0ce0247181c5dd79e16b67}} 
+int32 {\bfseries seed}
+\item 
+\mbox{\label{structfe__s_a40c006f7494fdad56833d5fd7ccf6904}} 
+size\+\_\+t {\bfseries sample\+\_\+counter}
+\item 
+\mbox{\label{structfe__s_aa05ae3633c2b33e77a7b8b90e769176b}} 
+uint8 {\bfseries start\+\_\+flag}
+\item 
+\mbox{\label{structfe__s_a18670c79bc0cd9848fdf4711c5094542}} 
+uint8 {\bfseries reserved}
+\item 
+\mbox{\label{structfe__s_afc472de43bd747de659dd57bc9a74fae}} 
+frame\+\_\+t $\ast$ {\bfseries ccc}
+\item 
+\mbox{\label{structfe__s_a6525c59397073d363e1844c28746fcb9}} 
+frame\+\_\+t $\ast$ {\bfseries sss}
+\item 
+\mbox{\label{structfe__s_ae5a054dbac5e32cf028b6d6d4c9391bd}} 
+\textbf{ melfb\+\_\+t} $\ast$ {\bfseries mel\+\_\+fb}
+\item 
+\mbox{\label{structfe__s_ad47433337a370e452070ffddce87e474}} 
+window\+\_\+t $\ast$ {\bfseries hamming\+\_\+window}
+\item 
+\mbox{\label{structfe__s_a6b1303b8c74a676ca9dcc9adc07033e9}} 
+\textbf{ noise\+\_\+stats\+\_\+t} $\ast$ {\bfseries noise\+\_\+stats}
+\item 
+\mbox{\label{structfe__s_a2bcaff6bbc8ee6e990a7092bd0d22771}} 
+int16 {\bfseries pre\+\_\+speech}
+\item 
+\mbox{\label{structfe__s_a46c8eab758b1a737ccc5ef4654e42f6c}} 
+int16 {\bfseries post\+\_\+speech}
+\item 
+\mbox{\label{structfe__s_a93290323d05eb26e0dfe423a9b27063a}} 
+int16 {\bfseries start\+\_\+speech}
+\item 
+\mbox{\label{structfe__s_a8c484564cca88e8aec167fe94bd27891}} 
+float32 {\bfseries vad\+\_\+threshold}
+\item 
+\mbox{\label{structfe__s_aaae66e5327a74c4270c8f0decd4d4389}} 
+\textbf{ vad\+\_\+data\+\_\+t} $\ast$ {\bfseries vad\+\_\+data}
+\item 
+\mbox{\label{structfe__s_a7d49693c1fa1b14bbcd25b87ad97935b}} 
+int16 $\ast$ {\bfseries spch}
+\item 
+\mbox{\label{structfe__s_a6fe89784eb5d23ee812439f427d33fe6}} 
+frame\+\_\+t $\ast$ {\bfseries frame}
+\item 
+\mbox{\label{structfe__s_af455b0ee3f8d81ca84ac88d4ea04e860}} 
+powspec\+\_\+t $\ast$ {\bfseries spec}
+\item 
+\mbox{\label{structfe__s_a87fd448109884fc3d796b926b67697e7}} 
+powspec\+\_\+t $\ast$ {\bfseries mfspec}
+\item 
+\mbox{\label{structfe__s_a7975216c6a540fa498352736404797b1}} 
+int16 $\ast$ {\bfseries overflow\+\_\+samps}
+\item 
+\mbox{\label{structfe__s_ac22fe7c117ef00eb513d7d0771333ddd}} 
+int16 {\bfseries num\+\_\+overflow\+\_\+samps}
+\item 
+\mbox{\label{structfe__s_ae6af635a19dac6426bf882a3fc5b069b}} 
+int16 {\bfseries prior}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure for the front-\/end computation. 
+
+
+
+Definition at line 117 of file fe\+\_\+internal.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libsphinxbase/fe/fe\+\_\+internal.\+h\end{DoxyCompactItemize}

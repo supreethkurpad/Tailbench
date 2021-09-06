@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structngram__raw__s" kind="struct" language="C++" prot="public">
+    <compoundname>ngram_raw_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structngram__raw__s_1a6d359802e98a78c90e1a1d823db5f8d7" prot="public" static="no" mutable="no">
+        <type>uint32 *</type>
+        <definition>uint32* ngram_raw_s::words</definition>
+        <argsstring></argsstring>
+        <name>words</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="48" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__raw__s_1af5bf5c0b0b18e94ec0e195f29c77c86c" prot="public" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* ngram_raw_s::weights</definition>
+        <argsstring></argsstring>
+        <name>weights</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="49" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/lm/ngrams_raw.h" line="47" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="47" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structngram__raw__s_1af5bf5c0b0b18e94ec0e195f29c77c86c" prot="public" virt="non-virtual"><scope>ngram_raw_s</scope><name>weights</name></member>
+      <member refid="structngram__raw__s_1a6d359802e98a78c90e1a1d823db5f8d7" prot="public" virt="non-virtual"><scope>ngram_raw_s</scope><name>words</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

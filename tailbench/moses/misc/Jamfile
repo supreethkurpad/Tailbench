@@ -1,0 +1,25 @@
+import modules ;
+local TBENCH_PATH = [ modules.peek : TBENCH_PATH ] ;
+
+exe processPhraseTable : GenerateTuples.cpp  processPhraseTable.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+
+exe processLexicalTable : processLexicalTable.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+
+exe queryPhraseTable : queryPhraseTable.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+
+exe queryLexicalTable : queryLexicalTable.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ; 
+
+local with-cmph = [ option.get "with-cmph" ] ;
+if $(with-cmph) {
+    exe processPhraseTableMin : processPhraseTableMin.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+    exe processLexicalTableMin : processLexicalTableMin.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+    exe queryPhraseTableMin : queryPhraseTableMin.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+
+    alias programsMin : processPhraseTableMin processLexicalTableMin queryPhraseTableMin ;
+#    alias programsMin : processPhraseTableMin processLexicalTableMin ;
+}
+else {
+    alias programsMin ;
+}
+
+alias programs : processPhraseTable processLexicalTable queryPhraseTable queryLexicalTable programsMin ;

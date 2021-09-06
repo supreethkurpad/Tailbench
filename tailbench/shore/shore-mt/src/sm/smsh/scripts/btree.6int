@@ -1,0 +1,295 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.6int,v 1.5 2006/06/01 17:09:37 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  Test non-unique btree.  WARNING: runs a long time.
+#  Use enough duplicates so that they span pages.
+#  This is taken from btree.6, but this one uses integer keys
+#  and long elems.
+#  For the given nrec, ne, it makes $ne elems/key, 
+#  and makes $nrecs keys.  Keys are 4 bytes, elems are
+#  200 bytes, so to get each key cluster to take > 1 8K page
+#  we need about nrec> 40, where nrecs==ne
+#  or very large ne
+#
+
+set elem_format "%0200d"
+
+proc scan_up_partial {ndx lb ub nr ne} {
+    global ktype
+    set nrec [expr { ($ub - $lb + 1) * $ne }]
+    verbose "scan up partial: $ndx >= $lb <= $ub  ( $nrec = $nr * $ne )"
+    set scan [sm create_scan $ndx >= $lb <= $ub t_cc_kvl $ktype]
+
+    set lb [string trimleft $lb 0]
+    set ub [string trimleft $ub 0]
+
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set r [sm scan_next $scan]
+	verbose2 "scanned $r"
+	if {[string compare $r eof] == 0} then { break }
+	set key [string trimleft [lindex $r 0] 0]
+	set el [string trimleft [lindex $r 1] 0]
+	verbose2 "scanned ($key, $el)"
+#	assert {expr $key == $el}
+#	assert {expr $key == $lb + $i - 1}
+    }
+    verbose2 expecting $i ">" $nrec
+    assert {expr $i > $nrec}
+    assert {expr [string compare [sm scan_next $scan] eof] == 0}
+    sm destroy_scan $scan
+    verbose "---- successful"
+}
+
+proc scan_up {ndx nr ne}  {
+    global ktype
+    set nrec [expr { $nr * $ne }]
+
+    #
+    # verify ascending
+    #
+    verbose scan up: expect $nrec = $nr * $ne records
+    set scan [sm create_scan $ndx >= neg_inf <= pos_inf t_cc_kvl $ktype]
+    for {set i 1} {$i <= $nrec} {incr i}  {
+        set r [sm scan_next $scan]
+	if {[string compare $r eof] == 0} then { 
+		verbose2 found $i records
+		break 
+	}
+        set key [string trimleft [lindex $r 0] 0]
+	set el [string trimleft [lindex $r 1] 0]
+        verbose2 scanned $key.$el
+#        assert {expr $key == $el}
+#        assert {expr $i == $key}
+    }
+    assert {expr $i > $nrec}
+    assert {expr [string compare [sm scan_next $scan] eof] == 0}
+    sm destroy_scan $scan
+    verbose "---- successful"
+}
+
+proc probe {ndx nr ne} {
+    verbose "probe: $nr * $ne"
+    set nrec [expr { $nr * $ne }]
+    for {set i 1} {$i <= $nrec} {incr i} {
+        set el [sm find_assoc $ndx $i $ktype]
+        assert {expr $i == $el}
+        verbose2 probed $i
+    }
+    verbose "---- successful"
+}
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+if {$logging==0} {
+    echo "Logging off: script not run. "
+} else {
+    set err 0
+    set ne 1000
+    # nb: nr must be 2 or greater
+    set nr 2
+    set nrec [expr { $nr * $ne } ]
+    set ktype i4
+
+    if {$logging==0} {
+	echo "Logging off: script not run."
+    } else {
+
+    #
+    # create index 
+    #
+    verbose Create index
+    sm begin_xct
+    set ndx [sm create_index $volid btree]
+    verbose2 created index $ndx
+    sm commit_xct
+
+    #
+    # load, abort
+    #
+    verbose load (1->$nr * 1->$ne), abort
+    sm begin_xct
+    for {set i 1} {$i <= $nr} {incr i} {
+	set key $i
+	for {set j 1} {$j <= $ne} {incr j}  {
+	    verbose2 inserting $i.$j
+	    if [catch {sm create_assoc $ndx $key [format $elem_format $j] $ktype} err] {
+		echo UNEXPECED ERROR : $err
+		exit
+	    }
+	}
+    }
+    scan_up_partial $ndx 2 [expr {$nr - 1}] $nr $ne
+
+    dstats $volid
+    verbose sm abort_xct 
+    sm abort_xct 
+
+    sm begin_xct
+    scan_up $ndx 0 0
+    sm commit_xct
+
+    #
+    # load, restart
+    #
+    verbose load, restart
+    sm begin_xct
+    set tx [sm xct]
+    set tid [sm xct_to_tid $tx]
+    verbose2  $tid
+    for {set i 1} {$i <= $nr} {incr i} {
+	set key $i
+	for {set j 1} {$j <= $ne} {incr j}  {
+	    verbose2 inserting $i.$j
+	    if [catch {sm create_assoc $ndx $key [format $elem_format $j] $ktype} err] {
+		echo UNEXPECTED ERROR: $err
+		exit
+	    }
+	}
+    }
+
+    verbose restart $tid after load
+    restart
+
+
+    sm begin_xct
+    scan_up $ndx 0 0
+    sm commit_xct
+
+    #
+    # load, commit restart
+    #
+    verbose load, commit, restart
+    sm begin_xct
+    for {set i 1} {$i <= $nr} {incr i} {
+	set key $i
+	for {set j 1} {$j <= $ne} {incr j}  {
+	    verbose2 inserting $i.$j
+	    if [catch {sm create_assoc $ndx $key [format $elem_format $j] $ktype} err] {
+		echo UNEXPECTED ERROR: $err
+		exit
+	    }
+	}
+    }
+    sm commit_xct
+
+    verbose restart
+    restart
+
+    sm begin_xct
+    scan_up $ndx $nr $ne
+    #probe $ndx $nr $ne
+    scan_up_partial $ndx 2 [expr {$nr - 1}] $nr $ne
+    sm commit_xct
+
+    #
+    # empty, abort
+    #
+    verbose empty, abort
+    sm begin_xct
+    for {set i 1} {$i <= $nr} {incr i} {
+	set key $i
+	for {set j 1} {$j <= $ne} {incr j}  {
+	    verbose2 deleting $i.$j
+	    sm destroy_assoc $ndx $key [format $elem_format $j] $ktype
+	}
+    }
+    scan_up $ndx 0 0
+    verbose sm abort_xct 
+    sm abort_xct 
+
+    sm begin_xct
+    scan_up $ndx $nr $ne 
+    sm commit_xct
+
+
+    #
+    # empty, restart
+    #
+
+    verbose empty, restart
+    sm begin_xct
+    set tx [sm xct]
+    set tid [sm xct_to_tid $tx]
+    verbose  $tid
+
+
+    for {set i 1} {$i <= $nr} {incr i} {
+	set key $i
+	for {set j 1} {$j <= $ne} {incr j}  {
+	    verbose2 deleting $i.$j
+	    verbose2 deleting $i.$j
+	    sm destroy_assoc $ndx $key [format $elem_format $j] $ktype
+	}
+    }
+
+    verbose restarting $tid after destroying all keys
+    restart
+
+    sm begin_xct
+    scan_up $ndx $nr $ne
+    sm commit_xct
+
+    #
+    # empty, commit, restart
+    #
+    verbose empty, commit, restart
+    sm begin_xct
+    for {set i 1} {$i <= $nr} {incr i} {
+	set key $i
+	for {set j 1} {$j <= $ne} {incr j}  {
+	    verbose2 deleting $i.$j
+	    sm destroy_assoc $ndx $key [format $elem_format $j] $ktype
+	}
+    }
+    sm commit_xct
+    restart
+
+    sm begin_xct
+    scan_up $ndx 0 0
+    sm commit_xct
+
+    verbose destroy, commit
+    sm begin_xct
+    sm destroy_index $ndx
+    sm commit_xct
+
+    unset ndx
+    unset i j
+    unset key
+    unset tid tx
+
+    }
+    verbose stats: [pstats]
+}
+unset nr err elem_format ktype
+unset nrec ne

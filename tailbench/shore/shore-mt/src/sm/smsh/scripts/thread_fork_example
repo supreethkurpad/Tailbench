@@ -1,0 +1,83 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: thread_fork_example,v 1.18.4.1 2010/03/25 18:05:31 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+source $script_dir/vol.init
+
+sm begin_xct
+
+verbose creating file
+set f1 [sm create_file $volid ]
+
+set PG_SZ       952
+
+# change body width
+set prefixlen  [expr {$PG_SZ * .48}]
+
+verbose creating r1 and r2
+set r1 [ sm create_rec $f1 "" 11 [formatlong 0 $prefixlen  %d 1] ]
+set r2 [ sm create_rec $f1 "" 11 [formatlong 0 $prefixlen %d 2] ]
+verbose $r1 $r2
+
+sm commit_xct
+
+proc remove { name rid } {
+	sm begin_xct
+	verbose sync $name $rid at destroy
+	sync
+	verbose $name destroy
+	sm destroy_rec $rid
+
+	verbose sync $name $rid at abort
+	sync
+	verbose $name abort
+	sm abort_xct
+}
+
+verbose forking 1
+set t1 [ fork_thread remove xct-1 $r1 ]
+verbose forking 2
+set t2 [ fork_thread remove xct-2 $r2 ]
+
+sync_thread $t1
+sync_thread $t2
+sync_thread $t1
+sync_thread $t2
+join_thread $t1 $t2
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+unset t1 t2 PG_SZ r1 r2 f1
+unset prefixlen
+
+checkpinstats thread_fork_example 
+puts stdout [concat CLEANUP AFTER  thread_fork_example: ]
+cleanup stdout
+

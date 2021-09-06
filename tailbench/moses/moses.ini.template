@@ -1,0 +1,81 @@
+# MERT optimized configuration
+### MOSES CONFIG FILE ###
+#########################
+
+# input factors
+[input-factors]
+0
+
+# mapping steps
+[mapping]
+0 T 0
+
+# translation tables: table type (hierarchical(0), textual (0), binary (1)), source-factors, target-factors, number of scores, file 
+# OLD FORMAT is still handled for back-compatibility
+# OLD FORMAT translation tables: source-factors, target-factors, number of scores, file 
+# OLD FORMAT a binary table type (1) is assumed 
+[ttable-file]
+1 0 0 5 @DATA_ROOT/moses/translation-model/phrase-table
+
+# no generation models, no generation-file section
+
+# language models: type(srilm/irstlm), factors, order, file
+[lmodel-file]
+8 0 3 @DATA_ROOT/moses/language-model/OpenSubtitles2011.blm.en
+
+
+# limit on how many phrase translations e for each phrase f are loaded
+# 0 = all elements loaded
+[ttable-limit]
+20
+
+# distortion (reordering) files
+[distortion-file]
+0-0 wbe-msd-bidirectional-fe-allff 6 @DATA_ROOT/moses/translation-model/reordering-table
+
+# distortion (reordering) weight
+[weight-d]
+0
+0
+0
+0
+0
+0
+0
+
+# language model weights
+[weight-l]
+0
+
+
+# translation model weights
+[weight-t]
+0
+0
+0
+0
+0
+
+# no generation models, no weight-generation section
+
+# word penalty
+[weight-w]
+0
+
+[distortion-limit]
+6
+
+[search-algorithm]
+1
+
+[cube-pruning-pop-limit]
+100
+
+[threads]
+1
+
+[num-tasks]
+1000000
+
+[output-file]
+test.out

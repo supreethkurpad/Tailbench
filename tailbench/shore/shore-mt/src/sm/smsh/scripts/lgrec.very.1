@@ -1,0 +1,94 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.very.1,v 1.6.2.1 2009/10/08 20:52:31 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test very large record (1 GB) creation, 
+#	and large file (>4GB)  create and destroy
+#
+# set volid 1
+# set Volid 1
+
+source $script_dir/vol.init
+
+set GB     1000000000
+
+set recsz $GB
+set nrecs 5
+
+set quota [sm get_volume_quota $volid]
+set vKB [lindex $quota 0]
+set volume_pages [expr {$vKB / ($page_size/1024)}]
+set pgs_per_rec  [expr { ( $recsz / $lg_rec_page_space ) + 1 } ]
+
+set pages_needed  [expr { $pgs_per_rec * $nrecs } ]
+
+set ok 1
+if [ expr {$pages_needed > $volume_pages }] {
+    echo "Volume not large enough: need " $pages_needed " have " $volume_pages
+    set ok 0
+}
+if {$ok == 1} {
+    set extents_needed  [expr { $pages_needed / $pages_per_ext } ]
+    set volume_extents [expr {$volume_pages / $pages_per_ext } ]
+    if [ expr {$extents_needed > $volume_extents }] {
+        echo "Volume not large enough: need " $extents_needed " have " $volume_extents
+        set ok 0
+        unset extents_needed volume_extents
+    }
+}
+
+if {$ok == 1} {
+    set cluster_extent  [expr {($volume_extents - $extents_needed)- 1}]
+
+    set cluster_page [expr {$cluster_extent * $pages_per_ext } ]
+
+    if [ expr {$cluster_page<0}] {
+        # we have enough extents, so we have enough pages
+        # but Tcl can't handle numbers bigger than a signed int
+        echo volume_pages $volume_pages
+        echo pgs_per_rec $pgs_per_rec
+        echo pages_needed $pages_needed
+        echo extents_needed $extents_needed
+        echo volume_extents $volume_extents
+        echo cluster_extent $cluster_extent
+        echo cluster_page $cluster_page
+        echo "Tcl can't handle numbers this large. sorry"
+        set ok 0
+        unset cluster_page cluster_extent 
+    }
+}
+
+if {$ok == 1} {
+    source $script_dir/lgrec.very.0
+    unset cluster_page cluster_extent volume_extents extents_needed 
+}
+
+unset volume_pages pgs_per_rec pages_needed
+unset recsz nrecs GB quota vKB
+unset ok

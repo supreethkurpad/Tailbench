@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structunigram__s" kind="struct" language="C++" prot="public">
+    <compoundname>unigram_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structunigram__s_1a1146a37091552cfd1c8ba4849c45dcac" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float unigram_s::prob</definition>
+        <argsstring></argsstring>
+        <name>prob</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="48" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structunigram__s_1aa95dd493e2d39c953bc4b9f957987e66" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float unigram_s::bo</definition>
+        <argsstring></argsstring>
+        <name>bo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="49" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structunigram__s_1a01e8e8faa0b1d9a25e0b6525acb7e76f" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 unigram_s::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="50" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/lm/lm_trie.h" line="47" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="47" bodyend="51"/>
+    <listofallmembers>
+      <member refid="structunigram__s_1aa95dd493e2d39c953bc4b9f957987e66" prot="public" virt="non-virtual"><scope>unigram_s</scope><name>bo</name></member>
+      <member refid="structunigram__s_1a01e8e8faa0b1d9a25e0b6525acb7e76f" prot="public" virt="non-virtual"><scope>unigram_s</scope><name>next</name></member>
+      <member refid="structunigram__s_1a1146a37091552cfd1c8ba4849c45dcac" prot="public" virt="non-virtual"><scope>unigram_s</scope><name>prob</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

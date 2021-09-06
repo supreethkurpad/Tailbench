@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structad__wbuf__t" kind="struct" language="C++" prot="public">
+    <compoundname>ad_wbuf_t</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structad__wbuf__t_1af965d67c14a8f92417350c3181f4e0c7" prot="public" static="no" mutable="no">
+        <type>HGLOBAL</type>
+        <definition>HGLOBAL ad_wbuf_t::h_whdr</definition>
+        <argsstring></argsstring>
+        <name>h_whdr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="74" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__wbuf__t_1a18cfda28e2a5bb39868313af83eaa2a2" prot="public" static="no" mutable="no">
+        <type>LPWAVEHDR</type>
+        <definition>LPWAVEHDR ad_wbuf_t::p_whdr</definition>
+        <argsstring></argsstring>
+        <name>p_whdr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="75" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__wbuf__t_1aff5ea768a4b5a376c879fff0544e425a" prot="public" static="no" mutable="no">
+        <type>HGLOBAL</type>
+        <definition>HGLOBAL ad_wbuf_t::h_buf</definition>
+        <argsstring></argsstring>
+        <name>h_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="76" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__wbuf__t_1ade7e8d650608229f6c0c512b1ff2bc84" prot="public" static="no" mutable="no">
+        <type>LPSTR</type>
+        <definition>LPSTR ad_wbuf_t::p_buf</definition>
+        <argsstring></argsstring>
+        <name>p_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="77" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxad/ad_win32.c" line="73" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="73" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structad__wbuf__t_1aff5ea768a4b5a376c879fff0544e425a" prot="public" virt="non-virtual"><scope>ad_wbuf_t</scope><name>h_buf</name></member>
+      <member refid="structad__wbuf__t_1af965d67c14a8f92417350c3181f4e0c7" prot="public" virt="non-virtual"><scope>ad_wbuf_t</scope><name>h_whdr</name></member>
+      <member refid="structad__wbuf__t_1ade7e8d650608229f6c0c512b1ff2bc84" prot="public" virt="non-virtual"><scope>ad_wbuf_t</scope><name>p_buf</name></member>
+      <member refid="structad__wbuf__t_1a18cfda28e2a5bb39868313af83eaa2a2" prot="public" virt="non-virtual"><scope>ad_wbuf_t</scope><name>p_whdr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

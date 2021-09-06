@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="unionfloat__enc" kind="union" language="C++" prot="public">
+    <compoundname>float_enc</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionfloat__enc_1a49168580eb1cb274f02f73be3afd1878" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float float_enc::f</definition>
+        <argsstring></argsstring>
+        <name>f</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/bitarr.c" line="56" column="1" bodyfile="src/libsphinxbase/util/bitarr.c" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionfloat__enc_1a9fb7001d36a521e2fc8ae4b2272f9cc5" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 float_enc::i</definition>
+        <argsstring></argsstring>
+        <name>i</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/bitarr.c" line="57" column="1" bodyfile="src/libsphinxbase/util/bitarr.c" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Union to map float to integer to store latter in bit array. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/util/bitarr.c" line="55" column="1" bodyfile="src/libsphinxbase/util/bitarr.c" bodystart="55" bodyend="58"/>
+    <listofallmembers>
+      <member refid="unionfloat__enc_1a49168580eb1cb274f02f73be3afd1878" prot="public" virt="non-virtual"><scope>float_enc</scope><name>f</name></member>
+      <member refid="unionfloat__enc_1a9fb7001d36a521e2fc8ae4b2272f9cc5" prot="public" virt="non-virtual"><scope>float_enc</scope><name>i</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

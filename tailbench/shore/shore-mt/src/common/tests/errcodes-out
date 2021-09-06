@@ -1,0 +1,24 @@
+ERROR CODES:
+Foundation Classes:65536:Internal error
+Foundation Classes:65537:Operating system error 
+Foundation Classes:65538:Container is full
+Foundation Classes:65539:Container is empty
+Foundation Classes:65540:Malloc failed : out of memory 
+Foundation Classes:65541:Mmap could not map aligned memory
+Foundation Classes:65542:Item not found 
+Foundation Classes:65543:Feature is not implemented
+Foundation Classes:65544:Update operation on read-only object
+Foundation Classes:65545:Attempting to mix static and dynamic containers
+Foundation Classes:65546:Item already found
+Foundation Classes:65547:unknown error code
+Foundation Classes:65548:Assertion Failed
+Options Package:131072:Illegal option description line
+Options Package:131073:Illegal option class name
+Options Package:131074:Option class name too long
+Options Package:131075:Too many option class levels
+Options Package:131076:Option name is not unique
+Options Package:131077:Unknown option name
+Options Package:131078:Unknown option class name
+Options Package:131079:Bad syntax in configuration file
+Options Package:131080:Bad option value
+Options Package:131081:A required option was not set

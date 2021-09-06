@@ -1,0 +1,86 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: freepage.bug,v 1.11.4.3 2009/12/03 04:03:30 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+source $script_dir/vol.init
+
+sm begin_xct
+verbose begin_xct [sm xct_to_tid [sm xct]]
+set fid [sm create_file $volid]
+set r [sm create_rec $fid head 7000 [formatlong 0 7000 %03d 99]]
+verbose created rec $r
+set r [sm create_rec $fid head 7000 [formatlong 0 7000 %03d 99]]
+verbose created rec $r
+set r1 [sm create_rec $fid head 4 body]
+verbose r1=$r1
+set r2 [sm create_rec $fid head 4 body]
+verbose r2=$r2
+sm destroy_rec $r
+verbose destroyed rec $r
+verbose commit_xct [sm xct_to_tid [sm xct]]
+sm commit_xct
+
+# r1 and r2 should be on the same page.
+# should not be on the first page in the store, since it is treated special.
+# should be the only records on the page, so both will hold IX locks on the
+# page when one tries to free the page.  this will propagate an error of
+# eLOCKTIMEOUT, since the page freeing code won't be able to get its EX
+# lock.
+
+proc deleteit {r} {
+	sync
+	sm lock_timeout 1000
+	sm begin_xct
+	set  x [sm xct_to_tid [sm xct]]  
+	verbose xct $x about to destroy_rec $r
+	catch { sm destroy_rec $r} err
+	verbose $err
+	verbose xct $x destroyed rec $r
+	verbose sync $x rec $r
+	sync
+	verbose commit $x rec $r
+	sm commit_xct
+}
+verbose EXPECT one E_LOCKTIMEOUT 
+
+set t1 [fork_thread deleteit $r1]
+verbose $t1 -> $r1
+set t2 [fork_thread deleteit $r2]
+verbose $t2 -> $r2
+verbose sync_thread $t1 $t2
+sync_thread $t1 $t2
+verbose sync_thread $t1 $t2
+sync_thread $t1 $t2
+join_thread $t1 $t2
+
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct 
+
+unset t1 t2 fid r r1 r2
+

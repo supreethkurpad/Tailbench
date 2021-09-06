@@ -1,0 +1,101 @@
+\section{ps\+\_\+latnode\+\_\+s Struct Reference}
+\label{structps__latnode__s}\index{ps\+\_\+latnode\+\_\+s@{ps\+\_\+latnode\+\_\+s}}
+
+
+D\+AG nodes.  
+
+
+
+
+{\ttfamily \#include $<$ps\+\_\+lattice\+\_\+internal.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structps__latnode__s_a78243b37753f7a209c15d6adf98ee3f7}} 
+int32 \textbf{ id}
+\begin{DoxyCompactList}\small\item\em Unique id for this node. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_afd85dbd410d6e6d970c73088bc6fb97e}} 
+int32 \textbf{ wid}
+\begin{DoxyCompactList}\small\item\em Dictionary word id. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_ae3b3dc7d14347e6380859c74b9a02589}} 
+int32 \textbf{ basewid}
+\begin{DoxyCompactList}\small\item\em Dictionary base word id. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_a584ee5a303355d851ac903718998df14}} 
+int32 \textbf{ fef}
+\begin{DoxyCompactList}\small\item\em First end frame. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_a5c7b9114d131151d6ce85228ea9f829d}} 
+int32 \textbf{ lef}
+\begin{DoxyCompactList}\small\item\em Last end frame. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_a4171e956043e7856c04d84498f16cf29}} 
+\textbf{ frame\+\_\+idx\+\_\+t} \textbf{ sf}
+\begin{DoxyCompactList}\small\item\em Start frame. \end{DoxyCompactList}\item 
+int16 \textbf{ reachable}
+\begin{DoxyCompactList}\small\item\em From. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_a50d14c033652a4fb387f76881df1c3f6}} 
+int32 \textbf{ node\+\_\+id}
+\begin{DoxyCompactList}\small\item\em Node from fsg model, used to map lattice back to model. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_a08268f9ec02dc27bead7ad7524838969}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>glist\_t \textbf{ velist}\\
+\>\>{\em List of history entries with different lmstate (tst only) }\\
+\>int32 \textbf{ fanin}\\
+\>\>{\em Number nodes with links to this node. }\\
+\>int32 \textbf{ rem\_score}\\
+\>\>{\em Estimated best score from node.sf to end. }\\
+\>int32 \textbf{ best\_exit}\\
+\>\>{\em Best exit score (used for final nodes only) }\\
+\} {\bfseries info}\\
+
+\end{tabbing}\item 
+\mbox{\label{structps__latnode__s_a5232eefbc6e800b77e7a3c8ee3f4135d}} 
+\textbf{ latlink\+\_\+list\+\_\+t} $\ast$ \textbf{ exits}
+\begin{DoxyCompactList}\small\item\em Links out of this node. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_a051a7eed31e29dd75151d1b34cc4eefa}} 
+\textbf{ latlink\+\_\+list\+\_\+t} $\ast$ \textbf{ entries}
+\begin{DoxyCompactList}\small\item\em Links into this node. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_aa4c0a395c74acbacccde561f92fa89e4}} 
+struct \textbf{ ps\+\_\+latnode\+\_\+s} $\ast$ \textbf{ alt}
+\begin{DoxyCompactList}\small\item\em Node with alternate pronunciation for this word. \end{DoxyCompactList}\item 
+\mbox{\label{structps__latnode__s_aca6f3d543a1712a1ca3bb8ec60f71c84}} 
+struct \textbf{ ps\+\_\+latnode\+\_\+s} $\ast$ \textbf{ next}
+\begin{DoxyCompactList}\small\item\em Next node in D\+AG (no ordering implied) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+D\+AG nodes. 
+
+A node corresponds to a number of hypothesized instances of a word which all share the same starting point. 
+
+Definition at line 113 of file ps\+\_\+lattice\+\_\+internal.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structps__latnode__s_af9c4c69f5f85bbc36818357a52432565}} 
+\index{ps\+\_\+latnode\+\_\+s@{ps\+\_\+latnode\+\_\+s}!reachable@{reachable}}
+\index{reachable@{reachable}!ps\+\_\+latnode\+\_\+s@{ps\+\_\+latnode\+\_\+s}}
+\subsubsection{reachable}
+{\footnotesize\ttfamily int16 ps\+\_\+latnode\+\_\+s\+::reachable}
+
+
+
+From. 
+
+\begin{DoxyVerb}</s> \end{DoxyVerb}
+ or\begin{DoxyVerb}<s> \end{DoxyVerb}
+ 
+
+Definition at line 121 of file ps\+\_\+lattice\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+delete\+\_\+unreachable(), ps\+\_\+lattice\+\_\+posterior\+\_\+prune(), and ps\+\_\+lattice\+\_\+write\+\_\+htk().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ ps\+\_\+lattice\+\_\+internal.\+h}\end{DoxyCompactItemize}

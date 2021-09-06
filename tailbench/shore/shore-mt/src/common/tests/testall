@@ -1,0 +1,99 @@
+#!/bin/ksh 
+
+# <std-header style='shell' orig-src='shore'>
+#
+#  $Id: testall,v 1.5 2010/06/15 22:22:00 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+PATH=.:$PATH
+
+function run_kvl {
+    echo kvl 3.2 abc 
+    kvl 3.2 abc 
+    echo kvl 3.2 abc xxxx
+    kvl 3.2 abc xxxx
+    echo kvl 1.8 Paradise Paradise
+    kvl 1.8 Paradise Paradise
+}
+
+function execute  {
+    print -n "$1\t--> running --> "
+    print "running $1" >> $2
+
+    if [[ -z $3 ]]; then
+        # no comparison file
+		echo >> /dev/null
+    elif [[ -a $3 ]]; then
+		echo >> /dev/null
+    else
+        # given argument doesn't exist
+        print "comparison file $3 doesn't exist" 
+        exit -1
+    fi
+
+    if [[ -n $3 ]]; then
+    of=/tmp/$$
+    if $1 1> $of 2> $of.err ; then
+        if diff $of $3 >> $2; then
+        print "ok"
+        else
+        print "diff failed; results in " $of " and " $of.err 
+        print "  expected results in " $3
+        print "  All diffs in " $2
+                exit 1
+        fi
+    else
+        print "failed to execute $1 ( $? )"
+            exit 1
+    fi
+    cat $of >> $2
+    rm $of
+
+    elif $1 >> $2 2>&1; then
+    print "ok"
+    else
+    print "failed to execute $1 ( $? )"
+        exit 1
+    fi
+}
+
+outf=/tmp/all$$.out
+rm -f /tmp/all*.out
+execute bitmap $outf bitmap-out
+execute errcodes $outf errcodes-out
+execute opaque $outf opaque-out
+execute vectors $outf vectors-out
+execute run_kvl $outf kvl-out.`uname -m`
+execute "latch1 -t 1" $outf latch1-out
+execute "latch1 -t 2" $outf latch2-out
+execute "latch1 -t 3" $outf latch3-out
+execute "lsns" $outf lsns-out
+execute "mapp" $outf mapp-out
+
+print
+print "result in $outf"
+

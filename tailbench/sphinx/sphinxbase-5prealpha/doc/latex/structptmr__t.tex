@@ -1,0 +1,67 @@
+\section{ptmr\+\_\+t Struct Reference}
+\label{structptmr__t}\index{ptmr\+\_\+t@{ptmr\+\_\+t}}
+
+
+Generic timer structures and functions for coarse-\/grained performance measurements using standard system calls.  
+
+
+
+
+{\ttfamily \#include $<$profile.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \textbf{ name}
+\begin{DoxyCompactList}\small\item\em Timer print name; N\+U\+LL terminates an array of timers. \end{DoxyCompactList}\item 
+\mbox{\label{structptmr__t_acbd784f7332329999925d396deae3a5d}} 
+float64 \textbf{ t\+\_\+cpu}
+\begin{DoxyCompactList}\small\item\em C\+PU time accumulated since most recent reset op. \end{DoxyCompactList}\item 
+\mbox{\label{structptmr__t_a743fce329d82fd7a9130cba5bbccd991}} 
+float64 \textbf{ t\+\_\+elapsed}
+\begin{DoxyCompactList}\small\item\em Elapsed time accumulated since most recent reset. \end{DoxyCompactList}\item 
+\mbox{\label{structptmr__t_a301d13acc21718143b8b39b7af8b6677}} 
+float64 \textbf{ t\+\_\+tot\+\_\+cpu}
+\begin{DoxyCompactList}\small\item\em Total C\+PU time since creation. \end{DoxyCompactList}\item 
+\mbox{\label{structptmr__t_a2dc87aa035c8eb542279ca4496dd76f1}} 
+float64 \textbf{ t\+\_\+tot\+\_\+elapsed}
+\begin{DoxyCompactList}\small\item\em Total elapsed time since creation. \end{DoxyCompactList}\item 
+\mbox{\label{structptmr__t_a85c0c5f0e321cf11fb478b92a05223e8}} 
+float64 \textbf{ start\+\_\+cpu}
+\begin{DoxyCompactList}\small\item\em -\/--- F\+OR I\+N\+T\+E\+R\+N\+AL U\+SE O\+N\+LY -\/--- \end{DoxyCompactList}\item 
+\mbox{\label{structptmr__t_a1702b16a6c6bcb82f6c636f5e68af188}} 
+float64 \textbf{ start\+\_\+elapsed}
+\begin{DoxyCompactList}\small\item\em -\/--- F\+OR I\+N\+T\+E\+R\+N\+AL U\+SE O\+N\+LY -\/--- \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Generic timer structures and functions for coarse-\/grained performance measurements using standard system calls. 
+
+Definition at line 157 of file profile.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structptmr__t_a73b51c5a047300d77b3a82a7dcaf44f1}} 
+\index{ptmr\+\_\+t@{ptmr\+\_\+t}!name@{name}}
+\index{name@{name}!ptmr\+\_\+t@{ptmr\+\_\+t}}
+\subsubsection{name}
+{\footnotesize\ttfamily const char$\ast$ ptmr\+\_\+t\+::name}
+
+
+
+Timer print name; N\+U\+LL terminates an array of timers. 
+
+Used by ptmr\+\_\+print\+\_\+all 
+
+Definition at line 158 of file profile.\+h.
+
+
+
+Referenced by ptmr\+\_\+print\+\_\+all(), and ptmr\+\_\+reset\+\_\+all().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/sphinxbase/\textbf{ profile.\+h}\end{DoxyCompactItemize}

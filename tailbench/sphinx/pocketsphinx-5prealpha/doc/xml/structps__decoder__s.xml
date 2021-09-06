@@ -1,0 +1,548 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structps__decoder__s" kind="struct" language="C++" prot="public">
+    <compoundname>ps_decoder_s</compoundname>
+    <includes refid="pocketsphinx__internal_8h" local="no">pocketsphinx_internal.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" prot="public" static="no" mutable="no">
+        <type>cmd_ln_t *</type>
+        <definition>cmd_ln_t* ps_decoder_s::config</definition>
+        <argsstring></argsstring>
+        <name>config</name>
+        <briefdescription>
+<para>Configuration. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="203" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="203" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1ad8fd9b79ae9f87703af3f4755b3ab567" compoundref="pocketsphinx_8c" startline="436" endline="450">ps_free</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a61fb92154c5c731cf4a24e0976263da0" compoundref="pocketsphinx_8c" startline="1379" endline="1388">ps_get_all_time</referencedby>
+        <referencedby refid="pocketsphinx_8h_1abb9256d8f7217a1e929509090df1f35b" compoundref="pocketsphinx_8c" startline="453" endline="456">ps_get_config</referencedby>
+        <referencedby refid="pocketsphinx_8h_1aac7070c934a2d03d0d5b34e19614360f" compoundref="pocketsphinx_8c" startline="1367" endline="1376">ps_get_utt_time</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a824f46e51681d931b7e2706a86c3d86f" compoundref="pocketsphinx_8c" startline="741" endline="794">ps_load_dict</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" compoundref="pocketsphinx_8c" startline="618" endline="623">ps_set_allphone</referencedby>
+        <referencedby refid="ps__search_8h_1a66bebfccb8ece9e7bff411329f25ee5e" compoundref="pocketsphinx_8c" startline="626" endline="638">ps_set_allphone_file</referencedby>
+        <referencedby refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" compoundref="pocketsphinx_8c" startline="657" endline="662">ps_set_fsg</referencedby>
+        <referencedby refid="ps__search_8h_1ae845bbf6a3e5b859e833f6cc0d1ba55f" compoundref="pocketsphinx_8c" startline="665" endline="701">ps_set_jsgf_file</referencedby>
+        <referencedby refid="ps__search_8h_1a3c51b0eab27ac9df20ee54e1d87b3ca3" compoundref="pocketsphinx_8c" startline="704" endline="737">ps_set_jsgf_string</referencedby>
+        <referencedby refid="ps__search_8h_1a7965534ad5e48f0b46f326d7da186a2a" compoundref="pocketsphinx_8c" startline="649" endline="654">ps_set_keyphrase</referencedby>
+        <referencedby refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" compoundref="pocketsphinx_8c" startline="641" endline="646">ps_set_kws</referencedby>
+        <referencedby refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" compoundref="pocketsphinx_8c" startline="595" endline="600">ps_set_lm</referencedby>
+        <referencedby refid="ps__search_8h_1a78372effd2aa6bddf7b71d6e2e9c3776" compoundref="pocketsphinx_8c" startline="603" endline="615">ps_set_lm_file</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1aa5ab90180288b6c9039eb86b496f76aa" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ps_decoder_s::refcount</definition>
+        <argsstring></argsstring>
+        <name>refcount</name>
+        <briefdescription>
+<para>Reference count. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="204" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="204" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1ad8fd9b79ae9f87703af3f4755b3ab567" compoundref="pocketsphinx_8c" startline="436" endline="450">ps_free</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ad033da98d0f7785d6ab89a41dac3cc7c" compoundref="pocketsphinx_8c" startline="404" endline="420">ps_init</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a8d912ce9a5fea61b7b10db1750531c34" compoundref="pocketsphinx_8c" startline="429" endline="433">ps_retain</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" prot="public" static="no" mutable="no">
+        <type><ref refid="structacmod__s" kindref="compound">acmod_t</ref> *</type>
+        <definition>acmod_t* ps_decoder_s::acmod</definition>
+        <argsstring></argsstring>
+        <name>acmod</name>
+        <briefdescription>
+<para>Acoustic model. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="207" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="207" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a5f3c4fcdbef34915c4e785ac9a1c6005" compoundref="pocketsphinx_8c" startline="804" endline="869">ps_add_word</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a466d1d718873e7b1cf0881e4f552a4a2" compoundref="pocketsphinx_8c" startline="1048" endline="1066">ps_decode_senscr</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ab9339de730713b68cbd68a7f36dc8730" compoundref="pocketsphinx_8c" startline="1136" endline="1199">ps_end_utt</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ad8fd9b79ae9f87703af3f4755b3ab567" compoundref="pocketsphinx_8c" startline="436" endline="450">ps_free</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a6237e2822756f230b88019b533a28724" compoundref="pocketsphinx_8c" startline="465" endline="468">ps_get_fe</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a0d74d90f0db0782386487cc061a09218" compoundref="pocketsphinx_8c" startline="471" endline="474">ps_get_feat</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a25a1d0e35f0c1ca8b018e1a27c0c1966" compoundref="pocketsphinx_8c" startline="1391" endline="1394">ps_get_in_speech</referencedby>
+        <referencedby refid="pocketsphinx_8h_1abb3527e41c2f4cd64dccbdbd5f812d1d" compoundref="pocketsphinx_8c" startline="1361" endline="1364">ps_get_n_frames</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a0ea0a24f578b1eeff2fccdb0b61e5527" compoundref="pocketsphinx_8c" startline="1472" endline="1475">ps_get_rawdata</referencedby>
+        <referencedby refid="pocketsphinx_8h_1aac7070c934a2d03d0d5b34e19614360f" compoundref="pocketsphinx_8c" startline="1367" endline="1376">ps_get_utt_time</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a824f46e51681d931b7e2706a86c3d86f" compoundref="pocketsphinx_8c" startline="741" endline="794">ps_load_dict</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a572ad08651b4caae820d178a12c8f95f" compoundref="pocketsphinx_8c" startline="1069" endline="1102">ps_process_raw</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" compoundref="pocketsphinx_8c" startline="618" endline="623">ps_set_allphone</referencedby>
+        <referencedby refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" compoundref="pocketsphinx_8c" startline="657" endline="662">ps_set_fsg</referencedby>
+        <referencedby refid="ps__search_8h_1a7965534ad5e48f0b46f326d7da186a2a" compoundref="pocketsphinx_8c" startline="649" endline="654">ps_set_keyphrase</referencedby>
+        <referencedby refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" compoundref="pocketsphinx_8c" startline="641" endline="646">ps_set_kws</referencedby>
+        <referencedby refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" compoundref="pocketsphinx_8c" startline="595" endline="600">ps_set_lm</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a4aef468e7959d9a7605f344d6759721c" compoundref="pocketsphinx_8c" startline="1466" endline="1469">ps_set_rawdata_size</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a89be3b2a8f83291a225db0bcd9ee65b2" compoundref="pocketsphinx_8c" startline="938" endline="942">ps_start_stream</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a85e04bcbf5366f1bdad555dbb4d73d5d" compoundref="pocketsphinx_8c" startline="477" endline="480">ps_update_mllr</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" prot="public" static="no" mutable="no">
+        <type><ref refid="structdict__t" kindref="compound">dict_t</ref> *</type>
+        <definition>dict_t* ps_decoder_s::dict</definition>
+        <argsstring></argsstring>
+        <name>dict</name>
+        <briefdescription>
+<para>Pronunciation dictionary. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="208" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="208" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a5f3c4fcdbef34915c4e785ac9a1c6005" compoundref="pocketsphinx_8c" startline="804" endline="869">ps_add_word</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ad8fd9b79ae9f87703af3f4755b3ab567" compoundref="pocketsphinx_8c" startline="436" endline="450">ps_free</referencedby>
+        <referencedby refid="ps__lattice_8c_1aaf4a101f324943c7635746ec6ba7ab06" compoundref="ps__lattice_8c" startline="387" endline="630">ps_lattice_read</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a824f46e51681d931b7e2706a86c3d86f" compoundref="pocketsphinx_8c" startline="741" endline="794">ps_load_dict</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ab0a242c645a68a553c2e7c62c96e4ce2" compoundref="pocketsphinx_8c" startline="872" endline="892">ps_lookup_word</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a5e278377cc57d921591ce95b980760d5" compoundref="pocketsphinx_8c" startline="797" endline="801">ps_save_dict</referencedby>
+        <referencedby refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" compoundref="pocketsphinx_8c" startline="618" endline="623">ps_set_allphone</referencedby>
+        <referencedby refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" compoundref="pocketsphinx_8c" startline="657" endline="662">ps_set_fsg</referencedby>
+        <referencedby refid="ps__search_8h_1a7965534ad5e48f0b46f326d7da186a2a" compoundref="pocketsphinx_8c" startline="649" endline="654">ps_set_keyphrase</referencedby>
+        <referencedby refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" compoundref="pocketsphinx_8c" startline="641" endline="646">ps_set_kws</referencedby>
+        <referencedby refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" compoundref="pocketsphinx_8c" startline="595" endline="600">ps_set_lm</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" prot="public" static="no" mutable="no">
+        <type><ref refid="structdict2pid__t" kindref="compound">dict2pid_t</ref> *</type>
+        <definition>dict2pid_t* ps_decoder_s::d2p</definition>
+        <argsstring></argsstring>
+        <name>d2p</name>
+        <briefdescription>
+<para>Dictionary to senone mapping. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="209" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="209" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a5f3c4fcdbef34915c4e785ac9a1c6005" compoundref="pocketsphinx_8c" startline="804" endline="869">ps_add_word</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ad8fd9b79ae9f87703af3f4755b3ab567" compoundref="pocketsphinx_8c" startline="436" endline="450">ps_free</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a824f46e51681d931b7e2706a86c3d86f" compoundref="pocketsphinx_8c" startline="741" endline="794">ps_load_dict</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" compoundref="pocketsphinx_8c" startline="618" endline="623">ps_set_allphone</referencedby>
+        <referencedby refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" compoundref="pocketsphinx_8c" startline="657" endline="662">ps_set_fsg</referencedby>
+        <referencedby refid="ps__search_8h_1a7965534ad5e48f0b46f326d7da186a2a" compoundref="pocketsphinx_8c" startline="649" endline="654">ps_set_keyphrase</referencedby>
+        <referencedby refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" compoundref="pocketsphinx_8c" startline="641" endline="646">ps_set_kws</referencedby>
+        <referencedby refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" compoundref="pocketsphinx_8c" startline="595" endline="600">ps_set_lm</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1abd17fe329f2fb219c5a534f3217c5b95" prot="public" static="no" mutable="no">
+        <type>logmath_t *</type>
+        <definition>logmath_t* ps_decoder_s::lmath</definition>
+        <argsstring></argsstring>
+        <name>lmath</name>
+        <briefdescription>
+<para>Log math computation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="210" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="210" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1ad8fd9b79ae9f87703af3f4755b3ab567" compoundref="pocketsphinx_8c" startline="436" endline="450">ps_free</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a249cfc383b7d9111a28b550945a606b5" compoundref="pocketsphinx_8c" startline="459" endline="462">ps_get_logmath</referencedby>
+        <referencedby refid="ps__lattice_8c_1aaf4a101f324943c7635746ec6ba7ab06" compoundref="ps__lattice_8c" startline="387" endline="630">ps_lattice_read</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="ps__search_8h_1a66bebfccb8ece9e7bff411329f25ee5e" compoundref="pocketsphinx_8c" startline="626" endline="638">ps_set_allphone_file</referencedby>
+        <referencedby refid="ps__search_8h_1ae845bbf6a3e5b859e833f6cc0d1ba55f" compoundref="pocketsphinx_8c" startline="665" endline="701">ps_set_jsgf_file</referencedby>
+        <referencedby refid="ps__search_8h_1a3c51b0eab27ac9df20ee54e1d87b3ca3" compoundref="pocketsphinx_8c" startline="704" endline="737">ps_set_jsgf_string</referencedby>
+        <referencedby refid="ps__search_8h_1a78372effd2aa6bddf7b71d6e2e9c3776" compoundref="pocketsphinx_8c" startline="603" endline="615">ps_set_lm_file</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a43bca42790684eefb8d01a0aef6fa530" prot="public" static="no" mutable="no">
+        <type>hash_table_t *</type>
+        <definition>hash_table_t* ps_decoder_s::searches</definition>
+        <argsstring></argsstring>
+        <name>searches</name>
+        <briefdescription>
+<para>Set of search modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="213" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="213" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a5f3c4fcdbef34915c4e785ac9a1c6005" compoundref="pocketsphinx_8c" startline="804" endline="869">ps_add_word</referencedby>
+        <referencedby refid="ps__search_8h_1ae2b728c9b05e733605d33fa19472ef8e" compoundref="pocketsphinx_8c" startline="501" endline="513">ps_get_search</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a824f46e51681d931b7e2706a86c3d86f" compoundref="pocketsphinx_8c" startline="741" endline="794">ps_load_dict</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="ps__search_8h_1a661c72707484ec2528319c9f6976fb7c" compoundref="pocketsphinx_8c" startline="528" endline="531">ps_search_iter</referencedby>
+        <referencedby refid="ps__search_8h_1a300fd82f4b1621663a0d870da61497b0" compoundref="pocketsphinx_8c" startline="516" endline="525">ps_unset_search</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1ad337270efc93613cf8dd7594f6515799" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx__internal_8h_1adc3de4d62e46c5e6cb93d09fb61be8ee" kindref="member">ps_search_t</ref> *</type>
+        <definition>ps_search_t* ps_decoder_s::search</definition>
+        <argsstring></argsstring>
+        <name>search</name>
+        <briefdescription>
+<para>Currently active search module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="216" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="216" bodyend="-1"/>
+        <referencedby refid="ps__search_8h_1ae2b728c9b05e733605d33fa19472ef8e" compoundref="pocketsphinx_8c" startline="501" endline="513">ps_get_search</referencedby>
+        <referencedby refid="ps__lattice_8c_1aaf4a101f324943c7635746ec6ba7ab06" compoundref="ps__lattice_8c" startline="387" endline="630">ps_lattice_read</referencedby>
+        <referencedby refid="pocketsphinx_8h_1af4bb6ba47844a135745db428919d9810" compoundref="pocketsphinx_8c" startline="1289" endline="1319">ps_nbest</referencedby>
+        <referencedby refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" compoundref="pocketsphinx_8c" startline="483" endline="498">ps_set_search</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+        <referencedby refid="ps__search_8h_1a300fd82f4b1621663a0d870da61497b0" compoundref="pocketsphinx_8c" startline="516" endline="525">ps_unset_search</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a0c6d141d7a71a1287be00a1ebcc7643d" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx__internal_8h_1adc3de4d62e46c5e6cb93d09fb61be8ee" kindref="member">ps_search_t</ref> *</type>
+        <definition>ps_search_t* ps_decoder_s::phone_loop</definition>
+        <argsstring></argsstring>
+        <name>phone_loop</name>
+        <briefdescription>
+<para>Phone loop search for lookahead. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="217" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="217" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1ab9339de730713b68cbd68a7f36dc8730" compoundref="pocketsphinx_8c" startline="1136" endline="1199">ps_end_utt</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a0f0a6681ffd98af789f6bed556c814e4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ps_decoder_s::pl_window</definition>
+        <argsstring></argsstring>
+        <name>pl_window</name>
+        <briefdescription>
+<para>Window size for phoneme lookahead. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="218" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a0f597370dd162c2799efe216c9b991fc" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 ps_decoder_s::uttno</definition>
+        <argsstring></argsstring>
+        <name>uttno</name>
+        <briefdescription>
+<para>Utterance counter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="221" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="221" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1ab42d1d1e300d2a6df5dd3cd796a27d43" prot="public" static="no" mutable="no">
+        <type>ptmr_t</type>
+        <definition>ptmr_t ps_decoder_s::perf</definition>
+        <argsstring></argsstring>
+        <name>perf</name>
+        <briefdescription>
+<para>Performance counter for all of decoding. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="222" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="222" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1ab9339de730713b68cbd68a7f36dc8730" compoundref="pocketsphinx_8c" startline="1136" endline="1199">ps_end_utt</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a61fb92154c5c731cf4a24e0976263da0" compoundref="pocketsphinx_8c" startline="1379" endline="1388">ps_get_all_time</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ada74b12d71e9d4db5d959b94004ff812" compoundref="pocketsphinx_8c" startline="1202" endline="1210">ps_get_hyp</referencedby>
+        <referencedby refid="pocketsphinx_8h_1af3431cf96766564d6ab2a3cc8e056860" compoundref="pocketsphinx_8c" startline="1213" endline="1221">ps_get_hyp_final</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ac8ac154482457740173caa1c0d699c49" compoundref="pocketsphinx_8c" startline="1225" endline="1233">ps_get_prob</referencedby>
+        <referencedby refid="pocketsphinx_8h_1aac7070c934a2d03d0d5b34e19614360f" compoundref="pocketsphinx_8c" startline="1367" endline="1376">ps_get_utt_time</referencedby>
+        <referencedby refid="pocketsphinx_8h_1a2216f6ff53f6bc9c78f285ee3fe0d665" compoundref="pocketsphinx_8c" startline="1236" endline="1244">ps_seg_iter</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a2886b321c576c7def449ebb2f37899fd" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 ps_decoder_s::n_frame</definition>
+        <argsstring></argsstring>
+        <name>n_frame</name>
+        <briefdescription>
+<para>Total number of frames processed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="223" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="223" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a61fb92154c5c731cf4a24e0976263da0" compoundref="pocketsphinx_8c" startline="1379" endline="1388">ps_get_all_time</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a8bb5ef8791798b8dd9bc82b1ec016663" prot="public" static="no" mutable="no">
+        <type>char const  *</type>
+        <definition>char const* ps_decoder_s::mfclogdir</definition>
+        <argsstring></argsstring>
+        <name>mfclogdir</name>
+        <briefdescription>
+<para>Log directory for MFCC files. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="224" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="224" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1aa2610c52a9267ee18ca095169bf34bfd" prot="public" static="no" mutable="no">
+        <type>char const  *</type>
+        <definition>char const* ps_decoder_s::rawlogdir</definition>
+        <argsstring></argsstring>
+        <name>rawlogdir</name>
+        <briefdescription>
+<para>Log directory for audio files. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="225" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="225" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structps__decoder__s_1a0ed3476113fe3d63b13ac5e8da3f3b4f" prot="public" static="no" mutable="no">
+        <type>char const  *</type>
+        <definition>char const* ps_decoder_s::senlogdir</definition>
+        <argsstring></argsstring>
+        <name>senlogdir</name>
+        <briefdescription>
+<para>Log directory for senone score files. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="226" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="226" bodyend="-1"/>
+        <referencedby refid="pocketsphinx_8h_1a391679e7edb0de1e324aa302ee820287" compoundref="pocketsphinx_8c" startline="234" endline="401">ps_reinit</referencedby>
+        <referencedby refid="pocketsphinx_8h_1ade3909b1c12c1b70afe284639e70cbff" compoundref="pocketsphinx_8c" startline="945" endline="1023">ps_start_utt</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Decoder object. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="474">
+        <label>ps_decoder_s</label>
+        <link refid="structps__decoder__s"/>
+        <childnode refid="475" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="477" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="482" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="487" relation="usage">
+          <edgelabel>phone_loop</edgelabel>
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="483">
+        <label>ps_mgau_s</label>
+        <link refid="structps__mgau__s"/>
+        <childnode refid="484" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+      </node>
+      <node id="477">
+        <label>dict_t</label>
+        <link refid="structdict__t"/>
+        <childnode refid="478" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="481" relation="usage">
+          <edgelabel>word</edgelabel>
+        </childnode>
+      </node>
+      <node id="487">
+        <label>ps_search_s</label>
+        <link refid="structps__search__s"/>
+        <childnode refid="488" relation="usage">
+          <edgelabel>last_link</edgelabel>
+        </childnode>
+        <childnode refid="491" relation="usage">
+          <edgelabel>dag</edgelabel>
+        </childnode>
+        <childnode refid="492" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="475" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="477" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="482" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="487" relation="usage">
+          <edgelabel>pls</edgelabel>
+        </childnode>
+      </node>
+      <node id="475">
+        <label>dict2pid_t</label>
+        <link refid="structdict2pid__t"/>
+        <childnode refid="476" relation="usage">
+          <edgelabel>lrssid</edgelabel>
+          <edgelabel>rssid</edgelabel>
+        </childnode>
+        <childnode refid="477" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="478" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+      </node>
+      <node id="490">
+        <label>latlink_list_s</label>
+        <link refid="structlatlink__list__s"/>
+        <childnode refid="488" relation="usage">
+          <edgelabel>link</edgelabel>
+        </childnode>
+        <childnode refid="490" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="486">
+        <label>tmat_t</label>
+        <link refid="structtmat__t"/>
+      </node>
+      <node id="479">
+        <label>cd_tree_s</label>
+        <link refid="structcd__tree__s"/>
+      </node>
+      <node id="481">
+        <label>dictword_t</label>
+        <link refid="structdictword__t"/>
+      </node>
+      <node id="476">
+        <label>xwdssid_t</label>
+        <link refid="structxwdssid__t"/>
+      </node>
+      <node id="489">
+        <label>ps_latnode_s</label>
+        <link refid="structps__latnode__s"/>
+        <childnode refid="489" relation="usage">
+          <edgelabel>alt</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="490" relation="usage">
+          <edgelabel>exits</edgelabel>
+          <edgelabel>entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="480">
+        <label>mdef_entry_s</label>
+        <link refid="structmdef__entry__s"/>
+      </node>
+      <node id="494">
+        <label>ps_segfuncs_s</label>
+        <link refid="structps__segfuncs__s"/>
+        <childnode refid="493" relation="usage">
+          <edgelabel>seg_next</edgelabel>
+        </childnode>
+      </node>
+      <node id="484">
+        <label>ps_mgaufuncs_s</label>
+        <link refid="structps__mgaufuncs__s"/>
+      </node>
+      <node id="478">
+        <label>bin_mdef_s</label>
+        <link refid="structbin__mdef__s"/>
+        <childnode refid="479" relation="usage">
+          <edgelabel>cd_tree</edgelabel>
+        </childnode>
+        <childnode refid="480" relation="usage">
+          <edgelabel>phone</edgelabel>
+        </childnode>
+      </node>
+      <node id="493">
+        <label>ps_seg_s</label>
+        <link refid="structps__seg__s"/>
+        <childnode refid="494" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="487" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="492">
+        <label>ps_searchfuncs_s</label>
+        <link refid="structps__searchfuncs__s"/>
+        <childnode refid="491" relation="usage">
+          <edgelabel>lattice</edgelabel>
+        </childnode>
+        <childnode refid="493" relation="usage">
+          <edgelabel>seg_iter</edgelabel>
+        </childnode>
+      </node>
+      <node id="491">
+        <label>ps_lattice_s</label>
+        <link refid="structps__lattice__s"/>
+        <childnode refid="489" relation="usage">
+          <edgelabel>end</edgelabel>
+          <edgelabel>nodes</edgelabel>
+          <edgelabel>start</edgelabel>
+        </childnode>
+        <childnode refid="490" relation="usage">
+          <edgelabel>q_tail</edgelabel>
+          <edgelabel>q_head</edgelabel>
+        </childnode>
+        <childnode refid="477" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="487" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="482">
+        <label>acmod_s</label>
+        <link refid="structacmod__s"/>
+        <childnode refid="483" relation="usage">
+          <edgelabel>mgau</edgelabel>
+        </childnode>
+        <childnode refid="485" relation="usage">
+          <edgelabel>mllr</edgelabel>
+        </childnode>
+        <childnode refid="478" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="486" relation="usage">
+          <edgelabel>tmat</edgelabel>
+        </childnode>
+      </node>
+      <node id="485">
+        <label>ps_mllr_s</label>
+        <link refid="structps__mllr__s"/>
+      </node>
+      <node id="488">
+        <label>ps_latlink_s</label>
+        <link refid="structps__latlink__s"/>
+        <childnode refid="488" relation="usage">
+          <edgelabel>best_prev</edgelabel>
+        </childnode>
+        <childnode refid="489" relation="usage">
+          <edgelabel>from</edgelabel>
+          <edgelabel>to</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="201" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="201" bodyend="227"/>
+    <listofallmembers>
+      <member refid="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>acmod</name></member>
+      <member refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>config</name></member>
+      <member refid="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>d2p</name></member>
+      <member refid="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>dict</name></member>
+      <member refid="structps__decoder__s_1abd17fe329f2fb219c5a534f3217c5b95" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>lmath</name></member>
+      <member refid="structps__decoder__s_1a8bb5ef8791798b8dd9bc82b1ec016663" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>mfclogdir</name></member>
+      <member refid="structps__decoder__s_1a2886b321c576c7def449ebb2f37899fd" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>n_frame</name></member>
+      <member refid="structps__decoder__s_1ab42d1d1e300d2a6df5dd3cd796a27d43" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>perf</name></member>
+      <member refid="structps__decoder__s_1a0c6d141d7a71a1287be00a1ebcc7643d" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>phone_loop</name></member>
+      <member refid="structps__decoder__s_1a0f0a6681ffd98af789f6bed556c814e4" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>pl_window</name></member>
+      <member refid="structps__decoder__s_1aa2610c52a9267ee18ca095169bf34bfd" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>rawlogdir</name></member>
+      <member refid="structps__decoder__s_1aa5ab90180288b6c9039eb86b496f76aa" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>refcount</name></member>
+      <member refid="structps__decoder__s_1ad337270efc93613cf8dd7594f6515799" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>search</name></member>
+      <member refid="structps__decoder__s_1a43bca42790684eefb8d01a0aef6fa530" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>searches</name></member>
+      <member refid="structps__decoder__s_1a0ed3476113fe3d63b13ac5e8da3f3b4f" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>senlogdir</name></member>
+      <member refid="structps__decoder__s_1a0f597370dd162c2799efe216c9b991fc" prot="public" virt="non-virtual"><scope>ps_decoder_s</scope><name>uttno</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

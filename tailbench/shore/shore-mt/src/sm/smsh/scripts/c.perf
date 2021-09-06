@@ -1,0 +1,131 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: c.perf,v 1.8.2.2 2009/12/21 18:45:13 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#   Time creation of records 
+#   Parameters: 
+#   	        size of objects written 
+#		logging on or off
+#
+# set objsize [expr {8192 * 6}]
+set objsize 7000
+
+#ignored for now
+set logging 1
+set fid 0
+
+set config [sm config_info]
+
+source $script_dir/vol.init
+
+
+set volsize [lindex [sm get_volume_quota $volid] 0]
+set used [lindex [sm get_volume_quota $volid] 1]
+set volsize [expr {$volsize - $used} ]
+set objksize [expr {$objsize / 1024} ]
+
+verbose volsize = $volsize   
+verbose objksize = $objksize 
+
+# dstats $volid
+
+# figure out how many (presumably large) 
+# objects will fit on the volume
+
+# set nobjs [expr {$volsize / $objksize} ]
+set nobjs [expr {8192 * 6}]
+
+# round down to the nearest 100
+if { $nobjs > 100 } {
+    set nobjs [expr {$nobjs / 100} ]
+    verbose nobjs = $nobjs
+    set nobjs [expr {$nobjs * 100} ]
+}
+set nobjs 5000
+verbose nobjs = $nobjs
+
+unset objksize
+
+set hdr "" 
+set id_body_width zvec%d
+set body [format $id_body_width $objsize]
+
+# 
+# in existing file, create a buncha records
+# in one transaction
+#
+# First, clear out the file
+#
+sm begin_xct
+    if {$fid!=0} {
+	sm destroy_file $fid 
+	set fid 0
+    }
+
+    # Now, start over and time it
+    set fid [sm create_file $volid ]
+    verbose fid=$fid
+sm commit_xct
+
+verbose CREATING $nobjs RECS of size $objsize
+
+set dummy [sm gather_stats reset]
+set wtime [ time {
+    sm begin_xct
+	for {set i 0} {$i < $nobjs} {incr i} {
+	    sm create_rec $fid $hdr $objsize $body
+	}
+	sm force_buffers true
+    sm commit_xct
+} 1 ]
+
+verbose
+verbose CREATED $nobjs RECS of size $objsize, forced buffers
+
+pstats
+set dummy [sm gather_stats reset]
+verbose 
+echo total create time = $wtime
+set sec [lindex $wtime 0]
+set msec [expr {$sec * 1000000} ]
+set tbytes [expr $objsize * $nobjs]
+
+if {$sec > 0} {
+   verbose [expr {$tbytes / $sec}] bytes per second
+}
+
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct
+
+# dstats $volid
+#
+unset used config sec fid dummy wtime hdr
+unset i volsize body nobjs msec tbytes objsize
+

@@ -1,0 +1,164 @@
+\section{src/libsphinxbase/fe/yin.c File Reference}
+\label{yin_8c}\index{src/libsphinxbase/fe/yin.\+c@{src/libsphinxbase/fe/yin.\+c}}
+
+
+Implementation of pitch extraction.  
+
+
+{\ttfamily \#include \char`\"{}sphinxbase/prim\+\_\+type.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/ckd\+\_\+alloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/fixpoint.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/yin.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ yin\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{yin_8c_adeaf7df902787daf9fa9d7453798c01e}} 
+\textbf{ yin\+\_\+t} $\ast$ \textbf{ yin\+\_\+init} (int frame\+\_\+size, float search\+\_\+threshold, float search\+\_\+range, int smooth\+\_\+window)
+\begin{DoxyCompactList}\small\item\em Initialize moving-\/window pitch estimation. \end{DoxyCompactList}\item 
+\mbox{\label{yin_8c_a98f2ed13316b8ab9bf93feb4b6d3e7bd}} 
+void \textbf{ yin\+\_\+free} (\textbf{ yin\+\_\+t} $\ast$pe)
+\begin{DoxyCompactList}\small\item\em Free a moving-\/window pitch estimator. \end{DoxyCompactList}\item 
+\mbox{\label{yin_8c_aedb765d2c9f8f9d96f90b4971ed0f649}} 
+void \textbf{ yin\+\_\+start} (\textbf{ yin\+\_\+t} $\ast$pe)
+\begin{DoxyCompactList}\small\item\em Start processing an utterance. \end{DoxyCompactList}\item 
+\mbox{\label{yin_8c_abfe51d8b596f85941831b2727e49c181}} 
+void \textbf{ yin\+\_\+end} (\textbf{ yin\+\_\+t} $\ast$pe)
+\begin{DoxyCompactList}\small\item\em Mark the end of an utterance. \end{DoxyCompactList}\item 
+\mbox{\label{yin_8c_a68441dc85aef9dcc2ea9233a0e31c0a6}} 
+int {\bfseries thresholded\+\_\+search} (float $\ast$diff\+\_\+window, float threshold, int start, int end)
+\item 
+void \textbf{ yin\+\_\+store} (\textbf{ yin\+\_\+t} $\ast$pe, int16 const $\ast$frame)
+\begin{DoxyCompactList}\small\item\em Store a frame of data to the pitch estimator. \end{DoxyCompactList}\item 
+void \textbf{ yin\+\_\+write} (\textbf{ yin\+\_\+t} $\ast$pe, int16 const $\ast$frame)
+\begin{DoxyCompactList}\small\item\em Feed a frame of data to the pitch estimator. \end{DoxyCompactList}\item 
+void \textbf{ yin\+\_\+write\+\_\+stored} (\textbf{ yin\+\_\+t} $\ast$pe)
+\begin{DoxyCompactList}\small\item\em Feed stored frame of data to the pitch estimator. \end{DoxyCompactList}\item 
+int \textbf{ yin\+\_\+read} (\textbf{ yin\+\_\+t} $\ast$pe, uint16 $\ast$out\+\_\+period, float $\ast$out\+\_\+bestdiff)
+\begin{DoxyCompactList}\small\item\em Read a raw estimated pitch value from the pitch estimator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of pitch extraction. 
+
+\begin{DoxyAuthor}{Author}
+David Huggins-\/\+Daines {\tt dhuggins@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\label{yin_8c_a3c7d0707cbe004fd7af824e58a46c55f}} 
+\index{yin.\+c@{yin.\+c}!yin\+\_\+read@{yin\+\_\+read}}
+\index{yin\+\_\+read@{yin\+\_\+read}!yin.\+c@{yin.\+c}}
+\subsubsection{yin\+\_\+read()}
+{\footnotesize\ttfamily int yin\+\_\+read (\begin{DoxyParamCaption}\item[{\textbf{ yin\+\_\+t} $\ast$}]{pe,  }\item[{uint16 $\ast$}]{out\+\_\+period,  }\item[{float $\ast$}]{out\+\_\+bestdiff }\end{DoxyParamCaption})}
+
+
+
+Read a raw estimated pitch value from the pitch estimator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pe} & Pitch estimator. \\
+\hline
+{\em out\+\_\+period} & Output\+: an estimate of the period ({\itshape not} the pitch) of the signal in samples. \\
+\hline
+{\em out\+\_\+bestdiff} & Output\+: the minimum normalized difference value associated with {\ttfamily $\ast$out\+\_\+pitch}, in Q15 format (i.\+e. scaled by 32768). This can be interpreted as one minus the probability of voicing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Non-\/zero if enough data was avaliable to return a pitch estimate, zero otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 286 of file yin.\+c.
+
+
+
+References yin\+\_\+s\+::diff\+\_\+window, yin\+\_\+s\+::endut, yin\+\_\+s\+::nfr, yin\+\_\+s\+::period\+\_\+window, yin\+\_\+s\+::search\+\_\+range, yin\+\_\+s\+::wcur, yin\+\_\+s\+::wsize, and yin\+\_\+s\+::wstart.
+
+\mbox{\label{yin_8c_a022b6a34db2893b816dff9d4fcc5edfe}} 
+\index{yin.\+c@{yin.\+c}!yin\+\_\+store@{yin\+\_\+store}}
+\index{yin\+\_\+store@{yin\+\_\+store}!yin.\+c@{yin.\+c}}
+\subsubsection{yin\+\_\+store()}
+{\footnotesize\ttfamily void yin\+\_\+store (\begin{DoxyParamCaption}\item[{\textbf{ yin\+\_\+t} $\ast$}]{pe,  }\item[{int16 const $\ast$}]{frame }\end{DoxyParamCaption})}
+
+
+
+Store a frame of data to the pitch estimator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pe} & Pitch estimator. \\
+\hline
+{\em frame} & Frame of {\ttfamily frame\+\_\+size} (see \doxyref{yin\+\_\+init()}{p.}{yin_8h_afc3a955f8d2215ed3d660737643c4f32}) samples of audio data. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 247 of file yin.\+c.
+
+
+
+References yin\+\_\+s\+::frame.
+
+\mbox{\label{yin_8c_ae272b1d9ce8ad45f69eb8b5f98f305b6}} 
+\index{yin.\+c@{yin.\+c}!yin\+\_\+write@{yin\+\_\+write}}
+\index{yin\+\_\+write@{yin\+\_\+write}!yin.\+c@{yin.\+c}}
+\subsubsection{yin\+\_\+write()}
+{\footnotesize\ttfamily void yin\+\_\+write (\begin{DoxyParamCaption}\item[{\textbf{ yin\+\_\+t} $\ast$}]{pe,  }\item[{int16 const $\ast$}]{frame }\end{DoxyParamCaption})}
+
+
+
+Feed a frame of data to the pitch estimator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pe} & Pitch estimator. \\
+\hline
+{\em frame} & Frame of {\ttfamily frame\+\_\+size} (see \doxyref{yin\+\_\+init()}{p.}{yin_8h_afc3a955f8d2215ed3d660737643c4f32}) samples of audio data. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 253 of file yin.\+c.
+
+
+
+References yin\+\_\+s\+::wsize, and yin\+\_\+s\+::wstart.
+
+
+
+Referenced by yin\+\_\+write\+\_\+stored().
+
+\mbox{\label{yin_8c_aa0c6271991fbd9799ebb3703f8e34fcb}} 
+\index{yin.\+c@{yin.\+c}!yin\+\_\+write\+\_\+stored@{yin\+\_\+write\+\_\+stored}}
+\index{yin\+\_\+write\+\_\+stored@{yin\+\_\+write\+\_\+stored}!yin.\+c@{yin.\+c}}
+\subsubsection{yin\+\_\+write\+\_\+stored()}
+{\footnotesize\ttfamily void yin\+\_\+write\+\_\+stored (\begin{DoxyParamCaption}\item[{\textbf{ yin\+\_\+t} $\ast$}]{pe }\end{DoxyParamCaption})}
+
+
+
+Feed stored frame of data to the pitch estimator. 
+
+(see \doxyref{yin\+\_\+store()}{p.}{yin_8h_a511d05069d36ba6f1c2bc3edae502bda})
+
+
+\begin{DoxyParams}{Parameters}
+{\em pe} & Pitch estimator. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 280 of file yin.\+c.
+
+
+
+References yin\+\_\+s\+::frame, and yin\+\_\+write().
+

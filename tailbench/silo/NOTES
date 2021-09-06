@@ -1,0 +1,20 @@
+- The command line option scale-factor controls the # of warehouses for tpcc
+
+- Option 'workload-mix' (tpcc-specific) controls the mix of various op types in
+the workload. There's are five different kinds of ops. See benchmarks/tpcc.c
+for details. The variable g_txn_workload_mix is initialized with default vals
+(ll 152), and is updated according to the command line option (if specified) in
+get_workload().
+
+- Option 'enable-partition-locks' (tpcc-specific) makes workers grab a lock (one
+lock per warehouse) before each transaction. The dafault behavior is to not do
+this.
+
+- Does disable-gc casue a significant difference in latency? What are the
+  trade-offs?
+
+- What effect does the option 'enable-separate-tree-per-partition' (tpcc
+  specific) have? 
+
+- After all bench workers have finished, the app waits for all transactions to
+  finish before finishing. How do we do this faithfully in zsim? (bench.cc:234)

@@ -1,0 +1,130 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: deadlock.5,v 1.1.2.1 2009/12/03 00:21:09 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# Test Upgrade deadlock detection
+#
+#    {1SH, 2SH} <-- 1EX
+#    {1EX} <-- 2SH
+#
+#    deadlock.2 does the same thing but with explicit lock requests
+#
+
+# same as deadlock.2, but use record stuff instead.
+proc tt1 {A B} {
+    verbose "{ tt1: sync "
+    sync
+    verbose "tt1: sync }"
+    sm begin_xct
+
+# SH on A
+    verbose [sm read_rec $A 0 0]
+# EX on B
+    sm append_rec $B zzz
+    verbose "tt1: acquired SH on A, EX on B"
+    verbose "{ tt1: sync "
+    sync
+    verbose "tt1: sync }"
+    verbose "tt1: attempting to acquire EX on A"
+# EX on A via sm append_rec $A zzz
+    # catch deadlock
+    verbose catch deadlock:
+	if [catch {sm append_rec $A zzz} errorno] {
+		verbose "(EXPECTED E_DEADLOCK) error is $errorno"
+		assert {error_is $errorno E_DEADLOCK}
+	}
+    sm commit_xct
+}
+
+proc tt2 {A B} {
+    verbose "{ tt2: sync "
+    sync
+    verbose "tt2: sync }"
+    sm begin_xct
+    verbose "tt2: attempting to acquire SH on A"
+
+# SH on A
+    verbose [sm read_rec $A 0 0]
+    verbose "tt2: acquired SH on A"
+    verbose "{ tt2: sync "
+    sync
+    verbose "tt2: sync }"
+    verbose "{ tt2: sync "
+    sync
+    verbose "tt2: sync }"
+    verbose "tt2: attempting to acquire SH on B with read"
+
+    # catch deadlock via sm read_rec $B 0 0
+# SH on B
+    set errorno 0
+    verbose catch deadlock:
+	if [catch {sm read_rec $B 0 0} errorno] {
+		verbose "(EXPECTED E_DEADLOCK) error is $errorno"
+		assert {error_is $errorno E_DEADLOCK}
+	}
+    sm commit_xct
+}
+
+####  main  ####
+
+source $script_dir/vol.init
+
+# create 2 records to use for our deadlock
+sm begin_xct
+set f [ sm create_file $volid ]
+set r1 [ sm create_rec $f hdr12345 11 abcdefghijklmnopqrstuvwxyz ]
+verbose r1 is $r1
+set r2 [ sm create_rec $f hdr 8 ABCDEF ]
+verbose r2 is $r2
+sm commit_xct
+
+set x [fork_thread tt1 $r1 $r2]
+verbose forked $x
+set y [fork_thread tt2 $r1 $r2]
+verbose forked $y
+
+verbose sync_thread $x $y
+sync_thread $x $y
+
+verbose sync_thread $x $y
+sync_thread $x $y
+
+verbose sync_thread $y
+sync_thread $y
+
+verbose join_thread $x $y
+join_thread $x $y
+
+verbose end
+
+sm begin_xct
+sm destroy_file $f
+sm commit_xct
+
+unset r1 r2 x y f
+

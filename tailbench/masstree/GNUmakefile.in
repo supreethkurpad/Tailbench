@@ -1,0 +1,105 @@
+AR = ar
+CC = @CC@
+CXX = @CXX@
+TBENCHDIR= ../harness
+CFLAGS = -g -W -Wall -O2 -I$(TBENCHDIR)
+DEPSDIR := .deps
+DEPCFLAGS = -MD -MF $(DEPSDIR)/$*.d -MP
+ifeq ($(strip $(MEMMGR)), )
+  MEMMGR = @MALLOC_LIBS@
+endif
+ifneq ($(strip $(KEYSWAP)), )
+  CFLAGS += -DKEYSWAP
+endif
+ifneq ($(strip $(NOPREFETCH)), )
+  CFLAGS += -DNOPREFETCH
+endif
+ifneq ($(strip $(NOSUPERPAGE)), )
+  CFLAGS += -DNOSUPERPAGE
+endif
+LIBS = @LIBS@ -lpthread -lm -lrt
+LDFLAGS = @LDFLAGS@
+
+INCDEPS = $(TBENCHDIR)/tbench_client.h $(TBENCHDIR)/tbench_server.h
+TBENCH_NETWORK_SERVER_OBJS = $(TBENCHDIR)/tbench_server_networked.o
+TBENCH_NETWORK_CLIENT_OBJS = $(TBENCHDIR)/client.o \
+							 $(TBENCHDIR)/tbench_client_networked.o
+TBENCH_INTEGRATED_OBJS = $(TBENCHDIR)/client.o \
+						 $(TBENCHDIR)/tbench_server_integrated.o
+
+all: test_atomics mtd mtclient mttest_integrated mttest_server_networked \
+	mttest_client_networked
+
+%.o: %.c config.h $(DEPSDIR)/stamp $(INCDEPS)
+	$(CXX) $(CFLAGS) $(DEPCFLAGS) -include config.h -c -o $@ $<
+
+%.o: %.cc config.h $(DEPSDIR)/stamp $(INCDEPS)
+	$(CXX) $(CFLAGS) $(DEPCFLAGS) -include config.h -c -o $@ $<
+
+%.S: %.o
+	objdump -S $< > $@
+
+libjson.a: json.o string.o straccum.o hashallocator.o clp.o kvrandom.o compiler.o kvthread.o str.o
+	@/bin/rm -f $@
+	$(AR) cru $@ $^
+
+KVTREES = masstree.o \
+	value_string.o value_array.o value_versioned_array.o perfstat.o \
+	string_slice.o
+
+mtd: mtd.o log.o checkpoint.o file.o misc.o $(KVTREES) \
+	kvio.o libjson.a
+	$(CXX) $(CFLAGS) -o $@ $^ $(MEMMGR) $(LDFLAGS) $(LIBS)
+
+mtclient: mtclient.o misc.o kvio.o libjson.a
+	$(CXX) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+
+mttest_integrated: $(TBENCH_INTEGRATED_OBJS) mttest.o kvclient.o misc.o \
+	checkpoint.o $(KVTREES) kvio.o libjson.a
+	$(CXX) $(CFLAGS) -o $@ $^ $(MEMMGR) $(LDFLAGS) $(LIBS)
+
+mttest_server_networked: $(TBENCH_NETWORK_SERVER_OBJS) mttest.o \
+	misc.o checkpoint.o $(KVTREES) kvio.o libjson.a
+	$(CXX) $(CFLAGS) -o $@ $^ $(MEMMGR) $(LDFLAGS) $(LIBS)
+
+mttest_client_networked: $(TBENCH_NETWORK_CLIENT_OBJS) kvclient.o
+	$(CXX) $(CFLAGS) -o $@ $^ $(MEMMGR) $(LDFLAGS) $(LIBS)
+
+test_string: test_string.o string.o straccum.o compiler.o
+	$(CXX) $(CFLAGS) -o $@ $^ $(MEMMGR) $(LDFLAGS) $(LIBS)
+
+test_atomics: test_atomics.o string.o straccum.o kvrandom.o \
+	json.o compiler.o kvio.o
+	$(CXX) $(CFLAGS) -o $@ $^ $(MEMMGR) $(LDFLAGS) $(LIBS)
+
+config.h: stamp-h
+
+GNUmakefile: GNUmakefile.in config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+configure config.h.in: configure.ac
+	autoreconf -i
+	touch config.h.in
+
+config.status: configure
+	./configure @ac_configure_args@
+
+$(DEPSDIR)/stamp:
+	mkdir -p $(DEPSDIR)
+	touch $@
+
+stamp-h: config.h.in config.status
+	CONFIG_FILES= $(SHELL) ./config.status
+	echo > stamp-h
+
+clean:
+	rm -f mtd mtclient mttest_integrated mttest_server_networked \
+	   mttest_client_networkedtest_string test_atomics *.o libjson.a
+	rm -rf .deps
+
+DEPFILES := $(wildcard $(DEPSDIR)/*.d)
+ifneq ($(DEPFILES),)
+include $(DEPFILES)
+endif
+
+.PHONY: clean all

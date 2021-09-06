@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_60aae0458aa1ecc8feb93296b73d98ea" kind="dir">
+    <compoundname>src/libsphinxbase/lm</compoundname>
+    <innerfile refid="fsg__model_8c">fsg_model.c</innerfile>
+    <innerfile refid="jsgf_8c">jsgf.c</innerfile>
+    <innerfile refid="jsgf__internal_8h">jsgf_internal.h</innerfile>
+    <innerfile refid="jsgf__parser_8c">jsgf_parser.c</innerfile>
+    <innerfile refid="jsgf__parser_8h">jsgf_parser.h</innerfile>
+    <innerfile refid="jsgf__scanner_8c">jsgf_scanner.c</innerfile>
+    <innerfile refid="jsgf__scanner_8h">jsgf_scanner.h</innerfile>
+    <innerfile refid="lm__trie_8c">lm_trie.c</innerfile>
+    <innerfile refid="lm__trie_8h">lm_trie.h</innerfile>
+    <innerfile refid="lm__trie__quant_8c">lm_trie_quant.c</innerfile>
+    <innerfile refid="lm__trie__quant_8h">lm_trie_quant.h</innerfile>
+    <innerfile refid="ngram__model_8c">ngram_model.c</innerfile>
+    <innerfile refid="ngram__model__internal_8h">ngram_model_internal.h</innerfile>
+    <innerfile refid="ngram__model__set_8c">ngram_model_set.c</innerfile>
+    <innerfile refid="ngram__model__set_8h">ngram_model_set.h</innerfile>
+    <innerfile refid="ngram__model__trie_8c">ngram_model_trie.c</innerfile>
+    <innerfile refid="ngram__model__trie_8h">ngram_model_trie.h</innerfile>
+    <innerfile refid="ngrams__raw_8c">ngrams_raw.c</innerfile>
+    <innerfile refid="ngrams__raw_8h">ngrams_raw.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/lm/"/>
+  </compounddef>
+</doxygen>

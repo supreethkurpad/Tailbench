@@ -1,0 +1,4 @@
+cat clean.sh >clean 
+chmod a+x clean
+cat clean.sh >clean 
+chmod a+x clean

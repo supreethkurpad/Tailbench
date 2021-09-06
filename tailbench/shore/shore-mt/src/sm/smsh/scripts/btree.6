@@ -1,0 +1,278 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.6,v 1.31 1999/06/07 19:05:14 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  Test non-unique btree
+#   WARNING: runs a long time.
+#  Use enough duplicates so that they span pages.
+#  for the given nrecs, it makes $nrecs elems/key, 
+#  and makes $nrecs keys.  Keys are 100 bytes, elems are
+#  100 bytes, so to get each key cluster to take > 1 page
+#  we need about nrecs> 40
+#
+proc scan_up_partial {ndx lb ub nrec} {
+    verbose "scan up partial: $ndx $lb $ub $nrec"
+    set scan [sm create_scan $ndx >= $lb <= $ub]
+
+    set lb [string trimleft $lb 0]
+    set ub [string trimleft $ub 0]
+
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set r [sm scan_next $scan]
+	if {[string compare $r eof] == 0} then { break }
+	set key [string trimleft [lindex $r 0] 0]
+	set el [string trimleft [lindex $r 1] 0]
+	verbose "scanned ($key, $el)"
+#	assert {expr $key == $el}
+#	assert {expr $key == $lb + $i - 1}
+    }
+    verbose expecting $i ">" $nrec
+    assert {expr $i > $nrec}
+    assert {expr [string compare [sm scan_next $scan] eof] == 0}
+    sm destroy_scan $scan
+    verbose "---- successful"
+}
+
+proc scan_up {ndx nrec}  {
+    #
+    # verify ascending
+    #
+    verbose "scan up: expect " $nrec " records"
+    set scan [sm create_scan $ndx >= neg_inf <= pos_inf]
+    for {set i 1} {$i <= $nrec} {incr i}  {
+        set r [sm scan_next $scan]
+	if {[string compare $r eof] == 0} then { 
+		verbose2 found $i records
+		break 
+	}
+        set key [string trimleft [lindex $r 0] 0]
+	set el [string trimleft [lindex $r 1] 0]
+        verbose2 scanned $key.$el
+#        assert {expr $key == $el}
+#        assert {expr $i == $key}
+    }
+    assert {expr $i > $nrec}
+    assert {expr [string compare [sm scan_next $scan] eof] == 0}
+    sm destroy_scan $scan
+    verbose "---- successful"
+}
+
+proc probe {ndx nrec} {
+    global short_form
+    verbose "probe:"
+    for {set i 1} {$i <= $nrec} {incr i} {
+        set el [sm find_assoc $ndx [format $short_form $i]]
+       assert {expr $i == $el}
+        verbose2 probed $i
+    }
+    verbose "---- successful"
+}
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+if {$logging==0} {
+    echo "Logging off: script not run. "
+} else {
+    set err 0
+    # set nrec 25
+    set nrec 50
+
+    #
+    # create index 
+    #
+    verbose Create index
+    sm begin_xct
+    set ndx [sm create_index $volid btree]
+    verbose created index $ndx
+    sm commit_xct
+
+    #
+    # load, abort
+    #
+    verbose load, abort
+    sm begin_xct
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set key [format $short_form $i]
+	for {set j 1} {$j <= $nrec} {incr j}  {
+	    verbose2 inserting $i.$j
+	    if [catch {sm create_assoc $ndx $key [format $short_form $j]} err] {
+		echo UNEXPECED ERROR : $err
+	    }
+	}
+    }
+    scan_up_partial $ndx [format $short_form 2] \
+		    [format $short_form [expr {$nrec - 1}]] \
+		    [expr {$nrec * $nrec - 2 * $nrec}]
+
+    dstats $volid
+    verbose sm abort_xct 
+    sm abort_xct 
+
+    sm begin_xct
+    scan_up $ndx 0
+    sm commit_xct
+
+    #
+    # load, restart
+    #
+    verbose load, restart
+    sm begin_xct
+    set tx [sm xct]
+    set tid [sm xct_to_tid $tx]
+    verbose  $tid
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set key [format $short_form $i]
+	for {set j 1} {$j <= $nrec} {incr j}  {
+	    verbose2 inserting $i.$j
+	    if [catch {sm create_assoc $ndx $key [format $short_form $j]} err] {
+		echo UNEXPECTED ERROR: $err
+	    }
+	}
+    }
+
+    verbose restart $tid after load
+    restart
+
+
+    sm begin_xct
+    scan_up $ndx 0
+    sm commit_xct
+
+    #
+    # load, commit restart
+    #
+    verbose load, commit, restart
+    sm begin_xct
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set key [format $short_form $i]
+	for {set j 1} {$j <= $nrec} {incr j}  {
+	    verbose2 inserting $i.$j
+	    if [catch {sm create_assoc $ndx $key [format $short_form $j]} err] {
+		echo UNEXPECTED ERROR: $err
+	    }
+	}
+    }
+    sm commit_xct
+
+    verbose restart
+    restart
+
+    sm begin_xct
+    scan_up $ndx [expr {$nrec * $nrec}]
+    #probe $ndx $[expr {$nrec * $nrec}]
+    scan_up_partial $ndx [format $short_form 2] \
+		    [format $short_form [expr {$nrec - 1}]] \
+		    [expr {$nrec * $nrec - 2 * $nrec}]
+    sm commit_xct
+
+    #
+    # empty, abort
+    #
+    verbose empty, abort
+    sm begin_xct
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set key [format $short_form $i]
+	for {set j 1} {$j <= $nrec} {incr j}  {
+	    verbose2 deleting $i.$j
+	    sm destroy_assoc $ndx $key [format $short_form $j]
+	}
+    }
+    scan_up $ndx 0
+    verbose sm abort_xct 
+    sm abort_xct 
+
+    sm begin_xct
+    scan_up $ndx [expr {$nrec * $nrec}]
+    sm commit_xct
+
+
+    #
+    # empty, restart
+    #
+
+    verbose empty, restart
+    sm begin_xct
+    set tx [sm xct]
+    set tid [sm xct_to_tid $tx]
+    verbose  $tid
+
+
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set key [format $short_form $i]
+	for {set j 1} {$j <= $nrec} {incr j}  {
+	    verbose2 deleting $i.$j
+	    verbose2 deleting $i.$j
+	    sm destroy_assoc $ndx $key [format $short_form $j]
+	}
+    }
+
+    verbose restarting $tid after destroying all keys
+    restart
+
+    sm begin_xct
+    scan_up $ndx [expr {$nrec * $nrec}]
+    sm commit_xct
+
+    #
+    # empty, commit, restart
+    #
+    verbose empty, commit, restart
+    sm begin_xct
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set key [format $short_form $i]
+	for {set j 1} {$j <= $nrec} {incr j}  {
+	    verbose2 deleting $i.$j
+	    sm destroy_assoc $ndx $key [format $short_form $j]
+	}
+    }
+    sm commit_xct
+    restart
+
+    sm begin_xct
+    scan_up $ndx 0
+    sm commit_xct
+
+    verbose destroy, commit
+    sm begin_xct
+    sm destroy_index $ndx
+    sm commit_xct
+
+    unset ndx
+    unset i j
+    unset key
+    unset tid tx
+
+    verbose [sm gather_stats]
+
+    unset nrec err
+}
+

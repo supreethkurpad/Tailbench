@@ -1,0 +1,237 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: cd.perf,v 1.9.2.3 2010/01/28 04:54:34 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#   Compare creation and destruction of records
+#   This is to work on the problem of destroying being
+#   inordinately slow.
+#   Parameters: 
+#   	        size of objects written 
+#
+
+#  NB: DON'T RUN THIS DIRECTLY -- use cd.perf.nn
+
+source $script_dir/vol.init
+
+set nobjs [expr { ($max_small_rec/$objsize) * $npages } ]
+
+# make an objsize buffer full of alphabetic characters
+set ten "abcde12345"
+set hundred ""
+# make 100 bytes
+for {set i 0} {$i < 10} {incr i}  {
+    set hundred "$hundred$ten"
+}
+
+set body ""
+for {set i 100} {$i < $objsize} {set i [expr $i + 100]}  {
+    set body "$body$hundred"
+}
+
+
+set hdr "" 
+# set id_body_width zvec%d
+# set body [format $id_body_width $objsize]
+
+# 
+# in existing file, create a buncha records
+# in one transaction
+#
+# First, clear out the file
+#
+set fid 0
+
+sm begin_xct
+    if {$fid!=0} {
+		verbose destroy file $fid
+		sm destroy_file $fid 
+		set fid 0
+    }
+
+    # Now, start over and time it
+    set fid [sm create_file $volid ]
+    verbose created fid=$fid
+sm commit_xct
+
+verbose checkpoint
+sm checkpoint
+
+verbose CREATING $nobjs RECS of size $objsize
+
+set i 0
+
+sm begin_xct
+set dummy [sm gather_stats reset]
+set wtime [ time {
+	for {set i 0} {$i < $nobjs} {set i [expr $i + 1]} {
+	    sm create_rec $fid $hdr $objsize $body
+	}
+	sm force_buffers true
+} 1 ]
+
+verbose CREATED $nobjs RECS of size $objsize, forced buffers
+echo total create time = $wtime
+
+set dummy [sm gather_stats reset]
+verbose [pnzstats $dummy]
+set dummy [sm gather_xct_stats reset]
+verbose [pnzstats $dummy]
+
+verbose committing
+sm commit_xct
+
+# scan the file to gather the rids
+# we separated this from the create to be
+# sure we're not timing something in tcl that's expensive
+
+set i 0
+sm begin_xct
+set dummy [sm gather_stats reset]
+set wtime [ time {
+	set scan [sm scan_file_create $fid t_cc_record]
+	set pin [sm scan_file_next $scan 0]
+	while {$pin != "NULL"} {
+	    set r($i) [sm pin_rid $pin]
+	    incr i
+	    set pin [sm scan_file_next $scan 0]
+	}
+	sm scan_file_destroy $scan
+} 1 ]
+assert {expr $nobjs == $i}
+
+verbose SCANNED $nobjs RECS of size $objsize
+sm commit_xct
+
+
+verbose forcing buffers again
+sm force_buffers true
+verbose checkpoint 
+sm checkpoint
+
+verbose destroying forward
+
+sm begin_xct
+set dummy [sm gather_stats reset]
+set wtime [ time {
+	for {set i 0} {$i < $nobjs} {set i [expr $i + 1]} {
+	    sm destroy_rec $r($i) 
+	}
+	sm force_buffers true
+} 1 ]
+
+verbose DESTROYED FWD $nobjs RECS of size $objsize, forced buffers
+echo total destroy time = $wtime
+set dummy [sm gather_stats reset]
+verbose [pnzstats $dummy]
+set dummy [sm gather_xct_stats reset]
+verbose [pnzstats $dummy]
+
+verbose aborting FWD DESTROY...
+sm abort_xct
+
+verbose forcing buffers again
+sm force_buffers true
+verbose checkpoint
+sm checkpoint
+
+verbose destroying backward 
+
+sm begin_xct
+set dummy [sm gather_stats reset]
+set wtime [ time {
+	for {set i [expr $nobjs - 1]} {$i >= 0} {set i [expr $i - 1]} {
+	    sm destroy_rec $r($i) 
+	}
+	sm force_buffers true
+} 1 ]
+verbose
+
+verbose DESTROYED BWD $nobjs RECS of size $objsize, forced buffers
+echo total destroy time = $wtime
+set dummy [sm gather_stats reset]
+verbose [pnzstats $dummy]
+set dummy [sm gather_xct_stats reset]
+verbose [pnzstats $dummy]
+
+verbose aborting BWD DESTROY...
+sm abort_xct
+
+set pick 1
+set pin 1
+set pin 1
+set scan 1
+set save 1
+
+# pseudo-randomly swap the list of objects
+for {set i 0} {$i < $nobjs} {incr i} {
+    set pick [random $nobjs]
+    set save $r($i)
+    set r($i) $r($pick)
+    set r($pick) $save
+}
+verbose forcing buffers again
+sm force_buffers true
+verbose checkpoint
+sm checkpoint
+
+verbose destroying randomly 
+
+sm begin_xct
+set dummy [sm gather_stats reset]
+set wtime [ time {
+	for {set i [expr $nobjs - 1]} {$i >= 0} {set i [expr $i - 1]} {
+	    sm destroy_rec $r($i) 
+	}
+	sm force_buffers true
+} 1 ]
+verbose
+
+verbose DESTROYED RANDOMLY $nobjs RECS of size $objsize, forced buffers
+echo total destroy time = $wtime
+set dummy [sm gather_stats reset]
+verbose [pnzstats $dummy]
+set dummy [sm gather_xct_stats reset]
+verbose [pnzstats $dummy]
+
+verbose committing RANDOM DESTROY ...
+sm commit_xct
+
+sm begin_xct
+    if {$fid!=0} {
+	    verbose destroying $fid
+		sm destroy_file $fid 
+		set fid 0
+    }
+sm commit_xct
+
+unset r wtime dummy fid i body hdr pick pin scan save
+unset hundred ten npages nobjs objsize
+
+verbose done.
+

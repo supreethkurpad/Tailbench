@@ -1,0 +1,47 @@
+\section{src/libpocketsphinx/phone\+\_\+loop\+\_\+search.h File Reference}
+\label{phone__loop__search_8h}\index{src/libpocketsphinx/phone\+\_\+loop\+\_\+search.\+h@{src/libpocketsphinx/phone\+\_\+loop\+\_\+search.\+h}}
+
+
+Fast and rough context-\/independent phoneme loop search.  
+
+
+{\ttfamily \#include $<$sphinxbase/cmd\+\_\+ln.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/logmath.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/ngram\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/listelem\+\_\+alloc.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pocketsphinx\+\_\+internal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hmm.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ phone\+\_\+loop\+\_\+renorm\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Renormalization event. \end{DoxyCompactList}\item 
+struct \textbf{ phone\+\_\+loop\+\_\+search\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Phone loop search structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{phone__loop__search_8h_ab49609ce2ff4d1827f57693f463e360b}} 
+\#define \textbf{ phone\+\_\+loop\+\_\+search\+\_\+score}(pls,  ci)~((pls == N\+U\+LL) ? 0 \+: (pls-\/$>$penalties[ci]))
+\begin{DoxyCompactList}\small\item\em Return lookahead heuristic score for a specific phone. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{phone__loop__search_8h_a313734607dd312343fd138ccc32b9228}} 
+typedef struct \textbf{ phone\+\_\+loop\+\_\+renorm\+\_\+s} {\bfseries phone\+\_\+loop\+\_\+renorm\+\_\+t}
+\item 
+\mbox{\label{phone__loop__search_8h_aff0f48051fd9e2725230896875887aa2}} 
+typedef struct \textbf{ phone\+\_\+loop\+\_\+search\+\_\+s} {\bfseries phone\+\_\+loop\+\_\+search\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{phone__loop__search_8h_a2308707c1a22ea9b0495f6c7f151f806}} 
+\textbf{ ps\+\_\+search\+\_\+t} $\ast$ {\bfseries phone\+\_\+loop\+\_\+search\+\_\+init} (cmd\+\_\+ln\+\_\+t $\ast$config, \textbf{ acmod\+\_\+t} $\ast$acmod, \textbf{ dict\+\_\+t} $\ast$dict)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fast and rough context-\/independent phoneme loop search. 
+
+This exists for the purposes of phoneme lookahead, and thus it actually does not do phoneme recognition (it wouldn\textquotesingle{}t be very accurate anyway). 

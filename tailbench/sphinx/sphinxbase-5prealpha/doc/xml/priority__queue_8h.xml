@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="priority__queue_8h" kind="file" language="C++">
+    <compoundname>priority_queue.h</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="sphinxbase__export_8h" local="no">sphinxbase/sphinxbase_export.h</includes>
+    <includedby refid="lm__trie_8c" local="no">src/libsphinxbase/lm/lm_trie.c</includedby>
+    <includedby refid="ngrams__raw_8c" local="no">src/libsphinxbase/lm/ngrams_raw.c</includedby>
+    <includedby refid="priority__queue_8c" local="no">src/libsphinxbase/util/priority_queue.c</includedby>
+    <incdepgraph>
+      <node id="905">
+        <label>sphinxbase/sphinxbase_export.h</label>
+        <link refid="sphinxbase__export_8h_source"/>
+      </node>
+      <node id="903">
+        <label>include/sphinxbase/priority_queue.h</label>
+        <link refid="priority__queue_8h"/>
+        <childnode refid="904" relation="include">
+        </childnode>
+        <childnode refid="905" relation="include">
+        </childnode>
+      </node>
+      <node id="904">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="906">
+        <label>include/sphinxbase/priority_queue.h</label>
+        <link refid="priority__queue_8h"/>
+        <childnode refid="907" relation="include">
+        </childnode>
+        <childnode refid="908" relation="include">
+        </childnode>
+        <childnode refid="909" relation="include">
+        </childnode>
+      </node>
+      <node id="909">
+        <label>src/libsphinxbase/util/priority_queue.c</label>
+        <link refid="priority__queue_8c_source"/>
+      </node>
+      <node id="907">
+        <label>src/libsphinxbase/lm/lm_trie.c</label>
+        <link refid="lm__trie_8c_source"/>
+      </node>
+      <node id="908">
+        <label>src/libsphinxbase/lm/ngrams_raw.c</label>
+        <link refid="ngrams__raw_8c_source"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="priority__queue_8h_1af2480262cd49a52001ead3cba4fefb3d" prot="public" static="no">
+        <type>struct <ref refid="structpriority__queue__s" kindref="compound">priority_queue_s</ref></type>
+        <definition>typedef struct priority_queue_s priority_queue_t</definition>
+        <argsstring></argsstring>
+        <name>priority_queue_t</name>
+        <briefdescription>
+<para>Priority queue for max element tracking. </para>        </briefdescription>
+        <detaileddescription>
+<para>The one expects heap here, but for current application (sorting of ngram entries one per order, i.e. maximum 10) i&apos;ll put just and array here, so each operation takes linear time. I swear to rework it some day! TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO!!!!! </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/priority_queue.h" line="111" column="1" bodyfile="include/sphinxbase/priority_queue.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="priority__queue_8h_1ab223a4e2b6243a7b79765276a908754c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT <ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref> *</type>
+        <definition>SPHINXBASE_EXPORT priority_queue_t* priority_queue_create</definition>
+        <argsstring>(size_t len, int(*compare)(void *a, void *b))</argsstring>
+        <name>priority_queue_create</name>
+        <param>
+          <type>size_t</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>int(*)(void *a, void *b)</type>
+          <declname>compare</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/priority_queue.h" line="27" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="54" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="priority__queue_8h_1a661df0bb8045d7cbcab5d05494950398" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT void *</type>
+        <definition>SPHINXBASE_EXPORT void* priority_queue_poll</definition>
+        <argsstring>(priority_queue_t *queue)</argsstring>
+        <name>priority_queue_poll</name>
+        <param>
+          <type><ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref> *</type>
+          <declname>queue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/priority_queue.h" line="30" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="68" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="priority__queue_8h_1acb988939fc10e12d22881e8fb82b61e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT void</type>
+        <definition>SPHINXBASE_EXPORT void priority_queue_add</definition>
+        <argsstring>(priority_queue_t *queue, void *element)</argsstring>
+        <name>priority_queue_add</name>
+        <param>
+          <type><ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref> *</type>
+          <declname>queue</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/priority_queue.h" line="33" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="104" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="priority__queue_8h_1ab96f97b69790b2f40298be5da21929d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT size_t</type>
+        <definition>SPHINXBASE_EXPORT size_t priority_queue_size</definition>
+        <argsstring>(priority_queue_t *queue)</argsstring>
+        <name>priority_queue_size</name>
+        <param>
+          <type><ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref> *</type>
+          <declname>queue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/priority_queue.h" line="36" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="124" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="priority__queue_8h_1abf96f52f31392a887d19b810959f40c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT void</type>
+        <definition>SPHINXBASE_EXPORT void priority_queue_free</definition>
+        <argsstring>(priority_queue_t *queue, void(*free_ptr)(void *a))</argsstring>
+        <name>priority_queue_free</name>
+        <param>
+          <type><ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref> *</type>
+          <declname>queue</declname>
+        </param>
+        <param>
+          <type>void(*)(void *a)</type>
+          <declname>free_ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/priority_queue.h" line="39" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="129" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>__PRIORITY_QUEUE_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__PRIORITY_QUEUE_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sphinxbase/sphinxbase_export.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Fool<sp/>Emacs.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structpriority__queue__s" kindref="compound">priority_queue_s</ref><sp/><ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref>*<sp/>priority_queue_create(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>(*compare)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*a,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*b));</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>priority_queue_poll(<ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref><sp/>*queue);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>priority_queue_add(<ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref><sp/>*queue,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*element);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>priority_queue_size(<ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref><sp/>*queue);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>priority_queue_free(<ref refid="structpriority__queue__s" kindref="compound">priority_queue_t</ref><sp/>*queue,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*free_ptr)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*a));</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>__PRIORITY_QUEUE_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="include/sphinxbase/priority_queue.h"/>
+  </compounddef>
+</doxygen>

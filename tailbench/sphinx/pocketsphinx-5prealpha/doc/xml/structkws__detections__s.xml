@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structkws__detections__s" kind="struct" language="C++" prot="public">
+    <compoundname>kws_detections_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkws__detections__s_1a96d224eef9abcc3029e0f8f20e5d6bcf" prot="public" static="no" mutable="no">
+        <type>glist_t</type>
+        <definition>glist_t kws_detections_s::detect_list</definition>
+        <argsstring></argsstring>
+        <name>detect_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/kws_detections.h" line="58" column="1" bodyfile="src/libpocketsphinx/kws_detections.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libpocketsphinx/kws_detections.h" line="57" column="1" bodyfile="src/libpocketsphinx/kws_detections.h" bodystart="57" bodyend="59"/>
+    <listofallmembers>
+      <member refid="structkws__detections__s_1a96d224eef9abcc3029e0f8f20e5d6bcf" prot="public" virt="non-virtual"><scope>kws_detections_s</scope><name>detect_list</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

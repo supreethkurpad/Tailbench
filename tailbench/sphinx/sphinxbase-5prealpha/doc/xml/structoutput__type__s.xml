@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structoutput__type__s" kind="struct" language="C++" prot="public">
+    <compoundname>output_type_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structoutput__type__s_1a978f479360a30a64f9e151d75ec2bb4b" prot="public" static="no" mutable="no">
+        <type>char const  *</type>
+        <definition>char const* output_type_s::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/sphinx_fe/sphinx_fe.c" line="67" column="1" bodyfile="src/sphinx_fe/sphinx_fe.c" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structoutput__type__s_1a150ba92b9d82aabb8e0087894ef5dba9" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* output_type_s::output_header) (sphinx_wave2feat_t *wtf, int nfloat)</definition>
+        <argsstring>)(sphinx_wave2feat_t *wtf, int nfloat)</argsstring>
+        <name>output_header</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/sphinx_fe/sphinx_fe.c" line="68" column="1" bodyfile="src/sphinx_fe/sphinx_fe.c" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structoutput__type__s_1a2d46cc2b8de8a884037052bb271af232" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* output_type_s::output_frames) (sphinx_wave2feat_t *wtf, mfcc_t **frames, int nfr)</definition>
+        <argsstring>)(sphinx_wave2feat_t *wtf, mfcc_t **frames, int nfr)</argsstring>
+        <name>output_frames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/sphinx_fe/sphinx_fe.c" line="69" column="1" bodyfile="src/sphinx_fe/sphinx_fe.c" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/sphinx_fe/sphinx_fe.c" line="66" column="1" bodyfile="src/sphinx_fe/sphinx_fe.c" bodystart="66" bodyend="70"/>
+    <listofallmembers>
+      <member refid="structoutput__type__s_1a978f479360a30a64f9e151d75ec2bb4b" prot="public" virt="non-virtual"><scope>output_type_s</scope><name>name</name></member>
+      <member refid="structoutput__type__s_1a2d46cc2b8de8a884037052bb271af232" prot="public" virt="non-virtual"><scope>output_type_s</scope><name>output_frames</name></member>
+      <member refid="structoutput__type__s_1a150ba92b9d82aabb8e0087894ef5dba9" prot="public" virt="non-virtual"><scope>output_type_s</scope><name>output_header</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

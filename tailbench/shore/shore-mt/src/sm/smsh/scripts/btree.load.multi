@@ -1,0 +1,258 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.load.multi,v 1.12.4.1 2010/01/28 04:54:33 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  test multiple btree bulk loads
+#  with multiple threads in same xct
+#
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+if {$multi_threaded_xct == 0 } {
+    echo "Not configured for multi-threaded xcts"
+    return
+}
+
+set nrec 500
+set nthreads 2
+
+# for clean-up later
+set cmd 0
+set thread_list 0
+set th 0
+set tx 0
+
+if {$multi_threaded_xct == 0 } {
+	echo "Not configured for multi-threaded xcts"
+} else {
+    #
+    # helper proc to print the file
+    #
+    #
+    proc print_file {f1 in_xct} {
+	if { $in_xct == 0 } {
+	    sm begin_xct
+	}
+	set scan [sm scan_file_create $f1 t_cc_file]
+	set i 0
+	set pin [sm scan_file_next $scan 0]
+	while {$pin != "NULL"}  {
+	    incr i
+	    set r [sm read_rec [sm pin_rid $pin] 0 0]
+	    verbose $i: read $r
+	    set pin [sm scan_file_next $scan 0]
+	}
+	sm scan_file_destroy $scan
+	if { $in_xct == 0 } {
+	    sm commit_xct
+	}
+    }
+    #
+    # helper proc that
+    # verifies that the file is ascending
+    #
+    proc verify { ndx2 nrec str in_xct } {
+	global short_form volid
+	verbose "scan up:"
+	if { $in_xct == 0 } {
+	    sm begin_xct
+	}
+	set scan [sm create_scan $ndx2 >= neg_inf <= pos_inf]
+	for {set i 1} {$i <= $nrec} {incr i}  {
+	    set r [sm scan_next $scan]
+	    if {[string compare $r eof] == 0} then { break }
+	    set key [string trimleft [lindex $r 0] 0]
+	    set el [lindex $r 1]
+	    verbose "scanned ($key, $el)"
+	    assert {expr $key == $el}
+	    assert {expr $i == $key}
+	}
+	assert {expr $i > $nrec}
+	assert {expr [string compare [sm scan_next $scan] eof] == 0}
+	sm destroy_scan $scan
+	verbose "---- successful"
+
+
+	verbose "probe:"
+	for {set i 1} {$i <= $nrec} {incr i} {
+	    set dummy [sm gather_stats reset]
+	    set el [sm find_assoc $ndx2 [format $short_form $i]]
+	    if [expr $i == $el] {
+		verbose probed $i $el
+	    } else {
+		pstats
+		verbose PROBLEM AT $i $el
+	    }
+	    assert {expr $i == $el}
+	}
+	if { $in_xct == 0 } {
+	    sm commit_xct
+	}
+	verbose "verify successful"
+    }
+
+proc each_thread {tx j} {
+	global volid nrec f ndx
+	set f1 $f($j)
+	set k [expr { $j * 3 } ]
+	sm attach_xct $tx
+
+	verbose $j sync-A 
+	sync
+
+	verbose $j sm create_index $volid uni_btree
+	set ndx($k) [sm create_index $volid uni_btree]
+	verbose $j index is $ndx($k)
+	verbose $j $k sm blkld_ndx $ndx($k) 1 $f1 b*1000
+
+	# set stat [sm blkld_ndx $ndx($k) 1 $f1 b*1000]
+	set caught [catch {sm blkld_ndx $ndx($k) 1 $f1 b*1000} stat]
+	if {$caught==0} {
+	verbose A: $stat
+
+	# verbose $j doing dstats after bulk load
+	# dstats $volid
+	# can't do it in multi-threaded xct
+
+	# verbose  verify $ndx($k) one
+	# verify $ndx($k) $nrec one 1
+
+	incr k
+
+	verbose $j sm create_index $volid uni_btree
+	set ndx($k) [sm create_index $volid uni_btree]
+	verbose $j index is $ndx($k)
+	verbose $j $k sm blkld_ndx $ndx($k) 1 $f1 b*1000
+	set stat [sm blkld_ndx $ndx($k) 1 $f1 b*1000]
+	# verbose $j doing dstats after bulk load
+	# dstats $volid 
+	# can't do in multi-threaded xct
+
+	# verbose verify $ndx($k) two
+	# verify $ndx($k) $nrec two 1
+
+	incr k
+
+	verbose $j sm create_index $volid uni_btree
+	set ndx($k) [sm create_index $volid uni_btree]
+	verbose $j index is $ndx($k)
+	verbose $j $k sm blkld_ndx $ndx($k) 1 $f1 b*1000
+	set stat [sm blkld_ndx $ndx($k) 1 $f1 b*1000]
+	# verbose $j doing dstats after bulk load
+	# dstats $volid
+	# verbose verify $ndx($k) two
+	# verify $ndx($k) $nrec three 1
+
+	verbose $j sync-B 
+	sync
+
+	verbose destroying index $j: $ndx($k)
+	sm destroy_index $ndx($k)
+	set k [expr { $k - 1 }]
+	verbose destroying index $j: $ndx($k)
+	sm destroy_index $ndx($k)
+	set k [expr { $k - 1 }]
+	verbose destroying index $j: $ndx($k)
+	sm destroy_index $ndx($k)
+	} else {
+		echo $j caught $caught err $stat k $k ndx($k) $ndx($k)
+
+		verbose $j sync-B-alternate
+		sync
+
+		verbose destroying index $j: $ndx($k)
+		sm destroy_index $ndx($k)
+	}
+
+	sm detach_xct $tx
+}
+
+    #
+    # create files of <key, el> pair (to be sorted later in blkld)
+    #
+    sm begin_xct
+	for {set j 0 }  {$j < $nthreads} {incr j} {
+	    verbose sm create_file $volid regular
+	    set f($j) [sm create_file $volid]
+	    verbose file is $f($j)
+	    for {set i $nrec} {$i > 0} {set i [ expr {$i - 1} ]} {
+		sm create_rec $f($j) [format $short_form $i] 10 $i
+	    }
+	    # print_file $f($j) 0
+	}
+    sm commit_xct
+
+
+    # fork off nthreads to do the bulk loads
+    sm begin_xct
+	set tx [sm xct]
+
+	set thread_list ""
+	for {set j 0 }  {$j < $nthreads} {incr j} {
+	    set th [fork_thread each_thread $tx $j ]
+	    set thread_list "$thread_list $th"
+	}
+	verbose ALL FORKED: $thread_list
+
+	verbose SYNCING-A: $thread_list
+	set cmd "sync_thread $thread_list"
+	eval $cmd
+	verbose ALL SYNCED-A: $thread_list
+
+	verbose SYNCING-B: $thread_list
+	eval $cmd
+	verbose ALL SYNCED-B: $thread_list
+
+	set cmd "join_thread $thread_list"
+	eval $cmd
+	verbose ALL JOINED: $thread_list
+
+    sm commit_xct
+
+    verbose "---- successful"
+
+
+    sm begin_xct
+    verbose doing dstats 
+    dstats $volid
+    for {set j 0 }  {$j < $nthreads} {incr j} {
+	verbose destroying file $j: $f($j)
+	sm destroy_file $f($j)
+    }
+    sm commit_xct
+
+    unset f i j 
+}
+
+verbose "---- successful"
+unset nrec nthreads cmd tx thread_list th
+

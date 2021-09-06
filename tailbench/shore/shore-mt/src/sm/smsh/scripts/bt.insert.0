@@ -1,0 +1,170 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: bt.insert.0,v 1.19 2010/06/08 22:28:28 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# this is the guts of bt.insert.[1234]
+# it assumes that the calling script has defined keylist (a list,
+# e.g., { 200 32433 8 98 }
+# and unique is set in bt.tcl, sourced by the
+# calling script.
+# 
+
+# set maxnum 2022
+set maxnum 4044
+
+# 1 key/value per page:
+set elemlength 4044
+
+#
+# create index and load it up 
+#
+#
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+set ndx [sm create_index $volid $unique regular b*1000 t_cc_kvl]
+verbose created index $ndx
+sm commit_xct
+
+# 
+# insert values in list
+#
+set nrec [llength $keylist]
+
+verbose $nrec records: $keylist
+
+proc random_restart { a } {
+    set j [random 3]
+    for { set i 0 } { $i <= $j } { incr i } {
+		_restart $a
+    }
+}
+
+proc runtest { term ndx nrec logging keylist } {
+# term: how to terminate this xct: commit abort or restart
+# ndx id of which index 
+# logging 0 or 1; if 0, the abort won't happen
+# keylist { list of keys }
+
+    verbose runtest $term logging=$logging nrec $nrec
+	
+    set key 1
+    set value 1
+    sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+	for {set i 0} {$i < $nrec} {incr i} {
+		verbose inserting $i
+		set key [lindex $keylist $i] 
+		verbose2 key $key
+
+		set value [mkval $i $key]
+		verbose2 value $value
+
+		verbose sm create_assoc $ndx $key <elem $key length>
+		sm create_assoc $ndx $key $value
+
+		# verbose sm find_assoc $ndx $key
+		# set res [sm find_assoc $ndx $key]
+		# assert {[expr [string compare $value $res] == 0]}
+		# verbose FOUND
+	}
+    switch $term {
+	abort {
+		if {$logging==0} {
+			verbose "Logging off: sm abort_xct not done.  Committing instead."
+			sm commit_xct 
+		} else {
+			verbose sm abort_xct 
+			sm abort_xct 
+		}
+	}
+   commit { 
+	    verbose sm commit_xct 
+	    sm commit_xct 
+	}
+	restart {
+		if {$logging==0} {
+			verbose "Logging off: restart not done.  Committing instead."
+			sm commit_xct 
+		} else {
+			verbose random_restart
+			random_restart false
+		}
+	}
+    }
+}
+
+runtest abort $ndx $nrec $logging $keylist 
+
+# sm begin_xct
+# test_scan $ndx 0
+# sm commit_xct
+
+runtest restart $ndx $nrec $logging $keylist 
+
+# sm begin_xct
+# test_scan $ndx 0
+# sm commit_xct
+
+clearstats
+runtest commit $ndx $nrec $logging $keylist 
+pstats 
+
+#
+# scan the index and check for the expected values
+# in the expected order
+#
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+set sorted [lsort $keylist]
+set len [llength $keylist]
+set res [test_scan $ndx $len]
+
+for {set i 0} {$i < $len} {incr i} {
+   set resi [lindex $res $i]
+   set sorti [lindex $sorted $i]
+
+   # use string comparison rather than expr so that
+   # it works with entries that are not integers
+   if { [string compare $resi [lindex $sorted $i]] != 0 } {
+      verbose index $i: test_scan returns $resi expected $sorti
+   }
+}
+
+unset res resi sorti sorted len i
+sm commit_xct
+
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+verbose sm destroy_index $ndx
+sm destroy_index $ndx
+verbose destroyed index
+sm commit_xct
+
+unset maxnum elemlength ndx nrec 
+

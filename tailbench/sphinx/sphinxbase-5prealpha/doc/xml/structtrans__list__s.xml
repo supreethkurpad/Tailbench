@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structtrans__list__s" kind="struct" language="C++" prot="public">
+    <compoundname>trans_list_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structtrans__list__s_1a15223c70915f916f5656627985c6fd39" prot="public" static="no" mutable="no">
+        <type><ref refid="structhash__table__s" kindref="compound">hash_table_t</ref> *</type>
+        <definition>hash_table_t* trans_list_s::null_trans</definition>
+        <argsstring></argsstring>
+        <name>null_trans</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/fsg_model.c" line="56" column="1" bodyfile="src/libsphinxbase/lm/fsg_model.c" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtrans__list__s_1ade18f3313bc542cee585f0c5c16de96a" prot="public" static="no" mutable="no">
+        <type><ref refid="structhash__table__s" kindref="compound">hash_table_t</ref> *</type>
+        <definition>hash_table_t* trans_list_s::trans</definition>
+        <argsstring></argsstring>
+        <name>trans</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/fsg_model.c" line="57" column="1" bodyfile="src/libsphinxbase/lm/fsg_model.c" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Adjacency list (opaque) for a state in an FSG. </para>    </briefdescription>
+    <detaileddescription>
+<para>Actually we use hash tables so that random access is a bit faster. Plus it allows us to make the lookup code a bit less ugly. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="298">
+        <label>trans_list_s</label>
+        <link refid="structtrans__list__s"/>
+        <childnode refid="299" relation="usage">
+          <edgelabel>trans</edgelabel>
+          <edgelabel>null_trans</edgelabel>
+        </childnode>
+      </node>
+      <node id="300">
+        <label>hash_entry_s</label>
+        <link refid="structhash__entry__s"/>
+        <childnode refid="300" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="299">
+        <label>hash_table_s</label>
+        <link refid="structhash__table__s"/>
+        <childnode refid="300" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/fsg_model.c" line="55" column="1" bodyfile="src/libsphinxbase/lm/fsg_model.c" bodystart="55" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structtrans__list__s_1a15223c70915f916f5656627985c6fd39" prot="public" virt="non-virtual"><scope>trans_list_s</scope><name>null_trans</name></member>
+      <member refid="structtrans__list__s_1ade18f3313bc542cee585f0c5c16de96a" prot="public" virt="non-virtual"><scope>trans_list_s</scope><name>trans</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

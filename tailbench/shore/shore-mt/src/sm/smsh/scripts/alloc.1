@@ -1,0 +1,215 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: alloc.1,v 1.17.2.5 2010/03/19 22:20:35 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test allocation & deallocation of pages
+#	T0:  create some recs in a file, commit
+#
+#		        SYNC                       SYNC
+#               ____                       ____
+#	T1:          *    create rec in file, 	*    commit
+#	T2:  destroy 
+#	     1st rec in file, 
+#                *     abort,               *   
+#	T3:          *     destroy 1st rec 
+#                          in file, commit,     *
+#
+
+source $script_dir/vol.init
+
+# format for body size -- >= one page
+set formsize [expr {${page_size} / 2} ]
+
+
+proc scanit { f } {
+    verbose scanit $f
+    set scan [sm scan_file_create $f t_cc_record]
+    verbose get first record from $scan
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+	set rec [sm pin_rid $pin]
+	verbose rec: $rec
+
+	set pid [sm pin_page_containing $pin 10]
+	verbose byte 10 is on page $pid
+
+	# don't unpin! 
+	# sm pin_unpin $pin
+	set pin [sm scan_file_next $scan 0]
+	set i [expr {$i+1} ]
+    }
+    sm scan_file_destroy $scan
+
+    verbose scan found $i records
+}
+proc destroyfirst { who f } {
+    verbose destroyfirst $who $f
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    if {$pin != "NULL"} {
+	set rec [sm pin_rid $pin]
+
+	set pid [sm pin_page_containing $pin 10]
+	verbose $who $rec byte 10 is on page $pid
+
+	sm destroy_rec $rec
+	verbose $who destroyed $rec
+    }
+    sm scan_file_destroy $scan
+}
+proc destroyall { f } {
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+	set rec [sm pin_rid $pin]
+	sm destroy_rec $rec
+	verbose destroyed $rec
+	set pin [sm scan_file_next $scan 0]
+	set i [expr {$i+1} ]
+    }
+    sm scan_file_destroy $scan
+    verbose destroyed $i recs file $f
+}
+
+
+proc t1 {} {
+    global volid  f0 r0 formsize verbose_flag
+    sm begin_xct
+    verbose t1: xact [sm xct] 
+named_sync 4 1
+    verbose t1: after sync1
+	
+named_sync 4 2
+    verbose t1: after sync2
+    verbose t1: creating...
+    set j [sm create_rec $f0 hdr 1000 [formatlong 0 $formsize  %010d 10] ]
+	set p [sm pin_create]
+	sm pin_pin $p $j 0
+	set pid [sm pin_page_containing $p 10]
+	verbose t1: $j byte 10 is on page $pid
+	sm pin_unpin $p 
+	sm pin_destroy $p
+    verbose t1: created $j
+named_sync 4 3
+    verbose t1: after sync3
+    sm commit_xct
+    verbose t1: committed
+}
+
+proc t2 {} {
+    global volid  f0 logging verbose_flag
+    sm begin_xct
+    verbose t2: xact [sm xct]
+named_sync 4 1
+    verbose t2: after sync1
+    verbose t2: destroy 1...
+    destroyfirst t2 $f0
+named_sync 4 2
+    verbose t2: after sync2
+    if {$logging==0} {
+	verbose Logging off: substituting commit for abort
+	sm commit_xct
+    } else {
+	verbose t2: aborting...
+	sm abort_xct
+	verbose t2: aborted
+    }
+named_sync 4 3
+    verbose t2: after sync3
+}
+
+proc t3 {} {
+    global volid  f0 verbose_flag
+    sm begin_xct
+    verbose t3: xact [sm xct]
+named_sync 4 1
+    verbose t3: after sync1
+named_sync 4 2
+    verbose t3: after sync2
+    verbose t3: destroy 1...
+    verbose calling destroyfirst t3 $f0
+    destroyfirst t3 $f0
+    verbose t3: committing...
+    sm commit_xct
+named_sync 4 3
+    verbose t3: after sync3
+}
+
+
+set numrecs 3
+
+sm begin_xct
+set f0 [sm create_file $volid]
+verbose created file $f0
+for { set i 1} { $i <= $numrecs} { incr i} {
+    set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i] ]
+    verbose created rec $j
+}
+verbose created 3 recs file $f0
+scanit $f0
+sm commit_xct
+
+
+set y1 [fork_thread t1 {}]
+set y2 [fork_thread t2 {}]
+set y3 [fork_thread t3 {}]
+
+named_sync 4 1
+named_sync 4 2
+named_sync 4 3
+join_thread $y1 $y2 $y3
+
+sm begin_xct
+scanit $f0
+sm commit_xct
+
+sm begin_xct
+destroyall $f0
+sm commit_xct
+
+sm begin_xct
+dstats $volid
+sm destroy_file $f0
+dstats $volid
+#
+#
+# set n [sm gather_stats]
+# echo PNZSTATS
+# echo [pnzstats $n]
+# unset n
+
+sm commit_xct
+
+unset formsize f0 numrecs i j
+unset y1 y2 y3
+
+

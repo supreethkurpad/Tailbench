@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structphmm__s" kind="struct" language="C++" prot="public">
+    <compoundname>phmm_s</compoundname>
+    <includes refid="allphone__search_8h" local="no">allphone_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structphmm__s_1a829311265f8df700c9fb628f5bdff0ad" prot="public" static="no" mutable="no">
+        <type><ref refid="structhmm__t" kindref="compound">hmm_t</ref></type>
+        <definition>hmm_t phmm_s::hmm</definition>
+        <argsstring></argsstring>
+        <name>hmm</name>
+        <briefdescription>
+<para>Base HMM structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="61" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphmm__s_1aee52956004053c676230cd8567366b60" prot="public" static="no" mutable="no">
+        <type>s3pid_t</type>
+        <definition>s3pid_t phmm_s::pid</definition>
+        <argsstring></argsstring>
+        <name>pid</name>
+        <briefdescription>
+<para>Phone id (temp. </para>        </briefdescription>
+        <detaileddescription>
+<para>during init.) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="62" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphmm__s_1afe385b65ca02fb4e3a087a0997ea4eac" prot="public" static="no" mutable="no">
+        <type><ref refid="s3types_8h_1ae5f70241ce62a79747f0611029a6409d" kindref="member">s3cipid_t</ref></type>
+        <definition>s3cipid_t phmm_s::ci</definition>
+        <argsstring></argsstring>
+        <name>ci</name>
+        <briefdescription>
+<para>Parent basephone for this PHMM. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="63" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphmm__s_1aad9f810256dea9ee491d21eb3a349d1c" prot="public" static="no" mutable="no">
+        <type>bitvec_t *</type>
+        <definition>bitvec_t* phmm_s::lc</definition>
+        <argsstring></argsstring>
+        <name>lc</name>
+        <briefdescription>
+<para>Set (bit-vector) of left context phones seen for this PHMM. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="64" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphmm__s_1a94ead49959a95398643178d8dc1609f8" prot="public" static="no" mutable="no">
+        <type>bitvec_t *</type>
+        <definition>bitvec_t* phmm_s::rc</definition>
+        <argsstring></argsstring>
+        <name>rc</name>
+        <briefdescription>
+<para>Set (bit-vector) of right context phones seen for this PHMM. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="65" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphmm__s_1a62c94d334abbbd2431d5e7e0ace79a14" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structphmm__s" kindref="compound">phmm_s</ref> *</type>
+        <definition>struct phmm_s* phmm_s::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+<para>Next unique PHMM for same parent basephone. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="66" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphmm__s_1a152d26f99b39098c8027cd2d8372e05c" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structplink__s" kindref="compound">plink_s</ref> *</type>
+        <definition>struct plink_s* phmm_s::succlist</definition>
+        <argsstring></argsstring>
+        <name>succlist</name>
+        <briefdescription>
+<para>List of predecessor PHMM nodes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="67" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Models a single unique &lt;senone-sequence, tmat&gt; pair. </para>    </briefdescription>
+    <detaileddescription>
+<para>Can represent several different triphones, but all with the same parent basephone. (NOTE: Word-position attribute of triphone is ignored.) </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="362">
+        <label>plink_s</label>
+        <link refid="structplink__s"/>
+        <childnode refid="362" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="361" relation="usage">
+          <edgelabel>phmm</edgelabel>
+        </childnode>
+      </node>
+      <node id="361">
+        <label>phmm_s</label>
+        <link refid="structphmm__s"/>
+        <childnode refid="362" relation="usage">
+          <edgelabel>succlist</edgelabel>
+        </childnode>
+        <childnode refid="363" relation="usage">
+          <edgelabel>hmm</edgelabel>
+        </childnode>
+        <childnode refid="361" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="363">
+        <label>hmm_s</label>
+        <link refid="structhmm__s"/>
+        <childnode refid="364" relation="usage">
+          <edgelabel>ctx</edgelabel>
+        </childnode>
+      </node>
+      <node id="364">
+        <label>hmm_context_t</label>
+        <link refid="structhmm__context__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/allphone_search.h" line="60" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="60" bodyend="68"/>
+    <listofallmembers>
+      <member refid="structphmm__s_1afe385b65ca02fb4e3a087a0997ea4eac" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>ci</name></member>
+      <member refid="structphmm__s_1a829311265f8df700c9fb628f5bdff0ad" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>hmm</name></member>
+      <member refid="structphmm__s_1aad9f810256dea9ee491d21eb3a349d1c" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>lc</name></member>
+      <member refid="structphmm__s_1a62c94d334abbbd2431d5e7e0ace79a14" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>next</name></member>
+      <member refid="structphmm__s_1aee52956004053c676230cd8567366b60" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>pid</name></member>
+      <member refid="structphmm__s_1a94ead49959a95398643178d8dc1609f8" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>rc</name></member>
+      <member refid="structphmm__s_1a152d26f99b39098c8027cd2d8372e05c" prot="public" virt="non-virtual"><scope>phmm_s</scope><name>succlist</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

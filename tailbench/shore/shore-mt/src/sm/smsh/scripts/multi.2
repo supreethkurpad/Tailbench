@@ -1,0 +1,203 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: multi.2,v 1.20.2.6 2010/03/19 22:20:36 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#  Testing the following multi-thread-per-tx scenarios
+#
+#  scenario 2 
+#  thread 1-m: EX lock o1
+#  thread 2-m: EX lock o2
+#  thread 1-s: SH lock o2 blocks on cond variable
+#  thread 2-s: SH lock o1 detects deadlock
+# 
+
+set_config_info
+
+# source $script_dir/vol.init
+undef_named_sync 5 silent
+define_named_sync 5 5
+
+set go 0
+if {$multi_threaded_xct == 0 } {
+	echo "Not configured for multi-threaded xcts"
+} else {
+	set go 1
+}
+if {$go == 1} {
+
+	set o1			"k(s(10.0).100.200)"
+	set o2			"k(s(10.0).100.340)"
+
+	##  TM: attach x, acquire ex-lock on o1, detach x 
+	proc tm {name x o1} {
+		global aborted_xct
+		link_to_inter_thread_comm_buffer aborted_xct
+		catch {sm attach_xct $x} err
+		set y [sm xct]
+		if { $y == 0 }  {
+			set tid 0
+		} else {
+			set tid [sm xct_to_tid [sm xct]]
+		}
+		verbose tm 4 name $name : tm xct=$x tid=$tid locking EX $o1
+
+		named_sync 5 tm
+
+		catch {sm lock $o1 EX LONG} err
+		verbose tm 5: result of lock is err=$err
+		if [error_is $err E_DEADLOCK] {
+		   verbose tm $name caught : $err
+		   verbose tm $name aborting
+		   verbose [pxstats false]
+		   sm abort_xct
+		   set aborted_xct $x
+		   return
+		}
+		verbose tm 6: $name tm xct $x acquired EX $o1, detaching
+		sm detach_xct $x
+		verbose tm 7: $name tm -- detached
+	}
+
+	##  TS: attach x, acquire sh-lock on o1, detach x 
+	proc ts {name x o2} {
+		global aborted_xct
+		link_to_inter_thread_comm_buffer aborted_xct
+
+		verbose "ts calling catch ...$x"
+		set caught [catch {sm attach_xct $x} err]
+		verbose  ts 1 err="|$err|" caught="|$caught|"
+		set y [sm xct]
+		verbose ts 2 xct is $y ($x)
+		if { $y == 0 }  {
+			set tid 0
+		} else {
+			set tid [sm xct_to_tid [sm xct]]
+		}
+		verbose ts $name ts xct=$x tid=$tid locking SH $o2
+
+
+		catch {sm lock $o2 SH LONG} err
+		verbose ts result of lock is err=$err
+		if [error_is $err E_DEADLOCK] {
+		   verbose ts $name ts caught : $err
+		   verbose ts aborting
+		   verbose [pxstats false]
+		   sm abort_xct
+		   set aborted_xct $x
+		   named_sync 5 ts-1
+		   return
+		}
+
+	    named_sync 5 ts-2
+
+		verbose ts $name ts xct $x acquired SH $o2, detaching
+		sm detach_xct $x
+		verbose ts $name ts -- detached
+	}
+
+	##########  main  ##########
+
+		link_to_inter_thread_comm_buffer aborted_xct
+		set aborted_xct ""
+
+		# start t1
+		sm begin_xct
+		set t1 [sm xct]
+		set tid [sm xct_to_tid $t1]
+		verbose xct $t1 $tid
+		sm detach_xct $t1
+
+		# tm: for t1, ex lock o1
+		verbose forking y1 tm xct=$t1 o1=$o1 (o2=$o2)
+		set y1 [fork_thread tm "y1" $t1 $o1]
+
+		# ts: for t1, sh lock o2, done before the sync
+		verbose forking y3 ts xct=$t1 (o1=$o1) o2=$o2
+		set y3 [fork_thread ts "y3" $t1 $o2]
+
+		# start t2
+		sm begin_xct
+		set t2 [sm xct]
+		set tid [sm xct_to_tid $t2]
+		verbose xct $t2 $tid
+		sm detach_xct $t2
+
+		# tm: for t2, ex lock o2
+		verbose forking y2 tm xct=$t2 o2 $o2 (o1 $o1)
+		set y2 [fork_thread tm {"y2" $t2 $o2}]
+
+		# tm: for t2, sh lock o1, done before the sync
+		verbose forking y4 ts xct=$t2 (o2 $o2) o1 $o1
+		set y4 [fork_thread ts {"y4" $t2 $o1}]
+
+verbose --------------------------------------------------------- 
+sm sleep  1000
+#  By the time we get to the sync, both SH locks should be acquired
+#  but the EX locks have not been tried. This means that after the
+#  sync, we should get a deadlock in one of the xcts
+#  The victim has to abort before the join or we'll hang on the join. 
+
+verbose named_sync 5 "$y1 $y2 $y3 $y4"
+named_sync 5 "$y1 $y2 $y3 $y4"
+
+verbose --------------------------------------------------------- 
+sm sleep  1000
+
+		verbose join_thread $y1 $y2 $y3 $y4
+		join_thread $y1 $y2 $y3 $y4
+
+		if {$aborted_xct != $t1} {
+			verbose committing $t1
+			sm attach_xct $t1
+			verbose [pxstats false]
+			sm commit_xct
+		} else {
+			verbose $t1 already aborted
+		}
+
+		if {$aborted_xct != $t2} {
+			verbose committing $t2
+			sm attach_xct $t2
+			verbose [pxstats false]
+			sm commit_xct
+		} else {
+			verbose $t2 already aborted
+		}
+		unset y2 y3 y4
+	    unset t2 
+		 
+	unset y1 t1 tid
+	unset o1 o2
+
+	verbose "SUCCESS"
+	# can't unset aborted_xct -- it's linked to the comm buffer.
+	addcleanupvars {aborted_xct}
+
+	verbose [pnzstats [sm gather_stats]]
+}
+unset go

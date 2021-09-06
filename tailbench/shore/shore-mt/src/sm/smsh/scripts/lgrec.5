@@ -1,0 +1,116 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.5,v 1.7.2.2 2009/12/03 00:21:11 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test running out of space on volume
+# Create a bunch of large objects until you run out of space.
+# simpler than lgrec.3.
+# This uses the append_file_i instead of lgrec.3's create_rec
+#  Uses append_file_i
+#
+
+source $script_dir/vol.init
+
+if { $logging == 0 } {
+    echo "Logging off: script not run. "
+} else {
+set_config_info
+
+set long_len [expr $lg_rec_page_space * 50]
+
+# set long_body [format %0$long_len\d  1]
+set long_body [formatlong 0 [expr {$long_len-10}] %010d 1]
+
+set llong [string length $long_body]
+verbose length of long_body  $llong
+
+verbose 
+verbose Create & destroy records of length $llong 
+verbose until we run out of space.  Presumably
+verbose the pages don't get re-used by this transaction.
+
+set last_pg_offset [expr {$llong - 1} ]
+
+sm begin_xct
+set fid [sm create_file $volid regular]
+sm commit_xct
+
+set errorno 0
+set i 0
+
+while {1} {
+    set j 10
+    sm begin_xct
+    set scan [sm scan_file_create $fid t_cc_append]
+    set tm [time {
+	    set caught [
+		catch  {
+		    set r [
+			sm multi_file_append $scan $i 10 $long_body $j
+		    ]
+
+		} errorno
+	    ]
+	    if {$caught} {
+		verbose EXPECTED error during create: $errorno
+		verbose aborting...
+		sm scan_file_destroy $scan
+		sm abort_xct
+		break
+	    }
+	    # set stats [pxstats reset]
+    } 1 ]
+    sm scan_file_destroy $scan
+    sm commit_xct
+    verbose
+    verbose loop $i: $j objects appended in time: $tm
+    # verbose $stats
+    # verbose
+	verbose SPACE IN MIDST
+	dstats $volid
+
+    incr i
+}
+
+verbose SPACE BEFORE DESTROY
+dstats $volid
+
+sm begin_xct
+sm destroy_file $fid
+# verbose volume_quota [sm get_volume_quota $volid]
+# verbose sm_stats [sm gather_stats]
+sm commit_xct
+
+verbose SPACE AFTER DESTROY
+dstats $volid
+
+unset r long_body long_len caught fid i errorno
+unset llong scan last_pg_offset j
+}
+

@@ -1,0 +1,169 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.perf3,v 1.7 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+#
+# Test file's re-use of space (holes in file)
+# Creates a file with $nrecs, destroys every other rec, leaving
+# $nrecs/2 records.  Re-creates (& destroys) $nrecs/2 recs
+# $numTests times.
+#
+# The destroyed records are splattered
+# throughout the file and never result in a freed page,
+# so creating records doesn't allocate pages.  This should
+# be reflected in the stats.
+#
+# This uses GRADUATED record sizes.  The original file
+# contains records whose sizes start out max and shrink to min.
+# When records are re-created, they start out min and grow to
+# max.  This tests the quality of the fits found by the 
+# algorithm.  By looking at the #new pages allocated and the
+# total #pages searched, we can get a measure of that quality.
+#
+# set fileType to tmp or regular or load_file
+# set logging to yes or no here AND in .shoreconfig
+#
+
+set nrecs 10000
+
+set numTests 1
+set objsize 100
+set fileType tmp
+set logging yes
+
+source $script_dir/vol.init
+clearstats
+
+verbose "********************************"
+verbose "** fileType: $fileType, logging: $logging, numTest: $numTests"
+verbose "********************************"
+
+set increment 512
+set max_rec_size [expr (${max_small_rec} / 2) + $increment  ]
+
+set instrument_flag 1
+set id_width %08d
+set hdr [format $id_width 1]
+
+proc destroyodd {fid}  {
+    global rid nrecs
+    for {set i 1} {$i < $nrecs} {incr i; incr i} {
+		if {$i < $nrecs} {
+			verbose destroying $i $rid($i)
+			set caught [catch {sm destroy_rec $rid($i)} err]
+			if {$caught != 0} {
+			   verbose UNEXPECTED ERROR: $err destroying record $rid($i) nrecs $nrecs
+			}
+			set rid($i) "r(0.0.0.0)"
+		}
+    }
+}
+proc test {fid numTests}  {
+	global id_width volid buffer nrecs rid hdr objsize increment
+	global max_rec_size
+
+	sm force_buffers true
+
+	sm begin_xct
+	set result [time {
+	    set rec_size 1
+		# NOTE: double increment
+	    for {set i 1} {$i < $nrecs} {incr i; incr i}  {
+			set buffer zvec${rec_size}
+			set rid($i) [sm create_rec $fid $hdr $objsize $buffer]
+			verbose created rid $i $rid($i) body= $buffer
+			set rec_size [expr ${rec_size} + $increment + $increment]
+			if [expr $rec_size > ${max_rec_size}] {
+				set rec_size 1
+			}
+	    }
+	    # destroy in same xct
+	    destroyodd $fid
+        } $numTests ]
+
+	set n [sm gather_xct_stats]
+	# set n NOSTATS
+	sm commit_xct
+
+	return [concat $result $n ]
+}
+
+
+sm begin_xct
+    set fid [sm create_file $volid $fileType]
+    set rec_size ${max_rec_size}
+    set scan [sm scan_file_create $fid t_cc_append]
+    for {set i 0} {$i < $nrecs} {incr i}  {
+		set buffer zvec${rec_size}
+		# set rid($i) [sm create_rec $fid $hdr $objsize $buffer]
+
+		set void [sm multi_file_append $scan $hdr $objsize $buffer 1]
+		verbose rid $i will be $buffer
+
+		set rec_size [expr ${rec_size} - $increment]
+		if [expr $rec_size <= 0] {
+			set rec_size ${max_rec_size}
+		}
+    }
+    sm scan_file_destroy $scan
+    # scan the file to get the rids
+    if (1) {
+		set scan [sm scan_file_create $fid t_cc_record]
+		set pin [sm scan_file_next $scan 0]
+		set i 0
+		while {$pin != "NULL"} {
+			set rid($i) [sm pin_rid $pin] 
+			verbose created $i : $rid($i)
+			# do NOT unpin -- it blows the context of the scan
+			# sm pin_unpin $pin
+			set pin [sm scan_file_next $scan 0]
+			set i [expr {$i+1} ]
+		}
+		sm scan_file_destroy $scan
+    }
+    destroyodd $fid
+    set n [sm gather_xct_stats]
+    verbose STATS for preparing file for tests:
+    verbose [pnzstats $n]
+sm commit_xct
+
+verbose Testing...
+
+set testTime [test $fid $numTests]
+
+verbose Destroying file...
+sm begin_xct
+    sm destroy_file $fid
+sm commit_xct
+
+verbose TIME, STATS for $numTests tests:
+verbose [pnzstats $testTime]
+
+unset buffer increment pin rid hdr max_rec_size
+unset scan i n testTime fileType numTests nrecs rec_size
+unset id_width void objsize
+unset fid

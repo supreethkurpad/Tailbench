@@ -1,0 +1,5 @@
+In addition to the standard TailBench environment variables, the sphinx client
+uses two custom environment variables: TBENCH_AN4_CORPUS points to the location
+of the AN4 corpus (the corpus contains the audio files to be decoded), and
+TBENCH_AUDIO_SAMPLES, which is a list of audio files in the corpus. See run.sh
+for an example.

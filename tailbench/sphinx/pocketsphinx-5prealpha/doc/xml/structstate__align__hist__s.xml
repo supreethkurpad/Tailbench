@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structstate__align__hist__s" kind="struct" language="C++" prot="public">
+    <compoundname>state_align_hist_s</compoundname>
+    <includes refid="state__align__search_8h" local="no">state_align_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structstate__align__hist__s_1a74cb4b079e03059eb0b02cb17bcadb5e" prot="public" static="no" mutable="no">
+        <type>uint16</type>
+        <definition>uint16 state_align_hist_s::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="58" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__hist__s_1aa8c7206b0491eefdfa2eaaf5a2834652" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 state_align_hist_s::score</definition>
+        <argsstring></argsstring>
+        <name>score</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="59" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>History structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libpocketsphinx/state_align_search.h" line="57" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="57" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structstate__align__hist__s_1a74cb4b079e03059eb0b02cb17bcadb5e" prot="public" virt="non-virtual"><scope>state_align_hist_s</scope><name>id</name></member>
+      <member refid="structstate__align__hist__s_1aa8c7206b0491eefdfa2eaaf5a2834652" prot="public" virt="non-virtual"><scope>state_align_hist_s</scope><name>score</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

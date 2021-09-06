@@ -1,0 +1,186 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: sort.1a,v 1.14.4.2 2009/12/21 18:45:18 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test sort on integers -- this is called by sort.1
+#    to test multiple integer and unsigned key types.
+#    This assumed that $ktype and $nrec  are set by calling script
+#
+
+# len hint < page size
+set lenhint 100
+
+#
+# Create and load a file with typed keys in reverse order
+# Create duplicates: ($nrecs - $i) copies of $i for i=0...$nrec-1
+# NB: old sort removes ONLY duplicate RECORDs; new sort
+# removes records with duplicate KEYs
+#
+
+
+proc make_input_file { } {
+    global f1 lenhint volid nrec ktype
+    set ordinal 1
+    sm begin_xct
+    set f1 [sm create_file $volid tmp]
+    verbose populating f1 = $f1
+    for {set i 0} {$i < $nrec} {incr i} {
+	for {set j 0} {$j <= $i } {incr j} {
+	    set data [expr { $nrec - $i } ]
+	    set hdr $data.$data.$data
+	    if { $ktype == "b*1000" } {
+		for {set c 0} {$c < $i} {incr c} {
+		    set hdr "$hdr$data"
+		}
+	    }
+	    set twentyfive "__________________________"
+	    set data "$data.$j"
+	    set data "$data.=$ordinal.$twentyfive"
+
+	    incr ordinal
+	    #   args: fid hdr len_hint data type [universe]
+	    # verbose sm create_typed_hdr_rec $f1 $hdr $lenhint $data $ktype b*1000
+	    sm create_typed_hdr_rec $f1 $hdr $lenhint $data $ktype b*1000
+	}
+    }
+
+    verbose $ordinal records  created of size [string length $hdr] "+"  [string length $data]
+    if {0} {
+	verbose scans on f1... UNSORTED, DUPLICATES
+	verbose [sm scan_sorted_recs $f1 $ktype b*1000]
+    }
+    sm commit_xct
+    unset j i hdr data twentyfive ordinal
+}
+
+make_input_file 
+
+#sort distinct and display
+if {1} {
+	sm begin_xct
+	    verbose sort ... ASCENDING, DISTINCT
+	    verbose sm sort_file $f1 $volid 3 $ktype hdr distinct keep
+	    set tm [
+	    time { set f2 [sm sort_file $f1 $volid 3 $ktype hdr distinct keep] } 1]
+	    echo time for sort_file: $tm
+	    set n [sm gather_xct_stats reset]
+	    verbose  STATS: [pnzstats $n]
+	    set n [sm gather_stats reset]
+	    verbose  GLOBAL STATS: [pnzstats  $n]
+	    verbose f2 = $f2 
+
+	    if {0} {
+		verbose scan f2 ... (ASCENDING, DISTINCT)
+		verbose [sm scan_sorted_recs $f2 $ktype b*1000]
+		verbose destroying $f2
+	    }
+	    sm destroy_file $f2
+
+	    verbose destroyed $f2
+	sm commit_xct
+}
+
+#sort non-distinct and display
+if {1} {
+	set run_size 3
+	sm begin_xct
+	    verbose sort ... ASCENDING, DUPLICATES
+	    set n [sm gather_xct_stats reset]
+	    verbose sm sort_file $f1 $volid $run_size $ktype hdr normal  keep
+	    set tm [time { set f2 [sm sort_file $f1 $volid $run_size $ktype hdr normal keep] } 1 ]
+	    echo time for sort_file: $tm
+	    set n [sm gather_xct_stats reset]
+	    verbose  STATS: [pnzstats  $n]
+	    set n [sm gather_stats reset]
+	    verbose  GLOBAL STATS: [pnzstats  $n]
+	    verbose f2 = $f2 
+
+	    if {0} {
+		verbose scan f2 ... (ASCENDING, DUPLICATES)
+		verbose [sm scan_sorted_recs $f2 $ktype b*1000]
+	    }
+	    sm destroy_file $f2
+	sm commit_xct
+	unset f2 run_size
+}
+# ditto for above but use destruct
+if {1} {
+	set run_size 3
+	sm begin_xct
+	    verbose sort ... ASCENDING, DUPLICATES
+	    set n [sm gather_xct_stats reset]
+	    verbose sm sort_file $f1 $volid $run_size $ktype hdr normal destruct
+	    set tm [time { set f2 [sm sort_file $f1 $volid $run_size $ktype hdr normal destruct] } 1 ]
+	    echo time for sort_file: $tm
+	    set n [sm gather_xct_stats reset]
+	    verbose  STATS: [pnzstats  $n]
+	    set n [sm gather_stats reset]
+	    verbose  GLOBAL STATS: [pnzstats  $n]
+	    verbose f2 = $f2 
+
+	    if {0} {
+		verbose scan f2 ... (ASCENDING, DUPLICATES)
+		verbose [sm scan_sorted_recs $f2 $ktype b*1000]
+	    }
+	    sm destroy_file $f2
+	sm commit_xct
+	unset f2 run_size
+
+	make_input_file 
+}
+
+# sort distinct and display, destruct
+if {1} {
+	sm begin_xct
+	    verbose sort ... ASCENDING, DISTINCT
+	    verbose sm sort_file $f1 $volid 3 $ktype hdr distinct destruct
+	    set tm [time { set f3 [sm sort_file $f1 $volid 3 $ktype hdr distinct destruct] } 1 ]
+	    echo time for sort_file: $tm
+	    set n [sm gather_xct_stats reset]
+	    verbose  STATS: [pnzstats  $n]
+	    set n [sm gather_stats reset]
+	    verbose  GLOBAL STATS: [pnzstats  $n]
+	    verbose f3 = $f3
+
+	    if {0} {
+		verbose scans f3 ... (ASCENDING, DISTINCT)
+		verbose [sm scan_sorted_recs $f3 $ktype b*1000]
+	    }
+
+	    catch {sm destroy_file $f1} err
+	    assert { expr {[error_is $err E_BADSTID] == 1} }
+	    sm destroy_file $f3
+
+	sm commit_xct
+	unset f3 err
+}
+
+unset f1 lenhint n
+
+

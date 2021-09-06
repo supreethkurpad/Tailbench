@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structbase__s" kind="struct" language="C++" prot="public">
+    <compoundname>base_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structbase__s_1a315c34dc6353300dc26df3ad24a050ad" prot="public" static="no" mutable="no">
+        <type>uint8</type>
+        <definition>uint8 base_s::word_bits</definition>
+        <argsstring></argsstring>
+        <name>word_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="59" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbase__s_1a41eb6cea2b87003361f3f5e223849ea4" prot="public" static="no" mutable="no">
+        <type>uint8</type>
+        <definition>uint8 base_s::total_bits</definition>
+        <argsstring></argsstring>
+        <name>total_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="60" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbase__s_1ab2eeaeadd9429692e9c5237fef4fc004" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 base_s::word_mask</definition>
+        <argsstring></argsstring>
+        <name>word_mask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="61" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbase__s_1a8822a082ded4c47efc1d64004fd423b1" prot="public" static="no" mutable="no">
+        <type>uint8 *</type>
+        <definition>uint8* base_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="62" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbase__s_1aa7ebeeb5d7092cdbce35644849f2880a" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 base_s::insert_index</definition>
+        <argsstring></argsstring>
+        <name>insert_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="63" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbase__s_1a7b49d9e3b285d84c39bcf3d76698c0c6" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 base_s::max_vocab</definition>
+        <argsstring></argsstring>
+        <name>max_vocab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="64" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/lm/lm_trie.h" line="58" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="58" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structbase__s_1a8822a082ded4c47efc1d64004fd423b1" prot="public" virt="non-virtual"><scope>base_s</scope><name>base</name></member>
+      <member refid="structbase__s_1aa7ebeeb5d7092cdbce35644849f2880a" prot="public" virt="non-virtual"><scope>base_s</scope><name>insert_index</name></member>
+      <member refid="structbase__s_1a7b49d9e3b285d84c39bcf3d76698c0c6" prot="public" virt="non-virtual"><scope>base_s</scope><name>max_vocab</name></member>
+      <member refid="structbase__s_1a41eb6cea2b87003361f3f5e223849ea4" prot="public" virt="non-virtual"><scope>base_s</scope><name>total_bits</name></member>
+      <member refid="structbase__s_1a315c34dc6353300dc26df3ad24a050ad" prot="public" virt="non-virtual"><scope>base_s</scope><name>word_bits</name></member>
+      <member refid="structbase__s_1ab2eeaeadd9429692e9c5237fef4fc004" prot="public" virt="non-virtual"><scope>base_s</scope><name>word_mask</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

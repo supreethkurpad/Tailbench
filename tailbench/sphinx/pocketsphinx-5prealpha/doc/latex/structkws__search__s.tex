@@ -1,0 +1,81 @@
+\section{kws\+\_\+search\+\_\+s Struct Reference}
+\label{structkws__search__s}\index{kws\+\_\+search\+\_\+s@{kws\+\_\+search\+\_\+s}}
+
+
+Implementation of K\+WS search structure.  
+
+
+
+
+{\ttfamily \#include $<$kws\+\_\+search.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structkws__search__s_a2fe82b392de65317a6b616681683942e}} 
+\textbf{ ps\+\_\+search\+\_\+t} {\bfseries base}
+\item 
+\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ \textbf{ hmmctx}
+\begin{DoxyCompactList}\small\item\em H\+MM context. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_ac7bd23ef33f85b4173a8d9a7cc9b9a32}} 
+\textbf{ kws\+\_\+detections\+\_\+t} $\ast$ \textbf{ detections}
+\begin{DoxyCompactList}\small\item\em Keyword spotting history. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_a0eec404435d9f8ad2700487f8a178f48}} 
+\textbf{ kws\+\_\+keyword\+\_\+t} $\ast$ \textbf{ keyphrases}
+\begin{DoxyCompactList}\small\item\em Keyphrases to spot. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_acd47cbdc3c0708d869888b99e6f5982c}} 
+int \textbf{ n\+\_\+keyphrases}
+\begin{DoxyCompactList}\small\item\em Keyphrases amount. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_a68a833afd9d01bdf4c2cc640b575eea7}} 
+\textbf{ frame\+\_\+idx\+\_\+t} \textbf{ frame}
+\begin{DoxyCompactList}\small\item\em Frame index. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_a5a84597099359059301dc6124579732e}} 
+int32 {\bfseries beam}
+\item 
+\mbox{\label{structkws__search__s_a3bfc1d19e39d1cd321ce47280f1abe00}} 
+int32 \textbf{ plp}
+\begin{DoxyCompactList}\small\item\em Phone loop probability. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_a0a04bba471516468d1b2bea14632f255}} 
+int32 \textbf{ bestscore}
+\begin{DoxyCompactList}\small\item\em For beam pruning. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_afce4456a796dbc72149d7a47159ccca9}} 
+int32 \textbf{ def\+\_\+threshold}
+\begin{DoxyCompactList}\small\item\em default threshold for p(hyp)/p(altern) ratio \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_acf2597fd017db4c2f90a9ba54e08a20c}} 
+int32 \textbf{ delay}
+\begin{DoxyCompactList}\small\item\em Delay to wait for best detection score. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_aab6e42d0c93af992c16e2a75db386df4}} 
+int32 \textbf{ n\+\_\+pl}
+\begin{DoxyCompactList}\small\item\em Number of CI phones. \end{DoxyCompactList}\item 
+\mbox{\label{structkws__search__s_a7b501f4cc5f4efb7b4ca0259afcf4e05}} 
+\textbf{ hmm\+\_\+t} $\ast$ \textbf{ pl\+\_\+hmms}
+\begin{DoxyCompactList}\small\item\em Phone loop hmms -\/ hmms of CI phones. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of K\+WS search structure. 
+
+Definition at line 70 of file kws\+\_\+search.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structkws__search__s_a0069d57702f921cbd1e2093148e7b672}} 
+\index{kws\+\_\+search\+\_\+s@{kws\+\_\+search\+\_\+s}!hmmctx@{hmmctx}}
+\index{hmmctx@{hmmctx}!kws\+\_\+search\+\_\+s@{kws\+\_\+search\+\_\+s}}
+\subsubsection{hmmctx}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+context\+\_\+t}$\ast$ kws\+\_\+search\+\_\+s\+::hmmctx}
+
+
+
+H\+MM context. 
+
+
+
+Definition at line 73 of file kws\+\_\+search.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/kws\+\_\+search.\+h\end{DoxyCompactItemize}

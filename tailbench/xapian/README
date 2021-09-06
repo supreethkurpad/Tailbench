@@ -1,0 +1,4 @@
+In addition to the standard TailBench environment variables, the xapian client
+uses an environment variable, TBENCH_TERMS_FILE, which points to a file
+containing a list of search terms. The search terms submitted to the application
+are randomly chosen from among these. See run.sh for an example.

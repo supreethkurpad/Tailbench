@@ -1,0 +1,5 @@
+rm -rf out-*
+make -C third-party/lz4 clean
+make[1]: Entering directory '/home/liuzhigang/kernel_interference/tailbench/tailbench-v0.9/silo/third-party/lz4'
+rm -f core *.o *.so lz4c lz4cs lz4c32 fuzzer fullbench
+make[1]: Leaving directory '/home/liuzhigang/kernel_interference/tailbench/tailbench-v0.9/silo/third-party/lz4'

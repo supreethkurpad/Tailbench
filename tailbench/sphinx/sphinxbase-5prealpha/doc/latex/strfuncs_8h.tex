@@ -1,0 +1,176 @@
+\section{include/sphinxbase/strfuncs.h File Reference}
+\label{strfuncs_8h}\index{include/sphinxbase/strfuncs.\+h@{include/sphinxbase/strfuncs.\+h}}
+
+
+Miscellaneous useful string functions.  
+
+
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ string\+\_\+edge\+\_\+e} \{ \textbf{ S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT}, 
+\textbf{ S\+T\+R\+I\+N\+G\+\_\+\+E\+ND}, 
+\textbf{ S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH}
+ \}\begin{DoxyCompactList}\small\item\em Which end of a string to operate on for \doxyref{string\+\_\+trim()}{p.}{strfuncs_8h_ac36a095632a4f16cf4e0fbcdb01de5ad}. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{strfuncs_8h_a317522f23d291311e366de34ef86b777}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char $\ast$ \textbf{ string\+\_\+join} (const char $\ast$base,...)
+\begin{DoxyCompactList}\small\item\em Concatenate a N\+U\+L\+L-\/terminated argument list of strings, returning a newly allocated string. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char $\ast$ \textbf{ string\+\_\+trim} (char $\ast$string, enum \textbf{ string\+\_\+edge\+\_\+e} which)
+\begin{DoxyCompactList}\small\item\em Remove whitespace from a string, modifying it in-\/place. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT double \textbf{ atof\+\_\+c} (char const $\ast$str)
+\begin{DoxyCompactList}\small\item\em Locale independent version of atof(). \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ str2words} (char $\ast$line, char $\ast$$\ast$wptr, int32 n\+\_\+wptr)
+\begin{DoxyCompactList}\small\item\em Convert a line to an array of \char`\"{}words\char`\"{}, based on whitespace separators. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ nextword} (char $\ast$line, const char $\ast$delim, char $\ast$$\ast$word, char $\ast$delimfound)
+\begin{DoxyCompactList}\small\item\em Yet another attempt at a clean \char`\"{}next-\/word-\/in-\/string\char`\"{} function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Miscellaneous useful string functions. 
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\label{strfuncs_8h_ab5c9ca15770a4bd3047705762b815df9}} 
+\index{strfuncs.\+h@{strfuncs.\+h}!string\+\_\+edge\+\_\+e@{string\+\_\+edge\+\_\+e}}
+\index{string\+\_\+edge\+\_\+e@{string\+\_\+edge\+\_\+e}!strfuncs.\+h@{strfuncs.\+h}}
+\subsubsection{string\+\_\+edge\+\_\+e}
+{\footnotesize\ttfamily enum \textbf{ string\+\_\+edge\+\_\+e}}
+
+
+
+Which end of a string to operate on for \doxyref{string\+\_\+trim()}{p.}{strfuncs_8h_ac36a095632a4f16cf4e0fbcdb01de5ad}. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT@{S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT}!strfuncs.\+h@{strfuncs.\+h}}\index{strfuncs.\+h@{strfuncs.\+h}!S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT@{S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT}}}\mbox{\label{strfuncs_8h_ab5c9ca15770a4bd3047705762b815df9a5e4d73e6ca445be10fa48351b9571125}} 
+S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT&Beginning of string. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+R\+I\+N\+G\+\_\+\+E\+ND@{S\+T\+R\+I\+N\+G\+\_\+\+E\+ND}!strfuncs.\+h@{strfuncs.\+h}}\index{strfuncs.\+h@{strfuncs.\+h}!S\+T\+R\+I\+N\+G\+\_\+\+E\+ND@{S\+T\+R\+I\+N\+G\+\_\+\+E\+ND}}}\mbox{\label{strfuncs_8h_ab5c9ca15770a4bd3047705762b815df9a11f31598e50bf3cf1d0aa97d967bb9b9}} 
+S\+T\+R\+I\+N\+G\+\_\+\+E\+ND&End of string. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH@{S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH}!strfuncs.\+h@{strfuncs.\+h}}\index{strfuncs.\+h@{strfuncs.\+h}!S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH@{S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH}}}\mbox{\label{strfuncs_8h_ab5c9ca15770a4bd3047705762b815df9a4fcbb0fe16fa4aa48723ba3ba10c26dd}} 
+S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH&Both ends of string. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 70 of file strfuncs.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{strfuncs_8h_ab708351fe7308551632a782bfad75a1e}} 
+\index{strfuncs.\+h@{strfuncs.\+h}!atof\+\_\+c@{atof\+\_\+c}}
+\index{atof\+\_\+c@{atof\+\_\+c}!strfuncs.\+h@{strfuncs.\+h}}
+\subsubsection{atof\+\_\+c()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT double atof\+\_\+c (\begin{DoxyParamCaption}\item[{char const $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+
+Locale independent version of atof(). 
+
+This function behaves like atof() in the \char`\"{}\+C\char`\"{} locale. Switching locale in a threaded program is extremely uncool, therefore we need this since we pass floats as strings in 1000 different places. 
+
+Definition at line 55 of file strfuncs.\+c.
+
+\mbox{\label{strfuncs_8h_a41d9a59e4326b545bf1282401319f553}} 
+\index{strfuncs.\+h@{strfuncs.\+h}!nextword@{nextword}}
+\index{nextword@{nextword}!strfuncs.\+h@{strfuncs.\+h}}
+\subsubsection{nextword()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 nextword (\begin{DoxyParamCaption}\item[{char $\ast$}]{line,  }\item[{const char $\ast$}]{delim,  }\item[{char $\ast$$\ast$}]{word,  }\item[{char $\ast$}]{delimfound }\end{DoxyParamCaption})}
+
+
+
+Yet another attempt at a clean \char`\"{}next-\/word-\/in-\/string\char`\"{} function. 
+
+See arguments below. \begin{DoxyReturn}{Returns}
+Length of word returned, or -\/1 if nothing found. This allows you to scan through a line\+:
+\end{DoxyReturn}
+
+\begin{DoxyPre}
+while ((n = nextword(line, delim, &word, &delimfound)) >= 0) \{
+    ... do something with word ..
+    word[n] = delimfound;
+    line = word + n;
+\}
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em line} & Input\+: String being searched for next word. Will be modified by this function (N\+UL characters inserted) \\
+\hline
+{\em delim} & Input\+: A word, if found, must be delimited at either end by a character from this string (or at the end by the N\+U\+LL char) \\
+\hline
+{\em word} & Output\+: $\ast$word = ptr within line to beginning of first word, if found. Delimiter at the end of word replaced with the N\+U\+LL char. \\
+\hline
+{\em delimfound} & Output\+: $\ast$delimfound = original delimiter found at the end of the word. (This way, the caller can restore the delimiter, preserving the original string.) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 166 of file strfuncs.\+c.
+
+\mbox{\label{strfuncs_8h_a5b520fdebcca599db86faaf75a82173f}} 
+\index{strfuncs.\+h@{strfuncs.\+h}!str2words@{str2words}}
+\index{str2words@{str2words}!strfuncs.\+h@{strfuncs.\+h}}
+\subsubsection{str2words()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 str2words (\begin{DoxyParamCaption}\item[{char $\ast$}]{line,  }\item[{char $\ast$$\ast$}]{wptr,  }\item[{int32}]{n\+\_\+wptr }\end{DoxyParamCaption})}
+
+
+
+Convert a line to an array of \char`\"{}words\char`\"{}, based on whitespace separators. 
+
+A word is a string with no whitespace chars in it. Note that the string line is modified as a result\+: N\+U\+LL chars are placed after every word in the line. Return value\+: No. of words found; -\/1 if no. of words in line exceeds n\+\_\+wptr. 
+\begin{DoxyParams}{Parameters}
+{\em line} & In/\+Out\+: line to be parsed. This string will be modified! (N\+UL characters inserted at word boundaries) \\
+\hline
+{\em wptr} & In/\+Out\+: Array of pointers to words found in line. The array must be allocated by the caller. It may be N\+U\+LL in which case the number of words will be counted. This allows you to allcate it to the proper size, e.\+g.\+:\\
+\hline
+\end{DoxyParams}
+n = str2words(line, N\+U\+L\+L, 0); wptr = \doxyref{ckd\+\_\+calloc(n, sizeof($\ast$wptr))}{p.}{ckd__alloc_8h_aa00ef21903bc4f8a972488417adc8d2e}; str2words(line, wptr, n); 
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+wptr} & In\+: Size of wptr array, ignored if wptr == N\+U\+LL \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 123 of file strfuncs.\+c.
+
+\mbox{\label{strfuncs_8h_ac36a095632a4f16cf4e0fbcdb01de5ad}} 
+\index{strfuncs.\+h@{strfuncs.\+h}!string\+\_\+trim@{string\+\_\+trim}}
+\index{string\+\_\+trim@{string\+\_\+trim}!strfuncs.\+h@{strfuncs.\+h}}
+\subsubsection{string\+\_\+trim()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char$\ast$ string\+\_\+trim (\begin{DoxyParamCaption}\item[{char $\ast$}]{string,  }\item[{enum \textbf{ string\+\_\+edge\+\_\+e}}]{which }\end{DoxyParamCaption})}
+
+
+
+Remove whitespace from a string, modifying it in-\/place. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & string to trim, contents will be modified. \\
+\hline
+{\em which} & one of S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT, S\+T\+R\+I\+N\+G\+\_\+\+E\+ND, or S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file strfuncs.\+c.
+
+
+
+References S\+T\+R\+I\+N\+G\+\_\+\+B\+O\+TH, S\+T\+R\+I\+N\+G\+\_\+\+E\+ND, and S\+T\+R\+I\+N\+G\+\_\+\+S\+T\+A\+RT.
+
+
+
+Referenced by lineiter\+\_\+next().
+

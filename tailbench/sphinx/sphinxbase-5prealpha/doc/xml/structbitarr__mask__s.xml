@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structbitarr__mask__s" kind="struct" language="C++" prot="public">
+    <compoundname>bitarr_mask_s</compoundname>
+    <includes refid="bitarr_8h" local="no">bitarr.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structbitarr__mask__s_1a47b05f707efd5233f021bb1276c79b7a" prot="public" static="no" mutable="no">
+        <type>uint8</type>
+        <definition>uint8 bitarr_mask_s::bits</definition>
+        <argsstring></argsstring>
+        <name>bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/bitarr.h" line="68" column="1" bodyfile="include/sphinxbase/bitarr.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbitarr__mask__s_1a034b318c56cbc15befef989a2521623c" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 bitarr_mask_s::mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/bitarr.h" line="69" column="1" bodyfile="include/sphinxbase/bitarr.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure that specifies bits required to efficiently store certain data. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/sphinxbase/bitarr.h" line="67" column="1" bodyfile="include/sphinxbase/bitarr.h" bodystart="67" bodyend="70"/>
+    <listofallmembers>
+      <member refid="structbitarr__mask__s_1a47b05f707efd5233f021bb1276c79b7a" prot="public" virt="non-virtual"><scope>bitarr_mask_s</scope><name>bits</name></member>
+      <member refid="structbitarr__mask__s_1a034b318c56cbc15befef989a2521623c" prot="public" virt="non-virtual"><scope>bitarr_mask_s</scope><name>mask</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

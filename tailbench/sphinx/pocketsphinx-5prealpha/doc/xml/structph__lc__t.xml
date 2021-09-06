@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structph__lc__t" kind="struct" language="C++" prot="public">
+    <compoundname>ph_lc_t</compoundname>
+    <includes refid="mdef_8h" local="no">mdef.h</includes>
+    <briefdescription>
+<para>Structures for storing the left context. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libpocketsphinx/mdef.h" line="119" column="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

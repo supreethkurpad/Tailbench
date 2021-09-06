@@ -1,0 +1,958 @@
+\section{include/ps\+\_\+lattice.h File Reference}
+\label{ps__lattice_8h}\index{include/ps\+\_\+lattice.\+h@{include/ps\+\_\+lattice.\+h}}
+
+
+Word graph search.  
+
+
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/ngram\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$pocketsphinx\+\_\+export.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__lattice_8h_af3c03aa650aafdaea0cbcfabe1a1c1e5}} 
+typedef struct \textbf{ ps\+\_\+lattice\+\_\+s} \textbf{ ps\+\_\+lattice\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Word graph structure used in bestpath/nbest search. \end{DoxyCompactList}\item 
+typedef struct \textbf{ ps\+\_\+latnode\+\_\+s} \textbf{ ps\+\_\+latnode\+\_\+t}
+\begin{DoxyCompactList}\small\item\em D\+AG nodes. \end{DoxyCompactList}\item 
+\mbox{\label{ps__lattice_8h_afd06dd0a4f63e1b1912c1a53b6a75de6}} 
+typedef struct \textbf{ ps\+\_\+latnode\+\_\+s} \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Iterator over D\+AG nodes. \end{DoxyCompactList}\item 
+typedef struct \textbf{ ps\+\_\+latlink\+\_\+s} \textbf{ ps\+\_\+latlink\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Links between D\+AG nodes. \end{DoxyCompactList}\item 
+\mbox{\label{ps__lattice_8h_a3a6312ccf7e1697399822c47a99c4645}} 
+typedef struct \textbf{ latlink\+\_\+list\+\_\+s} \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Iterator over D\+AG links. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+lattice\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+read} (struct \textbf{ ps\+\_\+decoder\+\_\+s} $\ast$ps, char const $\ast$file)
+\begin{DoxyCompactList}\small\item\em Read a lattice from a file on disk. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+lattice\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+retain} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag)
+\begin{DoxyCompactList}\small\item\em Retain a lattice. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+lattice\+\_\+free} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag)
+\begin{DoxyCompactList}\small\item\em Free a lattice. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+lattice\+\_\+write} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, char const $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Write a lattice to disk. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+lattice\+\_\+write\+\_\+htk} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, char const $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Write a lattice to disk in H\+TK format. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT logmath\+\_\+t $\ast$ \textbf{ ps\+\_\+lattice\+\_\+get\+\_\+logmath} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag)
+\begin{DoxyCompactList}\small\item\em Get the log-\/math computation object for this lattice. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+latnode\+\_\+iter} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag)
+\begin{DoxyCompactList}\small\item\em Start iterating over nodes in the lattice. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+next} (\textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Move to next node in iteration. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+free} (\textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Stop iterating over nodes. \end{DoxyCompactList}\item 
+\mbox{\label{ps__lattice_8h_a591bd15a350284b938deb84242736acc}} 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$ \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+node} (\textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Get node from iterator. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+latnode\+\_\+times} (\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$node, int16 $\ast$out\+\_\+fef, int16 $\ast$out\+\_\+lef)
+\begin{DoxyCompactList}\small\item\em Get start and end time range for a node. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$ \textbf{ ps\+\_\+latnode\+\_\+word} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Get word string for this node. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$ \textbf{ ps\+\_\+latnode\+\_\+baseword} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Get base word string for this node. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+latnode\+\_\+exits} (\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Iterate over exits from this node. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+latnode\+\_\+entries} (\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Iterate over entries to this node. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ ps\+\_\+latnode\+\_\+prob} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$node, \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$$\ast$out\+\_\+link)
+\begin{DoxyCompactList}\small\item\em Get best posterior probability and associated acoustic score from a lattice node. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+next} (\textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Get next link from a lattice link iterator. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+free} (\textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Stop iterating over links. \end{DoxyCompactList}\item 
+\mbox{\label{ps__lattice_8h_aec0e905415e724e6d6eed9b12c2f8584}} 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+link} (\textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Get link from iterator. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+latlink\+\_\+times} (\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$link, int16 $\ast$out\+\_\+sf)
+\begin{DoxyCompactList}\small\item\em Get start and end times from a lattice link. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$ \textbf{ ps\+\_\+latlink\+\_\+nodes} (\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$link, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$$\ast$out\+\_\+src)
+\begin{DoxyCompactList}\small\item\em Get destination and source nodes from a lattice link. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$ \textbf{ ps\+\_\+latlink\+\_\+word} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$link)
+\begin{DoxyCompactList}\small\item\em Get word string from a lattice link. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$ \textbf{ ps\+\_\+latlink\+\_\+baseword} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$link)
+\begin{DoxyCompactList}\small\item\em Get base word string from a lattice link. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+latlink\+\_\+pred} (\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$link)
+\begin{DoxyCompactList}\small\item\em Get predecessor link in best path. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ ps\+\_\+latlink\+\_\+prob} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$link, int32 $\ast$out\+\_\+ascr)
+\begin{DoxyCompactList}\small\item\em Get acoustic score and posterior probability from a lattice link. \end{DoxyCompactList}\item 
+\mbox{\label{ps__lattice_8h_a4aaae70904361b23a78cdcb632c298c4}} 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void \textbf{ ps\+\_\+lattice\+\_\+link} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$from, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$to, int32 score, int32 ef)
+\begin{DoxyCompactList}\small\item\em Create a directed link between \char`\"{}from\char`\"{} and \char`\"{}to\char`\"{} nodes, but if a link already exists, choose one with the best link\+\_\+scr. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+traverse\+\_\+edges} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$start, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$end)
+\begin{DoxyCompactList}\small\item\em Start a forward traversal of edges in a word graph. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+traverse\+\_\+next} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$end)
+\begin{DoxyCompactList}\small\item\em Get the next link in forward traversal. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+reverse\+\_\+edges} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$start, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$end)
+\begin{DoxyCompactList}\small\item\em Start a reverse traversal of edges in a word graph. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+reverse\+\_\+next} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, \textbf{ ps\+\_\+latnode\+\_\+t} $\ast$start)
+\begin{DoxyCompactList}\small\item\em Get the next link in reverse traversal. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ ps\+\_\+lattice\+\_\+bestpath} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, ngram\+\_\+model\+\_\+t $\ast$lmset, float32 lwf, float32 ascale)
+\begin{DoxyCompactList}\small\item\em Do N-\/\+Gram based best-\/path search on a word graph. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ ps\+\_\+lattice\+\_\+posterior} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, ngram\+\_\+model\+\_\+t $\ast$lmset, float32 ascale)
+\begin{DoxyCompactList}\small\item\em Calculate link posterior probabilities on a word graph. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ ps\+\_\+lattice\+\_\+posterior\+\_\+prune} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag, int32 beam)
+\begin{DoxyCompactList}\small\item\em Prune all links (and associated nodes) below a certain posterior probability. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+lattice\+\_\+n\+\_\+frames} (\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$dag)
+\begin{DoxyCompactList}\small\item\em Get the number of frames in the lattice. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Word graph search. 
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\label{ps__lattice_8h_a58ba3066b0b611f07c7ae57d77f8e776}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+t@{ps\+\_\+latlink\+\_\+t}}
+\index{ps\+\_\+latlink\+\_\+t@{ps\+\_\+latlink\+\_\+t}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+t}
+{\footnotesize\ttfamily typedef struct \textbf{ ps\+\_\+latlink\+\_\+s} \textbf{ ps\+\_\+latlink\+\_\+t}}
+
+
+
+Links between D\+AG nodes. 
+
+A link corresponds to a single hypothesized instance of a word with a given start and end point. 
+
+Definition at line 76 of file ps\+\_\+lattice.\+h.
+
+\mbox{\label{ps__lattice_8h_ad570c45dd72ad9ea8d57391fd2cd1c07}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+t@{ps\+\_\+latnode\+\_\+t}}
+\index{ps\+\_\+latnode\+\_\+t@{ps\+\_\+latnode\+\_\+t}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+t}
+{\footnotesize\ttfamily typedef struct \textbf{ ps\+\_\+latnode\+\_\+s} \textbf{ ps\+\_\+latnode\+\_\+t}}
+
+
+
+D\+AG nodes. 
+
+A node corresponds to a number of hypothesized instances of a word which all share the same starting point. 
+
+Definition at line 63 of file ps\+\_\+lattice.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{ps__lattice_8h_a392d98f9dc8fdae7f1092dced0738a43}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+baseword@{ps\+\_\+latlink\+\_\+baseword}}
+\index{ps\+\_\+latlink\+\_\+baseword@{ps\+\_\+latlink\+\_\+baseword}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+baseword()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const$\ast$ ps\+\_\+latlink\+\_\+baseword (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$}]{link }\end{DoxyParamCaption})}
+
+
+
+Get base word string from a lattice link. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to which node belongs. \\
+\hline
+{\em link} & Link inquired about \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Base word string for this link 
+\end{DoxyReturn}
+
+
+Definition at line 808 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::from.
+
+\mbox{\label{ps__lattice_8h_aa19aaa4a38a922ff28fe071f69b8272d}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+iter\+\_\+free@{ps\+\_\+latlink\+\_\+iter\+\_\+free}}
+\index{ps\+\_\+latlink\+\_\+iter\+\_\+free@{ps\+\_\+latlink\+\_\+iter\+\_\+free}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+iter\+\_\+free()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void ps\+\_\+latlink\+\_\+iter\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Stop iterating over links. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em itor} & Link iterator. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 767 of file ps\+\_\+lattice.\+c.
+
+\mbox{\label{ps__lattice_8h_af737b31c2570d321c26a79b5002f2ba7}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+iter\+\_\+next@{ps\+\_\+latlink\+\_\+iter\+\_\+next}}
+\index{ps\+\_\+latlink\+\_\+iter\+\_\+next@{ps\+\_\+latlink\+\_\+iter\+\_\+next}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+iter\+\_\+next()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+latlink\+\_\+iter\+\_\+next (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Get next link from a lattice link iterator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em itor} & Iterator. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated iterator, or N\+U\+LL if finished. 
+\end{DoxyReturn}
+
+
+Definition at line 761 of file ps\+\_\+lattice.\+c.
+
+\mbox{\label{ps__lattice_8h_a7344aa4fdb94a3a0af47901cb77185ed}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+nodes@{ps\+\_\+latlink\+\_\+nodes}}
+\index{ps\+\_\+latlink\+\_\+nodes@{ps\+\_\+latlink\+\_\+nodes}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+nodes()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+t}$\ast$ ps\+\_\+latlink\+\_\+nodes (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$}]{link,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$$\ast$}]{out\+\_\+src }\end{DoxyParamCaption})}
+
+
+
+Get destination and source nodes from a lattice link. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em link} & Link inquired about \\
+\hline
+{\em out\+\_\+src} & Output\+: (optional) source node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+destination node 
+\end{DoxyReturn}
+
+
+Definition at line 793 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::from, and ps\+\_\+latlink\+\_\+s\+::to.
+
+\mbox{\label{ps__lattice_8h_a8f37d188bd1dff70293adebdb2453ab4}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+pred@{ps\+\_\+latlink\+\_\+pred}}
+\index{ps\+\_\+latlink\+\_\+pred@{ps\+\_\+latlink\+\_\+pred}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+pred()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+latlink\+\_\+pred (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$}]{link }\end{DoxyParamCaption})}
+
+
+
+Get predecessor link in best path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em link} & Link inquired about \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Best previous link from bestpath search, if any. Otherwise N\+U\+LL 
+\end{DoxyReturn}
+
+
+Definition at line 816 of file ps\+\_\+lattice.\+c.
+
+\mbox{\label{ps__lattice_8h_aa393fbcf215acc8116e18aac2847cc59}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+prob@{ps\+\_\+latlink\+\_\+prob}}
+\index{ps\+\_\+latlink\+\_\+prob@{ps\+\_\+latlink\+\_\+prob}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+prob()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 ps\+\_\+latlink\+\_\+prob (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$}]{link,  }\item[{int32 $\ast$}]{out\+\_\+ascr }\end{DoxyParamCaption})}
+
+
+
+Get acoustic score and posterior probability from a lattice link. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to which node belongs. \\
+\hline
+{\em link} & Link inquired about \\
+\hline
+{\em out\+\_\+ascr} & Output\+: (optional) acoustic score. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Posterior probability for this link. Log is expressed in the log-\/base used in the decoder. To convert to linear floating-\/point, use logmath\+\_\+exp(ps\+\_\+lattice\+\_\+get\+\_\+logmath(), pprob). 
+\end{DoxyReturn}
+
+
+Definition at line 822 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::alpha, ps\+\_\+latlink\+\_\+s\+::ascr, ps\+\_\+latlink\+\_\+s\+::beta, ps\+\_\+lattice\+\_\+s\+::norm, and S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT.
+
+\mbox{\label{ps__lattice_8h_aef48bb18865b449e69316ed5959eae9f}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+times@{ps\+\_\+latlink\+\_\+times}}
+\index{ps\+\_\+latlink\+\_\+times@{ps\+\_\+latlink\+\_\+times}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+times()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+latlink\+\_\+times (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$}]{link,  }\item[{int16 $\ast$}]{out\+\_\+sf }\end{DoxyParamCaption})}
+
+
+
+Get start and end times from a lattice link. 
+
+\begin{DoxyNote}{Note}
+these are {\bfseries inclusive} -\/ i.\+e. the last frame of this word is ef, not ef-\/1.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em link} & Link inquired about. \\
+\hline
+{\em out\+\_\+sf} & Output\+: (optional) start frame of this link. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+End frame of this link. 
+\end{DoxyReturn}
+
+
+Definition at line 779 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::ef, ps\+\_\+latlink\+\_\+s\+::from, and ps\+\_\+latnode\+\_\+s\+::sf.
+
+\mbox{\label{ps__lattice_8h_a04c080f501883fe5d4c5500afb28e53a}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latlink\+\_\+word@{ps\+\_\+latlink\+\_\+word}}
+\index{ps\+\_\+latlink\+\_\+word@{ps\+\_\+latlink\+\_\+word}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latlink\+\_\+word()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const$\ast$ ps\+\_\+latlink\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$}]{link }\end{DoxyParamCaption})}
+
+
+
+Get word string from a lattice link. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to which node belongs. \\
+\hline
+{\em link} & Link inquired about \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Word string for this link (possibly a pronunciation variant). 
+\end{DoxyReturn}
+
+
+Definition at line 800 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::from.
+
+\mbox{\label{ps__lattice_8h_a0b3b6a843b49deab080bf1c6e99c875d}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+baseword@{ps\+\_\+latnode\+\_\+baseword}}
+\index{ps\+\_\+latnode\+\_\+baseword@{ps\+\_\+latnode\+\_\+baseword}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+baseword()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const$\ast$ ps\+\_\+latnode\+\_\+baseword (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{node }\end{DoxyParamCaption})}
+
+
+
+Get base word string for this node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to which node belongs. \\
+\hline
+{\em node} & Node inquired about. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Base word string for this node. 
+\end{DoxyReturn}
+
+
+Definition at line 726 of file ps\+\_\+lattice.\+c.
+
+\mbox{\label{ps__lattice_8h_a16ad0cfb8d4b02f9cf90a8b52756a7f7}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+entries@{ps\+\_\+latnode\+\_\+entries}}
+\index{ps\+\_\+latnode\+\_\+entries@{ps\+\_\+latnode\+\_\+entries}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+entries()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+latnode\+\_\+entries (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{node }\end{DoxyParamCaption})}
+
+
+
+Iterate over entries to this node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node inquired about. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator over entry links to this node. 
+\end{DoxyReturn}
+
+
+Definition at line 755 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latnode\+\_\+s\+::entries.
+
+\mbox{\label{ps__lattice_8h_a13fb923cd41fae910457df2643e58738}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+exits@{ps\+\_\+latnode\+\_\+exits}}
+\index{ps\+\_\+latnode\+\_\+exits@{ps\+\_\+latnode\+\_\+exits}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+exits()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+latnode\+\_\+exits (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{node }\end{DoxyParamCaption})}
+
+
+
+Iterate over exits from this node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node inquired about. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator over exit links from this node. 
+\end{DoxyReturn}
+
+
+Definition at line 749 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latnode\+\_\+s\+::exits.
+
+\mbox{\label{ps__lattice_8h_aaf073a0617c446aa5424513f7c1045b8}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+iter@{ps\+\_\+latnode\+\_\+iter}}
+\index{ps\+\_\+latnode\+\_\+iter@{ps\+\_\+latnode\+\_\+iter}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+iter()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+latnode\+\_\+iter (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag }\end{DoxyParamCaption})}
+
+
+
+Start iterating over nodes in the lattice. 
+
+\begin{DoxyNote}{Note}
+No particular order of traversal is guaranteed, and you should not depend on this.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to iterate over. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator over lattice nodes. 
+\end{DoxyReturn}
+
+
+Definition at line 688 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::nodes.
+
+\mbox{\label{ps__lattice_8h_ae9a6464b83d37bfa2ce570206eff6aad}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+iter\+\_\+free@{ps\+\_\+latnode\+\_\+iter\+\_\+free}}
+\index{ps\+\_\+latnode\+\_\+iter\+\_\+free@{ps\+\_\+latnode\+\_\+iter\+\_\+free}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+iter\+\_\+free()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void ps\+\_\+latnode\+\_\+iter\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Stop iterating over nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em itor} & Node iterator. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 700 of file ps\+\_\+lattice.\+c.
+
+\mbox{\label{ps__lattice_8h_a48aaf30b9396b38ccaf3a1b6e9225a01}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+iter\+\_\+next@{ps\+\_\+latnode\+\_\+iter\+\_\+next}}
+\index{ps\+\_\+latnode\+\_\+iter\+\_\+next@{ps\+\_\+latnode\+\_\+iter\+\_\+next}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+iter\+\_\+next()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+latnode\+\_\+iter\+\_\+next (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latnode\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Move to next node in iteration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em itor} & Node iterator. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated node iterator, or N\+U\+LL if finished 
+\end{DoxyReturn}
+
+
+Definition at line 694 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latnode\+\_\+s\+::next.
+
+\mbox{\label{ps__lattice_8h_a68253946c2405d7f9090de7530f33b9d}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+prob@{ps\+\_\+latnode\+\_\+prob}}
+\index{ps\+\_\+latnode\+\_\+prob@{ps\+\_\+latnode\+\_\+prob}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+prob()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 ps\+\_\+latnode\+\_\+prob (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{node,  }\item[{\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$$\ast$}]{out\+\_\+link }\end{DoxyParamCaption})}
+
+
+
+Get best posterior probability and associated acoustic score from a lattice node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to which node belongs. \\
+\hline
+{\em node} & Node inquired about. \\
+\hline
+{\em out\+\_\+link} & Output\+: exit link with highest posterior probability \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Posterior probability of the best link exiting this node. Log is expressed in the log-\/base used in the decoder. To convert to linear floating-\/point, use logmath\+\_\+exp(ps\+\_\+lattice\+\_\+get\+\_\+logmath(), pprob). 
+\end{DoxyReturn}
+
+
+Definition at line 732 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::alpha, ps\+\_\+latlink\+\_\+s\+::beta, ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+lattice\+\_\+s\+::lmath, and ps\+\_\+lattice\+\_\+s\+::norm.
+
+\mbox{\label{ps__lattice_8h_a42bd0fbfe8b0cab1a9a7e799a3fc30a2}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+times@{ps\+\_\+latnode\+\_\+times}}
+\index{ps\+\_\+latnode\+\_\+times@{ps\+\_\+latnode\+\_\+times}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+times()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+latnode\+\_\+times (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{node,  }\item[{int16 $\ast$}]{out\+\_\+fef,  }\item[{int16 $\ast$}]{out\+\_\+lef }\end{DoxyParamCaption})}
+
+
+
+Get start and end time range for a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node inquired about. \\
+\hline
+{\em out\+\_\+fef} & Output\+: End frame of first exit from this node. \\
+\hline
+{\em out\+\_\+lef} & Output\+: End frame of last exit from this node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Start frame for all edges exiting this node. 
+\end{DoxyReturn}
+
+
+Definition at line 712 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latnode\+\_\+s\+::fef, ps\+\_\+latnode\+\_\+s\+::lef, and ps\+\_\+latnode\+\_\+s\+::sf.
+
+\mbox{\label{ps__lattice_8h_a54888a8a7379c5c63613504b9a847ea3}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+latnode\+\_\+word@{ps\+\_\+latnode\+\_\+word}}
+\index{ps\+\_\+latnode\+\_\+word@{ps\+\_\+latnode\+\_\+word}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+latnode\+\_\+word()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT char const$\ast$ ps\+\_\+latnode\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{node }\end{DoxyParamCaption})}
+
+
+
+Get word string for this node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to which node belongs. \\
+\hline
+{\em node} & Node inquired about. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Word string for this node (possibly a pronunciation variant). 
+\end{DoxyReturn}
+
+
+Definition at line 720 of file ps\+\_\+lattice.\+c.
+
+\mbox{\label{ps__lattice_8h_af19b8f0749af01d4874595e80fc612ba}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+bestpath@{ps\+\_\+lattice\+\_\+bestpath}}
+\index{ps\+\_\+lattice\+\_\+bestpath@{ps\+\_\+lattice\+\_\+bestpath}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+bestpath()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+bestpath (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{ngram\+\_\+model\+\_\+t $\ast$}]{lmset,  }\item[{float32}]{lwf,  }\item[{float32}]{ascale }\end{DoxyParamCaption})}
+
+
+
+Do N-\/\+Gram based best-\/path search on a word graph. 
+
+This function calculates both the best path as well as the forward probability used in confidence estimation.
+
+\begin{DoxyReturn}{Returns}
+Final link in best path, N\+U\+LL on error. 
+\end{DoxyReturn}
+
+
+Definition at line 1215 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::alpha, dict\+\_\+filler\+\_\+word(), ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+lattice\+\_\+s\+::lmath, ps\+\_\+latnode\+\_\+s\+::next, ps\+\_\+lattice\+\_\+s\+::nodes, ps\+\_\+latlink\+\_\+s\+::path\+\_\+scr, ps\+\_\+lattice\+\_\+s\+::search, and ps\+\_\+lattice\+\_\+s\+::start.
+
+\mbox{\label{ps__lattice_8h_a3f90e846bde47cd1acdff165b92f5c22}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+free@{ps\+\_\+lattice\+\_\+free}}
+\index{ps\+\_\+lattice\+\_\+free@{ps\+\_\+lattice\+\_\+free}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+free()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+lattice\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag }\end{DoxyParamCaption})}
+
+
+
+Free a lattice. 
+
+\begin{DoxyReturn}{Returns}
+new reference count (0 if dag was freed) 
+\end{DoxyReturn}
+
+
+Definition at line 665 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::dict, dict\+\_\+free(), ps\+\_\+lattice\+\_\+s\+::hyp\+\_\+str, ps\+\_\+lattice\+\_\+s\+::latlink\+\_\+alloc, ps\+\_\+lattice\+\_\+s\+::latlink\+\_\+list\+\_\+alloc, ps\+\_\+lattice\+\_\+s\+::latnode\+\_\+alloc, ps\+\_\+lattice\+\_\+s\+::lmath, and ps\+\_\+lattice\+\_\+s\+::refcount.
+
+
+
+Referenced by ps\+\_\+search\+\_\+base\+\_\+free(), and ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{ps__lattice_8h_a5c9d9171c9846c46c107bfe41a9120cf}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+get\+\_\+logmath@{ps\+\_\+lattice\+\_\+get\+\_\+logmath}}
+\index{ps\+\_\+lattice\+\_\+get\+\_\+logmath@{ps\+\_\+lattice\+\_\+get\+\_\+logmath}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+get\+\_\+logmath()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT logmath\+\_\+t$\ast$ ps\+\_\+lattice\+\_\+get\+\_\+logmath (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag }\end{DoxyParamCaption})}
+
+
+
+Get the log-\/math computation object for this lattice. 
+
+\begin{DoxyReturn}{Returns}
+The log-\/math object for this lattice. The lattice retains ownership of this pointer, so you should not attempt to free it manually. Use logmath\+\_\+retain() if you wish to reuse it elsewhere. 
+\end{DoxyReturn}
+
+
+Definition at line 682 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::lmath.
+
+\mbox{\label{ps__lattice_8h_a44a196a35a8aeb044251c6c152034c90}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+n\+\_\+frames@{ps\+\_\+lattice\+\_\+n\+\_\+frames}}
+\index{ps\+\_\+lattice\+\_\+n\+\_\+frames@{ps\+\_\+lattice\+\_\+n\+\_\+frames}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+n\+\_\+frames()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+lattice\+\_\+n\+\_\+frames (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag }\end{DoxyParamCaption})}
+
+
+
+Get the number of frames in the lattice. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & The lattice in question. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of frames in this lattice. 
+\end{DoxyReturn}
+
+
+Definition at line 633 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::n\+\_\+frames.
+
+\mbox{\label{ps__lattice_8h_a8c5c6ef260ab006099ab34d09b5b1d06}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+posterior@{ps\+\_\+lattice\+\_\+posterior}}
+\index{ps\+\_\+lattice\+\_\+posterior@{ps\+\_\+lattice\+\_\+posterior}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+posterior()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 ps\+\_\+lattice\+\_\+posterior (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{ngram\+\_\+model\+\_\+t $\ast$}]{lmset,  }\item[{float32}]{ascale }\end{DoxyParamCaption})}
+
+
+
+Calculate link posterior probabilities on a word graph. 
+
+This function assumes that bestpath search has already been done.
+
+\begin{DoxyReturn}{Returns}
+Posterior probability of the utterance as a whole. 
+\end{DoxyReturn}
+
+
+Definition at line 1446 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::ascr, ps\+\_\+latnode\+\_\+s\+::basewid, ps\+\_\+latlink\+\_\+s\+::beta, B\+E\+T\+T\+E\+R\+\_\+\+T\+H\+AN, ps\+\_\+lattice\+\_\+s\+::dict, dict\+\_\+filler\+\_\+word(), ps\+\_\+lattice\+\_\+s\+::end, ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+lattice\+\_\+s\+::final\+\_\+node\+\_\+ascr, ps\+\_\+latlink\+\_\+s\+::from, ps\+\_\+lattice\+\_\+s\+::lmath, ps\+\_\+latnode\+\_\+s\+::next, ps\+\_\+lattice\+\_\+s\+::nodes, ps\+\_\+latlink\+\_\+s\+::path\+\_\+scr, ps\+\_\+lattice\+\_\+reverse\+\_\+edges(), ps\+\_\+lattice\+\_\+reverse\+\_\+next(), S\+E\+N\+S\+C\+R\+\_\+\+S\+H\+I\+FT, ps\+\_\+lattice\+\_\+s\+::start, and ps\+\_\+latlink\+\_\+s\+::to.
+
+\mbox{\label{ps__lattice_8h_a30d83a5fd158d2acaa5107be7a09ed09}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+posterior\+\_\+prune@{ps\+\_\+lattice\+\_\+posterior\+\_\+prune}}
+\index{ps\+\_\+lattice\+\_\+posterior\+\_\+prune@{ps\+\_\+lattice\+\_\+posterior\+\_\+prune}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+posterior\+\_\+prune()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int32 ps\+\_\+lattice\+\_\+posterior\+\_\+prune (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{int32}]{beam }\end{DoxyParamCaption})}
+
+
+
+Prune all links (and associated nodes) below a certain posterior probability. 
+
+This function assumes that \doxyref{ps\+\_\+lattice\+\_\+posterior()}{p.}{ps__lattice_8h_a8c5c6ef260ab006099ab34d09b5b1d06} has already been called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em beam} & Minimum posterior probability for links. This is expressed in the log-\/base used in the decoder. To convert from linear floating-\/point, use logmath\+\_\+log(ps\+\_\+lattice\+\_\+get\+\_\+logmath(), prob). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of arcs removed. 
+\end{DoxyReturn}
+
+
+Definition at line 1524 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::alpha, ps\+\_\+latlink\+\_\+s\+::beta, ps\+\_\+lattice\+\_\+s\+::end, ps\+\_\+latnode\+\_\+s\+::entries, ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+latlink\+\_\+s\+::from, ps\+\_\+lattice\+\_\+s\+::latlink\+\_\+alloc, ps\+\_\+lattice\+\_\+s\+::latlink\+\_\+list\+\_\+alloc, ps\+\_\+lattice\+\_\+s\+::norm, ps\+\_\+lattice\+\_\+traverse\+\_\+edges(), ps\+\_\+lattice\+\_\+traverse\+\_\+next(), ps\+\_\+latnode\+\_\+s\+::reachable, ps\+\_\+lattice\+\_\+s\+::start, and ps\+\_\+latlink\+\_\+s\+::to.
+
+\mbox{\label{ps__lattice_8h_a26f4a34c81b112109621b7ecacd57ee0}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+read@{ps\+\_\+lattice\+\_\+read}}
+\index{ps\+\_\+lattice\+\_\+read@{ps\+\_\+lattice\+\_\+read}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+read()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+lattice\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+read (\begin{DoxyParamCaption}\item[{struct \textbf{ ps\+\_\+decoder\+\_\+s} $\ast$}]{ps,  }\item[{char const $\ast$}]{file }\end{DoxyParamCaption})}
+
+
+
+Read a lattice from a file on disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ps} & Decoder to use for processing this lattice, or N\+U\+LL. \\
+\hline
+{\em file} & Path to lattice file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Newly created lattice, or N\+U\+LL for failure. 
+\end{DoxyReturn}
+
+
+Definition at line 387 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+search\+\_\+s\+::config, ps\+\_\+lattice\+\_\+s\+::dict, ps\+\_\+decoder\+\_\+s\+::dict, dict\+\_\+init(), dict\+\_\+retain(), ps\+\_\+lattice\+\_\+s\+::frate, ps\+\_\+lattice\+\_\+s\+::lmath, ps\+\_\+decoder\+\_\+s\+::lmath, ps\+\_\+lattice\+\_\+s\+::search, ps\+\_\+decoder\+\_\+s\+::search, and ps\+\_\+lattice\+\_\+s\+::silence.
+
+\mbox{\label{ps__lattice_8h_a9efc5f2836e2a0bd5d58326303516df5}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+retain@{ps\+\_\+lattice\+\_\+retain}}
+\index{ps\+\_\+lattice\+\_\+retain@{ps\+\_\+lattice\+\_\+retain}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+retain()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+lattice\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+retain (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag }\end{DoxyParamCaption})}
+
+
+
+Retain a lattice. 
+
+This function retains ownership of a lattice for the caller, preventing it from being freed automatically. You must call \doxyref{ps\+\_\+lattice\+\_\+free()}{p.}{ps__lattice_8h_a3f90e846bde47cd1acdff165b92f5c22} to free it after having called this function.
+
+\begin{DoxyReturn}{Returns}
+pointer to the retained lattice. 
+\end{DoxyReturn}
+
+
+Definition at line 658 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::refcount.
+
+\mbox{\label{ps__lattice_8h_ad712e99a75ab8e9eb2f636aac8d5e2cb}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+reverse\+\_\+edges@{ps\+\_\+lattice\+\_\+reverse\+\_\+edges}}
+\index{ps\+\_\+lattice\+\_\+reverse\+\_\+edges@{ps\+\_\+lattice\+\_\+reverse\+\_\+edges}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+reverse\+\_\+edges()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+reverse\+\_\+edges (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{start,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{end }\end{DoxyParamCaption})}
+
+
+
+Start a reverse traversal of edges in a word graph. 
+
+\begin{DoxyNote}{Note}
+See \doxyref{ps\+\_\+lattice\+\_\+traverse\+\_\+edges()}{p.}{ps__lattice_8h_a997fce2eb1eaf316d463ddfb3d8395b8} for why this A\+PI is the way it is.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to be traversed. \\
+\hline
+{\em start} & Start node (goal) of traversal. \\
+\hline
+{\em end} & End node (source) of traversal. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+First link in traversal. 
+\end{DoxyReturn}
+
+
+Definition at line 1148 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::end, ps\+\_\+latnode\+\_\+s\+::entries, ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+latnode\+\_\+s\+::fanin, ps\+\_\+latnode\+\_\+s\+::next, ps\+\_\+lattice\+\_\+s\+::nodes, ps\+\_\+lattice\+\_\+delq(), ps\+\_\+lattice\+\_\+pushq(), and ps\+\_\+lattice\+\_\+reverse\+\_\+next().
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+posterior().
+
+\mbox{\label{ps__lattice_8h_ae94a8b82335f782370faa66bb4801c72}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+reverse\+\_\+next@{ps\+\_\+lattice\+\_\+reverse\+\_\+next}}
+\index{ps\+\_\+lattice\+\_\+reverse\+\_\+next@{ps\+\_\+lattice\+\_\+reverse\+\_\+next}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+reverse\+\_\+next()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+reverse\+\_\+next (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{start }\end{DoxyParamCaption})}
+
+
+
+Get the next link in reverse traversal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to be traversed. \\
+\hline
+{\em start} & Start node (goal) of traversal. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Next link in traversal. 
+\end{DoxyReturn}
+
+
+Definition at line 1173 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latnode\+\_\+s\+::entries, ps\+\_\+latnode\+\_\+s\+::fanin, ps\+\_\+latlink\+\_\+s\+::from, ps\+\_\+lattice\+\_\+delq(), ps\+\_\+lattice\+\_\+popq(), ps\+\_\+lattice\+\_\+pushq(), and ps\+\_\+lattice\+\_\+s\+::start.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+posterior(), and ps\+\_\+lattice\+\_\+reverse\+\_\+edges().
+
+\mbox{\label{ps__lattice_8h_a997fce2eb1eaf316d463ddfb3d8395b8}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+traverse\+\_\+edges@{ps\+\_\+lattice\+\_\+traverse\+\_\+edges}}
+\index{ps\+\_\+lattice\+\_\+traverse\+\_\+edges@{ps\+\_\+lattice\+\_\+traverse\+\_\+edges}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+traverse\+\_\+edges()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+traverse\+\_\+edges (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{start,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{end }\end{DoxyParamCaption})}
+
+
+
+Start a forward traversal of edges in a word graph. 
+
+\begin{DoxyNote}{Note}
+A keen eye will notice an inconsistency in this A\+PI versus other types of iterators in Pocket\+Sphinx. The reason for this is that the traversal algorithm is much more efficient when it is able to modify the lattice structure. Therefore, to avoid giving the impression that multiple traversals are possible at once, no separate iterator structure is provided.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to be traversed. \\
+\hline
+{\em start} & Start node (source) of traversal. \\
+\hline
+{\em end} & End node (goal) of traversal. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+First link in traversal. 
+\end{DoxyReturn}
+
+
+Definition at line 1091 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+latnode\+\_\+s\+::fanin, ps\+\_\+latnode\+\_\+s\+::next, ps\+\_\+lattice\+\_\+s\+::nodes, ps\+\_\+lattice\+\_\+delq(), ps\+\_\+lattice\+\_\+pushq(), ps\+\_\+lattice\+\_\+traverse\+\_\+next(), ps\+\_\+lattice\+\_\+s\+::start, and ps\+\_\+latlink\+\_\+s\+::to.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+posterior\+\_\+prune().
+
+\mbox{\label{ps__lattice_8h_a2682f3cbbb4e6aee040fbe570ca983a9}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+traverse\+\_\+next@{ps\+\_\+lattice\+\_\+traverse\+\_\+next}}
+\index{ps\+\_\+lattice\+\_\+traverse\+\_\+next@{ps\+\_\+lattice\+\_\+traverse\+\_\+next}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+traverse\+\_\+next()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+lattice\+\_\+traverse\+\_\+next (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{\textbf{ ps\+\_\+latnode\+\_\+t} $\ast$}]{end }\end{DoxyParamCaption})}
+
+
+
+Get the next link in forward traversal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dag} & Lattice to be traversed. \\
+\hline
+{\em end} & End node (goal) of traversal. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Next link in traversal. 
+\end{DoxyReturn}
+
+
+Definition at line 1117 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::end, ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+latnode\+\_\+s\+::fanin, ps\+\_\+lattice\+\_\+delq(), ps\+\_\+lattice\+\_\+popq(), ps\+\_\+lattice\+\_\+pushq(), and ps\+\_\+latlink\+\_\+s\+::to.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+posterior\+\_\+prune(), and ps\+\_\+lattice\+\_\+traverse\+\_\+edges().
+
+\mbox{\label{ps__lattice_8h_a3f2e2b88d0aa80346cc64d2b7934b863}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+write@{ps\+\_\+lattice\+\_\+write}}
+\index{ps\+\_\+lattice\+\_\+write@{ps\+\_\+lattice\+\_\+write}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+write()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+lattice\+\_\+write (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{char const $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Write a lattice to disk. 
+
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 on failure. 
+\end{DoxyReturn}
+
+
+Definition at line 210 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+lattice\+\_\+s\+::end, ps\+\_\+latnode\+\_\+s\+::id, ps\+\_\+lattice\+\_\+s\+::lmath, ps\+\_\+lattice\+\_\+s\+::n\+\_\+frames, ps\+\_\+latnode\+\_\+s\+::next, ps\+\_\+lattice\+\_\+s\+::nodes, and ps\+\_\+lattice\+\_\+s\+::start.
+
+\mbox{\label{ps__lattice_8h_aefd25c0f49a0d70f999187a26fa2ff06}} 
+\index{ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}!ps\+\_\+lattice\+\_\+write\+\_\+htk@{ps\+\_\+lattice\+\_\+write\+\_\+htk}}
+\index{ps\+\_\+lattice\+\_\+write\+\_\+htk@{ps\+\_\+lattice\+\_\+write\+\_\+htk}!ps\+\_\+lattice.\+h@{ps\+\_\+lattice.\+h}}
+\subsubsection{ps\+\_\+lattice\+\_\+write\+\_\+htk()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+lattice\+\_\+write\+\_\+htk (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$}]{dag,  }\item[{char const $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Write a lattice to disk in H\+TK format. 
+
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 on failure. 
+\end{DoxyReturn}
+
+
+Definition at line 270 of file ps\+\_\+lattice.\+c.
+
+
+
+References ps\+\_\+latlink\+\_\+s\+::ascr, B\+E\+T\+T\+E\+R\+\_\+\+T\+H\+AN, ps\+\_\+lattice\+\_\+s\+::end, ps\+\_\+latnode\+\_\+s\+::exits, ps\+\_\+latnode\+\_\+s\+::id, ps\+\_\+latnode\+\_\+s\+::next, ps\+\_\+lattice\+\_\+s\+::nodes, ps\+\_\+latnode\+\_\+s\+::reachable, ps\+\_\+lattice\+\_\+s\+::start, ps\+\_\+latlink\+\_\+s\+::to, W\+O\+R\+S\+E\+\_\+\+T\+H\+AN, and W\+O\+R\+S\+T\+\_\+\+S\+C\+O\+RE.
+

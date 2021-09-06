@@ -1,0 +1,209 @@
+\section{include/sphinxbase/agc.h File Reference}
+\label{agc_8h}\index{include/sphinxbase/agc.\+h@{include/sphinxbase/agc.\+h}}
+
+
+routine that implements automatic gain control  
+
+
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/fe.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ agc\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure holding data for doing A\+GC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{agc_8h_a5524df49e0425cc6b1c002bc704a8103}} 
+typedef enum \textbf{ agc\+\_\+type\+\_\+e} \textbf{ agc\+\_\+type\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Types of acoustic gain control to apply to the features. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_a4998d40c67716fdea6791f8070642dc5}} 
+typedef struct \textbf{ agc\+\_\+s} \textbf{ agc\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Structure holding data for doing A\+GC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{agc_8h_aef1d2c7e32d37aa84d70c2f3675fc923}} 
+enum \textbf{ agc\+\_\+type\+\_\+e} \{ {\bfseries A\+G\+C\+\_\+\+N\+O\+NE} = 0, 
+{\bfseries A\+G\+C\+\_\+\+M\+AX}, 
+{\bfseries A\+G\+C\+\_\+\+E\+M\+AX}, 
+{\bfseries A\+G\+C\+\_\+\+N\+O\+I\+SE}
+ \}\begin{DoxyCompactList}\small\item\em Types of acoustic gain control to apply to the features. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{agc_8h_aebd0689591488378192e13f6d2646bc1}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ agc\+\_\+type\+\_\+t} \textbf{ agc\+\_\+type\+\_\+from\+\_\+str} (const char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Convert string representation (from command-\/line) to agc\+\_\+type\+\_\+t. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_a5c7ee7b19f8dcfd0c28b4dc76a283dc7}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ agc\+\_\+t} $\ast$ \textbf{ agc\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize A\+GC structure with default values. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_a6a050fc4b079be05b1946636d5d7f3aa}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+free} (\textbf{ agc\+\_\+t} $\ast$agc)
+\begin{DoxyCompactList}\small\item\em Free A\+GC structure. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+max} (\textbf{ agc\+\_\+t} $\ast$agc, mfcc\+\_\+t $\ast$$\ast$mfc, int32 n\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Apply A\+GC to the given mfc vectors (normalize all C0 mfc coefficients in the given input such that the max C0 value is 0, by subtracting the input max C0 from all). \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+emax} (\textbf{ agc\+\_\+t} $\ast$agc, mfcc\+\_\+t $\ast$$\ast$mfc, int32 n\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Apply A\+GC to the given block of M\+FC vectors. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+emax\+\_\+update} (\textbf{ agc\+\_\+t} $\ast$agc)
+\begin{DoxyCompactList}\small\item\em Update A\+GC parameters for next utterance. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_a7b439fb5d36250d09bb9d459c1e28ba5}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT float32 \textbf{ agc\+\_\+emax\+\_\+get} (\textbf{ agc\+\_\+t} $\ast$agc)
+\begin{DoxyCompactList}\small\item\em Get the current A\+GC maximum estimate. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_a4fd17f224b5d8f7bfcaa9389d11716eb}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+emax\+\_\+set} (\textbf{ agc\+\_\+t} $\ast$agc, float32 m)
+\begin{DoxyCompactList}\small\item\em Set the current A\+GC maximum estimate. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+noise} (\textbf{ agc\+\_\+t} $\ast$agc, mfcc\+\_\+t $\ast$$\ast$mfc, int32 n\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Apply A\+GC using noise threshold to the given block of M\+FC vectors. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_a77d0987174a1b3c6e8fcd63fe82f33ce}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT float32 \textbf{ agc\+\_\+get\+\_\+threshold} (\textbf{ agc\+\_\+t} $\ast$agc)
+\begin{DoxyCompactList}\small\item\em Get the current A\+GC noise threshold. \end{DoxyCompactList}\item 
+\mbox{\label{agc_8h_aaaa9e15f192c91ad64c343b7c6db6714}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ agc\+\_\+set\+\_\+threshold} (\textbf{ agc\+\_\+t} $\ast$agc, float32 threshold)
+\begin{DoxyCompactList}\small\item\em Set the current A\+GC noise threshold. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT const char $\ast$ \textbf{ agc\+\_\+type\+\_\+str} [$\,$]
+\begin{DoxyCompactList}\small\item\em String representations of agc\+\_\+type\+\_\+t values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+routine that implements automatic gain control 
+
+\begin{DoxyWarning}{Warning}
+This function may not be fully compatible with Sphinx\+Train\textquotesingle{}s family of A\+GC.
+\end{DoxyWarning}
+This implements A\+GC. 
+
+\subsection{Function Documentation}
+\mbox{\label{agc_8h_ac2cdd4c519b46824c5b28c5b769b5ecd}} 
+\index{agc.\+h@{agc.\+h}!agc\+\_\+emax@{agc\+\_\+emax}}
+\index{agc\+\_\+emax@{agc\+\_\+emax}!agc.\+h@{agc.\+h}}
+\subsubsection{agc\+\_\+emax()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void agc\+\_\+emax (\begin{DoxyParamCaption}\item[{\textbf{ agc\+\_\+t} $\ast$}]{agc,  }\item[{mfcc\+\_\+t $\ast$$\ast$}]{mfc,  }\item[{int32}]{n\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Apply A\+GC to the given block of M\+FC vectors. 
+
+Unlike \doxyref{agc\+\_\+max()}{p.}{agc_8h_a29a2a4dd80141af1c3476094c353b739} this does not require the entire utterance to be available. Call \doxyref{agc\+\_\+emax\+\_\+update()}{p.}{agc_8h_af47b6004f2f963ae0019a67450b892c2} at the end of each utterance to update the A\+GC parameters. 
+\begin{DoxyParams}{Parameters}
+{\em agc} & In\+: A\+GC structure \\
+\hline
+{\em mfc} & In/\+Out\+: mfc[f] = cepstrum vector in frame f \\
+\hline
+{\em n\+\_\+frame} & In\+: number of frames of cepstrum vectors supplied \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 142 of file agc.\+c.
+
+
+
+References agc\+\_\+s\+::max, agc\+\_\+s\+::obs\+\_\+frame, and agc\+\_\+s\+::obs\+\_\+max.
+
+\mbox{\label{agc_8h_af47b6004f2f963ae0019a67450b892c2}} 
+\index{agc.\+h@{agc.\+h}!agc\+\_\+emax\+\_\+update@{agc\+\_\+emax\+\_\+update}}
+\index{agc\+\_\+emax\+\_\+update@{agc\+\_\+emax\+\_\+update}!agc.\+h@{agc.\+h}}
+\subsubsection{agc\+\_\+emax\+\_\+update()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void agc\+\_\+emax\+\_\+update (\begin{DoxyParamCaption}\item[{\textbf{ agc\+\_\+t} $\ast$}]{agc }\end{DoxyParamCaption})}
+
+
+
+Update A\+GC parameters for next utterance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agc} & In\+: A\+GC structure \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 159 of file agc.\+c.
+
+
+
+References E\+\_\+\+I\+N\+FO, agc\+\_\+s\+::max, agc\+\_\+s\+::obs\+\_\+frame, agc\+\_\+s\+::obs\+\_\+max, and agc\+\_\+s\+::obs\+\_\+utt.
+
+\mbox{\label{agc_8h_a29a2a4dd80141af1c3476094c353b739}} 
+\index{agc.\+h@{agc.\+h}!agc\+\_\+max@{agc\+\_\+max}}
+\index{agc\+\_\+max@{agc\+\_\+max}!agc.\+h@{agc.\+h}}
+\subsubsection{agc\+\_\+max()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void agc\+\_\+max (\begin{DoxyParamCaption}\item[{\textbf{ agc\+\_\+t} $\ast$}]{agc,  }\item[{mfcc\+\_\+t $\ast$$\ast$}]{mfc,  }\item[{int32}]{n\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Apply A\+GC to the given mfc vectors (normalize all C0 mfc coefficients in the given input such that the max C0 value is 0, by subtracting the input max C0 from all). 
+
+This function operates on an entire utterance at a time. Hence, the entire utterance must be available beforehand (batchmode).
+
+Apply A\+GC to the given mfc vectors (normalize all C0 mfc coefficients in the given input such that the max C0 value is 0, by subtracting the input max C0 from all). 
+\begin{DoxyParams}{Parameters}
+{\em agc} & In\+: A\+GC structure (not used) \\
+\hline
+{\em mfc} & In/\+Out\+: mfc[f] = cepstrum vector in frame f \\
+\hline
+{\em n\+\_\+frame} & In\+: number of frames of cepstrum vectors supplied \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 109 of file agc.\+c.
+
+
+
+References E\+\_\+\+I\+N\+FO, agc\+\_\+s\+::obs\+\_\+frame, and agc\+\_\+s\+::obs\+\_\+max.
+
+\mbox{\label{agc_8h_ae65d4be1d74aea11b7e16e3777272d13}} 
+\index{agc.\+h@{agc.\+h}!agc\+\_\+noise@{agc\+\_\+noise}}
+\index{agc\+\_\+noise@{agc\+\_\+noise}!agc.\+h@{agc.\+h}}
+\subsubsection{agc\+\_\+noise()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void agc\+\_\+noise (\begin{DoxyParamCaption}\item[{\textbf{ agc\+\_\+t} $\ast$}]{agc,  }\item[{mfcc\+\_\+t $\ast$$\ast$}]{mfc,  }\item[{int32}]{n\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Apply A\+GC using noise threshold to the given block of M\+FC vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agc} & In\+: A\+GC structure \\
+\hline
+{\em mfc} & In/\+Out\+: mfc[f] = cepstrum vector in frame f \\
+\hline
+{\em n\+\_\+frame} & In\+: number of frames of cepstrum vectors supplied \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 180 of file agc.\+c.
+
+
+
+References E\+\_\+\+I\+N\+FO, and agc\+\_\+s\+::noise\+\_\+thresh.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\label{agc_8h_a6ea1b2b3d482cf08eb36084629503c80}} 
+\index{agc.\+h@{agc.\+h}!agc\+\_\+type\+\_\+str@{agc\+\_\+type\+\_\+str}}
+\index{agc\+\_\+type\+\_\+str@{agc\+\_\+type\+\_\+str}!agc.\+h@{agc.\+h}}
+\subsubsection{agc\+\_\+type\+\_\+str}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT const char$\ast$ agc\+\_\+type\+\_\+str[$\,$]}
+
+
+
+String representations of agc\+\_\+type\+\_\+t values. 
+
+
+
+Definition at line 70 of file agc.\+c.
+
+
+
+Referenced by agc\+\_\+type\+\_\+from\+\_\+str(), and feat\+\_\+init().
+

@@ -1,0 +1,124 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.2,v 1.24.4.2 2010/01/12 02:01:58 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  load a btree, and verify its split behavior. A probe is done
+#  after a few inserts.
+#
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+# set verbose_flag 1
+
+if [is_set keylen] {
+   verbose using key length $keylen already set
+} else {
+   set keylen 03
+}
+if [is_set elemlen] {
+   verbose using elem length $elemlen already set
+} else {
+   set elemlen 15
+}
+
+for {set nrec 1} {$nrec <= 8} {incr nrec} {
+    set nrec [expr {$nrec + 100} ]
+    verbose testing integer key btree  nrec= $nrec
+    sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+    sm test_int_btree $volid $nrec
+    sm commit_xct
+}
+
+set nrec 20
+
+verbose testing integer key btree
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+sm test_int_btree $volid $nrec
+sm commit_xct
+
+
+set nrec 800
+
+#
+# create index and load it up 
+#
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+set ndx [sm create_index $volid btree]
+verbose created index $ndx
+for {set i 1} {$i <= $nrec} {incr i} {
+    set key [formatlong 0 $keylen %010d $i]
+    set elem [formatlong 0 $elemlen %010d $i]
+    if {$i%20 == 0} { 
+		verbose inserting $i $key $elem
+    }
+    sm create_assoc $ndx $key $elem
+
+	if {$i > 280 && $i%50 == 0 } {
+	    echo $i ...
+		for {set j 1} {$j <= $i} {incr j} {
+			set key [formatlong 0 $keylen %010d $j]
+			set el [sm find_assoc $ndx $key ]
+			set elem [formatlong 0 $elemlen %010d $j]
+			#assert {[expr {$elem  == $el}]}
+			if {$elem != $el} {
+				verbose $elem != $el
+				assert {0}
+			}
+		}
+	}
+}
+verbose "probe:"
+for {set i 1} {$i <= $nrec} {incr i} {
+    set key [formatlong 0 $keylen %010d $i]
+    set el [sm find_assoc $ndx $key ]
+
+    set elem [formatlong 0 $elemlen %010d $i]
+    assert {expr [string compare $elem $el ] == 0}
+}
+verbose probed [expr $i - 1]
+verbose "---- successful"
+
+sm commit_xct
+verbose [sm gather_stats]
+
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+sm destroy_index $ndx
+sm commit_xct
+verbose [sm gather_stats]
+
+unset ndx nrec elem key keylen elemlen
+unset i j el
+

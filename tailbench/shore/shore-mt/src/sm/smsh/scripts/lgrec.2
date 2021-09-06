@@ -1,0 +1,202 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.2,v 1.21 1999/06/07 19:05:31 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test Large records
+#
+source $script_dir/vol.init
+set_config_info
+
+set num_rec 2
+set id_width %08d
+
+set s [format data 1]
+
+if {$page_size == 8192} {
+    set pattern_cnt 16
+} else {
+    set pattern_cnt 15
+}
+
+set pattern ".123456789"
+for {set i 0} {$i < $pattern_cnt} {incr i} {
+    set pattern $pattern$pattern
+    #verbose $pattern
+}
+
+
+###############################################
+#  create  num_rec records
+#
+sm begin_xct
+set fid [sm create_file $volid ]
+set rid(0) $null_rid
+verbose creating $num_rec 
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set rid($i) [
+	sm create_rec $fid [format $id_width $i] $page_size $pattern
+    ]
+    verbose created $i
+}
+verbose done creating $num_rec records
+sm commit_xct
+
+###############################################
+#   read inserted records
+#
+sm begin_xct
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set r [sm read_rec $rid($i) 0 0]
+    set id [format $id_width $i]
+    #verbose $i $id $r [lindex $r 2]
+    set hdr [lindex $r 2]
+    verbose $r
+    assert {expr [string compare $hdr hdr=$id] == 0}
+}
+
+verbose scanning after separate scan using pin
+sm scan_recs $fid
+
+sm commit_xct
+
+sm begin_xct
+dstats $volid
+
+###############################################
+#   append to the records
+#
+verbose APPEND hello ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm append_rec $rid($i) "hello"
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+dstats $volid
+verbose APPEND AAApattern ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    verbose $i: sm append_rec $rid($i) 
+    sm append_rec $rid($i) AAA$pattern
+    dstats $volid
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+dstats $volid
+
+###############################################
+#   update the records
+#
+verbose UPDATE 970 hello ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm update_rec $rid($i) 970 hello 
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+dstats $volid
+verbose UPDATE 1910 hello_this_is_a_long_update ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm update_rec $rid($i) 1910 hello_this_is_a_long_update 
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+dstats $volid
+verbose UPDATE 1964 aaapattern ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm update_rec $rid($i) 1944 aaa${pattern}zzz
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+dstats $volid
+
+###############################################
+#   truncate the records
+#
+dstats $volid
+
+verbose TRUNCATE 2 ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm truncate_rec $rid($i) 2 
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+dstats $volid
+verbose TRUNCATE 2000 ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm truncate_rec $rid($i) 2000
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+dstats $volid
+verbose TRUNCATE 100000 ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm truncate_rec $rid($i) 100000
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+verbose scanning after separate scan using pin
+verbose [sm scan_recs $fid]
+
+sm commit_xct
+
+###############################################
+#   delete all odd records
+verbose DESTROY all odd records
+sm begin_xct
+verbose destroying [expr $num_rec/2]
+for {set i 1} {$i <= $num_rec} {incr i; incr i} {
+    sm destroy_rec $rid($i)
+}
+sm commit_xct
+
+###############################################
+#   re-read even records
+#
+sm begin_xct
+for {set i 2} {$i <= $num_rec} {incr i; incr i} {
+    set r [sm read_rec $rid($i) 0 0]
+    set id [format $id_width $i]
+    verbose $i $id $r
+    set hdr [lindex $r 2]
+    set body [lindex $r 4]
+    assert {expr [string compare $hdr hdr=$id] == 0}
+    #  after trunc, etc, body should have changed
+    assert {expr [string compare $body $pattern] != 0}
+    # see lgrec.1 for proper way to check the object
+}
+verbose trying an odd record -- THIS SHOULD GENERATE AN ERROR
+catch {[sm read_rec $rid(1) 0 0]} result
+verbose $result
+
+verbose trying an even record
+verbose [sm read_rec $rid(2) 0 0]
+
+sm commit_xct
+
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct
+
+unset r pattern_cnt pattern rid s id_width
+unset result id fid hdr num_rec i body
+
+return "lgrec.2 done"
+

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structlongest__s" kind="struct" language="C++" prot="public">
+    <compoundname>longest_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlongest__s_1a884daf44d1a451ede576b92237164ba4" prot="public" static="no" mutable="no">
+        <type><ref refid="structbase__s" kindref="compound">base_t</ref></type>
+        <definition>base_t longest_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="75" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlongest__s_1aa4d7af640b9e150043b6d67e1d979b4f" prot="public" static="no" mutable="no">
+        <type>uint8</type>
+        <definition>uint8 longest_s::quant_bits</definition>
+        <argsstring></argsstring>
+        <name>quant_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="76" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="179">
+        <label>longest_s</label>
+        <link refid="structlongest__s"/>
+        <childnode refid="180" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+      <node id="180">
+        <label>base_s</label>
+        <link refid="structbase__s"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/lm_trie.h" line="74" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="74" bodyend="77"/>
+    <listofallmembers>
+      <member refid="structlongest__s_1a884daf44d1a451ede576b92237164ba4" prot="public" virt="non-virtual"><scope>longest_s</scope><name>base</name></member>
+      <member refid="structlongest__s_1aa4d7af640b9e150043b6d67e1d979b4f" prot="public" virt="non-virtual"><scope>longest_s</scope><name>quant_bits</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

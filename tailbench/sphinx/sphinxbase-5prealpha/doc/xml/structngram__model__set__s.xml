@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structngram__model__set__s" kind="struct" language="C++" prot="public">
+    <compoundname>ngram_model_set_s</compoundname>
+    <includes refid="ngram__model__set_8h" local="no">ngram_model_set.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structngram__model__set__s_1a3b88f17aa148ceac4f32dd4cbf5f4f81" prot="public" static="no" mutable="no">
+        <type><ref refid="ngram__model_8h_1afaaf0c00e20056d97efcd97e4cae4ea7" kindref="member">ngram_model_t</ref></type>
+        <definition>ngram_model_t ngram_model_set_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+<para>Base ngram_model_t structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="51" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1a6c28858d5631a9c9dbc7b2c9583f5c5a" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ngram_model_set_s::n_models</definition>
+        <argsstring></argsstring>
+        <name>n_models</name>
+        <briefdescription>
+<para>Number of models in this set. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="53" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="53" bodyend="-1"/>
+        <referencedby refid="ngram__model__set_8c_1a13893e41e56962f6f237aa1305337b7a" compoundref="ngram__model__set_8c" startline="388" endline="395">ngram_model_set_iter_next</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1a031e7d7dcf1667f69e1cb980f45623cb" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ngram_model_set_s::cur</definition>
+        <argsstring></argsstring>
+        <name>cur</name>
+        <briefdescription>
+<para>Currently selected model, or -1 for none. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="54" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1a862d4c4feb5a903101f4a0fdc5ba8a62" prot="public" static="no" mutable="no">
+        <type><ref refid="ngram__model_8h_1afaaf0c00e20056d97efcd97e4cae4ea7" kindref="member">ngram_model_t</ref> **</type>
+        <definition>ngram_model_t** ngram_model_set_s::lms</definition>
+        <argsstring></argsstring>
+        <name>lms</name>
+        <briefdescription>
+<para>Language models in this set. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="55" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="55" bodyend="-1"/>
+        <referencedby refid="ngram__model__set_8c_1abec0455e59945b910d86c2f825ab0894" compoundref="ngram__model__set_8c" startline="404" endline="410">ngram_model_set_iter_model</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1aff5e13c45decde4c5bf30d8aa2b1c7d9" prot="public" static="no" mutable="no">
+        <type>char **</type>
+        <definition>char** ngram_model_set_s::names</definition>
+        <argsstring></argsstring>
+        <name>names</name>
+        <briefdescription>
+<para>Names for language models. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="56" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="56" bodyend="-1"/>
+        <referencedby refid="ngram__model__set_8c_1abec0455e59945b910d86c2f825ab0894" compoundref="ngram__model__set_8c" startline="404" endline="410">ngram_model_set_iter_model</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1a11068bb0029c788c506bec4507dd6d23" prot="public" static="no" mutable="no">
+        <type>int32 *</type>
+        <definition>int32* ngram_model_set_s::lweights</definition>
+        <argsstring></argsstring>
+        <name>lweights</name>
+        <briefdescription>
+<para>Log interpolation weights. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="57" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1addebde44e2b7aa22dd82032c316fc962" prot="public" static="no" mutable="no">
+        <type>int32 **</type>
+        <definition>int32** ngram_model_set_s::widmap</definition>
+        <argsstring></argsstring>
+        <name>widmap</name>
+        <briefdescription>
+<para>Word ID mapping for submodels. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="58" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__set__s_1af34ca232338c2d8c7dc8d13869ac09fd" prot="public" static="no" mutable="no">
+        <type>int32 *</type>
+        <definition>int32* ngram_model_set_s::maphist</definition>
+        <argsstring></argsstring>
+        <name>maphist</name>
+        <briefdescription>
+<para>Word ID mapping for N-Gram history. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_set.h" line="59" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Subclass of ngram_model for grouping language models. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="233">
+        <label>ngram_funcs_s</label>
+        <link refid="structngram__funcs__s"/>
+      </node>
+      <node id="226">
+        <label>ngram_model_set_s</label>
+        <link refid="structngram__model__set__s"/>
+        <childnode refid="227" relation="usage">
+          <edgelabel>base</edgelabel>
+          <edgelabel>lms</edgelabel>
+        </childnode>
+      </node>
+      <node id="235">
+        <label>ngram_class_s::ngram_hash_s</label>
+        <link refid="structngram__class__s_1_1ngram__hash__s"/>
+      </node>
+      <node id="229">
+        <label>hash_entry_s</label>
+        <link refid="structhash__entry__s"/>
+        <childnode refid="229" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="228">
+        <label>hash_table_s</label>
+        <link refid="structhash__table__s"/>
+        <childnode refid="229" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+      </node>
+      <node id="234">
+        <label>ngram_class_s</label>
+        <link refid="structngram__class__s"/>
+        <childnode refid="235" relation="usage">
+          <edgelabel>nword_hash</edgelabel>
+        </childnode>
+      </node>
+      <node id="230">
+        <label>logmath_s</label>
+        <link refid="structlogmath__s"/>
+        <childnode refid="231" relation="usage">
+          <edgelabel>t</edgelabel>
+        </childnode>
+        <childnode refid="232" relation="usage">
+          <edgelabel>filemap</edgelabel>
+        </childnode>
+      </node>
+      <node id="231">
+        <label>logadd_s</label>
+        <link refid="structlogadd__s"/>
+      </node>
+      <node id="232">
+        <label>mmio_file_s</label>
+        <link refid="structmmio__file__s"/>
+      </node>
+      <node id="227">
+        <label>ngram_model_s</label>
+        <link refid="structngram__model__s"/>
+        <childnode refid="228" relation="usage">
+          <edgelabel>wid</edgelabel>
+        </childnode>
+        <childnode refid="230" relation="usage">
+          <edgelabel>lmath</edgelabel>
+        </childnode>
+        <childnode refid="233" relation="usage">
+          <edgelabel>funcs</edgelabel>
+        </childnode>
+        <childnode refid="234" relation="usage">
+          <edgelabel>classes</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/ngram_model_set.h" line="50" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_set.h" bodystart="50" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structngram__model__set__s_1a3b88f17aa148ceac4f32dd4cbf5f4f81" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>base</name></member>
+      <member refid="structngram__model__set__s_1a031e7d7dcf1667f69e1cb980f45623cb" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>cur</name></member>
+      <member refid="structngram__model__set__s_1a862d4c4feb5a903101f4a0fdc5ba8a62" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>lms</name></member>
+      <member refid="structngram__model__set__s_1a11068bb0029c788c506bec4507dd6d23" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>lweights</name></member>
+      <member refid="structngram__model__set__s_1af34ca232338c2d8c7dc8d13869ac09fd" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>maphist</name></member>
+      <member refid="structngram__model__set__s_1a6c28858d5631a9c9dbc7b2c9583f5c5a" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>n_models</name></member>
+      <member refid="structngram__model__set__s_1aff5e13c45decde4c5bf30d8aa2b1c7d9" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>names</name></member>
+      <member refid="structngram__model__set__s_1addebde44e2b7aa22dd82032c316fc962" prot="public" virt="non-virtual"><scope>ngram_model_set_s</scope><name>widmap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

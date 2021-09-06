@@ -1,0 +1,260 @@
+\section{sphinx\+\_\+wave2feat\+\_\+s Struct Reference}
+\label{structsphinx__wave2feat__s}\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ refcount}
+\begin{DoxyCompactList}\small\item\em Reference count. \end{DoxyCompactList}\item 
+\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ config}
+\begin{DoxyCompactList}\small\item\em Configuration parameters. \end{DoxyCompactList}\item 
+\textbf{ fe\+\_\+t} $\ast$ \textbf{ fe}
+\begin{DoxyCompactList}\small\item\em Front end object. \end{DoxyCompactList}\item 
+char $\ast$ \textbf{ infile}
+\begin{DoxyCompactList}\small\item\em Path to input file. \end{DoxyCompactList}\item 
+char $\ast$ \textbf{ outfile}
+\begin{DoxyCompactList}\small\item\em Path to output file. \end{DoxyCompactList}\item 
+F\+I\+LE $\ast$ \textbf{ infh}
+\begin{DoxyCompactList}\small\item\em Input file handle. \end{DoxyCompactList}\item 
+F\+I\+LE $\ast$ \textbf{ outfh}
+\begin{DoxyCompactList}\small\item\em Output file handle. \end{DoxyCompactList}\item 
+short $\ast$ \textbf{ audio}
+\begin{DoxyCompactList}\small\item\em Audio buffer. \end{DoxyCompactList}\item 
+mfcc\+\_\+t $\ast$$\ast$ \textbf{ feat}
+\begin{DoxyCompactList}\small\item\em Feature buffer. \end{DoxyCompactList}\item 
+int \textbf{ blocksize}
+\begin{DoxyCompactList}\small\item\em Size of audio buffer. \end{DoxyCompactList}\item 
+int \textbf{ featsize}
+\begin{DoxyCompactList}\small\item\em Size of feature buffer. \end{DoxyCompactList}\item 
+int \textbf{ veclen}
+\begin{DoxyCompactList}\small\item\em Length of each output vector. \end{DoxyCompactList}\item 
+int \textbf{ in\+\_\+veclen}
+\begin{DoxyCompactList}\small\item\em Length of each input vector (for cep$<$-\/$>$spec). \end{DoxyCompactList}\item 
+int \textbf{ byteswap}
+\begin{DoxyCompactList}\small\item\em Whether byteswapping is necessary. \end{DoxyCompactList}\item 
+\textbf{ output\+\_\+type\+\_\+t} const  $\ast$ \textbf{ ot}
+\begin{DoxyCompactList}\small\item\em Output type object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 72 of file sphinx\+\_\+fe.\+c.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structsphinx__wave2feat__s_a776c72734abe1e34162a5ee347f533e5}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!audio@{audio}}
+\index{audio@{audio}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{audio}
+{\footnotesize\ttfamily short$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::audio}
+
+
+
+Audio buffer. 
+
+
+
+Definition at line 80 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_aff2646e41780ceb9dcd234c719fd25f1}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!blocksize@{blocksize}}
+\index{blocksize@{blocksize}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{blocksize}
+{\footnotesize\ttfamily int sphinx\+\_\+wave2feat\+\_\+s\+::blocksize}
+
+
+
+Size of audio buffer. 
+
+
+
+Definition at line 82 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_a030717e2736fd04d1a281f51e5db2799}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!byteswap@{byteswap}}
+\index{byteswap@{byteswap}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{byteswap}
+{\footnotesize\ttfamily int sphinx\+\_\+wave2feat\+\_\+s\+::byteswap}
+
+
+
+Whether byteswapping is necessary. 
+
+
+
+Definition at line 86 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_a484d308befbde315664da8520ebc410d}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!config@{config}}
+\index{config@{config}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{config}
+{\footnotesize\ttfamily \textbf{ cmd\+\_\+ln\+\_\+t}$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::config}
+
+
+
+Configuration parameters. 
+
+
+
+Definition at line 74 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_a5882f148fe200890855304b46f00ee4b}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!fe@{fe}}
+\index{fe@{fe}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{fe}
+{\footnotesize\ttfamily \textbf{ fe\+\_\+t}$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::fe}
+
+
+
+Front end object. 
+
+
+
+Definition at line 75 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_ab43d8d5721133bcaf02da23c0bbb58ae}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!feat@{feat}}
+\index{feat@{feat}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{feat}
+{\footnotesize\ttfamily mfcc\+\_\+t$\ast$$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::feat}
+
+
+
+Feature buffer. 
+
+
+
+Definition at line 81 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_ac041852de738a42752be67cceb16660c}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!featsize@{featsize}}
+\index{featsize@{featsize}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{featsize}
+{\footnotesize\ttfamily int sphinx\+\_\+wave2feat\+\_\+s\+::featsize}
+
+
+
+Size of feature buffer. 
+
+
+
+Definition at line 83 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_a3410a9e0c05c0057f31452550fb5380a}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!in\+\_\+veclen@{in\+\_\+veclen}}
+\index{in\+\_\+veclen@{in\+\_\+veclen}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{in\+\_\+veclen}
+{\footnotesize\ttfamily int sphinx\+\_\+wave2feat\+\_\+s\+::in\+\_\+veclen}
+
+
+
+Length of each input vector (for cep$<$-\/$>$spec). 
+
+
+
+Definition at line 85 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_ad86834e597d4677aed93e7c06cebccb7}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!infh@{infh}}
+\index{infh@{infh}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{infh}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::infh}
+
+
+
+Input file handle. 
+
+
+
+Definition at line 78 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_a6d4d1b1be4e3a3c1de82943e9e6fa65c}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!infile@{infile}}
+\index{infile@{infile}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{infile}
+{\footnotesize\ttfamily char$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::infile}
+
+
+
+Path to input file. 
+
+
+
+Definition at line 76 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_a929e05e041ad922f6a2e35637a98c917}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!ot@{ot}}
+\index{ot@{ot}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{ot}
+{\footnotesize\ttfamily \textbf{ output\+\_\+type\+\_\+t} const$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::ot}
+
+
+
+Output type object. 
+
+
+
+Definition at line 87 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_ad7340fab24fb182cbff2c73fd1fb3671}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!outfh@{outfh}}
+\index{outfh@{outfh}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{outfh}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::outfh}
+
+
+
+Output file handle. 
+
+
+
+Definition at line 79 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_aa50405dc75074933912da57295ec5fbf}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!outfile@{outfile}}
+\index{outfile@{outfile}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{outfile}
+{\footnotesize\ttfamily char$\ast$ sphinx\+\_\+wave2feat\+\_\+s\+::outfile}
+
+
+
+Path to output file. 
+
+
+
+Definition at line 77 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_ae9b2fc4bfa6a3adbf2ee5a71796cdb51}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!refcount@{refcount}}
+\index{refcount@{refcount}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{refcount}
+{\footnotesize\ttfamily int sphinx\+\_\+wave2feat\+\_\+s\+::refcount}
+
+
+
+Reference count. 
+
+
+
+Definition at line 73 of file sphinx\+\_\+fe.\+c.
+
+\mbox{\label{structsphinx__wave2feat__s_ad71e5fca7c13ae0258bcee81a6f1fa89}} 
+\index{sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}!veclen@{veclen}}
+\index{veclen@{veclen}!sphinx\+\_\+wave2feat\+\_\+s@{sphinx\+\_\+wave2feat\+\_\+s}}
+\subsubsection{veclen}
+{\footnotesize\ttfamily int sphinx\+\_\+wave2feat\+\_\+s\+::veclen}
+
+
+
+Length of each output vector. 
+
+
+
+Definition at line 84 of file sphinx\+\_\+fe.\+c.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/sphinx\+\_\+fe/sphinx\+\_\+fe.\+c\end{DoxyCompactItemize}

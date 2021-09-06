@@ -1,0 +1,99 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.6,v 1.4.4.3 2010/01/12 02:02:02 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test file pin_i::append_rec running out of space
+#       WARNING: takes a long time with a large volume
+#
+source $script_dir/vol.init
+
+echo WARNING: this script takes a long time on a large volume
+
+# clear stats
+set b1 zvec[expr { ${max_small_rec} } ]
+set buffer zvec[expr { ${page_size} * 1} ]
+sm begin_xct
+    set f1 [sm create_file $volid]
+    set r(0) [sm create_rec $f1 h 11 $b1]
+    set r(1) [sm create_rec $f1 h 11 $b1]
+
+    # pin the record and cause it to be converted to a large
+    # record.  Keep appending until we run out of space on the
+    # volume.  If we alternate this with two records, we should
+    # be able to force them to become non-chunk implementations
+    # of large records.
+
+    set pin [sm pin_create]
+    set toggle 0
+	for {set i 1} {$i > 0} {incr i} {
+		if [expr { ($i/100)*100 == $i}] {
+			verbose $i
+		}
+		sm pin_pin $pin $r($toggle) 0
+		set impl($toggle) [sm pin_large_impl $pin]
+		if [catch {sm pin_append_rec $pin $buffer} err] {
+			verbose expected ERROR: $err
+			break
+		}
+		set newimpl [sm pin_large_impl $pin]
+		if { $impl($toggle) != $newimpl } {
+			verbose $r($toggle) switched implementations:
+			verbose from $impl($toggle) to $newimpl
+			set q [sm read_rec $r($toggle) 0 0]
+			set sizes [lindex $q 1]
+			set sizes [split $sizes .]
+			set sizes [lindex $sizes 2]
+			verbose size of record is $sizes
+		}
+
+		sm pin_unpin $pin
+		set toggle [expr {1 - $toggle}]
+	}
+    verbose  appended $i (* 2) pages
+    if [expr {[error_is $err E_OUTOFSPACE] == 0} ] {
+        echo ERROR: unexpected error  $err;  expected E_OUTOFSPACE
+    }
+    sm pin_destroy $pin
+	verbose SPACE BEFORE DESTROY
+	dstatsnoaudit $volid 
+    sm destroy_file $f1
+
+# we should be able to commit this xct after getting the out-of-space
+# error ONLY because we destroyed the file.
+sm commit_xct
+
+
+verbose SPACE AFTER DESTROY
+dstats $volid
+
+unset pin i r q impl toggle
+unset buffer f1 err b1
+unset newimpl 
+if [is_set sizes] { unset sizes }
+

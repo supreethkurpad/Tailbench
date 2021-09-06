@@ -1,0 +1,95 @@
+<std-header style='plain' orig-src='shore'>
+
+ $Id: README,v 1.12 2010/06/08 22:28:24 nhall Exp $
+
+SHORE -- Scalable Heterogeneous Object REpository
+
+Copyright (c) 1994-99 Computer Sciences Department, University of
+                      Wisconsin -- Madison
+All Rights Reserved.
+
+Permission to use, copy, modify and distribute this software and its
+documentation is hereby granted, provided that both the copyright
+notice and this permission notice appear in all copies of the
+software, derivative works or modified versions, and any portions
+thereof, and that both notices appear in supporting documentation.
+
+THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+"AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+
+This software was developed with support by the Advanced Research
+Project Agency, ARPA order number 018 (formerly 8230), monitored by
+the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+Further funding for this work was provided by DARPA through
+Rome Research Laboratory Contract No. F30602-97-2-0247.
+
+  -- do not edit anything above this line --   </std-header>
+
+The smsh program is a shell for testing the Shore Storage Manager.
+
+smsh has two "configuration" files.
+The first .shoreconfig (same name as the one for the shore server)
+where all options are set (previously they were set in .smshrc).
+All option lines now have the form:
+        smsh.server.executablename.optionname
+smsh first looks for a .shoreconfig file in your home directory
+and then in the local directory.  An example file is in
+.shoreconfig.example.
+
+smsh has a new option called smsh_smshrc which points to an rc file
+to be read.  Normally this is set to ~/.smshrc.  The .smshrc file
+is interpreted by Tcl.  It's primary purpose is to describe
+devices and volumes used by the scripts.  An example is in 
+.smshrc.example.  
+
+
+*********************************************************************
+
+You can run smsh on a single script at at time thus:
+
+with physical oids:
+	smsh -f ../scripts/btree.1 
+
+(obsolete) with logical oids:
+	smsh -lf ../scripts/lid.1
+
+to run a test that still reproduces a bug:
+	smsh -f ../scripts/bugs/xxxx
+
+to run with simulated preemptive thread switches (switch on each
+    page latch, unlatch): Build with USE_SSMTEST, then do 
+	smsh -yf ../scripts/xxxx
+
+
+*********************************************************************
+
+You can run smsh on groups of scripts thus:
+
+   --normal "regression" testing:
+	smsh -f ../scripts/all
+
+   --some performance tests
+	smsh -f ../scripts/all.perf
+
+   --some to find out which tests need to unset tcl variables:
+	smsh -f ../scripts/cleanup.all
+	then look at the file called "garbage_variables" ...
+
+   --to run (presumably) forever in pseudo-random order...
+	smsh -f ../scripts/random.all
+
+*********************************************************************
+
+To get a better testing of crash recovery, use the shell scripts
+runsmsh.  It forks off an smsh that runs random.all, and it also
+kills (with a signal) the smsh at pseudo-random times. 
+
+*********************************************************************
+
+To test crash recovery where the time/place of the crash is 
+predetermined, use runtests.pl.
+
+*********************************************************************
+

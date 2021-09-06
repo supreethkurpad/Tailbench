@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="uniondmp__weight__t" kind="union" language="C++" prot="public">
+    <compoundname>dmp_weight_t</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="uniondmp__weight__t_1ac41dfac7e4cf5085a9266fd3989d6c2b" prot="public" static="no" mutable="no">
+        <type>float32</type>
+        <definition>float32 dmp_weight_t::f</definition>
+        <argsstring></argsstring>
+        <name>f</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="58" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="uniondmp__weight__t_1ae13454a86a50d88b50e0e23c6dcea109" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 dmp_weight_t::l</definition>
+        <argsstring></argsstring>
+        <name>l</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="59" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/lm/ngrams_raw.h" line="57" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="57" bodyend="60"/>
+    <listofallmembers>
+      <member refid="uniondmp__weight__t_1ac41dfac7e4cf5085a9266fd3989d6c2b" prot="public" virt="non-virtual"><scope>dmp_weight_t</scope><name>f</name></member>
+      <member refid="uniondmp__weight__t_1ae13454a86a50d88b50e0e23c6dcea109" prot="public" virt="non-virtual"><scope>dmp_weight_t</scope><name>l</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

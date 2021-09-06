@@ -1,0 +1,203 @@
+#!/bin/ksh 
+
+# <std-header style='shell' orig-src='shore'>
+#
+#  $Id: testall,v 1.6 2010/06/18 21:22:59 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+function execute  {
+# make sure "." is in the path:
+    OLD_PATH=$PATH
+    PATH=$PATH:.
+
+    if [[ -z $3 ]]; then
+        # no comparison file
+		echo >> /dev/null
+    elif [[ -a $3 ]]; then
+		echo >> /dev/null
+    else
+        # given argument doesn't exist
+        print "Error: comparison file $3 doesn't exist" 
+        exit -1
+    fi
+
+    print -n "$1\t--> running --> "
+    print "running $1" >> $2
+
+
+    if [[ -n $3 ]]; then
+        # already checked that comparison file exists above
+        of=/tmp/$$
+        if $1 1> $of 2> $of.err ; then
+            if diff $of $3 >> $2; then
+                print "ok"
+            else
+                print "diff failed; results in " $of " and " $of.err 
+                print "  expected results in " $3
+                print "  All diffs in " $2
+                exit 1
+            fi
+        else
+            print "failed to execute $1 ( $? )"
+            exit 1
+        fi
+        cat $of >> $2
+        rm $of
+    elif $1 >> $2 2>&1; then
+        print "ok"
+    else
+        print "failed to execute $1 ( $? )"
+        exit 1
+    fi
+    PATH=$OLD_PATH
+}
+
+function file_scan_test  {
+    echo "{---------------------------------------FILE SCAN TEST -----"
+    echo creating log directory
+    mkdir -p ./log
+
+    echo creating volume  directory
+    mkdir -p ./volumes
+
+    echo blowing away log and volumes
+    /bin/rm -f ./log/* ./volumes/*
+
+    echo "------------------------------------------create------------"
+    echo creating...
+    rm -f $1-i-out
+    touch $1-i-out
+    execute "./$1 -i $2" $1-i-out
+    echo created. Resulting output is in $1-i-out
+    ## cat $1-i-out
+    ## echo 
+    ## echo 
+    ## echo 
+
+    echo "------------------------------------------scan--------------"
+    echo scanning ...
+    rm -f $1-out
+    touch $1-out
+    execute "./$1 $3" $1-out
+    echo scanned. Resulting output: is in $1-i-out
+    ## cat $1-out
+    ## echo 
+    ## echo 
+    echo 
+
+    echo "------------------------------------------cleanup------------"
+    echo removing log dir and volume dir after test
+    /bin/rm -rf ./log ./volumes
+    echo "------------------------------------------------------------}"
+}
+
+
+numrecs=55
+numthreads=6
+
+echo "---------------------------------------------------------"
+echo "running create_rec test"
+echo creating log directory
+mkdir -p ./log
+echo creating volume  directory
+mkdir -p ./volumes
+echo blowing away log and volumes
+/bin/rm -f ./log/* ./volumes/* tmp-out
+##
+## create_rec tests cannot diff with -out file because
+## numbers will differ each time.  We just stuff the results
+## into create_rec-out
+execute "create_rec -i " create_rec-out
+
+echo "---------------------------------------------------------"
+##
+## sort_stream test cannot diff with -out file because
+## numbers will differ each time.  We just stuff the results
+## into sort_stream-out
+execute "sort_stream -i " sort_stream-i-out
+execute "sort_stream " sort_stream-out
+
+echo "---------------------------------------------------------"
+echo "running lockid_test "
+execute "lockid_test " tmp-out lockid_test-out.`uname -m`
+
+echo "---------------------------------------------------------"
+echo "running lock_cache_test "
+# this cannot use a results file b/c it's hash-dependent
+# both what fits and the order in which things appear.
+execute "lock_cache_test" tmp-out  
+
+echo "---------------------------------------------------------"
+echo "running startstop"
+execute "startstop" tmp-out
+
+echo "---------------------------------------------------------"
+echo "running file_scan test"
+file_scan_test file_scan "-n $numrecs" "-n $numrecs"
+echo "---------------------------------------------------------"
+echo "running file_scan_many test"
+file_scan_test file_scan_many "-t $numthreads -A -n $numrecs" "-t $numthreads"
+
+echo "---------------------------------------------------------"
+echo "running hash table tests"
+echo "NOTE : These hash table test can fail with diffs in"
+echo "       counters (based on build optimization level)"
+echo "---------------------------------------------------------"
+execute "htab -n 500 " tmp-out htab-n500-out
+# We are seeing slightly different performance statistics
+# here so we will remove the comparison with output file
+# for the moment.
+# execute "htab -n 10000 -R" tmp-out htab-n10000-R-out
+# execute "htab -n 100000 -R" tmp-out htab-n100000-R-out
+execute "htab -n 10000 -R" tmp-out  
+execute "htab -n 100000 -R" tmp-out 
+
+
+##
+## log_exceed -i : run out of log space; show what happens
+## with the callbacks.
+## echo "---------------------------------------------------------"
+## echo "running log_exceed test"
+## echo creating log directory
+## mkdir -p ./log
+## echo creating volume  directory
+## mkdir -p ./volumes
+## echo blowing away log and volumes
+## /bin/rm -f ./log/* ./volumes/* tmp-out
+## execute "log_exceed " log_exceed-out
+
+
+echo "---------------------------------------------------------"
+echo "running multi-rooted btrees tests"
+execute "multi_rooted_btrees_test -i " multi-rooted-out
+
+echo "---------------------------------------------------------"
+echo "running multi-rooted btrees tests with second design"
+execute "multi_rooted_btrees_test2 -i " multi-rooted-out2
+
+echo "---------------------------------------------------------"
+echo "running multi-rooted btrees tests with third design"
+execute "multi_rooted_btrees_test3 -i " multi-rooted-out3

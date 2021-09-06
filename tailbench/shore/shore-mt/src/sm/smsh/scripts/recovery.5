@@ -1,0 +1,139 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: recovery.5,v 1.2 2010/05/26 01:21:13 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+#
+#   This script was created to test gnats 77 of shore-mt, which
+#   turned out to be a problem with FRJ's hack to avoid freeing a
+#   page (on rollback) that had a use by another tx than the one that
+#   created the  page and rolled back.
+#   Unfortunately that hack has several problems with it, one of which
+#   is that it requires that the xct be in the xct table for redo and
+#   undo of page alloc/free log records.  This script demonstrates that
+#   problem.  Unclean restart after the abort of the btree create
+#   triggers the problem. 
+
+#
+#
+source $script_dir/vol.init
+
+if { $logging == 0 } {
+    echo "No logging: script not run."
+} else {
+
+# need enough records to use at least 2 pages.
+# The problem with the rtrees is that I don't know if
+# they ever compact themselves.
+set nrec 1500
+set u "2.-1500.-1500.1500.1500"
+
+set do_rtree 1
+set do_btree 1
+
+if {$do_rtree} {
+	#
+	# create rtree 
+	#
+	sm begin_xct
+	set ndx [sm create_md_index $volid 2 rtree]
+	verbose created rtree $ndx
+	sm commit_xct
+
+	verbose "DISK BEFORE LOAD"
+	dstats $volid
+
+	sm begin_xct
+	#
+	# load and abort 
+	#
+	for {set i 1} {$i <= $nrec} {incr i} {
+		set box($i) [sm next_box $u]
+	#    verbose inserting $box($i) $i
+		sm create_md_assoc $ndx $box($i) $i
+	}
+	verbose inserted $nrec entries
+	sm rtree_stats $ndx
+
+	verbose "DISK BEFORE ABORT"
+	dstats $volid
+	sm abort_xct
+	verbose "DISK AFTER ABORT"
+	dstats $volid
+}
+
+set nrec 150
+if {$do_btree} {
+	#
+	# create btree index 
+	#
+	verbose Create index
+	sm begin_xct
+	set ndx [sm create_index $volid btree]
+	verbose created index $ndx
+	sm commit_xct
+
+if {1} {
+	verbose "DISK BEFORE LOAD"
+	dstats $volid
+
+
+	sm begin_xct
+	#
+	# load, abort
+	#
+	verbose load, abort
+	for {set i 1} {$i <= $nrec} {incr i} {
+		set key [format $short_form $i]
+		for {set j 1} {$j <= $nrec} {incr j}  {
+			verbose2 inserting $i.$j
+			if [catch {sm create_assoc $ndx $key [format $short_form $j]} err] {
+			echo UNEXPECED ERROR : $err
+			break
+			}
+		}
+		if {$err == "E_OUTOFSPACE"} {
+			break
+		}
+
+	}
+
+	verbose "DISK BEFORE ABORT"
+	dstats $volid
+	verbose sm abort_xct
+	sm abort_xct
+	verbose "DISK AFTER ABORT"
+	dstats $volid
+}
+}
+
+verbose RESTARTING unclean
+sm restart false 
+verbose RESTARTING clean
+sm restart true
+}
+
+source $script_dir/vol.init

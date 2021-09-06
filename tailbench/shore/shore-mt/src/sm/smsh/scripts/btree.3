@@ -1,0 +1,75 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.3,v 1.33 2000/02/22 03:53:33 bolo Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  test btree bulk load
+#
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+
+set nrec 120
+
+set typelist { u2 u4 i2 i4 b*1000 f4 f8 u1 i1 }
+set typelist { u2 u4 i2 i4 b*1000 f4 f8 u1 i1 i8 u8 }
+set propertylist { regular insert_file load_file }
+
+set len1 [llength $typelist]
+set len2 [llength $propertylist]
+
+sm gather_stats reset
+for {set k 0} {$k < $len1} {incr k} {
+    for {set l 0} {$l < $len2} {incr l} {
+	set ktype [lindex $typelist $k] 
+	set property [lindex $propertylist $l] 
+	verbose "---- testing -- $ktype ; property -- $property"
+
+	source $script_dir/btree.3a
+	verbose [sm gather_stats reset]
+    }
+}
+
+
+if { 0 } {
+    # BEGIN test b1
+    # testing characters is a bit different since we
+    # don't want duplicates in this test
+    set nrec 9
+    set ktype b1
+    verbose "---- testing -- $ktype"
+    source $script_dir/btree.3a
+    # END test b1
+}
+
+
+unset k l ktype property len1 len2 typelist nrec propertylist
+

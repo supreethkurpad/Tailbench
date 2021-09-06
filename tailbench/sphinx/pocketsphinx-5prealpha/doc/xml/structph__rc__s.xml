@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structph__rc__s" kind="struct" language="C++" prot="public">
+    <compoundname>ph_rc_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structph__rc__s_1ab0f0852e254c04a1cb11de805b698733" prot="public" static="no" mutable="no">
+        <type>int16</type>
+        <definition>int16 ph_rc_s::rc</definition>
+        <argsstring></argsstring>
+        <name>rc</name>
+        <briefdescription>
+<para>Specific rc for a parent &lt;wpos,ci,lc&gt; </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/mdef.h" line="113" column="1" bodyfile="src/libpocketsphinx/mdef.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structph__rc__s_1a9762d0f7b4b9f284fd2b3ff735b4256b" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ph_rc_s::pid</definition>
+        <argsstring></argsstring>
+        <name>pid</name>
+        <briefdescription>
+<para>Triphone id for above rc instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/mdef.h" line="114" column="1" bodyfile="src/libpocketsphinx/mdef.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structph__rc__s_1ae05aead721c5cfdd27ac90378bb80f3c" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structph__rc__s" kindref="compound">ph_rc_s</ref> *</type>
+        <definition>struct ph_rc_s* ph_rc_s::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+<para>Next rc entry for same parent &lt;wpos,ci,lc&gt; </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/mdef.h" line="115" column="1" bodyfile="src/libpocketsphinx/mdef.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="357">
+        <label>ph_rc_s</label>
+        <link refid="structph__rc__s"/>
+        <childnode refid="357" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/mdef.h" line="112" column="1" bodyfile="src/libpocketsphinx/mdef.h" bodystart="112" bodyend="116"/>
+    <listofallmembers>
+      <member refid="structph__rc__s_1ae05aead721c5cfdd27ac90378bb80f3c" prot="public" virt="non-virtual"><scope>ph_rc_s</scope><name>next</name></member>
+      <member refid="structph__rc__s_1a9762d0f7b4b9f284fd2b3ff735b4256b" prot="public" virt="non-virtual"><scope>ph_rc_s</scope><name>pid</name></member>
+      <member refid="structph__rc__s_1ab0f0852e254c04a1cb11de805b698733" prot="public" virt="non-virtual"><scope>ph_rc_s</scope><name>rc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

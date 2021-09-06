@@ -1,0 +1,570 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="ngram__model__internal_8h" kind="file" language="C++">
+    <compoundname>ngram_model_internal.h</compoundname>
+    <includes refid="ngram__model_8h" local="yes">sphinxbase/ngram_model.h</includes>
+    <includes refid="hash__table_8h" local="yes">sphinxbase/hash_table.h</includes>
+    <includedby refid="lm__trie_8h" local="yes">src/libsphinxbase/lm/lm_trie.h</includedby>
+    <includedby refid="lm__trie__quant_8c" local="yes">src/libsphinxbase/lm/lm_trie_quant.c</includedby>
+    <includedby refid="ngram__model_8c" local="yes">src/libsphinxbase/lm/ngram_model.c</includedby>
+    <includedby refid="ngram__model__trie_8h" local="yes">src/libsphinxbase/lm/ngram_model_trie.h</includedby>
+    <includedby refid="ngram__model__set_8h" local="yes">src/libsphinxbase/lm/ngram_model_set.h</includedby>
+    <includedby refid="ngrams__raw_8c" local="yes">src/libsphinxbase/lm/ngrams_raw.c</includedby>
+    <incdepgraph>
+      <node id="1908">
+        <label>sphinxbase/sphinxbase_export.h</label>
+        <link refid="sphinxbase__export_8h_source"/>
+      </node>
+      <node id="1907">
+        <label>stdarg.h</label>
+      </node>
+      <node id="1906">
+        <label>sphinxbase/ngram_model.h</label>
+        <link refid="ngram__model_8h"/>
+        <childnode refid="1907" relation="include">
+        </childnode>
+        <childnode refid="1908" relation="include">
+        </childnode>
+        <childnode refid="1909" relation="include">
+        </childnode>
+        <childnode refid="1911" relation="include">
+        </childnode>
+        <childnode refid="1913" relation="include">
+        </childnode>
+        <childnode refid="1914" relation="include">
+        </childnode>
+      </node>
+      <node id="1917">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1915">
+        <label>sphinxbase/hash_table.h</label>
+        <link refid="hash__table_8h"/>
+        <childnode refid="1908" relation="include">
+        </childnode>
+        <childnode refid="1909" relation="include">
+        </childnode>
+        <childnode refid="1916" relation="include">
+        </childnode>
+      </node>
+      <node id="1914">
+        <label>sphinxbase/mmio.h</label>
+        <link refid="mmio_8h"/>
+        <childnode refid="1908" relation="include">
+        </childnode>
+      </node>
+      <node id="1909">
+        <label>sphinxbase/prim_type.h</label>
+        <link refid="prim__type_8h"/>
+        <childnode refid="1910" relation="include">
+        </childnode>
+      </node>
+      <node id="1913">
+        <label>sphinxbase/logmath.h</label>
+        <link refid="logmath_8h"/>
+        <childnode refid="1908" relation="include">
+        </childnode>
+        <childnode refid="1909" relation="include">
+        </childnode>
+        <childnode refid="1911" relation="include">
+        </childnode>
+      </node>
+      <node id="1911">
+        <label>sphinxbase/cmd_ln.h</label>
+        <link refid="cmd__ln_8h"/>
+        <childnode refid="1912" relation="include">
+        </childnode>
+        <childnode refid="1907" relation="include">
+        </childnode>
+        <childnode refid="1908" relation="include">
+        </childnode>
+        <childnode refid="1909" relation="include">
+        </childnode>
+      </node>
+      <node id="1910">
+        <label>sphinx_config.h</label>
+      </node>
+      <node id="1916">
+        <label>sphinxbase/glist.h</label>
+        <link refid="glist_8h"/>
+        <childnode refid="1917" relation="include">
+        </childnode>
+        <childnode refid="1908" relation="include">
+        </childnode>
+        <childnode refid="1909" relation="include">
+        </childnode>
+      </node>
+      <node id="1905">
+        <label>src/libsphinxbase/lm/ngram_model_internal.h</label>
+        <link refid="ngram__model__internal_8h"/>
+        <childnode refid="1906" relation="include">
+        </childnode>
+        <childnode refid="1915" relation="include">
+        </childnode>
+      </node>
+      <node id="1912">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1922">
+        <label>src/libsphinxbase/lm/ngram_model.c</label>
+        <link refid="ngram__model_8c_source"/>
+      </node>
+      <node id="1923">
+        <label>src/libsphinxbase/lm/ngram_model_trie.c</label>
+        <link refid="ngram__model__trie_8c_source"/>
+      </node>
+      <node id="1921">
+        <label>src/libsphinxbase/lm/ngram_model_trie.h</label>
+        <link refid="ngram__model__trie_8h_source"/>
+        <childnode refid="1922" relation="include">
+        </childnode>
+        <childnode refid="1923" relation="include">
+        </childnode>
+      </node>
+      <node id="1926">
+        <label>src/libsphinxbase/lm/ngram_model_set.c</label>
+        <link refid="ngram__model__set_8c"/>
+      </node>
+      <node id="1925">
+        <label>src/libsphinxbase/lm/ngram_model_set.h</label>
+        <link refid="ngram__model__set_8h"/>
+        <childnode refid="1926" relation="include">
+        </childnode>
+      </node>
+      <node id="1924">
+        <label>src/libsphinxbase/lm/lm_trie_quant.c</label>
+        <link refid="lm__trie__quant_8c_source"/>
+      </node>
+      <node id="1920">
+        <label>src/libsphinxbase/lm/lm_trie.c</label>
+        <link refid="lm__trie_8c_source"/>
+      </node>
+      <node id="1919">
+        <label>src/libsphinxbase/lm/lm_trie.h</label>
+        <link refid="lm__trie_8h_source"/>
+        <childnode refid="1920" relation="include">
+        </childnode>
+        <childnode refid="1921" relation="include">
+        </childnode>
+      </node>
+      <node id="1918">
+        <label>src/libsphinxbase/lm/ngram_model_internal.h</label>
+        <link refid="ngram__model__internal_8h"/>
+        <childnode refid="1919" relation="include">
+        </childnode>
+        <childnode refid="1924" relation="include">
+        </childnode>
+        <childnode refid="1922" relation="include">
+        </childnode>
+        <childnode refid="1921" relation="include">
+        </childnode>
+        <childnode refid="1925" relation="include">
+        </childnode>
+        <childnode refid="1927" relation="include">
+        </childnode>
+      </node>
+      <node id="1927">
+        <label>src/libsphinxbase/lm/ngrams_raw.c</label>
+        <link refid="ngrams__raw_8c_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structngram__model__s" prot="public">ngram_model_s</innerclass>
+    <innerclass refid="structngram__class__s" prot="public">ngram_class_s</innerclass>
+    <innerclass refid="structngram__class__s_1_1ngram__hash__s" prot="public">ngram_class_s::ngram_hash_s</innerclass>
+    <innerclass refid="structngram__funcs__s" prot="public">ngram_funcs_s</innerclass>
+    <innerclass refid="structclassdef__s" prot="public">classdef_s</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ngram__model__internal_8h_1adb2b15e01e503f774ed281c42d084023" prot="public" static="no">
+        <name>NGRAM_MAX_ORDER</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="98" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ngram__model__internal_8h_1a55aa11c30ce643ee794847162c39c9f8" prot="public" static="no">
+        <name>NGRAM_HASH_SIZE</name>
+        <initializer>128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="100" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ngram__model__internal_8h_1a320ea4b664f609542748ed20dbf8dbf1" prot="public" static="no">
+        <name>NGRAM_BASEWID</name>
+        <param><defname>wid</defname></param>
+        <initializer>((wid)&amp;0xffffff)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="102" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ngram__model__internal_8h_1adc0ecd4b280c91fb49f71d1dc98fe76d" prot="public" static="no">
+        <name>NGRAM_CLASSID</name>
+        <param><defname>wid</defname></param>
+        <initializer>(((wid)&gt;&gt;24) &amp; 0x7f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="103" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ngram__model__internal_8h_1aaa72cdb8eefad025e1ea6c92776ecd00" prot="public" static="no">
+        <name>NGRAM_CLASSWID</name>
+        <param><defname>wid</defname></param>
+        <param><defname>classid</defname></param>
+        <initializer>(((classid)&lt;&lt;24) | 0x80000000 | (wid))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="104" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ngram__model__internal_8h_1ac1affae2e3e94c6504f2c30bf2b83744" prot="public" static="no">
+        <name>NGRAM_IS_CLASSWID</name>
+        <param><defname>wid</defname></param>
+        <initializer>((wid)&amp;0x80000000)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="105" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ngram__model__internal_8h_1ad6b210295ab5957834f00b0555ed210a" prot="public" static="no">
+        <name>UG_ALLOC_STEP</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="107" column="9" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ngram__model__internal_8h_1ade7b9802129ee399ec0471722098affa" prot="public" static="no">
+        <type>struct <ref refid="structngram__funcs__s" kindref="compound">ngram_funcs_s</ref></type>
+        <definition>typedef struct ngram_funcs_s  ngram_funcs_t</definition>
+        <argsstring></argsstring>
+        <name>ngram_funcs_t</name>
+        <briefdescription>
+<para>Implementation-specific functions for operating on ngram_model_t objects. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="149" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ngram__model__internal_8h_1ae74883e4c3814746953a45e7c4b5ed2f" prot="public" static="no">
+        <type>struct <ref refid="structclassdef__s" kindref="compound">classdef_s</ref></type>
+        <definition>typedef struct classdef_s  classdef_t</definition>
+        <argsstring></argsstring>
+        <name>classdef_t</name>
+        <briefdescription>
+<para>One class definition from a classdef file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="158" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ngram__model__internal_8h_1af762f0086fef8d9087f8f20981d063ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32</type>
+        <definition>int32 ngram_model_init</definition>
+        <argsstring>(ngram_model_t *model, ngram_funcs_t *funcs, logmath_t *lmath, int32 n, int32 n_unigram)</argsstring>
+        <name>ngram_model_init</name>
+        <param>
+          <type><ref refid="ngram__model_8h_1afaaf0c00e20056d97efcd97e4cae4ea7" kindref="member">ngram_model_t</ref> *</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type><ref refid="structngram__funcs__s" kindref="compound">ngram_funcs_t</ref> *</type>
+          <declname>funcs</declname>
+        </param>
+        <param>
+          <type><ref refid="logmath_8h_1ae613aa7db1dd40ff56a80a7dadb22cc8" kindref="member">logmath_t</ref> *</type>
+          <declname>lmath</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>n_unigram</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the base ngram_model_t structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="164" column="1" bodyfile="src/libsphinxbase/lm/ngram_model.c" bodystart="202" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__model__internal_8h_1a7a7d075700ac5ceeacaa285ba5b51ad1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32</type>
+        <definition>int32 read_classdef_file</definition>
+        <argsstring>(hash_table_t *classes, const char *classdef_file)</argsstring>
+        <name>read_classdef_file</name>
+        <param>
+          <type><ref refid="structhash__table__s" kindref="compound">hash_table_t</ref> *</type>
+          <declname>classes</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>classdef_file</declname>
+        </param>
+        <briefdescription>
+<para>Read a probdef file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>&lt; Are we currently reading a list of class words? </para>        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="171" column="1" bodyfile="src/libsphinxbase/lm/ngram_model.c" bodystart="904" bodyend="1012"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__model__internal_8h_1ad91c0d0d71fc2adb89edbb7532763b85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void classdef_free</definition>
+        <argsstring>(classdef_t *classdef)</argsstring>
+        <name>classdef_free</name>
+        <param>
+          <type><ref refid="structclassdef__s" kindref="compound">classdef_t</ref> *</type>
+          <declname>classdef</declname>
+        </param>
+        <briefdescription>
+<para>Free a class definition. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="177" column="1" bodyfile="src/libsphinxbase/lm/ngram_model.c" bodystart="1015" bodyend="1023"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__model__internal_8h_1a5ffbde0fdbf1e67852ba56c8fed604af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="ngram__model_8h_1ae36b2f037b2ea751dff23f082379c264" kindref="member">ngram_class_t</ref> *</type>
+        <definition>ngram_class_t* ngram_class_new</definition>
+        <argsstring>(ngram_model_t *model, int32 tag_wid, int32 start_wid, glist_t classwords)</argsstring>
+        <name>ngram_class_new</name>
+        <param>
+          <type><ref refid="ngram__model_8h_1afaaf0c00e20056d97efcd97e4cae4ea7" kindref="member">ngram_model_t</ref> *</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>tag_wid</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>start_wid</declname>
+        </param>
+        <param>
+          <type><ref refid="structgnode__s" kindref="compound">glist_t</ref></type>
+          <declname>classwords</declname>
+        </param>
+        <briefdescription>
+<para>Allocate and initialize an N-Gram class. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="182" column="1" bodyfile="src/libsphinxbase/lm/ngram_model.c" bodystart="677" bodyend="708"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__model__internal_8h_1a26f02f1d1128de4b8dc4626a2028b6fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngram_class_free</definition>
+        <argsstring>(ngram_class_t *lmclass)</argsstring>
+        <name>ngram_class_free</name>
+        <param>
+          <type><ref refid="ngram__model_8h_1ae36b2f037b2ea751dff23f082379c264" kindref="member">ngram_class_t</ref> *</type>
+          <declname>lmclass</declname>
+        </param>
+        <briefdescription>
+<para>Deallocate an N-Gram class. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="188" column="1" bodyfile="src/libsphinxbase/lm/ngram_model.c" bodystart="771" bodyend="776"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__model__internal_8h_1ae5e598f86038d1767486489f6b6db638" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32</type>
+        <definition>int32 ngram_class_prob</definition>
+        <argsstring>(ngram_class_t *lmclass, int32 wid)</argsstring>
+        <name>ngram_class_prob</name>
+        <param>
+          <type><ref refid="ngram__model_8h_1ae36b2f037b2ea751dff23f082379c264" kindref="member">ngram_class_t</ref> *</type>
+          <declname>lmclass</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>wid</declname>
+        </param>
+        <briefdescription>
+<para>Get the in-class log probability for a word in an N-Gram class. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>This probability, or 1 if word not found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="195" column="1" bodyfile="src/libsphinxbase/lm/ngram_model.c" bodystart="882" bodyend="901"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c-basic-offset:<sp/>4;<sp/>indent-tabs-mode:<sp/>nil<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>1999-2007<sp/>Carnegie<sp/>Mellon<sp/>University.<sp/><sp/>All<sp/>rights</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>1.<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.<sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>2.<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>distribution.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>This<sp/>work<sp/>was<sp/>supported<sp/>in<sp/>part<sp/>by<sp/>funding<sp/>from<sp/>the<sp/>Defense<sp/>Advanced<sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Research<sp/>Projects<sp/>Agency<sp/>and<sp/>the<sp/>National<sp/>Science<sp/>Foundation<sp/>of<sp/>the<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>United<sp/>States<sp/>of<sp/>America,<sp/>and<sp/>the<sp/>CMU<sp/>Sphinx<sp/>Speech<sp/>Consortium.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY<sp/>``AS<sp/>IS&apos;&apos;<sp/>AND<sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>ANY<sp/>EXPRESSED<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/><sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>NOR<sp/>ITS<sp/>EMPLOYEES<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/>\file<sp/>ngram_model_internal.h<sp/>Internal<sp/>structures<sp/>for<sp/>N-Gram<sp/>models</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/>Author:<sp/>David<sp/>Huggins-Daines<sp/>&lt;dhuggins@cs.cmu.edu&gt;</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__NGRAM_MODEL_INTERNAL_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NGRAM_MODEL_INTERNAL_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ngram__model_8h" kindref="compound">sphinxbase/ngram_model.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="hash__table_8h" kindref="compound">sphinxbase/hash_table.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="structngram__model__s" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__model__s" kindref="compound">ngram_model_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="56" refid="structngram__model__s_1a3b14986e4dc40ccec1f7e206b7f41d06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structngram__model__s_1a3b14986e4dc40ccec1f7e206b7f41d06" kindref="member">refcount</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="57" refid="structngram__model__s_1a710daed84ee676f79dcbf510fca238e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>*<ref refid="structngram__model__s_1a710daed84ee676f79dcbf510fca238e8" kindref="member">n_counts</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58" refid="structngram__model__s_1a3e41109b30668bdfc077614c1ef49960" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a3e41109b30668bdfc077614c1ef49960" kindref="member">n_1g_alloc</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59" refid="structngram__model__s_1a74f85927ef0d5513a1e6c02d13864be3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a74f85927ef0d5513a1e6c02d13864be3" kindref="member">n_words</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62" refid="structngram__model__s_1a3c87bc1b678662a2c8930b3b8c33a80f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/><ref refid="structngram__model__s_1a3c87bc1b678662a2c8930b3b8c33a80f" kindref="member">n</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63" refid="structngram__model__s_1adeb914f8e9f011a5c960f5ee9cd33919" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/><ref refid="structngram__model__s_1adeb914f8e9f011a5c960f5ee9cd33919" kindref="member">n_classes</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64" refid="structngram__model__s_1a78a3253febced2cae4732044da466ee6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/><ref refid="structngram__model__s_1a78a3253febced2cae4732044da466ee6" kindref="member">writable</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65" refid="structngram__model__s_1ac609a2f867496d6ca719351d566db328" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/><ref refid="structngram__model__s_1ac609a2f867496d6ca719351d566db328" kindref="member">flags</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="67" refid="structngram__model__s_1a2ca373109c651ac998b33153eb38fd95" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlogmath__s" kindref="compound">logmath_t</ref><sp/>*<ref refid="structngram__model__s_1a2ca373109c651ac998b33153eb38fd95" kindref="member">lmath</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68" refid="structngram__model__s_1a76ea0c65b23de80091e7c602bdb43bde" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>float32<sp/><ref refid="structngram__model__s_1a76ea0c65b23de80091e7c602bdb43bde" kindref="member">lw</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69" refid="structngram__model__s_1a3d6bf5632760a16e52cb881d7010d774" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a3d6bf5632760a16e52cb881d7010d774" kindref="member">log_wip</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70" refid="structngram__model__s_1a65425a599c4bcc4dda809d81149b8fc0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a65425a599c4bcc4dda809d81149b8fc0" kindref="member">log_zero</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71" refid="structngram__model__s_1ae625e779e340845f03fb3da164e93039" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**<ref refid="structngram__model__s_1ae625e779e340845f03fb3da164e93039" kindref="member">word_str</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72" refid="structngram__model__s_1a75567419a8002ef6e916c81f5d9ee9ed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structhash__table__s" kindref="compound">hash_table_t</ref><sp/>*<ref refid="structngram__model__s_1a75567419a8002ef6e916c81f5d9ee9ed" kindref="member">wid</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="73" refid="structngram__model__s_1a4f910ab2c18b0e68dce92816a27fb139" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/>*<ref refid="structngram__model__s_1a4f910ab2c18b0e68dce92816a27fb139" kindref="member">tmp_wids</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="74" refid="structngram__model__s_1a39384af3e6b53591d433436db011ac8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__class__s" kindref="compound">ngram_class_s</ref><sp/>**<ref refid="structngram__model__s_1a39384af3e6b53591d433436db011ac8d" kindref="member">classes</ref>;<sp/></highlight></codeline>
+<codeline lineno="75" refid="structngram__model__s_1ad3d9d8ad9773f958a89534220eda6fb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__funcs__s" kindref="compound">ngram_funcs_s</ref><sp/>*<ref refid="structngram__model__s_1ad3d9d8ad9773f958a89534220eda6fb9" kindref="member">funcs</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="structngram__class__s" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__class__s" kindref="compound">ngram_class_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="82" refid="structngram__class__s_1ab5f3cc0142c9fd91b3c3d0e59906b556" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1ab5f3cc0142c9fd91b3c3d0e59906b556" kindref="member">tag_wid</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="83" refid="structngram__class__s_1a370c88602c7c1f7e3ff1a767c027f5cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1a370c88602c7c1f7e3ff1a767c027f5cb" kindref="member">start_wid</ref>;<sp/></highlight></codeline>
+<codeline lineno="84" refid="structngram__class__s_1af13562cbc44647435f315b18df5688dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1af13562cbc44647435f315b18df5688dc" kindref="member">n_words</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="85" refid="structngram__class__s_1a50077f48f135f1c666745a21574e4205" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/>*<ref refid="structngram__class__s_1a50077f48f135f1c666745a21574e4205" kindref="member">prob1</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="89" refid="structngram__class__s_1_1ngram__hash__s" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__class__s_1_1ngram__hash__s" kindref="compound">ngram_hash_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="90" refid="structngram__class__s_1_1ngram__hash__s_1ad0178b5a86ec23ce790b6b7cb64db0b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1_1ngram__hash__s_1ad0178b5a86ec23ce790b6b7cb64db0b9" kindref="member">wid</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="91" refid="structngram__class__s_1_1ngram__hash__s_1a6ac4c01b0c8d29f770f4780e38ab0923" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1_1ngram__hash__s_1a6ac4c01b0c8d29f770f4780e38ab0923" kindref="member">prob1</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="92" refid="structngram__class__s_1_1ngram__hash__s_1a88ede5798cadc2bece12c49fa038b090" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1_1ngram__hash__s_1a88ede5798cadc2bece12c49fa038b090" kindref="member">next</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/>*nword_hash;</highlight></codeline>
+<codeline lineno="94" refid="structngram__class__s_1a7f450019eb6dc2e31b18eb3ab6009920" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1a7f450019eb6dc2e31b18eb3ab6009920" kindref="member">n_hash</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95" refid="structngram__class__s_1a79438cd582363800bc05da31a9ca49d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__class__s_1a79438cd582363800bc05da31a9ca49d6" kindref="member">n_hash_inuse</ref>;<sp/></highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NGRAM_MAX_ORDER<sp/>5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NGRAM_HASH_SIZE<sp/>128</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NGRAM_BASEWID(wid)<sp/>((wid)&amp;0xffffff)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NGRAM_CLASSID(wid)<sp/>(((wid)&gt;&gt;24)<sp/>&amp;<sp/>0x7f)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NGRAM_CLASSWID(wid,classid)<sp/>(((classid)&lt;&lt;24)<sp/>|<sp/>0x80000000<sp/>|<sp/>(wid))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NGRAM_IS_CLASSWID(wid)<sp/>((wid)&amp;0x80000000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>UG_ALLOC_STEP<sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="structngram__funcs__s" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__funcs__s" kindref="compound">ngram_funcs_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="114" refid="structngram__funcs__s_1ae13797f51aee31ddde0f150c1bbe1570" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>(*free)<sp/>(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model);</highlight></codeline>
+<codeline lineno="118" refid="structngram__funcs__s_1ae3cc072e20e6c1556c91b783ec061a4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int<sp/>(*apply_weights)<sp/>(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model,<sp/>float32<sp/><ref refid="structngram__model__s_1a76ea0c65b23de80091e7c602bdb43bde" kindref="member">lw</ref>,<sp/>float32<sp/>wip);</highlight></codeline>
+<codeline lineno="122" refid="structngram__funcs__s_1ab74c094f1e88465559fdd29859bf4395" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>int32(*score)<sp/>(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a75567419a8002ef6e916c81f5d9ee9ed" kindref="member">wid</ref>,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/>*<sp/>history,<sp/>int32<sp/>n_hist,<sp/>int32<sp/>*<sp/>n_used);</highlight></codeline>
+<codeline lineno="129" refid="structngram__funcs__s_1a9c9f83dc5151495a21b7eff16ad747d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>int32(*raw_score)<sp/>(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a75567419a8002ef6e916c81f5d9ee9ed" kindref="member">wid</ref>,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/>*<sp/>history,<sp/>int32<sp/>n_hist,<sp/>int32<sp/>*<sp/>n_used);</highlight></codeline>
+<codeline lineno="143" refid="structngram__funcs__s_1aec7921e64c7cc778fa2267d6717482c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>int32(*add_ug)<sp/>(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model,<sp/>int32<sp/><ref refid="structngram__model__s_1a75567419a8002ef6e916c81f5d9ee9ed" kindref="member">wid</ref>,<sp/>int32<sp/>lweight);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="structngram__funcs__s_1af1ab9c61d3b9fa4a4782b8df3089baa6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>(*flush)<sp/>(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal">}<sp/><ref refid="structngram__funcs__s" kindref="compound">ngram_funcs_t</ref>;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="structclassdef__s" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structclassdef__s" kindref="compound">classdef_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**words;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>float32<sp/>*weights;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/><ref refid="structngram__model__s_1a74f85927ef0d5513a1e6c02d13864be3" kindref="member">n_words</ref>;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}<sp/><ref refid="structclassdef__s" kindref="compound">classdef_t</ref>;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal">int32</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">ngram_model_init(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model,</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structngram__funcs__s" kindref="compound">ngram_funcs_t</ref><sp/>*<sp/><ref refid="structngram__model__s_1ad3d9d8ad9773f958a89534220eda6fb9" kindref="member">funcs</ref>,</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlogmath__s" kindref="compound">logmath_t</ref><sp/>*<sp/><ref refid="structngram__model__s_1a2ca373109c651ac998b33153eb38fd95" kindref="member">lmath</ref>,<sp/>int32<sp/><ref refid="structngram__model__s_1a3c87bc1b678662a2c8930b3b8c33a80f" kindref="member">n</ref>,<sp/>int32<sp/>n_unigram);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal">int32<sp/>read_classdef_file(<ref refid="structhash__table__s" kindref="compound">hash_table_t</ref><sp/>*<sp/><ref refid="structngram__model__s_1a39384af3e6b53591d433436db011ac8d" kindref="member">classes</ref>,</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*classdef_file);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>classdef_free(<ref refid="structclassdef__s" kindref="compound">classdef_t</ref><sp/>*<sp/>classdef);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><ref refid="structngram__class__s" kindref="compound">ngram_class_t</ref><sp/>*ngram_class_new(<ref refid="structngram__model__s" kindref="compound">ngram_model_t</ref><sp/>*<sp/>model,<sp/>int32<sp/>tag_wid,</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/>start_wid,<sp/><ref refid="structgnode__s" kindref="compound">glist_t</ref><sp/>classwords);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ngram_class_free(<ref refid="structngram__class__s" kindref="compound">ngram_class_t</ref><sp/>*<sp/>lmclass);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal">int32<sp/>ngram_class_prob(<ref refid="structngram__class__s" kindref="compound">ngram_class_t</ref><sp/>*<sp/>lmclass,<sp/>int32<sp/><ref refid="structngram__model__s_1a75567419a8002ef6e916c81f5d9ee9ed" kindref="member">wid</ref>);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>__NGRAM_MODEL_INTERNAL_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="src/libsphinxbase/lm/ngram_model_internal.h"/>
+  </compounddef>
+</doxygen>

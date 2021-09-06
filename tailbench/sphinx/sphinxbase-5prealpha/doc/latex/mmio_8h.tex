@@ -1,0 +1,57 @@
+\section{include/sphinxbase/mmio.h File Reference}
+\label{mmio_8h}\index{include/sphinxbase/mmio.\+h@{include/sphinxbase/mmio.\+h}}
+
+
+Memory-\/mapped I/O wrappers for files.  
+
+
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{mmio_8h_ae27ed04d8142d77aae885c8cb8c9fa3b}} 
+typedef struct \textbf{ mmio\+\_\+file\+\_\+s} \textbf{ mmio\+\_\+file\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Abstract structure representing a memory-\/mapped file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ mmio\+\_\+file\+\_\+t} $\ast$ \textbf{ mmio\+\_\+file\+\_\+read} (const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Memory-\/map a file for reading. \end{DoxyCompactList}\item 
+\mbox{\label{mmio_8h_a5e6d8bf5cd7785563abc18c70a31ce0d}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void $\ast$ \textbf{ mmio\+\_\+file\+\_\+ptr} (\textbf{ mmio\+\_\+file\+\_\+t} $\ast$mf)
+\begin{DoxyCompactList}\small\item\em Get a pointer to the memory mapped for a file. \end{DoxyCompactList}\item 
+\mbox{\label{mmio_8h_a341a9c1cc8a3c4bddfd2d29a1b0993f6}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ mmio\+\_\+file\+\_\+unmap} (\textbf{ mmio\+\_\+file\+\_\+t} $\ast$mf)
+\begin{DoxyCompactList}\small\item\em Unmap a file, releasing memory associated with it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Memory-\/mapped I/O wrappers for files. 
+
+\begin{DoxyAuthor}{Author}
+David Huggins-\/\+Daines {\tt dhuggins@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\label{mmio_8h_ae3367a51a50a6108178ecfdd6c983c61}} 
+\index{mmio.\+h@{mmio.\+h}!mmio\+\_\+file\+\_\+read@{mmio\+\_\+file\+\_\+read}}
+\index{mmio\+\_\+file\+\_\+read@{mmio\+\_\+file\+\_\+read}!mmio.\+h@{mmio.\+h}}
+\subsubsection{mmio\+\_\+file\+\_\+read()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ mmio\+\_\+file\+\_\+t}$\ast$ mmio\+\_\+file\+\_\+read (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Memory-\/map a file for reading. 
+
+\begin{DoxyReturn}{Returns}
+a mmio\+\_\+file\+\_\+t $\ast$ or N\+U\+LL for failure. 
+\end{DoxyReturn}
+
+
+Definition at line 207 of file mmio.\+c.
+
+
+
+References E\+\_\+\+E\+R\+R\+O\+R\+\_\+\+S\+Y\+S\+T\+EM.
+

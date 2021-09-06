@@ -1,0 +1,104 @@
+#!/bin/sh 
+
+# <std-header style='shell' orig-src='shore'>
+#
+#  $Id: runsmsh,v 1.1.2.3 2010/01/12 02:01:53 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+
+# 
+# Run smsh over & over again, as long as
+# its reason for exiting is 0 or TIMEOUT
+# 
+# Use a child process to randomly kill smsh
+#
+
+v=0
+
+scriptname=${1:-random.all}
+echo $scriptname
+
+SIGUSR1=10
+SIGUSR2=12
+
+TIMEOUT=$SIGUSR1
+GOAWAY=$SIGUSR2
+
+# Exit status when the exit
+#  is caused by receipt of a TIMEOUT signal:
+TIMEOUT_STATUS=`expr $TIMEOUT + 128`
+
+iteration=0
+
+#
+# random_kick sits around sending SIGUSR1 to its process group
+#  	at random times, and dies when it gets a SIGUSR2
+
+trap  "if test $iteration -ne 0; then echo done with iteration $iteration; fi" $TIMEOUT;
+
+# random_kick: av[1] is sig 
+# random_kick: av[2] is pid 
+# random_kick: av[3,4,5] max0,1,2 timeouts; each of the three
+# timeouts is randomly chosen
+random_kick $TIMEOUT 0 30 120 1800 &
+kicker=$!
+
+echo KICKER = $kicker
+
+if test -x ./smsh ;  then
+    while test -x ./smsh ;  do 
+	iteration=`expr $iteration + 1`
+
+	first=1
+	trap  "if test $first -ne 1; then echo DIED iter $iteration; exit 1; fi" $GOAWAY
+	trap  "if test $first -ne 1; then echo ignored TIMEOUT; fi" $TIMEOUT
+	first=2
+
+	echo ./smsh -f scripts/$scriptname
+	./smsh -f scripts/$scriptname
+	status=$?
+
+	if test $status -ne 0; then
+	   echo "Server died on iteration $iteration ... status = " $status
+
+	   if test $status -ne $TIMEOUT_STATUS; then
+	       echo "Not killed by timer ... killing everything... " > runsmsh.out
+	       echo `date` >> runsmsh.out
+
+	       kill -$GOAWAY $kicker
+	       kill -$GOAWAY $kicker
+	       echo awaiting $kicker
+	       wait
+	       exit 1
+	    fi
+	fi
+    done
+else
+    echo ./smsh is not executable
+fi;
+
+exit 0

@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structad__rec__s" kind="struct" language="C++" prot="public">
+    <compoundname>ad_rec_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structad__rec__s_1af4b2cd7de40e5b2a48d2d6878d33cc18" prot="public" static="no" mutable="no">
+        <type>snd_pcm_t *</type>
+        <definition>snd_pcm_t* ad_rec_s::dspH</definition>
+        <argsstring></argsstring>
+        <name>dspH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_alsa.c" line="91" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a5ddf90deb3806752a1fa3152fe864047" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::recording</definition>
+        <argsstring></argsstring>
+        <name>recording</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_alsa.c" line="92" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a2c5120af44acf19c5c7c63778bc932a3" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::sps</definition>
+        <argsstring></argsstring>
+        <name>sps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_alsa.c" line="93" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a731523ef22607a580877bdcc563d9e5e" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::bps</definition>
+        <argsstring></argsstring>
+        <name>bps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_alsa.c" line="94" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1acd700500a367b0cb21306b7152f723af" prot="public" static="no" mutable="no">
+        <type>jack_client_t *</type>
+        <definition>jack_client_t* ad_rec_s::client</definition>
+        <argsstring></argsstring>
+        <name>client</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_jack.c" line="56" column="1" bodyfile="src/libsphinxad/ad_jack.c" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a3acb1e45a779726ee6370ee4f773ed12" prot="public" static="no" mutable="no">
+        <type>jack_port_t *</type>
+        <definition>jack_port_t* ad_rec_s::input_port</definition>
+        <argsstring></argsstring>
+        <name>input_port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_jack.c" line="57" column="1" bodyfile="src/libsphinxad/ad_jack.c" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1aa063dd1156101f957df117a0cd2407be" prot="public" static="no" mutable="no">
+        <type>jack_port_t *</type>
+        <definition>jack_port_t* ad_rec_s::output_port</definition>
+        <argsstring></argsstring>
+        <name>output_port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_jack.c" line="58" column="1" bodyfile="src/libsphinxad/ad_jack.c" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a39c7bd9b729d4ec0da0bd2c9cfa5e240" prot="public" static="no" mutable="no">
+        <type>jack_ringbuffer_t *</type>
+        <definition>jack_ringbuffer_t* ad_rec_s::rbuffer</definition>
+        <argsstring></argsstring>
+        <name>rbuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_jack.c" line="59" column="1" bodyfile="src/libsphinxad/ad_jack.c" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a4118f000ae396de0faca9cbf07c2ee61" prot="public" static="no" mutable="no">
+        <type>jack_default_audio_sample_t *</type>
+        <definition>jack_default_audio_sample_t* ad_rec_s::sample_buffer</definition>
+        <argsstring></argsstring>
+        <name>sample_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_jack.c" line="60" column="1" bodyfile="src/libsphinxad/ad_jack.c" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a3e4378783effb06051461aca5a3d2f6c" prot="public" static="no" mutable="no">
+        <type>ALCdevice *</type>
+        <definition>ALCdevice* ad_rec_s::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_openal.c" line="47" column="1" bodyfile="src/libsphinxad/ad_openal.c" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a7bd3eea2ed7b7be7155d4304505b140e" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::dspFD</definition>
+        <argsstring></argsstring>
+        <name>dspFD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_oss.c" line="84" column="1" bodyfile="src/libsphinxad/ad_oss.c" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a8ebda5d453f68928e21548739f27ceb9" prot="public" static="no" mutable="no">
+        <type>pa_simple *</type>
+        <definition>pa_simple* ad_rec_s::pa</definition>
+        <argsstring></argsstring>
+        <name>pa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_pulse.c" line="53" column="1" bodyfile="src/libsphinxad/ad_pulse.c" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a79081fc333f54eff7afdc23404f3ae69" prot="public" static="no" mutable="no">
+        <type>HWAVEIN</type>
+        <definition>HWAVEIN ad_rec_s::h_wavein</definition>
+        <argsstring></argsstring>
+        <name>h_wavein</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="84" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a81d0d2d45fe558b7e7c5504680b15dc5" prot="public" static="no" mutable="no">
+        <type><ref refid="structad__wbuf__t" kindref="compound">ad_wbuf_t</ref> *</type>
+        <definition>ad_wbuf_t* ad_rec_s::wi_buf</definition>
+        <argsstring></argsstring>
+        <name>wi_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="85" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1acd8fe38386d84c3e954f2652577c0c7e" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::n_buf</definition>
+        <argsstring></argsstring>
+        <name>n_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="86" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a8f1c8d2056486373a7d87c89e995b8f2" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::opened</definition>
+        <argsstring></argsstring>
+        <name>opened</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="87" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a1eb7456dc028152343c8d538195a8aa3" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::curbuf</definition>
+        <argsstring></argsstring>
+        <name>curbuf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="89" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a1c7d3d94fc97bb318cbfe4aa33088b62" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::curoff</definition>
+        <argsstring></argsstring>
+        <name>curoff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="90" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1ab9d6eff8b29d0741ed3b4133a57174ca" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::curlen</definition>
+        <argsstring></argsstring>
+        <name>curlen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="91" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structad__rec__s_1a30b13811b7b97765861b776e29d5d34c" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 ad_rec_s::lastbuf</definition>
+        <argsstring></argsstring>
+        <name>lastbuf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxad/ad_win32.c" line="92" column="1" bodyfile="src/libsphinxad/ad_win32.c" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Audio recording structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>ad_rec_s</label>
+        <link refid="structad__rec__s"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>wi_buf</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ad_wbuf_t</label>
+        <link refid="structad__wbuf__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxad/ad_alsa.c" line="90" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="90" bodyend="95"/>
+    <listofallmembers>
+      <member refid="structad__rec__s_1a731523ef22607a580877bdcc563d9e5e" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>bps</name></member>
+      <member refid="structad__rec__s_1acd700500a367b0cb21306b7152f723af" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>client</name></member>
+      <member refid="structad__rec__s_1a1eb7456dc028152343c8d538195a8aa3" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>curbuf</name></member>
+      <member refid="structad__rec__s_1ab9d6eff8b29d0741ed3b4133a57174ca" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>curlen</name></member>
+      <member refid="structad__rec__s_1a1c7d3d94fc97bb318cbfe4aa33088b62" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>curoff</name></member>
+      <member refid="structad__rec__s_1a3e4378783effb06051461aca5a3d2f6c" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>device</name></member>
+      <member refid="structad__rec__s_1a7bd3eea2ed7b7be7155d4304505b140e" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>dspFD</name></member>
+      <member refid="structad__rec__s_1af4b2cd7de40e5b2a48d2d6878d33cc18" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>dspH</name></member>
+      <member refid="structad__rec__s_1a79081fc333f54eff7afdc23404f3ae69" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>h_wavein</name></member>
+      <member refid="structad__rec__s_1a3acb1e45a779726ee6370ee4f773ed12" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>input_port</name></member>
+      <member refid="structad__rec__s_1a30b13811b7b97765861b776e29d5d34c" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>lastbuf</name></member>
+      <member refid="structad__rec__s_1acd8fe38386d84c3e954f2652577c0c7e" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>n_buf</name></member>
+      <member refid="structad__rec__s_1a8f1c8d2056486373a7d87c89e995b8f2" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>opened</name></member>
+      <member refid="structad__rec__s_1aa063dd1156101f957df117a0cd2407be" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>output_port</name></member>
+      <member refid="structad__rec__s_1a8ebda5d453f68928e21548739f27ceb9" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>pa</name></member>
+      <member refid="structad__rec__s_1a39c7bd9b729d4ec0da0bd2c9cfa5e240" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>rbuffer</name></member>
+      <member refid="structad__rec__s_1a5ddf90deb3806752a1fa3152fe864047" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>recording</name></member>
+      <member refid="structad__rec__s_1a4118f000ae396de0faca9cbf07c2ee61" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>sample_buffer</name></member>
+      <member refid="structad__rec__s_1a2c5120af44acf19c5c7c63778bc932a3" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>sps</name></member>
+      <member refid="structad__rec__s_1a81d0d2d45fe558b7e7c5504680b15dc5" prot="public" virt="non-virtual"><scope>ad_rec_s</scope><name>wi_buf</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

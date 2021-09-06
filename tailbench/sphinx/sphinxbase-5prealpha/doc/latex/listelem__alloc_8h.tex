@@ -1,0 +1,60 @@
+\section{include/sphinxbase/listelem\+\_\+alloc.h File Reference}
+\label{listelem__alloc_8h}\index{include/sphinxbase/listelem\+\_\+alloc.\+h@{include/sphinxbase/listelem\+\_\+alloc.\+h}}
+
+
+Fast memory allocator for uniformly sized objects.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{listelem__alloc_8h_ad0c40e65d9cca0d7ec08fcf416b09af2}} 
+\#define \textbf{ listelem\+\_\+malloc}(le)~\+\_\+\+\_\+listelem\+\_\+malloc\+\_\+\+\_\+((le),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Allocate a list element and return pointer to it. \end{DoxyCompactList}\item 
+\mbox{\label{listelem__alloc_8h_aa9bbb7161aceacdba49b41b189554507}} 
+\#define \textbf{ listelem\+\_\+malloc\+\_\+id}(le,  oid)~\+\_\+\+\_\+listelem\+\_\+malloc\+\_\+id\+\_\+\+\_\+((le),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+,(oid))
+\begin{DoxyCompactList}\small\item\em Allocate a list element, returning a unique identifier. \end{DoxyCompactList}\item 
+\mbox{\label{listelem__alloc_8h_a67de661d7ca552347fa6f03005e25d74}} 
+\#define \textbf{ listelem\+\_\+free}(le,  el)~\textbf{ \+\_\+\+\_\+listelem\+\_\+free\+\_\+\+\_\+}((le),(el),\+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+,\+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Macro of {\bfseries listelem\+\_\+free} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{listelem__alloc_8h_a3fd3950d7834feaa2bbdf84afb98ce32}} 
+typedef struct \textbf{ listelem\+\_\+alloc\+\_\+s} \textbf{ listelem\+\_\+alloc\+\_\+t}
+\begin{DoxyCompactList}\small\item\em List element allocator object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{listelem__alloc_8h_a4b08b49eaa74cbe9a3c95170cee78de7}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$ \textbf{ listelem\+\_\+alloc\+\_\+init} (size\+\_\+t elemsize)
+\begin{DoxyCompactList}\small\item\em Initialize and return a list element allocator. \end{DoxyCompactList}\item 
+\mbox{\label{listelem__alloc_8h_a94c02e93a0abaa2bd79636cbac6cced2}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ listelem\+\_\+alloc\+\_\+free} (\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$le)
+\begin{DoxyCompactList}\small\item\em Finalize and release all memory associated with a list element allocator. \end{DoxyCompactList}\item 
+\mbox{\label{listelem__alloc_8h_a04e5512f4dcedc2e84e58108bf61f1ff}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void $\ast$ {\bfseries \+\_\+\+\_\+listelem\+\_\+malloc\+\_\+\+\_\+} (\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$le, char $\ast$file, int line)
+\item 
+\mbox{\label{listelem__alloc_8h_a45f35edbe5f23773b1624f2ca2ac5e86}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void $\ast$ {\bfseries \+\_\+\+\_\+listelem\+\_\+malloc\+\_\+id\+\_\+\+\_\+} (\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$le, char $\ast$file, int line, int32 $\ast$out\+\_\+id)
+\item 
+\mbox{\label{listelem__alloc_8h_a74e610ac90e2b0696b2aedef4289d8f3}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void $\ast$ \textbf{ listelem\+\_\+get\+\_\+item} (\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$le, int32 id)
+\begin{DoxyCompactList}\small\item\em Retrieve a list element by its identifier. \end{DoxyCompactList}\item 
+\mbox{\label{listelem__alloc_8h_ab83a7a6fd086c14140ad2c8c4162709b}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ \+\_\+\+\_\+listelem\+\_\+free\+\_\+\+\_\+} (\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$le, void $\ast$elem, char $\ast$file, int line)
+\begin{DoxyCompactList}\small\item\em Free list element of given size. \end{DoxyCompactList}\item 
+\mbox{\label{listelem__alloc_8h_a838d9361ba76a89a834a7ea6a185b57d}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ listelem\+\_\+stats} (\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$le)
+\begin{DoxyCompactList}\small\item\em Print number of allocation, numer of free operation stats. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fast memory allocator for uniformly sized objects. 
+
+\begin{DoxyAuthor}{Author}
+M K Ravishankar {\tt rkm@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}

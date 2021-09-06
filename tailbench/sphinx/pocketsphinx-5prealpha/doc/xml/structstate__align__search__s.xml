@@ -1,0 +1,401 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structstate__align__search__s" kind="struct" language="C++" prot="public">
+    <compoundname>state_align_search_s</compoundname>
+    <includes refid="state__align__search_8h" local="no">state_align_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structstate__align__search__s_1ab2a596d687e113c88a271d1397b8d9c5" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx__internal_8h_1adc3de4d62e46c5e6cb93d09fb61be8ee" kindref="member">ps_search_t</ref></type>
+        <definition>ps_search_t state_align_search_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+<para>Base search structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="67" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a683e76dbcc87cde89ca5d45b4b91c1e9" prot="public" static="no" mutable="no">
+        <type><ref refid="structhmm__context__t" kindref="compound">hmm_context_t</ref> *</type>
+        <definition>hmm_context_t* state_align_search_s::hmmctx</definition>
+        <argsstring></argsstring>
+        <name>hmmctx</name>
+        <briefdescription>
+<para>HMM context structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="68" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a47b9b509c7416f8952ee452d8ce7dda6" prot="public" static="no" mutable="no">
+        <type><ref refid="structps__alignment__s" kindref="compound">ps_alignment_t</ref> *</type>
+        <definition>ps_alignment_t* state_align_search_s::al</definition>
+        <argsstring></argsstring>
+        <name>al</name>
+        <briefdescription>
+<para>Alignment structure being operated on. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="69" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a78ea3ffae6ecc3c004ff60707dc225b0" prot="public" static="no" mutable="no">
+        <type><ref refid="structhmm__t" kindref="compound">hmm_t</ref> *</type>
+        <definition>hmm_t* state_align_search_s::hmms</definition>
+        <argsstring></argsstring>
+        <name>hmms</name>
+        <briefdescription>
+<para>Vector of HMMs corresponding to phone level. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="70" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1ab248827613cdbc892e35e57d5c43c7c3" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int state_align_search_s::n_phones</definition>
+        <argsstring></argsstring>
+        <name>n_phones</name>
+        <briefdescription>
+<para>Number of HMMs (phones). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="71" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1aa520abfdb4d0bca2b769f281839637a9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int state_align_search_s::frame</definition>
+        <argsstring></argsstring>
+        <name>frame</name>
+        <briefdescription>
+<para>Current frame being processed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="73" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a1810f343c6ae382f5ed0a5eb02d33037" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 state_align_search_s::best_score</definition>
+        <argsstring></argsstring>
+        <name>best_score</name>
+        <briefdescription>
+<para>Best score in current frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="74" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a80c74bac917a8203bb74f5738621ce83" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int state_align_search_s::n_emit_state</definition>
+        <argsstring></argsstring>
+        <name>n_emit_state</name>
+        <briefdescription>
+<para>Number of emitting states (tokens per frame) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="76" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a2fae207533462fe6efe19c8a2a3a64e0" prot="public" static="no" mutable="no">
+        <type><ref refid="structstate__align__hist__s" kindref="compound">state_align_hist_t</ref> *</type>
+        <definition>state_align_hist_t* state_align_search_s::tokens</definition>
+        <argsstring></argsstring>
+        <name>tokens</name>
+        <briefdescription>
+<para>Tokens (backpointers) for state alignment. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="77" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structstate__align__search__s_1a97956b4924cba2b37470ff17f29c37bb" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int state_align_search_s::n_fr_alloc</definition>
+        <argsstring></argsstring>
+        <name>n_fr_alloc</name>
+        <briefdescription>
+<para>Number of frames of tokens allocated. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/state_align_search.h" line="78" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Phone loop search structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="670">
+        <label>ps_mgau_s</label>
+        <link refid="structps__mgau__s"/>
+        <childnode refid="671" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+      </node>
+      <node id="659">
+        <label>dict_t</label>
+        <link refid="structdict__t"/>
+        <childnode refid="660" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="663" relation="usage">
+          <edgelabel>word</edgelabel>
+        </childnode>
+      </node>
+      <node id="654">
+        <label>ps_search_s</label>
+        <link refid="structps__search__s"/>
+        <childnode refid="655" relation="usage">
+          <edgelabel>last_link</edgelabel>
+        </childnode>
+        <childnode refid="658" relation="usage">
+          <edgelabel>dag</edgelabel>
+        </childnode>
+        <childnode refid="664" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="667" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="659" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="669" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="654" relation="usage">
+          <edgelabel>pls</edgelabel>
+        </childnode>
+      </node>
+      <node id="674">
+        <label>ps_alignment_s</label>
+        <link refid="structps__alignment__s"/>
+        <childnode refid="675" relation="usage">
+          <edgelabel>sseq</edgelabel>
+          <edgelabel>word</edgelabel>
+          <edgelabel>state</edgelabel>
+        </childnode>
+        <childnode refid="667" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+      </node>
+      <node id="667">
+        <label>dict2pid_t</label>
+        <link refid="structdict2pid__t"/>
+        <childnode refid="668" relation="usage">
+          <edgelabel>lrssid</edgelabel>
+          <edgelabel>rssid</edgelabel>
+        </childnode>
+        <childnode refid="659" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="660" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+      </node>
+      <node id="657">
+        <label>latlink_list_s</label>
+        <link refid="structlatlink__list__s"/>
+        <childnode refid="655" relation="usage">
+          <edgelabel>link</edgelabel>
+        </childnode>
+        <childnode refid="657" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="653">
+        <label>state_align_hist_s</label>
+        <link refid="structstate__align__hist__s"/>
+      </node>
+      <node id="673">
+        <label>tmat_t</label>
+        <link refid="structtmat__t"/>
+      </node>
+      <node id="661">
+        <label>cd_tree_s</label>
+        <link refid="structcd__tree__s"/>
+      </node>
+      <node id="663">
+        <label>dictword_t</label>
+        <link refid="structdictword__t"/>
+      </node>
+      <node id="668">
+        <label>xwdssid_t</label>
+        <link refid="structxwdssid__t"/>
+      </node>
+      <node id="656">
+        <label>ps_latnode_s</label>
+        <link refid="structps__latnode__s"/>
+        <childnode refid="656" relation="usage">
+          <edgelabel>alt</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="657" relation="usage">
+          <edgelabel>exits</edgelabel>
+          <edgelabel>entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="662">
+        <label>mdef_entry_s</label>
+        <link refid="structmdef__entry__s"/>
+      </node>
+      <node id="650">
+        <label>state_align_search_s</label>
+        <link refid="structstate__align__search__s"/>
+        <childnode refid="651" relation="usage">
+          <edgelabel>hmms</edgelabel>
+        </childnode>
+        <childnode refid="652" relation="usage">
+          <edgelabel>hmmctx</edgelabel>
+        </childnode>
+        <childnode refid="653" relation="usage">
+          <edgelabel>tokens</edgelabel>
+        </childnode>
+        <childnode refid="654" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+        <childnode refid="674" relation="usage">
+          <edgelabel>al</edgelabel>
+        </childnode>
+      </node>
+      <node id="676">
+        <label>ps_alignment_entry_s</label>
+        <link refid="structps__alignment__entry__s"/>
+      </node>
+      <node id="666">
+        <label>ps_segfuncs_s</label>
+        <link refid="structps__segfuncs__s"/>
+        <childnode refid="665" relation="usage">
+          <edgelabel>seg_next</edgelabel>
+        </childnode>
+      </node>
+      <node id="671">
+        <label>ps_mgaufuncs_s</label>
+        <link refid="structps__mgaufuncs__s"/>
+      </node>
+      <node id="660">
+        <label>bin_mdef_s</label>
+        <link refid="structbin__mdef__s"/>
+        <childnode refid="661" relation="usage">
+          <edgelabel>cd_tree</edgelabel>
+        </childnode>
+        <childnode refid="662" relation="usage">
+          <edgelabel>phone</edgelabel>
+        </childnode>
+      </node>
+      <node id="651">
+        <label>hmm_t</label>
+        <link refid="structhmm__t"/>
+      </node>
+      <node id="652">
+        <label>hmm_context_t</label>
+        <link refid="structhmm__context__t"/>
+      </node>
+      <node id="665">
+        <label>ps_seg_s</label>
+        <link refid="structps__seg__s"/>
+        <childnode refid="666" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="654" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="664">
+        <label>ps_searchfuncs_s</label>
+        <link refid="structps__searchfuncs__s"/>
+        <childnode refid="658" relation="usage">
+          <edgelabel>lattice</edgelabel>
+        </childnode>
+        <childnode refid="665" relation="usage">
+          <edgelabel>seg_iter</edgelabel>
+        </childnode>
+      </node>
+      <node id="658">
+        <label>ps_lattice_s</label>
+        <link refid="structps__lattice__s"/>
+        <childnode refid="656" relation="usage">
+          <edgelabel>end</edgelabel>
+          <edgelabel>nodes</edgelabel>
+          <edgelabel>start</edgelabel>
+        </childnode>
+        <childnode refid="657" relation="usage">
+          <edgelabel>q_tail</edgelabel>
+          <edgelabel>q_head</edgelabel>
+        </childnode>
+        <childnode refid="659" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="654" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="669">
+        <label>acmod_s</label>
+        <link refid="structacmod__s"/>
+        <childnode refid="670" relation="usage">
+          <edgelabel>mgau</edgelabel>
+        </childnode>
+        <childnode refid="672" relation="usage">
+          <edgelabel>mllr</edgelabel>
+        </childnode>
+        <childnode refid="660" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="673" relation="usage">
+          <edgelabel>tmat</edgelabel>
+        </childnode>
+      </node>
+      <node id="672">
+        <label>ps_mllr_s</label>
+        <link refid="structps__mllr__s"/>
+      </node>
+      <node id="655">
+        <label>ps_latlink_s</label>
+        <link refid="structps__latlink__s"/>
+        <childnode refid="655" relation="usage">
+          <edgelabel>best_prev</edgelabel>
+        </childnode>
+        <childnode refid="656" relation="usage">
+          <edgelabel>from</edgelabel>
+          <edgelabel>to</edgelabel>
+        </childnode>
+      </node>
+      <node id="675">
+        <label>ps_alignment_vector_s</label>
+        <link refid="structps__alignment__vector__s"/>
+        <childnode refid="676" relation="usage">
+          <edgelabel>seq</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/state_align_search.h" line="66" column="1" bodyfile="src/libpocketsphinx/state_align_search.h" bodystart="66" bodyend="79"/>
+    <listofallmembers>
+      <member refid="structstate__align__search__s_1a47b9b509c7416f8952ee452d8ce7dda6" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>al</name></member>
+      <member refid="structstate__align__search__s_1ab2a596d687e113c88a271d1397b8d9c5" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>base</name></member>
+      <member refid="structstate__align__search__s_1a1810f343c6ae382f5ed0a5eb02d33037" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>best_score</name></member>
+      <member refid="structstate__align__search__s_1aa520abfdb4d0bca2b769f281839637a9" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>frame</name></member>
+      <member refid="structstate__align__search__s_1a683e76dbcc87cde89ca5d45b4b91c1e9" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>hmmctx</name></member>
+      <member refid="structstate__align__search__s_1a78ea3ffae6ecc3c004ff60707dc225b0" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>hmms</name></member>
+      <member refid="structstate__align__search__s_1a80c74bac917a8203bb74f5738621ce83" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>n_emit_state</name></member>
+      <member refid="structstate__align__search__s_1a97956b4924cba2b37470ff17f29c37bb" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>n_fr_alloc</name></member>
+      <member refid="structstate__align__search__s_1ab248827613cdbc892e35e57d5c43c7c3" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>n_phones</name></member>
+      <member refid="structstate__align__search__s_1a2fae207533462fe6efe19c8a2a3a64e0" prot="public" virt="non-virtual"><scope>state_align_search_s</scope><name>tokens</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

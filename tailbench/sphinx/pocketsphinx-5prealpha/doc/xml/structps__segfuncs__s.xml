@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structps__segfuncs__s" kind="struct" language="C++" prot="public">
+    <compoundname>ps_segfuncs_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structps__segfuncs__s_1a880757cdcfb8c858dfa82d44259fc8f9" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx_8h_1a64d3ac229ef945017112bab4c2a5ec94" kindref="member">ps_seg_t</ref> *(*</type>
+        <definition>ps_seg_t*(* ps_segfuncs_s::seg_next) (ps_seg_t *seg)</definition>
+        <argsstring>)(ps_seg_t *seg)</argsstring>
+        <name>seg_next</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="171" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__segfuncs__s_1aefbd109d77bf6556b352e5fab721858e" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* ps_segfuncs_s::seg_free) (ps_seg_t *seg)</definition>
+        <argsstring>)(ps_seg_t *seg)</argsstring>
+        <name>seg_free</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="172" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="618">
+        <label>ps_mgau_s</label>
+        <link refid="structps__mgau__s"/>
+        <childnode refid="619" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+      </node>
+      <node id="609">
+        <label>dict_t</label>
+        <link refid="structdict__t"/>
+        <childnode refid="610" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="613" relation="usage">
+          <edgelabel>word</edgelabel>
+        </childnode>
+      </node>
+      <node id="604">
+        <label>ps_search_s</label>
+        <link refid="structps__search__s"/>
+        <childnode refid="605" relation="usage">
+          <edgelabel>last_link</edgelabel>
+        </childnode>
+        <childnode refid="608" relation="usage">
+          <edgelabel>dag</edgelabel>
+        </childnode>
+        <childnode refid="614" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="615" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="609" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="617" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="604" relation="usage">
+          <edgelabel>pls</edgelabel>
+        </childnode>
+      </node>
+      <node id="615">
+        <label>dict2pid_t</label>
+        <link refid="structdict2pid__t"/>
+        <childnode refid="616" relation="usage">
+          <edgelabel>lrssid</edgelabel>
+          <edgelabel>rssid</edgelabel>
+        </childnode>
+        <childnode refid="609" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="610" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+      </node>
+      <node id="607">
+        <label>latlink_list_s</label>
+        <link refid="structlatlink__list__s"/>
+        <childnode refid="605" relation="usage">
+          <edgelabel>link</edgelabel>
+        </childnode>
+        <childnode refid="607" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="621">
+        <label>tmat_t</label>
+        <link refid="structtmat__t"/>
+      </node>
+      <node id="611">
+        <label>cd_tree_s</label>
+        <link refid="structcd__tree__s"/>
+      </node>
+      <node id="613">
+        <label>dictword_t</label>
+        <link refid="structdictword__t"/>
+      </node>
+      <node id="616">
+        <label>xwdssid_t</label>
+        <link refid="structxwdssid__t"/>
+      </node>
+      <node id="606">
+        <label>ps_latnode_s</label>
+        <link refid="structps__latnode__s"/>
+        <childnode refid="606" relation="usage">
+          <edgelabel>alt</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="607" relation="usage">
+          <edgelabel>exits</edgelabel>
+          <edgelabel>entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="612">
+        <label>mdef_entry_s</label>
+        <link refid="structmdef__entry__s"/>
+      </node>
+      <node id="602">
+        <label>ps_segfuncs_s</label>
+        <link refid="structps__segfuncs__s"/>
+        <childnode refid="603" relation="usage">
+          <edgelabel>seg_next</edgelabel>
+        </childnode>
+      </node>
+      <node id="619">
+        <label>ps_mgaufuncs_s</label>
+        <link refid="structps__mgaufuncs__s"/>
+      </node>
+      <node id="610">
+        <label>bin_mdef_s</label>
+        <link refid="structbin__mdef__s"/>
+        <childnode refid="611" relation="usage">
+          <edgelabel>cd_tree</edgelabel>
+        </childnode>
+        <childnode refid="612" relation="usage">
+          <edgelabel>phone</edgelabel>
+        </childnode>
+      </node>
+      <node id="603">
+        <label>ps_seg_s</label>
+        <link refid="structps__seg__s"/>
+        <childnode refid="602" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="604" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="614">
+        <label>ps_searchfuncs_s</label>
+        <link refid="structps__searchfuncs__s"/>
+        <childnode refid="608" relation="usage">
+          <edgelabel>lattice</edgelabel>
+        </childnode>
+        <childnode refid="603" relation="usage">
+          <edgelabel>seg_iter</edgelabel>
+        </childnode>
+      </node>
+      <node id="608">
+        <label>ps_lattice_s</label>
+        <link refid="structps__lattice__s"/>
+        <childnode refid="606" relation="usage">
+          <edgelabel>end</edgelabel>
+          <edgelabel>nodes</edgelabel>
+          <edgelabel>start</edgelabel>
+        </childnode>
+        <childnode refid="607" relation="usage">
+          <edgelabel>q_tail</edgelabel>
+          <edgelabel>q_head</edgelabel>
+        </childnode>
+        <childnode refid="609" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="604" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="617">
+        <label>acmod_s</label>
+        <link refid="structacmod__s"/>
+        <childnode refid="618" relation="usage">
+          <edgelabel>mgau</edgelabel>
+        </childnode>
+        <childnode refid="620" relation="usage">
+          <edgelabel>mllr</edgelabel>
+        </childnode>
+        <childnode refid="610" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="621" relation="usage">
+          <edgelabel>tmat</edgelabel>
+        </childnode>
+      </node>
+      <node id="620">
+        <label>ps_mllr_s</label>
+        <link refid="structps__mllr__s"/>
+      </node>
+      <node id="605">
+        <label>ps_latlink_s</label>
+        <link refid="structps__latlink__s"/>
+        <childnode refid="605" relation="usage">
+          <edgelabel>best_prev</edgelabel>
+        </childnode>
+        <childnode refid="606" relation="usage">
+          <edgelabel>from</edgelabel>
+          <edgelabel>to</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="170" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="170" bodyend="173"/>
+    <listofallmembers>
+      <member refid="structps__segfuncs__s_1aefbd109d77bf6556b352e5fab721858e" prot="public" virt="non-virtual"><scope>ps_segfuncs_s</scope><name>seg_free</name></member>
+      <member refid="structps__segfuncs__s_1a880757cdcfb8c858dfa82d44259fc8f9" prot="public" virt="non-virtual"><scope>ps_segfuncs_s</scope><name>seg_next</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

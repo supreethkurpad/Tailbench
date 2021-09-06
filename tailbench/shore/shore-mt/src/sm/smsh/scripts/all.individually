@@ -1,0 +1,183 @@
+ set scripts1 [list \
+ vol.init\
+ \
+ alloc.1\
+ alloc.4\
+ alloc.3\
+ alloc.7\
+ alloc.6 \
+ alloc.11\
+ alloc.9\
+ alloc.10\
+ alloc.5 \
+ alloc.8\
+ alloc.2 \
+ bng.1\
+ bt.insert.1\
+ bt.insert.2\
+ bt.insert.3\
+ bt.insert.4\
+ btree.1\
+ btree.10\
+ btree.11 \
+ btree.2\
+ btree.20\
+ btree.21\
+ btree.3\
+ btree.30 \
+ btree.32 \
+ btree.33 \
+ btree.4\
+ btree.5\
+ btree.6\
+ btree.8\
+ btree.err.1\
+ btree.err.2\
+ btree.err.3\
+ btree.err.4\
+ btree.load\
+ btree_split.1\
+ bt.remove.1\
+ bt.remove.2\
+ bt.remove.3\
+ bt.remove.4\
+ cd.perf.0\
+ cd.perf.1\
+ cd.perf.2\
+ cd.perf.3\
+ cd.perf.4\
+ cd.perf.5\
+ cd.perf.6\
+ cd.perf.7\
+ cd.perf.8\
+ ]
+
+
+ set scripts2 [list \
+ vol.init\
+ \
+ multi.1\
+ multi.2\
+ multi.3\
+ deadlock.1\
+ deadlock.2\
+ deadlock.4\
+ deadlock.5\
+ deadlock.6\
+ quark.1 \
+ file.activity2 \
+ file.activity \
+ c.perf\
+ createsmall.1\
+ file.1\
+ file.5\
+ file.6\
+ file.7\
+ file.8\
+ file.many\
+ file.undo.1\
+ file.undo.2\
+ free_page\
+ free_page.abort\
+ lgrec.1\
+ lgrec.2\
+ lgrec.3\
+ lgrec.4\
+ lgrec.5\
+ lock.1\
+ lock.hier\
+ lock.hier_sm\
+ lock.upgrade\
+ mpw\
+ pin.1\
+ pin.2\
+ pin.3\
+ pin.4\
+ pin.5\
+ record_create_abort.1\
+ recovery.1\
+ recovery.2\
+ recovery.4\
+ rtree.1\
+ rtree.2\
+ rtree.3\
+ rtree.4\
+ sort.1\
+ sort.2\
+ sort.3\
+ sort.4\
+ space_recovery\
+ thread_fork_example\
+ tmpfile.1\
+ tmpfile.2 \
+ tmpfile.3\
+ vol.1\
+ vol.3\
+ lock.perf\
+ loadrec.perf\
+ simplewrite.perf\
+ freepage.bug \
+ file.perf2 \
+ file.perf3 \
+ btree.7 \
+ btree.9\
+ btree.6int\
+ btree.simple.1\
+ file_destroy.1\
+ bt.insert.5 \
+ trans.all\
+ lgrec.very.3 \
+ lockrec_sm \
+ lockrec_pin \
+ file.2 \
+ free_ext \
+ ]
+
+ 
+ echo $scripts1
+ 
+ cleanup stdout
+ pecho [runscripts $scripts1]
+ unset scripts1
+
+ echo $scripts2
+ 
+ cleanup stdout
+ pecho [runscripts $scripts2]
+ unset scripts2
+
+##################################################
+
+ set badsmsh [ list \
+ btree.destroy.1\
+ ]
+ # btree.destroy.1 was in orig bugs/
+
+## these require large volumes:
+ set badoutofspace [ list \
+ lgrec.very.2\
+ lgrec.very.1\
+ all.perf \
+ ]
+
+ set badalone [list \
+ sort.mkey.1 \
+ bt.1 \
+ btree.load.multi \
+ btree.31 \
+ ]
+ # confidence :  : doesn't belong in this list. It's a list by itself.
+ # would be good for testall
+ # 
+ #  sort.mkey.1 probably has to do with key_cookie_t
+#
+ # btree.big.1  FC_NOTIMPLEMENTED: always was the case.
+ #    so I moved it to bugs/
+ # bt.1 : eRECWONTFIT : was the case with 5.0.2 also.
+ # btree.31: #69.  Note also that we need to fix or remove 
+ # btree.32, multi.3 and btree.load.multi, all of which have multiple
+ # threads of a single xct doing updates.
+
+################################### Report what's left on the volume
+dstats $volid
+sm check_volume $volid

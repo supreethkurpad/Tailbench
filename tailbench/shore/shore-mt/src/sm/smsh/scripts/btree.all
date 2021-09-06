@@ -1,0 +1,86 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.all,v 1.44.2.2 2010/02/05 20:39:32 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+source $script_dir/vol.init
+
+
+set scripts { btree.load }
+
+if { [is_set do_long_scripts] } {
+    lappend scripts btree.long.all
+}
+
+lappend scripts btree.simple.1
+# This one gums up the screen
+# lappend scripts btree.2all.print
+lappend scripts btree.6int
+lappend scripts bng.1
+
+foreach i { btree.load.multi btree_split.1 } {
+    lappend scripts $i
+}
+
+#
+# bt.insert.0 is called by bt.insert.[1-4]
+#
+foreach j { insert } {
+    foreach i {1 2 3 4} {
+	# set scripts [concat $scripts bt.$j.$i]
+	lappend scripts bt.$j.$i
+    }
+}
+
+#
+# bt.insert.5 is sort of a special case -- it makes
+# a very large btree NB: moved to btree.long.all
+
+# lappend scripts bt.insert.5
+
+foreach j { remove } {
+    foreach i {1 2 3 4 } {
+	# set scripts [concat $scripts bt.$j.$i]
+	lappend scripts bt.$j.$i
+    }
+}
+
+foreach i { 1 2 3 4 } {
+    lappend scripts btree.err.$i
+}
+
+
+foreach i {1 2 2all 3 33 4 5 7 8 9 10 11} {
+    # set scripts [concat $scripts btree.$i]
+    lappend scripts btree.$i
+}
+
+unset i j
+
+echo btree.all ABOUT TO RUN $scripts
+runscripts $scripts
+

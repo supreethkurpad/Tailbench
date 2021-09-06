@@ -1,0 +1,166 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: pin_deadlock.1,v 1.3 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#        Test pin latch deadlock
+#        The problem with this is that it causes a deadlock and therefore
+#        cannot be run in a list of scripts.
+#
+source $script_dir/vol.init
+
+echo ****************** WARNING ************************
+echo This script causes latch deadlock.Do not run it as
+echo part of a list of scripts that you expect to finish.
+echo *************************************************** 
+
+set update_ops {update_rec update_rec_hdr append_rec truncate_rec}
+
+# Transaction to set up the file with one record per test in update_ops.
+sm begin_xct
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+
+for {set i 0} {$i < [llength $update_ops]} {incr i} {
+    set rec($i) [sm create_rec $f1 rec$i 11 rec$i]
+    verbose rec $i = $rec($i)
+}
+sm commit_xct
+
+
+proc pin_test {rid op thrnum} {
+    sm begin_xct
+
+	set tid [sm xct_to_tid [sm xct]]
+    set pin [sm pin_create]
+    verbose "--$op: $tid: sm pin_pin $pin $rid UD for op $op"
+    sm pin_pin $pin $rid UD
+    verbose "--$op: $tid: pinned $rid UD. now first sync"
+    verbose "--$op: $tid: named_sync $thrnum"
+    named_sync $thrnum
+ 
+    #sm pin_unpin $pin
+
+    verbose "--$op: $tid: updating $rid ..."
+    set err 0
+    switch $op {
+        update_rec        {catch {sm pin_update_rec $pin 1 "X"} err}
+        update_rec_hdr    {catch {sm pin_update_rec_hdr $pin 1 "X"} err}
+        append_rec        {catch {sm pin_append_rec $pin "X"} err}
+        truncate_rec      {catch {sm pin_truncate_rec $pin 1} err}
+        default {assert {0}}
+    }
+	set do_abort 0
+    if { $err != 0 } {
+        if {[error_is $err E_DEADLOCK] == 1} {
+		    set do_abort 1
+		}
+	}
+    if { $do_abort != 0 } {
+		verbose "--$op: $tid: DEADLOCK in rem1 (expected) with $op on $rid"
+		verbose "--$op: $tid: (converted from latch-lock to lock-lock)"
+		# see comments in pin.cpp pin_i::_repin
+		sm dump_locks
+		sm dump_latches
+		verbose "--$op: $tid: aborting me $tid"
+		sm pin_destroy $pin
+		sm abort_xct
+		# Now we get stuck here while one of the threads
+		# is waiting for a lock or latch before it gets to the named
+		# and someone has a latch while is syncing?
+		# Maybe the latch-lock deadlock got converted but
+		# it didn't drop the latch?
+		# sync.
+		verbose "--$op: $tid: second named_sync rid=$rid"
+		named_sync $thrnum
+		sm begin_xct
+    } else {
+        verbose "--$op: $tid finished $rid"
+		sm pin_destroy $pin
+		verbose "--$op: $tid second named_sync rid=$rid"
+		named_sync $thrnum
+    }
+    verbose "--$op: $tid third named_sync rid=$rid"
+    named_sync $thrnum
+    verbose "--$op: $tid committing"
+    sm commit_xct
+}
+
+
+# Run the tests: for each update_op, fork a thread that tries to
+# do that kind of update on a record; each is given its own record
+# on which to work, but they are all on the same page.
+# First, find out how many threads we will have so we can
+# select the correct named barrier:
+#
+# count operations
+set thr_cnt 0
+foreach op $update_ops {
+    incr thr_cnt
+}
+# add one for the main thread
+set syncname [expr {$thr_cnt + 1}]
+echo syncname is $syncname
+
+# Fork off the other threads
+set i 0
+foreach op $update_ops {
+    verbose forking $op
+    set thr($i) [ fork_thread pin_test $rec($i) $op $syncname]
+	incr i
+}
+
+# sync all threads (including me)
+sm dump_threads
+verbose
+verbose main thread syncing $syncname
+verbose
+named_sync $syncname
+verbose done with first sync --------------------------------
+
+verbose main thread syncing $syncname
+named_sync $syncname
+verbose done with second sync --------------------------------
+
+verbose main thread syncing $syncname
+named_sync $syncname
+verbose done with third sync --------------------------------
+
+for {set i 0} { $i < $thr_cnt} {incr i} {
+    verbose joining $i
+    join_thread $thr($i)
+}
+
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+verbose done
+unset rec update_ops t1 t2 op thr thr_cnt i f1 $syncname
+

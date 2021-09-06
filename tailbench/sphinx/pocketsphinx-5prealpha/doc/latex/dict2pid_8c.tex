@@ -1,0 +1,216 @@
+\section{src/libpocketsphinx/dict2pid.c File Reference}
+\label{dict2pid_8c}\index{src/libpocketsphinx/dict2pid.\+c@{src/libpocketsphinx/dict2pid.\+c}}
+
+
+
+\begin{DoxyItemize}
+\item dictionary word to senone sequence mappings 
+\end{DoxyItemize} 
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}dict2pid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hmm.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ compress\+\_\+table} (s3ssid\+\_\+t $\ast$uncomp\+\_\+tab, s3ssid\+\_\+t $\ast$com\+\_\+tab, \textbf{ s3cipid\+\_\+t} $\ast$ci\+\_\+map, int32 n\+\_\+ci)
+\item 
+int32 \textbf{ get\+\_\+rc\+\_\+nssid} (\textbf{ dict2pid\+\_\+t} $\ast$d2p, s3wid\+\_\+t w)
+\begin{DoxyCompactList}\small\item\em A\+R\+C\+H\+AN, A duplicate of get\+\_\+rc\+\_\+npid in ctxt\+\_\+table.\+h. \end{DoxyCompactList}\item 
+\textbf{ s3cipid\+\_\+t} $\ast$ \textbf{ dict2pid\+\_\+get\+\_\+rcmap} (\textbf{ dict2pid\+\_\+t} $\ast$d2p, s3wid\+\_\+t w)
+\begin{DoxyCompactList}\small\item\em Get RC map. \end{DoxyCompactList}\item 
+\mbox{\label{dict2pid_8c_aa94120dcea4b17807576e29484b8a008}} 
+int \textbf{ dict2pid\+\_\+add\+\_\+word} (\textbf{ dict2pid\+\_\+t} $\ast$d2p, int32 wid)
+\begin{DoxyCompactList}\small\item\em Add a word to the dict2pid structure (after adding it to dict). \end{DoxyCompactList}\item 
+\mbox{\label{dict2pid_8c_a720e15c92ef6930e722bccb014e11b7b}} 
+s3ssid\+\_\+t \textbf{ dict2pid\+\_\+internal} (\textbf{ dict2pid\+\_\+t} $\ast$d2p, int32 wid, int pos)
+\begin{DoxyCompactList}\small\item\em Return the senone sequence ID for the given word position. \end{DoxyCompactList}\item 
+\textbf{ dict2pid\+\_\+t} $\ast$ \textbf{ dict2pid\+\_\+build} (\textbf{ bin\+\_\+mdef\+\_\+t} $\ast$mdef, \textbf{ dict\+\_\+t} $\ast$dict)
+\begin{DoxyCompactList}\small\item\em Build the dict2pid structure for the given model/dictionary. \end{DoxyCompactList}\item 
+\mbox{\label{dict2pid_8c_a85a8de8009445e1129766186ddaa949a}} 
+\textbf{ dict2pid\+\_\+t} $\ast$ \textbf{ dict2pid\+\_\+retain} (\textbf{ dict2pid\+\_\+t} $\ast$d2p)
+\begin{DoxyCompactList}\small\item\em Retain a pointer to dict2pid. \end{DoxyCompactList}\item 
+int \textbf{ dict2pid\+\_\+free} (\textbf{ dict2pid\+\_\+t} $\ast$d2p)
+\begin{DoxyCompactList}\small\item\em Free the memory dict2pid structure. \end{DoxyCompactList}\item 
+void \textbf{ dict2pid\+\_\+report} (\textbf{ dict2pid\+\_\+t} $\ast$d2p)
+\begin{DoxyCompactList}\small\item\em Report a dict2pid data structure. \end{DoxyCompactList}\item 
+void \textbf{ dict2pid\+\_\+dump} (F\+I\+LE $\ast$fp, \textbf{ dict2pid\+\_\+t} $\ast$d2p)
+\begin{DoxyCompactList}\small\item\em For debugging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+\begin{DoxyItemize}
+\item dictionary word to senone sequence mappings 
+\end{DoxyItemize}
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{dict2pid_8c_af437f4d3a798db6828c42df69256f762}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!compress\+\_\+table@{compress\+\_\+table}}
+\index{compress\+\_\+table@{compress\+\_\+table}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{compress\+\_\+table()}
+{\footnotesize\ttfamily void compress\+\_\+table (\begin{DoxyParamCaption}\item[{s3ssid\+\_\+t $\ast$}]{uncomp\+\_\+tab,  }\item[{s3ssid\+\_\+t $\ast$}]{com\+\_\+tab,  }\item[{\textbf{ s3cipid\+\_\+t} $\ast$}]{ci\+\_\+map,  }\item[{int32}]{n\+\_\+ci }\end{DoxyParamCaption})}
+
+Compress this map 
+
+Definition at line 49 of file dict2pid.\+c.
+
+
+
+References B\+A\+D\+\_\+\+S3\+C\+I\+P\+ID, and B\+A\+D\+\_\+\+S3\+S\+S\+ID.
+
+\mbox{\label{dict2pid_8c_addd541f2275b79e284575fb11b7986e1}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!dict2pid\+\_\+build@{dict2pid\+\_\+build}}
+\index{dict2pid\+\_\+build@{dict2pid\+\_\+build}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{dict2pid\+\_\+build()}
+{\footnotesize\ttfamily \textbf{ dict2pid\+\_\+t}$\ast$ dict2pid\+\_\+build (\begin{DoxyParamCaption}\item[{\textbf{ bin\+\_\+mdef\+\_\+t} $\ast$}]{mdef,  }\item[{\textbf{ dict\+\_\+t} $\ast$}]{dict }\end{DoxyParamCaption})}
+
+
+
+Build the dict2pid structure for the given model/dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mdef} & A model definition \\
+\hline
+{\em dict} & An initialized dictionary \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 388 of file dict2pid.\+c.
+
+
+
+References B\+A\+D\+\_\+\+S3\+S\+S\+ID, bin\+\_\+mdef\+\_\+retain(), dict2pid\+\_\+t\+::dict, dict\+\_\+retain(), dict\+\_\+size, dict2pid\+\_\+t\+::ldiph\+\_\+lc, dict2pid\+\_\+t\+::lrdiph\+\_\+rc, dict2pid\+\_\+t\+::mdef, and bin\+\_\+mdef\+\_\+s\+::n\+\_\+ciphone.
+
+
+
+Referenced by ps\+\_\+load\+\_\+dict().
+
+\mbox{\label{dict2pid_8c_a32320cd5d020620ac913b46bafeb5cae}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!dict2pid\+\_\+dump@{dict2pid\+\_\+dump}}
+\index{dict2pid\+\_\+dump@{dict2pid\+\_\+dump}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{dict2pid\+\_\+dump()}
+{\footnotesize\ttfamily void dict2pid\+\_\+dump (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{\textbf{ dict2pid\+\_\+t} $\ast$}]{d2p }\end{DoxyParamCaption})}
+
+
+
+For debugging. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & In\+: a file pointer \\
+\hline
+{\em d2p} & In\+: a \doxyref{dict2pid\+\_\+t}{p.}{structdict2pid__t} structure \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 538 of file dict2pid.\+c.
+
+
+
+References dict2pid\+\_\+t\+::dict, dict\+\_\+size, and dict2pid\+\_\+t\+::mdef.
+
+\mbox{\label{dict2pid_8c_a293253226550e812c448ae096b364d0d}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!dict2pid\+\_\+free@{dict2pid\+\_\+free}}
+\index{dict2pid\+\_\+free@{dict2pid\+\_\+free}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{dict2pid\+\_\+free()}
+{\footnotesize\ttfamily int dict2pid\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ dict2pid\+\_\+t} $\ast$}]{d2p }\end{DoxyParamCaption})}
+
+
+
+Free the memory dict2pid structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d2p} & In\+: the d2p \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 507 of file dict2pid.\+c.
+
+
+
+References dict2pid\+\_\+t\+::ldiph\+\_\+lc, dict2pid\+\_\+t\+::lrdiph\+\_\+rc, and dict2pid\+\_\+t\+::rssid.
+
+
+
+Referenced by ps\+\_\+alignment\+\_\+free(), ps\+\_\+free(), ps\+\_\+load\+\_\+dict(), ps\+\_\+reinit(), ps\+\_\+search\+\_\+base\+\_\+free(), and ps\+\_\+search\+\_\+base\+\_\+reinit().
+
+\mbox{\label{dict2pid_8c_a34aca68c98588e7e1a3f0e6d0800e1bf}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!dict2pid\+\_\+get\+\_\+rcmap@{dict2pid\+\_\+get\+\_\+rcmap}}
+\index{dict2pid\+\_\+get\+\_\+rcmap@{dict2pid\+\_\+get\+\_\+rcmap}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{dict2pid\+\_\+get\+\_\+rcmap()}
+{\footnotesize\ttfamily \textbf{ s3cipid\+\_\+t}$\ast$ dict2pid\+\_\+get\+\_\+rcmap (\begin{DoxyParamCaption}\item[{\textbf{ dict2pid\+\_\+t} $\ast$}]{d2p,  }\item[{s3wid\+\_\+t}]{w }\end{DoxyParamCaption})}
+
+
+
+Get RC map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d2p} & In\+: a dict2pid \\
+\hline
+{\em w} & In\+: a wid \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 229 of file dict2pid.\+c.
+
+
+
+References xwdssid\+\_\+t\+::cimap, dictword\+\_\+t\+::ciphone, dict2pid\+\_\+t\+::dict, dict2pid\+\_\+t\+::lrssid, dictword\+\_\+t\+::pronlen, dict2pid\+\_\+t\+::rssid, and dict\+\_\+t\+::word.
+
+\mbox{\label{dict2pid_8c_a36c486f1ac64991c95c4c0ef75ceaa46}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!dict2pid\+\_\+report@{dict2pid\+\_\+report}}
+\index{dict2pid\+\_\+report@{dict2pid\+\_\+report}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{dict2pid\+\_\+report()}
+{\footnotesize\ttfamily void dict2pid\+\_\+report (\begin{DoxyParamCaption}\item[{\textbf{ dict2pid\+\_\+t} $\ast$}]{d2p }\end{DoxyParamCaption})}
+
+
+
+Report a dict2pid data structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d2p} & In\+: a \doxyref{dict2pid\+\_\+t}{p.}{structdict2pid__t} structure \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 533 of file dict2pid.\+c.
+
+\mbox{\label{dict2pid_8c_aa77890032a2c171ed9944b1d81fd5cb0}} 
+\index{dict2pid.\+c@{dict2pid.\+c}!get\+\_\+rc\+\_\+nssid@{get\+\_\+rc\+\_\+nssid}}
+\index{get\+\_\+rc\+\_\+nssid@{get\+\_\+rc\+\_\+nssid}!dict2pid.\+c@{dict2pid.\+c}}
+\subsubsection{get\+\_\+rc\+\_\+nssid()}
+{\footnotesize\ttfamily int32 get\+\_\+rc\+\_\+nssid (\begin{DoxyParamCaption}\item[{\textbf{ dict2pid\+\_\+t} $\ast$}]{d2p,  }\item[{s3wid\+\_\+t}]{w }\end{DoxyParamCaption})}
+
+
+
+A\+R\+C\+H\+AN, A duplicate of get\+\_\+rc\+\_\+npid in ctxt\+\_\+table.\+h. 
+
+Get number of rc.
+
+I doubt whether it is correct because the compressed map has not been checked. 
+\begin{DoxyParams}{Parameters}
+{\em d2p} & In\+: a dict2pid \\
+\hline
+{\em w} & In\+: a wid \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 204 of file dict2pid.\+c.
+
+
+
+References dictword\+\_\+t\+::ciphone, dict2pid\+\_\+t\+::dict, dict2pid\+\_\+t\+::lrssid, xwdssid\+\_\+t\+::n\+\_\+ssid, dictword\+\_\+t\+::pronlen, dict2pid\+\_\+t\+::rssid, and dict\+\_\+t\+::word.
+

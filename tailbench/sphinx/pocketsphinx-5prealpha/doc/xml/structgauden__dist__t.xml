@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structgauden__dist__t" kind="struct" language="C++" prot="public">
+    <compoundname>gauden_dist_t</compoundname>
+    <includes refid="ms__gauden_8h" local="no">ms_gauden.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structgauden__dist__t_1a93e978149bae5b5bf089769458c42ee4" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 gauden_dist_t::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+<para>Index of codeword (gaussian density) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ms_gauden.h" line="72" column="1" bodyfile="src/libpocketsphinx/ms_gauden.h" bodystart="72" bodyend="-1"/>
+        <referencedby refid="ms__gauden_8h_1a0306e088fa33894ca40182d2392ffe4d" compoundref="ms__gauden_8c" startline="399" endline="412">gauden_free</referencedby>
+        <referencedby refid="ms__senone_8h_1a86881df5bbbd615e2cd8171e3b086fa6" compoundref="ms__senone_8c" startline="341" endline="353">senone_free</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structgauden__dist__t_1ab08100d4953998dad76bfcf30864c0c5" prot="public" static="no" mutable="no">
+        <type>mfcc_t</type>
+        <definition>mfcc_t gauden_dist_t::dist</definition>
+        <argsstring></argsstring>
+        <name>dist</name>
+        <briefdescription>
+<para>Density value for input observation wrt above codeword; NOTE: result in logs3 domain, but var_t used for speed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ms_gauden.h" line="73" column="1" bodyfile="src/libpocketsphinx/ms_gauden.h" bodystart="73" bodyend="-1"/>
+        <referencedby refid="ms__gauden_8h_1a0306e088fa33894ca40182d2392ffe4d" compoundref="ms__gauden_8c" startline="399" endline="412">gauden_free</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure to store distance (density) values for a given input observation wrt density values in some given codebook. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libpocketsphinx/ms_gauden.h" line="71" column="1" bodyfile="src/libpocketsphinx/ms_gauden.h" bodystart="71" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structgauden__dist__t_1ab08100d4953998dad76bfcf30864c0c5" prot="public" virt="non-virtual"><scope>gauden_dist_t</scope><name>dist</name></member>
+      <member refid="structgauden__dist__t_1a93e978149bae5b5bf089769458c42ee4" prot="public" virt="non-virtual"><scope>gauden_dist_t</scope><name>id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

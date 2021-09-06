@@ -1,0 +1,214 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.3,v 1.47 1999/06/07 19:05:25 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test Create, Destroy, Read of Records
+#
+source $script_dir/vol.init
+
+if { $logging==0 } {
+    echo "Logging off: script not run. "
+} else {
+
+
+set_config_info
+
+#set num_rec [expr $page_size/2]
+set num_rec 3
+
+set id_hdr_width %06d
+set id_body_width %08d
+
+set s [format data 1]
+
+###############################################
+#   insert num_rec records
+#
+sm begin_xct
+set fid [sm create_file $volid regular]
+
+catch {unset rid}
+set rid(0) $null_rid
+verbose creating $num_rec 
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set rid($i) [
+	sm create_rec $fid [format $id_hdr_width $i] 10 data.[format $id_body_width $i]
+    ]
+}
+
+verbose reading $num_rec
+for {set i 1} {$i <= $num_rec} {incr i} {
+    catch {unset r}
+    set r [sm read_rec $rid($i) 0 0]
+    verbose read_rec yields: $r
+    set id [format $id_hdr_width $i]
+    set id_body [format $id_body_width $i]
+    verbose $i $id $id_body $r
+    set hdr [lindex $r 2]
+    set body [lindex $r 4]
+	# sm read_rec returns this: hdr=<hdr> : <body>
+    verbose check hdr
+    verbose hdr=$hdr
+    verbose expected=$id
+    assert {expr [string compare $hdr hdr=$id] == 0}
+    verbose check body
+    verbose body=$body
+    verbose expected="data.$id_body"
+    assert {expr [string compare $body data.$id_body] == 0}
+}
+verbose done with check
+
+verbose getting stats before abort of record creations
+verbose [dstats $volid]
+
+verbose aborting
+sm abort_xct
+
+verbose after abort
+sm begin_xct
+
+verbose getting stats after abort of record creations
+verbose [dstats $volid]
+
+verbose recreating $num_rec
+set fid [sm create_file $volid regular]
+
+set rid(0) $null_rid
+verbose creating $num_rec 
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set rid($i) [
+	sm create_rec $fid [format $id_hdr_width $i] 10 data.[format $id_body_width $i]
+    ]
+}
+sm commit_xct
+
+dstats $fid
+dstats $volid
+
+###############################################
+#   read inserted records
+#
+verbose reading $num_rec
+sm begin_xct
+for {set i 1} {$i <= $num_rec} {incr i} {
+    catch {unset r}
+    set r [sm read_rec $rid($i) 0 0]
+    set id [format $id_hdr_width $i]
+    set id_body [format $id_body_width $i]
+    verbose $i $id $id_body $r
+    set hdr [lindex $r 2]
+    set body [lindex $r 4]
+	# sm read_rec returns this: hdr=<hdr> : <body>
+    verbose check hdr
+    assert {expr [string compare $hdr hdr=$id] == 0}
+    verbose check body
+    assert {expr [string compare $body data.$id_body] == 0}
+}
+
+verbose scanning after separate scan using pin
+sm scan_recs $fid
+
+sm commit_xct
+
+###############################################
+#   delete all odd records
+verbose delete all odd records
+sm begin_xct
+set abort_check 2
+while {$abort_check >= 1} {
+    sm abort_xct
+    sm begin_xct
+    verbose checking stats after destroy was aborted
+    verbose [dstats $volid]
+    verbose destroying [expr $num_rec/2]
+    for {set i 1} {$i <= $num_rec} {incr i; incr i} {
+	sm destroy_rec $rid($i)
+    }
+    set abort_check [expr {$abort_check - 1}]
+
+    verbose checking stats after destroy
+    verbose [dstats $volid]
+}
+sm commit_xct
+
+###############################################
+#   re-read even records
+#
+verbose re-read even records
+sm begin_xct
+for {set i 2} {$i <= $num_rec} {incr i; incr i} {
+    set r [sm read_rec $rid($i) 0 0]
+    set id [format $id_hdr_width $i]
+    set id_body [format $id_body_width $i]
+    verbose $i $id $id_body $r
+    set hdr [lindex $r 2]
+    set body [lindex $r 4]
+    verbose check hdr
+    assert {expr [string compare $hdr hdr=$id] == 0}
+    assert {expr [string compare $body data.$id_body] == 0}
+}
+verbose trying an odd record -- THIS SHOULD GENERATE AN ERROR
+catch {[sm read_rec $rid(1) 0 0]} result
+verbose EXPECTED ERROR: $result
+
+verbose trying an even record
+verbose [sm read_rec $rid(2) 0 0]
+
+verbose volume_quota [sm get_volume_quota $volid]
+
+sm commit_xct
+dstats $volid
+
+verbose volume_quota [sm get_volume_quota $volid]
+verbose sm_stats [sm gather_stats]
+
+sm begin_xct
+
+verbose destroying all records ...
+set scan [sm scan_file_create $fid t_cc_file]
+set pin [sm scan_file_next $scan 0]
+while {$pin != "NULL"} {
+    sm destroy_rec [sm pin_rid $pin]
+    set pin [sm scan_file_next $scan 0]
+}
+sm scan_file_destroy $scan
+
+verbose destroying file $fid
+sm destroy_file $fid
+sm commit_xct
+
+sm begin_xct
+verbose volume_quota [sm get_volume_quota $volid]
+verbose sm_stats [sm gather_stats]
+sm commit_xct
+dstats $volid
+
+unset rid r result id_body pin id fid hdr num_rec scan abort_check i body s
+}
+

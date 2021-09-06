@@ -1,0 +1,195 @@
+\section{feat\+\_\+s Struct Reference}
+\label{structfeat__s}\index{feat\+\_\+s@{feat\+\_\+s}}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ refcount}
+\begin{DoxyCompactList}\small\item\em Reference count. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_ab58e7419bc24969680baf4289dc756ce}} 
+char $\ast$ \textbf{ name}
+\begin{DoxyCompactList}\small\item\em Printable name for this feature type. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_aee30d93416c0c392f946dacd58dec984}} 
+int32 \textbf{ cepsize}
+\begin{DoxyCompactList}\small\item\em Size of input speech vector (typically, a cepstrum vector) \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a5b4ed4ce256ddcc3e97864cbbc8547a2}} 
+int32 \textbf{ n\+\_\+stream}
+\begin{DoxyCompactList}\small\item\em Number of feature streams; e.\+g., 4 in Sphinx-\/\+II. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a79f153013d8738796976e3de626a6772}} 
+uint32 $\ast$ \textbf{ stream\+\_\+len}
+\begin{DoxyCompactList}\small\item\em Vector length of each feature stream. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a02cf7454beea5fc6968165cfd17a7f34}} 
+int32 \textbf{ window\+\_\+size}
+\begin{DoxyCompactList}\small\item\em Number of extra frames around given input frame needed to compute corresponding output feature (so total = window\+\_\+size$\ast$2 + 1) \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_afe74101645e3e9dafe07d78f68ddf694}} 
+int32 \textbf{ n\+\_\+sv}
+\begin{DoxyCompactList}\small\item\em Number of subvectors. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_acfe00502fb5fb605f99b4b1f9842d650}} 
+uint32 $\ast$ \textbf{ sv\+\_\+len}
+\begin{DoxyCompactList}\small\item\em Vector length of each subvector. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a0a89f7965e2db52b32519d967d7d13db}} 
+int32 $\ast$$\ast$ \textbf{ subvecs}
+\begin{DoxyCompactList}\small\item\em Subvector specification (or N\+U\+LL for none) \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_af747bcddb70ea570fc07e8cefc2f8896}} 
+mfcc\+\_\+t $\ast$ \textbf{ sv\+\_\+buf}
+\begin{DoxyCompactList}\small\item\em Temporary copy buffer for subvector projection. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a32f835789890a70dab6271491f1400e3}} 
+int32 \textbf{ sv\+\_\+dim}
+\begin{DoxyCompactList}\small\item\em Total dimensionality of subvector (length of sv\+\_\+buf) \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a3e31d666805a9183f3188249bb6ff45f}} 
+\textbf{ cmn\+\_\+type\+\_\+t} \textbf{ cmn}
+\begin{DoxyCompactList}\small\item\em Type of C\+MN to be performed on each utterance. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a7b222bd84282defdabdba35987e7ae7b}} 
+int32 \textbf{ varnorm}
+\begin{DoxyCompactList}\small\item\em Whether variance normalization is to be performed on each utt; Irrelevant if no C\+MN is performed. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a4580c133e0bb9b9e2856f66482e91d3d}} 
+\textbf{ agc\+\_\+type\+\_\+t} \textbf{ agc}
+\begin{DoxyCompactList}\small\item\em Type of A\+GC to be performed on each utterance. \end{DoxyCompactList}\item 
+void($\ast$ \textbf{ compute\+\_\+feat} )(struct \textbf{ feat\+\_\+s} $\ast$fcb, mfcc\+\_\+t $\ast$$\ast$input, mfcc\+\_\+t $\ast$$\ast$feat)
+\begin{DoxyCompactList}\small\item\em Feature computation function. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_af405f775cc9df57701f93f2056be3c4a}} 
+\textbf{ cmn\+\_\+t} $\ast$ \textbf{ cmn\+\_\+struct}
+\begin{DoxyCompactList}\small\item\em Structure that stores the temporary variables for cepstral means normalization. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a2cc3e4a25a696379e8843d36cfcf3656}} 
+\textbf{ agc\+\_\+t} $\ast$ \textbf{ agc\+\_\+struct}
+\begin{DoxyCompactList}\small\item\em Structure that stores the temporary variables for acoustic gain control. \end{DoxyCompactList}\item 
+mfcc\+\_\+t $\ast$$\ast$ \textbf{ cepbuf}
+\begin{DoxyCompactList}\small\item\em Circular buffer of M\+F\+CC frames for live feature computation. \end{DoxyCompactList}\item 
+mfcc\+\_\+t $\ast$$\ast$ \textbf{ tmpcepbuf}
+\begin{DoxyCompactList}\small\item\em Array of pointers into cepbuf to handle border cases. \end{DoxyCompactList}\item 
+int32 \textbf{ bufpos}
+\begin{DoxyCompactList}\small\item\em Write index in cepbuf. \end{DoxyCompactList}\item 
+int32 \textbf{ curpos}
+\begin{DoxyCompactList}\small\item\em Read index in cepbuf. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_a2c54fea16330caf82c5f516137c2d454}} 
+mfcc\+\_\+t $\ast$$\ast$$\ast$ \textbf{ lda}
+\begin{DoxyCompactList}\small\item\em Array of linear transformations (for L\+DA, M\+L\+LT, or whatever) \end{DoxyCompactList}\item 
+uint32 \textbf{ n\+\_\+lda}
+\begin{DoxyCompactList}\small\item\em Number of linear transformations in lda. \end{DoxyCompactList}\item 
+\mbox{\label{structfeat__s_acbebc734e2c212aa7078b29531a78bc7}} 
+uint32 \textbf{ out\+\_\+dim}
+\begin{DoxyCompactList}\small\item\em Output dimensionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 117 of file feat.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structfeat__s_a9bd6277ec5f03e103b9c8a67579a2822}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!bufpos@{bufpos}}
+\index{bufpos@{bufpos}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{bufpos}
+{\footnotesize\ttfamily int32 feat\+\_\+s\+::bufpos}
+
+
+
+Write index in cepbuf. 
+
+
+
+Definition at line 156 of file feat.\+h.
+
+\mbox{\label{structfeat__s_a9b5c45065c30c9b6b610e54479b3f2c8}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!cepbuf@{cepbuf}}
+\index{cepbuf@{cepbuf}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{cepbuf}
+{\footnotesize\ttfamily mfcc\+\_\+t$\ast$$\ast$ feat\+\_\+s\+::cepbuf}
+
+
+
+Circular buffer of M\+F\+CC frames for live feature computation. 
+
+
+
+Definition at line 154 of file feat.\+h.
+
+\mbox{\label{structfeat__s_aaa43338c81fbe88f0d60321850bb3361}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!compute\+\_\+feat@{compute\+\_\+feat}}
+\index{compute\+\_\+feat@{compute\+\_\+feat}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{compute\+\_\+feat}
+{\footnotesize\ttfamily void($\ast$ feat\+\_\+s\+::compute\+\_\+feat) (struct \textbf{ feat\+\_\+s} $\ast$fcb, mfcc\+\_\+t $\ast$$\ast$input, mfcc\+\_\+t $\ast$$\ast$feat)}
+
+
+
+Feature computation function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fcb} & the \doxyref{feat\+\_\+t}{p.}{structfeat__t} describing this feature type \\
+\hline
+{\em input} & pointer into the input cepstra \\
+\hline
+{\em feat} & a 2-\/d array of output features (n\+\_\+stream x stream\+\_\+len) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/ve otherwise.
+\end{DoxyReturn}
+Function for converting window of input speech vector (input[-\/window\+\_\+size..window\+\_\+size]) to output feature vector (feat[stream][]). If N\+U\+LL, no conversion available, the speech input must be feature vector itself. 
+
+Definition at line 148 of file feat.\+h.
+
+\mbox{\label{structfeat__s_ad27f63c459eb46462e28b2a23d8f8a6f}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!curpos@{curpos}}
+\index{curpos@{curpos}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{curpos}
+{\footnotesize\ttfamily int32 feat\+\_\+s\+::curpos}
+
+
+
+Read index in cepbuf. 
+
+
+
+Definition at line 157 of file feat.\+h.
+
+\mbox{\label{structfeat__s_a2078107cc1c82d6c0b4f93bfbb75dd7a}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!n\+\_\+lda@{n\+\_\+lda}}
+\index{n\+\_\+lda@{n\+\_\+lda}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{n\+\_\+lda}
+{\footnotesize\ttfamily uint32 feat\+\_\+s\+::n\+\_\+lda}
+
+
+
+Number of linear transformations in lda. 
+
+
+
+Definition at line 160 of file feat.\+h.
+
+\mbox{\label{structfeat__s_a65eb722aadd471310eff84ac5946d98f}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!refcount@{refcount}}
+\index{refcount@{refcount}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{refcount}
+{\footnotesize\ttfamily int feat\+\_\+s\+::refcount}
+
+
+
+Reference count. 
+
+
+
+Definition at line 118 of file feat.\+h.
+
+\mbox{\label{structfeat__s_a0ffb1581086d94546b5e91e9ab685cb7}} 
+\index{feat\+\_\+s@{feat\+\_\+s}!tmpcepbuf@{tmpcepbuf}}
+\index{tmpcepbuf@{tmpcepbuf}!feat\+\_\+s@{feat\+\_\+s}}
+\subsubsection{tmpcepbuf}
+{\footnotesize\ttfamily mfcc\+\_\+t$\ast$$\ast$ feat\+\_\+s\+::tmpcepbuf}
+
+
+
+Array of pointers into cepbuf to handle border cases. 
+
+
+
+Definition at line 155 of file feat.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/sphinxbase/\textbf{ feat.\+h}\end{DoxyCompactItemize}

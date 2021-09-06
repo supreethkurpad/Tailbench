@@ -1,0 +1,250 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.big.1,v 1.12.2.2 2009/12/03 00:21:07 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  Load a btree from a (unix) file of unsigned integer keys
+#  and verify its content.  This will fail if you use integer
+#  keytype, since the file of keys has some very large (> max
+#  int) integers.
+#
+# set filename $script_dir/btree.big.1.keys
+# set filename $script_dir/btree.big.1.keys.nonunique
+set filename $script_dir/btree.big.1.keys
+set ktype u4
+set nrec 100000
+
+# part 1: create index & load
+# part 2: verify with scan
+# part 3: verify with probes
+# part 4: destroy objects
+set part1 1
+set do_blk 1
+set do_sort 1
+set part1b 1
+set part2 0
+set part3 1
+set part4 1
+
+proc scan_up {ndx nrec filename}  {
+    global ktype rid
+    #
+    # verify ascending
+    #
+    if { [catch { open $filename r } fileid ] == 0 } {
+    } else {
+        verbose Failed to read $filename:  $fileid
+        exit 100
+    }
+    verbose "scan up:"
+    set wrong 0
+    set scan [sm create_scan $ndx >= neg_inf <= pos_inf]
+    for {set i 1} {$i <= $nrec} {incr i}  {
+        set r [sm scan_next $scan $ktype]
+        if {[string compare $r eof] == 0} then { break }
+        set key [string trimleft [lindex $r 0] 0]
+        set el [lindex $r 1]
+        verbose "scanned ($key, $el)"
+        gets $fileid filekey
+        if [expr {$key == $filekey}] { 
+        } else {
+             # verbose $i: expected: $filekey got: $key
+             incr wrong
+        # assert {expr $wrong == 0}
+        }
+    }
+    # assert {expr $i > $nrec}
+    # assert {expr [string compare [sm scan_next $scan $ktype] eof] == 0}
+    sm destroy_scan $scan
+    close $fileid
+    # assert {expr $wrong == 0}
+    verbose $wrong in wrong order
+}
+
+set volid2 1
+if {$part1 == 0} {
+    set volid 1
+    if {$do_blk==1} {
+        set f1 s($volid.4)
+        set ndx s($volid2.4)
+    } else {
+        set ndx s($volid2.4)
+    }
+}
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+set rid "RID456789012"
+
+if {$part1} {
+    verbose PART1
+    #
+    # create index and load it up 
+    #
+    sm begin_xct
+    if {$do_blk == 1} {
+        set f1 [sm create_file $volid load_file]
+        verbose created file $f1
+    } else {
+        set ndx [sm create_index $volid2 btree regular $ktype]
+        verbose created index $ndx
+    }
+    sm commit_xct
+
+    sm begin_xct
+    if { [catch { open $filename r } fileid ] == 0 } {
+            verbose opened $filename: $fileid
+            for {set i 1} {$i <= $nrec} {incr i}  {
+                # verbose gets $fileid key
+                gets $fileid key
+                if {$do_blk == 1} {
+                    # verbose sm create_typed_hdr_rec $f1 $key 10 $ktype $rid b*1000
+                    sm create_typed_hdr_rec $f1 $key 10 $rid $ktype b*1000
+                } else {
+                    # verbose sm create_assoc $ndx $key $rid $ktype
+                    # sm create_assoc $ndx $key $rid $ktype
+                    if [catch { sm create_assoc $ndx $key $rid $ktype } err] {
+                        verbose error creating $i assoc: $err
+                        exit 100
+                    }
+                    unset err
+                }
+                if [expr {($i / 1000)* 1000 == $i} ] {
+                    verbose $i
+                }
+                unset key
+            }
+            verbose read $i keys
+            close $fileid
+    } else {
+            verbose Failed to read $filename:  $fileid
+            exit 100
+    }
+    sm commit_xct
+    verbose END PART1
+}
+
+if {$part1b} {
+    verbose PART1B
+    if {$do_blk == 1} {
+        sm begin_xct
+        if {$do_sort == 1} {
+            verbose sm sort_file $f1 $volid 3 $ktype hdr normal keep tmp
+            set f2 [sm sort_file $f1 $volid 3 $ktype hdr normal keep tmp]
+            sm scan_sorted_recs $f2 $ktype b*1000
+        } else {
+            set f2 $f1
+        }
+
+        set ndx [sm create_index $volid2 btree regular $ktype]
+        verbose created index $ndx $volid btree regular $ktype
+        verbose sm blkld_ndx $ndx 1 $f2 $ktype
+        set stat [sm blkld_ndx $ndx 1 $f2 $ktype]
+        verbose bulk-loaded index: $stat
+        sm commit_xct
+    }
+    verbose END PART1B
+}
+
+if {$part2} {
+    verbose PART2 : verify order with scan
+
+    sm begin_xct
+    sm print_index $ndx
+    scan_up $ndx $nrec $filename
+    sm commit_xct
+    verbose END PART2
+}
+
+if {$part3} {
+    verbose PART3 : verify with file read & btree probe
+
+    sm begin_xct
+    if { [catch { open $filename r } fileid ] == 0 } {
+            verbose opened $filename: $fileid
+            for {set i 1} {$i <= $nrec} {incr i}  {
+                # verbose gets $fileid key
+                gets $fileid key
+                # verbose sm find_assoc $ndx $key $ktype
+                if [catch { set el [sm find_assoc $ndx $key $ktype] } err] {
+                    verbose error: $err  on record $i: $key
+                }
+                unset key err
+            }
+            verbose found $i keys
+            close $fileid
+    } else {
+            verbose Failed to read $filename:  $fileid
+            exit 100
+    }
+    sm commit_xct
+    verbose END PART3 
+}
+
+if {$part4} {
+    verbose PART4 : scan the file and remove entries 1 at a time
+    sm begin_xct
+
+    if { [catch { open $filename r } fileid ] == 0 } {
+        verbose opened $filename: $fileid
+        for {set i 1} {$i <= $nrec} {incr i}  {
+            # verbose gets $fileid key
+            gets $fileid key
+            # verbose sm find_assoc  $ndx $key $ktype
+            if [catch { set el [sm find_assoc  $ndx $key $ktype] } err] {
+                verbose error: $err  looking up  record $i: $key
+            }
+            # verbose sm destroy_assoc $ndx $key $rid $ktype
+            if [catch { set el [sm destroy_assoc $ndx $key $rid $ktype] } err] {
+                verbose error: $err  destroying record $i: $key
+                sm print_index $ndx
+                exit 100
+            }
+            if [expr {($i / 1000)* 1000 == $i} ] {
+                verbose $i
+            }
+            unset key err
+        }
+        verbose destroyed $i keys
+        close $fileid
+    } else {
+        verbose Failed to read $filename:  $fileid
+        exit 100
+    }
+    sm commit_xct
+
+    verbose  PART5: destroy
+    sm begin_xct
+    sm destroy_index $ndx
+    sm commit_xct
+    verbose END PART4 
+}
+

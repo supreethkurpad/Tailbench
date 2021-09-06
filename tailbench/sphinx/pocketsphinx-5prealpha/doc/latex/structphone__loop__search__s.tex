@@ -1,0 +1,204 @@
+\section{phone\+\_\+loop\+\_\+search\+\_\+s Struct Reference}
+\label{structphone__loop__search__s}\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+
+
+Phone loop search structure.  
+
+
+
+
+{\ttfamily \#include $<$phone\+\_\+loop\+\_\+search.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ps\+\_\+search\+\_\+t} \textbf{ base}
+\begin{DoxyCompactList}\small\item\em Base search structure. \end{DoxyCompactList}\item 
+\textbf{ hmm\+\_\+t} $\ast$ \textbf{ hmms}
+\begin{DoxyCompactList}\small\item\em Basic H\+MM structures for CI phones. \end{DoxyCompactList}\item 
+\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ \textbf{ hmmctx}
+\begin{DoxyCompactList}\small\item\em H\+MM context structure. \end{DoxyCompactList}\item 
+int16 \textbf{ frame}
+\begin{DoxyCompactList}\small\item\em Current frame being searched. \end{DoxyCompactList}\item 
+int16 \textbf{ n\+\_\+phones}
+\begin{DoxyCompactList}\small\item\em Size of phone array. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__loop__search__s_ad9233a565738a5097097bab89193e2c5}} 
+int32 $\ast$$\ast$ \textbf{ pen\+\_\+buf}
+\begin{DoxyCompactList}\small\item\em Penalty buffer. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__loop__search__s_a630510d46979533e7acfd1e70d80ea97}} 
+int16 \textbf{ pen\+\_\+buf\+\_\+ptr}
+\begin{DoxyCompactList}\small\item\em Pointer for frame to fill in penalty buffer. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__loop__search__s_a0d01d1eabc94239673b4040e2a6d84fd}} 
+int32 $\ast$ \textbf{ penalties}
+\begin{DoxyCompactList}\small\item\em Penalties for CI phones in current frame. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__loop__search__s_adecb101bb21afd9e2a32c3f59b5abdc7}} 
+float64 \textbf{ penalty\+\_\+weight}
+\begin{DoxyCompactList}\small\item\em Weighting factor for penalties. \end{DoxyCompactList}\item 
+int32 \textbf{ best\+\_\+score}
+\begin{DoxyCompactList}\small\item\em Best Viterbi score in current frame. \end{DoxyCompactList}\item 
+int32 \textbf{ beam}
+\begin{DoxyCompactList}\small\item\em H\+MM pruning beam width. \end{DoxyCompactList}\item 
+int32 \textbf{ pbeam}
+\begin{DoxyCompactList}\small\item\em Phone exit pruning beam width. \end{DoxyCompactList}\item 
+int32 \textbf{ pip}
+\begin{DoxyCompactList}\small\item\em Phone insertion penalty (\char`\"{}language score\char`\"{}). \end{DoxyCompactList}\item 
+\mbox{\label{structphone__loop__search__s_a28788511ed4729a50c1b475312c7b90a}} 
+int \textbf{ window}
+\begin{DoxyCompactList}\small\item\em Window size for phoneme lookahead. \end{DoxyCompactList}\item 
+glist\+\_\+t \textbf{ renorm}
+\begin{DoxyCompactList}\small\item\em List of renormalizations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Phone loop search structure. 
+
+Definition at line 72 of file phone\+\_\+loop\+\_\+search.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structphone__loop__search__s_aea1cf9ffda814f681b57f32c1f8cc3b1}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!base@{base}}
+\index{base@{base}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{base}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+search\+\_\+t} phone\+\_\+loop\+\_\+search\+\_\+s\+::base}
+
+
+
+Base search structure. 
+
+
+
+Definition at line 73 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_a1aa6103c72ce8159bd21bfa4f97feff3}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!beam@{beam}}
+\index{beam@{beam}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{beam}
+{\footnotesize\ttfamily int32 phone\+\_\+loop\+\_\+search\+\_\+s\+::beam}
+
+
+
+H\+MM pruning beam width. 
+
+
+
+Definition at line 84 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_af6bf0231db2587a3f7ffa3f838b84db5}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!best\+\_\+score@{best\+\_\+score}}
+\index{best\+\_\+score@{best\+\_\+score}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{best\+\_\+score}
+{\footnotesize\ttfamily int32 phone\+\_\+loop\+\_\+search\+\_\+s\+::best\+\_\+score}
+
+
+
+Best Viterbi score in current frame. 
+
+
+
+Definition at line 83 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_a160e5fb9670d1870e5b21379a87bace5}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!frame@{frame}}
+\index{frame@{frame}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{frame}
+{\footnotesize\ttfamily int16 phone\+\_\+loop\+\_\+search\+\_\+s\+::frame}
+
+
+
+Current frame being searched. 
+
+
+
+Definition at line 76 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_a67c44a95de79cb421fbeed4432686f48}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!hmmctx@{hmmctx}}
+\index{hmmctx@{hmmctx}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{hmmctx}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+context\+\_\+t}$\ast$ phone\+\_\+loop\+\_\+search\+\_\+s\+::hmmctx}
+
+
+
+H\+MM context structure. 
+
+
+
+Definition at line 75 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_a6f29f6a259a1ee07108bb55036cec9d0}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!hmms@{hmms}}
+\index{hmms@{hmms}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{hmms}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+t}$\ast$ phone\+\_\+loop\+\_\+search\+\_\+s\+::hmms}
+
+
+
+Basic H\+MM structures for CI phones. 
+
+
+
+Definition at line 74 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_a7844f45806d19d229504378da16bdc4c}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!n\+\_\+phones@{n\+\_\+phones}}
+\index{n\+\_\+phones@{n\+\_\+phones}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{n\+\_\+phones}
+{\footnotesize\ttfamily int16 phone\+\_\+loop\+\_\+search\+\_\+s\+::n\+\_\+phones}
+
+
+
+Size of phone array. 
+
+
+
+Definition at line 77 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_aaace8b677a536e41bb4616e6695b11d3}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!pbeam@{pbeam}}
+\index{pbeam@{pbeam}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{pbeam}
+{\footnotesize\ttfamily int32 phone\+\_\+loop\+\_\+search\+\_\+s\+::pbeam}
+
+
+
+Phone exit pruning beam width. 
+
+
+
+Definition at line 85 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_ac979bc57a659c7853eec1854dbcbfabe}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!pip@{pip}}
+\index{pip@{pip}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{pip}
+{\footnotesize\ttfamily int32 phone\+\_\+loop\+\_\+search\+\_\+s\+::pip}
+
+
+
+Phone insertion penalty (\char`\"{}language score\char`\"{}). 
+
+
+
+Definition at line 86 of file phone\+\_\+loop\+\_\+search.\+h.
+
+\mbox{\label{structphone__loop__search__s_a273295fbe1a22ad3ddf7db8695a394ec}} 
+\index{phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}!renorm@{renorm}}
+\index{renorm@{renorm}!phone\+\_\+loop\+\_\+search\+\_\+s@{phone\+\_\+loop\+\_\+search\+\_\+s}}
+\subsubsection{renorm}
+{\footnotesize\ttfamily glist\+\_\+t phone\+\_\+loop\+\_\+search\+\_\+s\+::renorm}
+
+
+
+List of renormalizations. 
+
+
+
+Definition at line 88 of file phone\+\_\+loop\+\_\+search.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ phone\+\_\+loop\+\_\+search.\+h}\end{DoxyCompactItemize}

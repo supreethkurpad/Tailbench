@@ -1,0 +1,241 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: read2.perf,v 1.9 2006/06/01 17:09:50 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#   Time 2 scans at a time (on different spindles, preferably)
+#   Parameters: 
+#   	        size of objects written 
+#		logging on or off
+#
+# set objsize [expr {8192 * 6}]
+set objsize 7000
+set nscans 1
+
+#ignored for now
+set logging 1
+
+set config [sm config_info]
+
+set volid 1
+source $script_dir/vol.init
+
+set volsize [lindex [sm get_volume_quota $volid] 0]
+set used [lindex [sm get_volume_quota $volid] 1]
+set volsize [expr {$volsize - $used} ]
+set objksize [expr {$objsize / 1024} ]
+
+echo volsize = $volsize   
+echo objksize = $objksize 
+
+# dstats $volid
+
+# figure out how many (presumably large) 
+# objects will fit on the volume
+
+# set nobjs [expr {$volsize / $objksize} ]
+set nobjs [expr {8192 * 7}]
+set nobjs 5000
+
+echo nobjs = $nobjs
+
+# round down to the nearest 100
+if { $nobjs > 100 } {
+    set nobjs [expr {$nobjs / 100} ]
+    echo nobjs = $nobjs
+    set nobjs [expr {$nobjs * 100} ]
+}
+echo nobjs = $nobjs
+
+unset objksize
+
+set hdr "" 
+set id_body_width zvec%d
+set body [format $id_body_width $objsize]
+
+# 
+# in existing file, create a buncha records
+# in one transaction
+
+sm begin_xct
+    # Now, start over and time it
+    # set fid [sm create_file $volid ]
+    set fid s(1.4)
+    echo fid=$fid
+
+    set fid2 s(2.4)
+    catch {sm destroy_file $fid2} err
+    echo destroy : $err : create file:
+    set fid2 [sm create_file 2 tmp]
+    echo fid2=$fid2
+sm commit_xct
+
+
+if { 0 } {
+	echo CREATING $nobjs RECS of size $objsize
+
+	set dummy [sm gather_stats reset]
+	sm begin_xct
+	    for {set i 0} {$i < $nobjs} {incr i} {
+		sm create_rec $fid $hdr $objsize $body
+	    }
+	sm commit_xct
+	echo
+	echo CREATED $nobjs RECS of size $objsize
+}
+
+
+set hdr ""
+set id_body_width zvec%d
+set body [format $id_body_width $objsize]
+
+######################################################################
+echo READING $nobjs RECS of size $objsize $nscans times
+echo sm force_buffers true
+sm force_buffers true
+set dummy [sm gather_stats reset]
+set rtime [ time {
+    sm begin_xct
+
+	for {set i 0} {$i < $nscans} {incr i} {
+	    set scan [sm scan_file_create $fid t_cc_record]
+	    set pin [sm scan_file_next $scan 0]
+	    while {$pin != "NULL"} {
+		sm pin_rid $pin
+		# sm pin_unpin $pin
+		set pin [sm scan_file_next $scan 0]
+	    }
+	    sm scan_file_destroy $scan
+	}
+
+    sm commit_xct
+} 1 ]
+echo SCANNED $nobjs RECS of size $objsize
+
+pstats
+set dummy [sm gather_stats reset]
+echo 
+echo total scan time = $rtime
+set sec [lindex $wtime 0]
+set msec [expr {$msec * 1000000} ]
+set tbytes [expr $objsize * $nobjs * $nscans]
+set ttbytes [expr $page_size * $nobjs * $nscans]
+
+if {$sec > 0} {
+   echo [expr {$tbytes / $sec}] user bytes per second
+   echo [expr {$ttbytes / $sec}] total bytes per second
+}
+
+######################################################################
+echo READING/WRITING $nobjs RECS of size $objsize $nscans times
+echo sm force_buffers true
+sm force_buffers true
+set dummy [sm gather_stats reset]
+set rtime [ time {
+    sm begin_xct
+
+	for {set i 0} {$i < $nscans} {incr i} {
+	    set scan [sm scan_file_create $fid t_cc_record]
+	    set pin [sm scan_file_next $scan 0]
+	    while {$pin != "NULL"} {
+		sm pin_rid $pin
+		set pin [sm scan_file_next $scan 0]
+		sm create_rec $fid2 $hdr $objsize $body
+	    }
+	    sm scan_file_destroy $scan
+	}
+    sm force_buffers true
+
+    sm commit_xct
+} 1 ]
+echo SCANNED/WROTE $nobjs RECS of size $objsize
+
+pstats
+set dummy [sm gather_stats reset]
+echo 
+echo total scan time = $rtime
+set msec [lindex $rtime 0]
+set sec [expr {$msec / 1000000} ]
+set tbytes [expr $objsize * $nobjs * $nscans]
+set ttbytes [expr $page_size * $nobjs * $nscans]
+
+if {$sec > 0} {
+   echo [expr {$tbytes / $sec}] user bytes per second
+   echo [expr {$ttbytes / $sec}] total bytes per second
+}
+
+######################################################################
+# now run 2 scans simultaneously
+######################################################################
+
+echo DOUBLE-SCANNING $nobjs RECS of size $objsize $nscans times
+
+sm force_buffers true
+set dummy [sm gather_stats reset]
+set rtime [ time {
+    sm begin_xct
+
+	for {set i 0} {$i < $nscans} {incr i} {
+	    set scan1 [sm scan_file_create $fid t_cc_record]
+	    set scan2 [sm scan_file_create $fid2 t_cc_record]
+	    set pin1 [sm scan_file_next $scan1 0]
+	    set pin2 [sm scan_file_next $scan2 0]
+	    while {$pin1 != "NULL"} {
+		set pin1 [sm scan_file_next $scan1 0]
+		set pin2 [sm scan_file_next $scan2 0]
+	    }
+	    sm scan_file_destroy $scan1
+	    sm scan_file_destroy $scan2
+	}
+
+    sm commit_xct
+} 1 ]
+echo double-SCANNED $nobjs RECS of size $objsize
+
+pstats
+set dummy [sm gather_stats reset]
+echo 
+echo total scan time = $rtime
+set msec [lindex $rtime 0]
+set sec [expr {$msec / 1000000} ]
+set tbytes [expr $objsize * $nobjs * $nscans * 2]
+set ttbytes [expr $page_size * $nobjs * $nscans * 2]
+
+if {$sec > 0} {
+   echo [expr {$tbytes / $sec}] user bytes per second
+   echo [expr {$ttbytes / $sec}] total bytes per second
+}
+
+sm begin_xct
+    sm destroy_file $fid2
+sm commit_xct
+
+# dstats $volid
+
+unset scan1 scan2 scan 
+

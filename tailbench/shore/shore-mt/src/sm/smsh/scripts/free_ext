@@ -1,0 +1,353 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: free_ext,v 1.29.4.5 2010/03/19 22:20:36 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+proc rid_to_pid { rec } {
+	set pid [string range $rec 0 [expr [string last "." $rec]-1] ]
+	set pid [string range $pid [expr [string last "." $pid]+1] end ]
+	return $pid
+}
+
+proc rem1 { rid  commit} {
+	sm begin_xct
+	set tx [sm xct]
+	set tid [sm xct_to_tid $tx]
+	sync
+	verbose tid $tid destroying rec1 $rid
+	sm destroy_rec $rid
+	verbose rec1 $rid destroyed
+	# you can't sync here, because one of the
+	# destroys can't happen until the other
+	# tx commits
+	# sync
+	if {$commit} {
+		sm commit_xct
+		verbose t1 ($tid) committed
+	} else {
+		verbose t1 aborting
+		sm abort_xct
+		verbose t1 aborted
+	}
+}
+
+proc rem2 { rid  commit} {
+	sm begin_xct
+	set tx [sm xct]
+	set tid [sm xct_to_tid $tx]
+	sync
+	verbose tid $tid destroying rec2 $rid
+	sm destroy_rec $rid
+	verbose rec2 $rid destroyed
+	# you can't sync here, because one of the
+	# destroys can't happen until the other
+	# tx commits
+	# sync
+	if {$commit} {
+		sm commit_xct
+		verbose t2 ($tid) committed
+	} else {
+		verbose t2 aborting
+		sm abort_xct
+		verbose t2 aborted
+	}
+}
+
+###############################################################################
+source $script_dir/vol.init
+set_config_info
+
+# Set up the initial disk stats so we can check diffs in these numbers
+# at various points in the script
+
+# Get starting statistics
+set init_dstats [get_dstats $volid noaudit]
+set init_stats [sm gather_stats]
+
+proc expect_at_least_stats { diff name msg } {
+    global volid init_stats
+	verbose expect_at_least_stats $diff $name $msg
+    set cur [sm gather_stats]
+	set x [select_stat_value $init_stats $name]
+	set y [select_stat_value $cur $name]
+	set d [expr { $y - $x }]
+	if [expr {$d >= $diff}] {
+		verbose "SUCCESS: $name is $d more (at least $diff) at $msg"
+		return $d
+	} else {
+		# fail
+		echo "FAIL: $name is $d more; expected at least $diff at $msg"
+		assert {expr {$d == $diff} }
+		return -1
+	}
+}
+
+proc expect_at_least_Dstats { diff name msg } {
+    global volid init_dstats
+	verbose expect_at_least_Dstats $diff $name $msg
+    set cur [get_dstats $volid noaudit]
+	set x [select_stat_value $init_dstats $name]
+	set y [select_stat_value $cur $name]
+	set d [expr { $y - $x }]
+	if [expr {$d >= $diff}] {
+		verbose "SUCCESS: $name is $d more (at least $diff) at $msg"
+		return $d
+	} else {
+		# fail
+		echo "FAIL: $name is $d more; expected at least $diff at $msg"
+		assert {expr {$d == $diff} }
+		return -1
+	}
+}
+
+proc expect_exactly_stats { diff name msg } {
+    global volid init_stats
+	verbose expect_exactly_stats $diff $name $msg
+    set cur [sm gather_stats]
+	set x [select_stat_value $init_stats $name]
+	set y [select_stat_value $cur $name]
+	set d [expr { $y - $x }]
+	if [expr {$d == $diff}] {
+		verbose "SUCCESS: $name is exactly $d more at $msg "
+		return $d
+	} else {
+		# fail
+		echo "FAIL: $name is $d more; expected $diff at $msg"
+		assert {expr {$d == $diff} }
+		return -1
+	}
+}
+
+proc expect_exactly_Dstats { diff name msg } {
+    global volid init_dstats
+	verbose expect_exactly_Dstats $diff $name $msg
+    set cur [get_dstats $volid noaudit]
+	set x [select_stat_value $init_dstats $name]
+	set y [select_stat_value $cur $name]
+	set d [expr { $y - $x }]
+	if [expr {$d == $diff}] {
+		verbose "SUCCESS: $name is exactly $d more at $msg "
+		return $d
+	} else {
+		# fail
+		echo "FAIL: $name is $d more; expected $diff at $msg"
+		assert {expr {$d == $diff} }
+		return -1
+	}
+}
+###############################################################################
+
+if { $logging == 0 } {
+    echo "Logging off: script not run. "
+} else {
+
+    sm begin_xct
+    verbose creating file
+    set f1 [sm create_file $volid]
+	sm commit_xct
+
+	set new_files [expect_exactly_Dstats 1 file_cnt "after file created"]
+	verbose "-----> created" $new_files " new files."
+	set new_extents [expect_at_least_Dstats 1 volh.alloc_ext_cnt "after file created"]
+	verbose "-----> created" $new_extents " new extents."
+
+    set PG_SZ       $page_size
+
+# Create pages_per_ext records, each big enough 
+# to fill a whole page (so a whole  extent is filled). 
+
+    sm begin_xct
+#    control body width. Since it's likely to be bigger than what
+#    format can handle, we'll use formatlong:
+    set prefixlen  [expr {($PG_SZ * 6)/10}]
+	verbose prefixlen $prefixlen
+    for {set i 1} {$i <= $pages_per_ext} {incr i} {
+	    set r($i) [ sm create_rec $f1 "" 11 [formatlong 0 $prefixlen %d $i] ]
+	    verbose $r($i)
+    }
+
+	set new_records [expect_exactly_Dstats $pages_per_ext file.fipg.small_rec_cnt "after records created-1"]
+	verbose "-----> created" $new_records " new records."
+
+	set new_file_pages [expect_exactly_Dstats $pages_per_ext file.file_pg_cnt "after records created-2"]
+	verbose "-----> used" $new_file_pages " new file pages."
+
+	# SHORE-MT is buggy here: allocates 3 more instead of 2
+# 	expect_exactly_Dstats 2 volh.alloc_ext_cnt 4
+ 	set new_extents_2 [expect_at_least_Dstats 2 volh.alloc_ext_cnt  "after records created-3"]
+	verbose "-----> used" $new_extents_2 " new extents."
+
+	# Get the number of extents allocated now from the regular stats.
+	# Should match.
+ 	set new_extents_3 [expect_at_least_stats 2 vol_alloc_exts  "after records created-4"]
+	assert { expr {$new_extents_2 == $new_extents_3} }
+
+# Then create 2 more recs to be placed in the first and second
+# pages of the second extent.
+    set rec1data [formatlong 0 $prefixlen %d 1]
+    set rec2data [formatlong 0 $prefixlen %d 2]
+
+    verbose Length of records is [llength rec1$rec1data] [llength rec2$rec2data]
+
+	# the next two records should be on different pages in 2nd extent
+    set rec1 [sm create_rec $f1 "" 11 rec1$rec1data ]
+    set rec2 [sm create_rec $f1 "" 11 rec2$rec2data ]
+    verbose rec1 $rec1   rec2 $rec2
+    #Remember the pid of the pages containing rec1 and rec2
+    set pid1 [rid_to_pid $rec1]
+    set pid2 [rid_to_pid $rec2]
+    verbose pid1 $pid1   pid2 $pid2
+    assert {expr {$pid1 == [expr $pid2-1]}}
+
+	set num_2recs [expect_exactly_Dstats [expr $pages_per_ext + 2] file.fipg.small_rec_cnt "after two records created"]
+	verbose "-----> Just created 2 recs: for a total of " $num_2recs "."
+
+	#   get number of newly allocated extents from the regular statistics.
+	#   PROBLEM: why do we find we've allocated more here?
+	set num_2exts [expect_at_least_stats [expr $new_extents_3 + 1] vol_alloc_exts "after two records created-2"]
+
+    sm commit_xct
+
+	# SHORE-MT doesn't use the first extent allocated with the file(yet)
+	# expect_exactly_Dstats 3 volh.alloc_ext_cnt 6
+	expect_at_least_Dstats 3 volh.alloc_ext_cnt "after commit"
+
+###############################################################################
+
+    # Create two transactions: t1 and t2.
+    # First t1 destroys rec1 and then t2 destroys rec2.
+    # Then both xacts commit.
+
+    sm begin_xct
+
+    verbose forking 1
+    set t1 [ fork_thread rem1 $rec1 1 ]
+    verbose forking 2
+    set t2 [ fork_thread rem2 $rec2 1 ]
+
+    #destroy rec1 ==> page is freed
+    sync_thread $t1
+    #destroy rec2 ==> page is freed
+    sync_thread $t2
+
+    join_thread $t1 $t2
+
+    # Check that both pages are freed but the extent might
+	# not be freed because of the contention 
+
+    sm commit_xct
+
+	# show that the two records are no longer on the volume
+	expect_exactly_Dstats $pages_per_ext file.fipg.small_rec_cnt "after second commit"
+
+	# show that the at least one extent has been freed.
+	# It should be exactly one.
+	expect_exactly_stats 1 vol_free_exts "after second commit"
+
+###############################################################################
+
+    # Re-create rec1 and rec2 
+    # Check that the same pages are reused.
+    # Then destroy them again (this time using a single xact) and check that
+    # the extent is deallocated.
+
+    sm begin_xct
+
+    verbose re-creating recs rec1 and rec2
+    set rec1 [sm create_rec $f1 "" 11 rec1$rec1data ]
+    set rec2 [sm create_rec $f1 "" 11 rec2$rec2data ]
+    verbose re-created recs rec1 $rec1 and rec2 $rec2
+
+	expect_at_least_stats 1 vol_alloc_exts " after re-created recs"
+
+	## SHORE-MT allocates a different extent here:
+    # assert {expr { $pid1 == [rid_to_pid $rec1]}}
+    # assert {expr { $pid2 == [rid_to_pid $rec2]}}
+
+    # verbose du after re-creating rec1 and rec2
+    # dstats $f1
+
+    verbose destroying rec1 and rec2
+    sm destroy_rec $rec1
+    sm destroy_rec $rec2
+    sm commit_xct
+
+	# See how many extents have been freed.
+	expect_at_least_stats 1 vol_free_exts " after re-destroyed recs"
+
+    # verbose df after destroying rec1 and rec2
+	expect_at_least_Dstats 1 file_cnt " after re-create, re-destroy"
+
+    ##############################################################################
+
+    # Create second file and check that it reuses the 
+	# extent de-allocated above.
+
+    sm begin_xct
+
+    verbose creating second file
+    set f2 [sm create_file $volid]
+    verbose f2 $f2
+
+	expect_exactly_Dstats 2 file_cnt "after created 2nd file"
+
+    verbose creating a record in this file
+    set rnew [ sm create_rec $f2 "" 11 mike ]
+    verbose rnew $rnew
+    verbose pid1 $pid1
+    verbose pid2 $pid2
+    verbose rid to pid: [rid_to_pid $rnew]
+	set res [rid_to_pid $rnew]
+	verbose res= $res rnew=$rnew
+	# SHORE-MT is wasteful of pages/extents
+    # assert {expr { $pid1 == $res}}
+
+    verbose destroying both files
+    sm destroy_file $f1
+	expect_exactly_Dstats 1 file_cnt "after destroyed first file"
+    sm destroy_file $f2
+	expect_exactly_Dstats 0 file_cnt "after destroyed 2nd file"
+
+    sm commit_xct
+
+    ###############################################################################
+
+    unset f1 f2 PG_SZ 
+    unset rnew pid1 pid2 rec1 rec2
+    unset rec1data rec2data
+    unset r i
+    unset t1 t2
+    unset prefixlen
+	unset res 
+
+	unset new_files new_extents new_records
+	unset new_file_pages new_extents_2 new_extents_3 
+	unset num_2recs num_2exts
+}
+
+unset init_dstats
+unset init_stats

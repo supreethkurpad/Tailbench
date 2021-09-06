@@ -1,0 +1,66 @@
+\section{phone\+\_\+t Struct Reference}
+\label{structphone__t}\index{phone\+\_\+t@{phone\+\_\+t}}
+
+
+Triphone information, including base phones as a subset.  
+
+
+
+
+{\ttfamily \#include $<$mdef.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int32 \textbf{ ssid}
+\begin{DoxyCompactList}\small\item\em State sequence (or senone sequence) ID, considering the n\+\_\+emit\+\_\+state senone-\/ids are a unit. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__t_acbe38b7fc991bfbcb745fb6131d812f0}} 
+int32 \textbf{ tmat}
+\begin{DoxyCompactList}\small\item\em Transition matrix id. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__t_a0a895c57dccac46699fa3589e42b21d5}} 
+int16 {\bfseries ci}
+\item 
+\mbox{\label{structphone__t_a2a473afd43114648de71a9444aa54641}} 
+int16 {\bfseries lc}
+\item 
+\mbox{\label{structphone__t_a334106cbedf3d95a6bdebc4704e028cd}} 
+int16 \textbf{ rc}
+\begin{DoxyCompactList}\small\item\em Base, left, right context ciphones. \end{DoxyCompactList}\item 
+\mbox{\label{structphone__t_a5436db1dd178ef5ead83359c84963c83}} 
+\textbf{ word\+\_\+posn\+\_\+t} \textbf{ wpos}
+\begin{DoxyCompactList}\small\item\em Word position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Triphone information, including base phones as a subset. 
+
+For the latter, lc, rc and wpos are non-\/existent. 
+
+Definition at line 97 of file mdef.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structphone__t_af2f31836358c1c29c38a361b3923b859}} 
+\index{phone\+\_\+t@{phone\+\_\+t}!ssid@{ssid}}
+\index{ssid@{ssid}!phone\+\_\+t@{phone\+\_\+t}}
+\subsubsection{ssid}
+{\footnotesize\ttfamily int32 phone\+\_\+t\+::ssid}
+
+
+
+State sequence (or senone sequence) ID, considering the n\+\_\+emit\+\_\+state senone-\/ids are a unit. 
+
+The senone sequences themselves are in a separate table 
+
+Definition at line 98 of file mdef.\+h.
+
+
+
+Referenced by bin\+\_\+mdef\+\_\+read\+\_\+text(), and mdef\+\_\+is\+\_\+cisenone().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ mdef.\+h}\end{DoxyCompactItemize}

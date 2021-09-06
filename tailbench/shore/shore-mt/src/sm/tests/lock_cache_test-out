@@ -1,0 +1,107 @@
+Sources: 
+	 vol 1000
+	 store s(1000.900)
+	 page p(1000.900.50)
+	 rec r(1000.900.50.6)
+	 extent x(1000.33)
+	 u1 u1(1)
+	 u2 u2(1,2)
+	 u3 u3(1,2,3)
+	 u4 u4(1,2,3,4)
+{
+	Inserted L(1000) at line 219
+	Evicted 0
+	Dump at line 219
+	lock_id L(1000) mode 3
+}
+{
+	Inserted L(s(1000.900)) at line 220
+	Evicted 0
+	Dump at line 220
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+}
+{
+	Inserted L(p(1000.900.50)) at line 221
+	Evicted 0
+	Dump at line 221
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+}
+{
+	Inserted L(r(1000.900.50.6)) at line 222
+	Evicted 0
+	Dump at line 222
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+	lock_id L(r(1000.900.50.6)) mode 3
+}
+{
+	Inserted L(x(1000.33)[NoPageAllocs]) at line 223
+	Evicted 0
+	Dump at line 223
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+	lock_id L(r(1000.900.50.6)) mode 3
+	lock_id L(x(1000.33)[NoPageAllocs]) mode 3
+}
+{
+	Inserted L(u1(1)) at line 224
+	Evicted 0
+	Dump at line 224
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+	lock_id L(r(1000.900.50.6)) mode 3
+	lock_id L(x(1000.33)[NoPageAllocs]) mode 3
+	lock_id L(u1(1)) mode 3
+}
+{
+	Inserted L(u2(1,2)) at line 225
+	Evicted 0
+	Dump at line 225
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+	lock_id L(r(1000.900.50.6)) mode 3
+	lock_id L(x(1000.33)[NoPageAllocs]) mode 3
+	lock_id L(u1(1)) mode 3
+	lock_id L(u2(1,2)) mode 3
+}
+{
+	Inserted L(u3(1,2,3)) at line 226
+	Evicted 0
+	Dump at line 226
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+	lock_id L(r(1000.900.50.6)) mode 3
+	lock_id L(x(1000.33)[NoPageAllocs]) mode 3
+	lock_id L(u1(1)) mode 3
+	lock_id L(u2(1,2)) mode 3
+	lock_id L(u3(1,2,3)) mode 3
+}
+{
+	Inserted L(u4(1,2,3,4)) at line 227
+	Evicted 0
+	Dump at line 227
+	lock_id L(1000) mode 3
+	lock_id L(s(1000.900)) mode 3
+	lock_id L(p(1000.900.50)) mode 3
+	lock_id L(r(1000.900.50.6)) mode 3
+	lock_id L(x(1000.33)[NoPageAllocs]) mode 3
+	lock_id L(u1(1)) mode 3
+	lock_id L(u2(1,2)) mode 3
+	lock_id L(u3(1,2,3)) mode 3
+	lock_id L(u4(1,2,3,4)) mode 3
+}
+Dump after compacting all at line 230
+	lock_id L(1000) mode 3
+	lock_id L(x(1000.33)[NoPageAllocs]) mode 3
+	lock_id L(u1(1)) mode 3
+	lock_id L(u2(1,2)) mode 3
+	lock_id L(u3(1,2,3)) mode 3
+	lock_id L(u4(1,2,3,4)) mode 3

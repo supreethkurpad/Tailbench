@@ -1,0 +1,227 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: free_page.abort,v 1.3 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+#
+#   taken from free_page but now we rollback work 
+#   after the two transcations destroy the records.
+
+proc rid_to_pid { rec } {
+	set pid [string range $rec 0 [expr [string last "." $rec]-1] ]
+	set pid [string range $pid [expr [string last "." $pid]+1] end ]
+	return $pid
+}
+
+proc rem1 { rid  commit} {
+	sm begin_xct
+	set savept [sm save_work]
+	sync
+	verbose destroying r1
+	sm destroy_rec $rid
+	verbose r1 destroyed
+	sync
+	if {$commit} {
+		sm commit_xct
+		verbose t1 committed
+	} else {
+		verbose t1 rolling back
+		sm rollback_work $savept
+		verbose t1 rolled back
+		sm commit_xct
+		verbose t1 committed null xct
+	}
+}
+
+proc rem2 { rid  commit} {
+	sm begin_xct
+	set savept [sm save_work]
+	sync
+	verbose destroying r2
+	sm destroy_rec $rid
+	verbose r2 destroyed
+	sync
+	if {$commit} {
+		sm commit_xct
+		verbose t2 committed
+	} else {
+		verbose t2 rolling back
+		sm rollback_work $savept
+		verbose t2 rolled back
+		sm commit_xct
+		verbose t2 committed null xct
+	}
+}
+
+source $script_dir/vol.init
+
+if { $logging == 0 } {
+    echo "Logging off: script not run. "
+} else {
+    sm begin_xct
+
+    verbose creating file
+    set f1 [sm create_file $volid]
+
+    # Create 3 records: r0, r1 and r2. 
+    # r0 will be big enough to fill a whole page.
+    # r1 and r2 are placed in the second page of the file.
+
+    # change body width
+    set prefixlen  $max_small_rec
+
+    verbose creating r0
+    set r0 [ sm create_rec $f1 "" 11 [formatlong 0 $prefixlen %d 0] ]
+    verbose $r0
+
+    verbose creating r1 and r2
+    set r1 [ sm create_rec $f1 "" 11 markos ]
+    set r2 [ sm create_rec $f1 "" 11 mike ]
+    verbose $r1 $r2
+
+    #Remember the pid of the page containing r1 and r2
+    set pid1 [rid_to_pid $r1 ]
+    verbose $pid1
+    set pid2 [rid_to_pid $r2]
+    verbose $pid2
+    assert {expr [string compare $pid1 $pid2] ==0 }
+
+    # verbose du after creating r1 and r2
+    # dstats $f1
+
+    echo A: expect three records sm scan_recs $f1
+    echo [sm scan_recs $f1]
+
+    sm commit_xct
+
+    # Create two transactions: t1 and t2.
+    # First t1 destroys r1 and then t2 destroys r2.
+    # Both xacts commit.
+
+    verbose B: forking 1
+    set t1 [ fork_thread rem1 $r1 1 ]
+    verbose B: forking 2
+    set t2 [ fork_thread rem2 $r2 1 ]
+
+    #destroy r1
+    sync_thread $t1
+    #destroy r2: t2 destroys r2 and tries to free page==>must wait until t1 commits
+    sync_thread $t2
+    #commit t1
+    sync_thread $t1
+    #commit t2
+    sync_thread $t2
+
+    join_thread $t1 $t2
+
+	sm begin_xct
+    echo B: expect 1 record sm scan_recs $f1
+    echo [sm scan_recs $f1]
+	sm abort_xct
+
+    # Re-create r1 and r2 
+    # Check that the same page is reused.
+
+    sm begin_xct
+
+    # verbose du after destroying r1 and r2
+    # dustats $f1
+
+    verbose C: re-creating recs r1 and r2
+
+    set r1 [ sm create_rec $f1 "" 11 markos ]
+    set r2 [ sm create_rec $f1 "" 11 mike ]
+    verbose C: $r1 $r2
+    assert {expr [string compare $pid1 [rid_to_pid $r1]] == 0}
+    assert {expr [string compare $pid2 [rid_to_pid $r2]] == 0}
+
+    echo C: expect 3 records sm scan_recs $f1
+    echo [sm scan_recs $f1]
+    # verbose du after re-creating r1 and r2
+    # dstats $f1
+    sm commit_xct
+
+
+    # Create two transactions: t1 and t2.
+    # First t1 destroys r1 and then t2 destroys r2.
+    # t1 will abort, t2 will commit.
+
+    verbose D: forking 1
+    set t1 [ fork_thread rem1 $r1 0 ]
+    verbose D: forking 2
+    set t2 [ fork_thread rem2 $r2 1 ]
+
+    sync_thread $t1
+    sync_thread $t2
+    sync_thread $t1
+    sync_thread $t2
+    join_thread $t1 $t2
+
+    sm begin_xct
+    echo D: expect 2 records sm scan_recs $f1
+    echo [sm scan_recs $f1]
+	# verbose dstats after deleting 1 record
+    # dstats $f1
+
+    verbose E: re-creating rec r2
+    set r2 [ sm create_rec $f1 "" 11 mike ]
+    verbose E: $r1 $r2
+    assert {expr [string compare $pid2 [rid_to_pid $r2]] == 0}
+
+    echo E: expect 3 records sm scan_recs $f1
+    echo [sm scan_recs $f1]
+    sm commit_xct
+
+    # Create two transactions: t1 and t2.
+    # First t1 destroys r1 and then t2 destroys r2.
+    # t1 will commit, t2 will abort.
+
+    verbose F: forking 1
+    set t1 [ fork_thread rem1 $r1 1 ]
+    verbose F: forking 2
+    set t2 [ fork_thread rem2 $r2 0 ]
+
+    sync_thread $t1
+    sync_thread $t2
+    sync_thread $t1
+    sync_thread $t2
+    join_thread $t1 $t2
+
+	sm begin_xct
+    echo F: expect 2 records sm scan_recs $f1
+    echo [sm scan_recs $f1]
+    sm commit_xct
+
+    sm begin_xct
+	verbose destroying file.
+    sm destroy_file $f1
+    sm commit_xct
+
+    unset f1 r0 r1 r2 
+    unset pid1 pid2 
+    unset t1 t2 prefixlen
+}
+

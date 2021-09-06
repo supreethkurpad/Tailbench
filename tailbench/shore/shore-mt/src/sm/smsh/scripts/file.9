@@ -1,0 +1,179 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.9,v 1.3 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+#
+
+
+# Run check_volume after creation/commit of each kind of file:
+# tmp, regular, load_file, insert_file; see what happens after
+# dismount/remount. The tmp file is supposed to disappear.
+# The others will be converted to regular on commit.
+#
+# This script also lets us know what kinds of things we can
+# create with the different properties and what we can change.
+#
+
+set kindlist {tmp load_file insert_file regular}
+
+#return  0 if ok, 1 if error
+proc createit {dev volid what how} {
+	# verbose 
+	# verbose  CREATEIT dev=$dev volid=$volid what=$what how=$how 
+	set err [catch {eval $how} f1]
+	if {$err != 0} {
+		verbose DISALLOWED: create a "$what" HOW: $how
+		# verbose "$how failed: "  $f1
+		# verbose END createit $dev $volid $what $how 
+		return 0
+	} else {
+	}
+
+	set err [catch {sm get_store_property $f1} old]  
+	verbose ALLOWED: create a "$what" HOW: $how PROP: $old
+
+	verbose $what $f1 CHECK VOLUME $volid BEFORE COMMIT  of $how
+	verbose [sm check_volume $volid]
+	return $f1
+}
+
+proc checkit {dev volid what storeid} {
+	# verbose 
+	verbose $what $storeid CHECK VOLUME $volid BEFORE COMMIT 
+	verbose [sm check_volume $volid]
+	sm commit_xct
+	verbose $what $storeid CHECK VOLUME $volid AFTER COMMIT 
+	sm begin_xct
+	verbose [sm check_volume $volid]
+	sm commit_xct
+
+	set err [catch {sm dismount_dev $dev} res]
+	if {$err != 0} {
+	    echo "dismount_dev $dev failed: "  $res
+	}
+	set err [catch {sm mount_dev $dev $volid} res]
+	if {$err != 0} {
+	    echo "remount: mount_dev $dev failed "  $res
+	}
+	verbose $what $storeid CHECK VOLUME $volid AFTER COMMIT,DISMOUNT,REMOUNT 
+	verbose [sm check_volume $volid]
+	# verbose 
+	sm begin_xct
+}
+
+proc changeit {dev volid what storeid kindlist} {
+	set sp [sm save_work]
+    set err [catch {sm get_store_property $storeid} old]  
+    verbose changeit $what $storeid returned: $err -  $old 
+	# verbose rolling back...
+	sm rollback_work $sp
+
+    if {$err == 0} {
+		foreach k $kindlist {
+			set sp [sm save_work]
+			   set err [catch {sm set_store_property $storeid $k} new]
+			   if {$err == 0} {
+				   verbose ALLOWED: change $what store property from $old to $k
+			   } else {
+				   verbose DISALLOWED: change $what store property from $old to $k resulted in : $err $k $new
+			   }
+			sm rollback_work $sp
+		}
+    }
+}
+
+set f1 ""
+
+source $script_dir/vol.init
+verbose CHECK VOLUME AT START
+verbose [sm check_volume $volid]
+
+
+# Create file of given kind
+set what "file"
+foreach k $kindlist {
+	sm begin_xct
+	set how "sm create_file $volid $k"
+	verbose "---------------------------------- $k ------- $what --------- $how"
+	set f1 [createit $dev $volid $what $how]
+	# If we were able to create it, then try to change it to each kind.
+	# The proc changeit tries to change the store property in a
+	# transaction that it then aborts.
+	if { $f1 != 0 } {
+		verbose f1 = $f1 
+
+		changeit  $dev $volid $what $f1 $kindlist 
+		checkit $dev $volid $what $f1
+		# checkit mounts/dismounts, if tmp, file will go away
+
+		# verbose destroying $f1 ...
+		# set err [catch {sm destroy_file $f1} res]
+		# verbose err $err res $res f1 $f1.
+		#ignore result
+	}
+	sm commit_xct
+}
+
+# Create btree of given kind
+set what "btree"
+foreach k $kindlist {
+	sm begin_xct
+	set how "sm create_index $volid btree $k u4"
+	verbose "---------------------------------- $k ------- $what --------- $how"
+	set f1 [createit $dev $volid $what $how]
+	if { $f1 != 0 } {
+		verbose f1 = $f1 
+
+		changeit  $dev $volid $what $f1 $kindlist 
+		checkit $dev $volid $what $f1
+
+		set err [catch {sm destroy_index $f1} res]
+		#ignore result
+	}
+	sm commit_xct
+}
+
+# Create rtree of given kind
+set what "rtree"
+foreach k $kindlist {
+	sm begin_xct
+	set how "sm create_md_index $volid 2 $what $k"
+	verbose "---------------------------------- $k ------- $what --------- $how"
+	set f1 [createit $dev $volid $what $how]
+	if { $f1 != 0 } {
+		verbose f1 = $f1 
+
+		changeit  $dev $volid $what $f1 $kindlist 
+		checkit $dev $volid $what $f1
+
+		set err [catch {sm destroy_md_index $f1} res]
+		#ignore result
+	}
+	sm commit_xct
+}
+
+unset f1 k kindlist what 

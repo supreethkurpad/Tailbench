@@ -1,0 +1,87 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.perf,v 1.12 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# set fileType to tmp or regular or no_log
+# set logging to yes or no here AND in .shoreconfig
+
+set fileType tmp
+set logging yes
+set numFiles 3
+set numObjPerFile 1000
+set id_width %08d
+
+proc test {fileType}  {
+	global id_width volid buffer numObjPerFile numFiles
+
+	verbose test $numObjPerFile object per file for $numFiles files
+
+	sm begin_xct
+	for {set n 0} {$n < $numFiles} {incr n}  {
+		set fid [sm create_file $volid $fileType]
+		for {set i 0} {$i < $numObjPerFile} {incr i}  {
+			set r [sm create_rec $fid [format $id_width $i] 30000 $buffer]
+			verbose sm create_rec $fid $i 30000  returns rid $r
+		}
+		verbose [sm get_du_statistics $volid ]
+	}
+	set n [sm gather_xct_stats reset]
+	sm commit_xct
+	verbose [pnzstats $n]
+}
+
+# make a 64K buffer
+set buffer ""
+for {set i 48} {$i < 112} {incr i}  {
+	set c [format "%c" $i]
+	set buffer "$buffer$c"
+}
+for {set i 0} {$i < 10} {incr i}  {
+	set buffer "$buffer$buffer"
+}
+
+
+source $script_dir/vol.init
+clearstats
+
+verbose "********************************"
+verbose "** fileType: $fileType, logging: $logging, numFiles: $numFiles"
+verbose "********************************"
+
+set testTime [time {test $fileType}]
+
+verbose
+verbose testTime=$testTime
+verbose ********************************
+verbose STAT NUMBERS ARE FOR $numFiles RUNS.
+verbose ********************************
+# print bf stats
+verbose [pnzstats [sm gather_stats]]
+verbose
+verbose
+

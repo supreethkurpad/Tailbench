@@ -1,0 +1,80 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: trans.2,v 1.16.2.4 2009/12/21 18:45:19 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  test 2pc recovery
+#
+
+set do_file_create 1
+source $script_dir/trans.tcl
+
+
+
+if {$logging == 0} {
+    return "Logging off: script not run. "
+}
+
+# replace actionlist given in trans.tcl:
+# (just for convenience in fiddling)
+set actionlist { readwrite readonly }
+
+set finishlist { 
+	extern.prepare.commit.restart 
+	extern.prepare.abort.restart
+	extern.prepare.restart.commit
+	extern.restart
+	commit.restart abort.restart
+	extern.abort.restart
+	extern.prepare.restart.abort
+	}
+
+set cleanlist { false true }
+# set cleanlist { true }
+
+set formsize [expr {$page_size - 100}]
+verbose set formsize $formsize
+
+foreach f $finishlist {
+foreach c $cleanlist {
+foreach a $actionlist {
+	verbose rtrans $c $a $f
+	rtrans $c $a $f
+}
+}
+}
+
+unset c a f
+
+sm begin_xct
+sm destroy_file $f0
+sm commit_xct
+
+unset formsize
+unset cleanlist
+unset finishlist actionlist 

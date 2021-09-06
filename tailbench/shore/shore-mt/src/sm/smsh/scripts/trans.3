@@ -1,0 +1,71 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: trans.3,v 1.9.4.4 2009/12/21 18:45:19 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  test 2pc recovery -- to do
+#  CRASHES NOT YET TESTED
+#
+
+set do_file_create 1
+source $script_dir/trans.tcl
+
+proc crashtrans { action finish c } {
+	set cmd "trans $action $finish"
+	set cmd "crash $c $cmd"
+}
+
+set finishlist { 
+	commit.restart abort.restart
+	extern.abort.restart
+	extern.prepare.commit.restart extern.prepare.abort.restart
+	extern.prepare.restart.commit
+	extern.prepare.restart.abort
+	extern.restart
+	}
+
+set crashlist { 
+	unfinished_prepare
+	concurrent_prepare_log
+    }
+
+set clean false
+set formsize [expr {$page_size - 100}]
+
+foreach a $actionlist {
+    foreach f $finishlist {
+	   rtrans $clean $a $f
+    }
+}
+
+sm begin_xct
+sm destroy_file $f0
+sm commit_xct
+
+unset clean crashlist finishlist actionlist
+unset a f formsize 

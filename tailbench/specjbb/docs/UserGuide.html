@@ -1,0 +1,1826 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>SPECjbb2005 User</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.4  (Win32)">
+	<META NAME="CREATED" CONTENT="20050601;17050699">
+	<META NAME="CHANGED" CONTENT="20050602;8555127">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=2 STYLE="page-break-before: always">
+	<TR VALIGN=TOP>
+		<TD>
+			<P STYLE="border: none; padding: 0in; text-decoration: none"><A NAME="_x0000_i1025"></A>
+			<FONT COLOR="#0000bb"><A HREF="http://www.spec.org/jbb2005/"><IMG SRC="spec-sm.gif" NAME="Graphic1" ALT="SPEC logo" ALIGN=BOTTOM WIDTH=57 HEIGHT=78 BORDER=0></A></FONT></P>
+		</TD>
+		<TD>
+			<H2 STYLE="border: none; padding: 0in"><U>SPECjbb<FONT COLOR="#000000">2005</FONT>
+			User's Guide</U> 
+			</H2>
+			<P STYLE="border: none; padding: 0in">Version 1.04 <BR>Last
+			modified: June 13, 2005 
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<HR SIZE=1>
+<H2><A HREF="#Introduction"><U><FONT COLOR="#0000bb">1 Introduction</FONT></U></A>
+</H2>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Background"><U><FONT COLOR="#0000bb">1.1
+Background</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Purpose"><U><FONT COLOR="#0000bb">1.2
+General Concepts</FONT></U></A> 
+</H3>
+<H2><A HREF="#Installation and Setup"><U><FONT COLOR="#0000bb">2
+Installation and Setup of SPECjbb2005</FONT></U></A> 
+</H2>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Installing"><U><FONT COLOR="#0000bb">2.1
+Installation of SPECjbb2005</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Installation211"><U><FONT COLOR="#0000bb">2.1.1
+Installing the benchmark</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Installation212"><U><FONT COLOR="#0000bb">2.1.2
+Trial run of SPECjbb2005</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Setup"><U><FONT COLOR="#0000bb">2.2
+Setup</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Properties File Setup"><U><FONT COLOR="#0000bb">2.2.1
+Properties File Setup</FONT></U></A> 
+</H3>
+<H4 STYLE="margin-left: 1in"><A HREF="#Properties Format"><U><FONT COLOR="#0000bb">2.2.1.1
+Properties Format</FONT></U></A> 
+</H4>
+<H4 STYLE="margin-left: 1in"><A HREF="#Control Properties"><U><FONT COLOR="#0000bb">2.2.1.2
+Control Properties</FONT></U></A> 
+</H4>
+<H2><A HREF="#Running SPECjbb2005"><U><FONT COLOR="#0000bb">3 Running
+SPECjbb2005</FONT></U></A><FONT COLOR="#ff0000"> </FONT>
+</H2>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Running the benchmark"><U><FONT COLOR="#0000bb">3.2
+Running the benchmark</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Reporter"><U><FONT COLOR="#0000bb">3.3
+Running the Reporter</FONT></U></A> 
+</H3>
+<H3><A HREF="#Customizing properties"><U><FONT COLOR="#0000bb">4
+Customizing the properties files</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Control parameters"><U><FONT COLOR="#0000bb">4.1
+Control parameters</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Configuration Description"><U><FONT COLOR="#0000bb">4.2
+Configuration description parameters</FONT></U></A> 
+</H3>
+<H2><A HREF="#Operational Validity"><U><FONT COLOR="#0000bb">5
+Operational Validity</FONT></U></A> 
+</H2>
+<H2><A HREF="#Metric"><U><FONT COLOR="#0000bb">6 The Metric</FONT></U></A>
+</H2>
+<H2><A HREF="#Results"><U><FONT COLOR="#0000bb">7 Results Reports</FONT></U></A>
+</H2>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Raw file"><U><FONT COLOR="#0000bb">7.1
+Raw file</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Outputs"><U><FONT COLOR="#0000bb">7.2
+HTML Result Pages</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Screen ASCII"><U><FONT COLOR="#0000bb">7.3
+ASCII report file</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Screen Output"><U><FONT COLOR="#0000bb">7.4
+Benchmark Output</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Input Summary"><U><FONT COLOR="#0000bb">Test
+verification and summary of benchmark settings</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Iteration Results"><U><FONT COLOR="#0000bb">Results
+from each point</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Overall Score"><U><FONT COLOR="#0000bb">Overall
+SPECjbb2005 result</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.67in"><A HREF="#Configuration Information"><U><FONT COLOR="#0000bb">Configuration
+Information</FONT></U></A> 
+</H3>
+<H2><A HREF="#Troubleshooting"><U><FONT COLOR="#0000bb">8
+Troubleshooting</FONT></U></A> 
+</H2>
+<H2><A HREF="#Performance Tuning"><U><FONT COLOR="#0000bb">9
+Performance Tuning</FONT></U></A> 
+</H2>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#JVM Tuning"><U><FONT COLOR="#0000bb">JVM
+Software</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Classpath"><U><FONT COLOR="#0000bb">CLASSPATH</FONT></U></A>
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Memory Tuning"><U><FONT COLOR="#0000bb">Memory</FONT></U></A>
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="# Threads"><U><FONT COLOR="#0000bb">Threads</FONT></U></A>
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#JVM locks"><U><FONT COLOR="#0000bb">JVM
+Locking</FONT></U></A> 
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#Network Tuning"><U><FONT COLOR="#0000bb">Network</FONT></U></A>
+</H3>
+<H3 STYLE="margin-left: 0.33in"><A HREF="#IO Tuning"><U><FONT COLOR="#0000bb">Disk
+I/O</FONT></U></A> 
+</H3>
+<H2><A HREF="#Submitting"><U><FONT COLOR="#0000bb">10 Submitting
+results</FONT></U></A> 
+</H2>
+<HR SIZE=1>
+<P STYLE="margin-bottom: 0.17in">&nbsp;</P>
+<H2><A NAME="Introduction"></A>1 Introduction 
+</H2>
+<P>This document is a practical guide for setting up and running a
+SPEC Java Business Benchmark (SPECjbb2005) test. To submit
+SPECjbb2005 results the benchmarker must adhere to the rules
+contained in the <A HREF="RunRules.html"><U><FONT COLOR="#0000bb">&quot;Run
+and Reporting Rules&quot;</FONT></U></A> contained in the kit. For an
+overview of the benchmark architecture, see the <A HREF="WhitePaper.html"><U><FONT COLOR="#0000bb">SPECjbb2005
+White Paper</FONT></U></A>. 
+</P>
+<P>This document is targeted at people trying to run the SPECjbb2005
+benchmark in order to accurately measure their Java system, comprised
+of a JVM and an underlying operating system and hardware. 
+</P>
+<HR SIZE=1>
+<P STYLE="margin-bottom: 0.17in">&nbsp;</P>
+<H3><A NAME="Background"></A>1.1 Background 
+</H3>
+<P>SPECjbb2005 is a Java program emulating a 3-tier system with
+emphasis on the middle tier. Random input selection represents the
+first (user) tier. SPECjbb2005 fully implements the middle tier
+business logic. The third tier is represented by<FONT COLOR="#000000">&nbsp;tables
+of objects, implemented by Java Collections</FONT>, rather than a
+separate database. 
+</P>
+<P>The motivation behind SPECjbb2005 is that it is, and will continue
+to be, common to use Java as middleware between a database and
+customers. SPECjbb2005 is representative of a middle tier system,
+with simplifications to isolate it for benchmarking. This strategy
+saves the benchmarker the expense of having to invest in a fast
+database system in order to measure various JVM systems. 
+</P>
+<P>SPECjbb2005 is a follow-on release to SPECjbb2000, which was
+inspired by the TPC-C benchmark and loosely follows the TPC-C
+specification for its schema, input generation, and transaction
+profile. SPECjbb2005 runs in a single JVM in which threads represent
+terminals, where each thread independently generates random input
+before calling transaction specific logic. There is neither network
+nor disk IO in SPECjbb2005. 
+</P>
+<P>For a full-fledged multi-tier Java benchmark, SPEC has developed a
+comprehensive application server benchmark, <A HREF="http://www.spec.org/jAppServer2004/"><U><FONT COLOR="#0000bb">SPECjAppServer2004</FONT></U></A>.
+</P>
+<H3><A NAME="Purpose"></A>1.2 General Concepts 
+</H3>
+<P>A warehouse is a unit of stored data. It contains roughly 25MB of
+data stored in many objects in several Collections (HashMaps,
+TreeMaps). A thread represents an active user posting transaction
+requests within a warehouse. There is a one-to-one mapping between
+warehouses and threads, plus a few threads for SPECjbb2005 main and
+various JVM functions. As the number of warehouses increases during
+the full benchmark run, so does the number of threads. 
+</P>
+<P>A &quot;point&quot; represents the throughput during the
+measurement interval at a given number of warehouses. A full
+benchmark run consists of a sequence of measurement points with an
+increasing number of warehouses (and thus an increasing number of
+threads). 
+</P>
+<P>This user can configure the number of application instances to
+run.&nbsp; When more than one instance is selected, several instances
+will be run concurrently with the final measurement being the sum of
+those for the individual instances. The multiple application
+instances are synced using local socket communication and a
+controller.</P>
+<HR SIZE=1>
+<P STYLE="margin-bottom: 0.17in">&nbsp;</P>
+<H2><A NAME="Installation and Setup"></A><A NAME="Installation_and_Setup"></A>
+2 Installation and Setup of SPECjbb2005</H2>
+<H3><A NAME="Installing"></A>2.1 Installation of SPECjbb2005 
+</H3>
+<H3><A NAME="Installation211"></A>2.1.1 Installing the benchmark 
+</H3>
+<P>This section describes the steps necessary to set up SPECjbb2005.
+The setup instructions for most platforms are very similar to these
+generic setup instructions. 
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in"><STRONG>Make sure Java is
+	correctly installed on the test machine.</STRONG> 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in"><STRONG>Put the CD in the CDROM
+	drive.</STRONG> 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in"><STRONG>Mount it</STRONG> (if
+	necessary) and <STRONG>enter the top-level cdrom directory</STRONG>.
+		</P>
+	<LI><P STYLE="margin-bottom: 0in"><STRONG>Run InstallShield:</STRONG>
+		</P>
+</OL>
+<P STYLE="margin-left: 0.83in">java setup 
+</P>
+<P STYLE="margin-left: 0.5in">or double click on setup.exe 
+</P>
+<OL START=5>
+	<LI><P STYLE="margin-bottom: 0in"><STRONG>Follow the instructions
+	from there.</STRONG> 
+	</P>
+</OL>
+<P>&nbsp;</P>
+<P>Alternately, <STRONG>to run without the GUI</STRONG>, use the
+following command: 
+</P>
+<P STYLE="margin-left: 0.33in">java setup -o &lt;installation
+directory&gt; 
+</P>
+<P>There should now be two jar files (<EM>jbb.jar and &nbsp;check.jar</EM>),
+documentation in <EM>doc</EM>, and source and class files in
+<EM>src/spec/jbb</EM> and <EM>src/spec/reporter</EM>. 
+</P>
+<P><STRONG>Do NOT recompile (javac).</STRONG> 
+</P>
+<P>You are expected to use the bytecodes provided. Recompiling the
+benchmark will cause validation errors. 
+</P>
+<H3><A NAME="Installation212"></A>2.1.2 Trial run of SPECjbb2005 
+</H3>
+<P>Try running the benchmark using either 
+</P>
+<PRE STYLE="margin-bottom: 0.2in">      </PRE><P STYLE="margin-left: 0.33in">
+run.sh 
+</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or 
+</P>
+<P STYLE="margin-left: 0.33in">run.bat 
+</P>
+<P>as appropriate to your operating system. These are provided as
+examples, and may require minor modifications for your particular
+environment. Go to the directory containing the
+benchmark.<BR>Alternately, set 
+</P>
+<PRE STYLE="margin-bottom: 0.2in"><FONT FACE="Courier New"><FONT SIZE=2>CLASSPATH=./jbb.jar:/check.jar:$CLASSPATH</FONT></FONT></PRE><P>
+for Unix or 
+</P>
+<PRE STYLE="margin-bottom: 0.2in"><FONT FACE="Courier New"><FONT SIZE=2>CLASSPATH=.\jbb.jar;.\check.jar;%CLASSPATH%</FONT></FONT></PRE><P>
+for Windows. 
+</P>
+<P ALIGN=JUSTIFY><BR>To run the benchmark up to 8 warehouses (the
+default configuration of the SPECjbb.props) execute the command: 
+</P>
+<PRE STYLE="margin-left: 0.33in; margin-bottom: 0.2in"><A NAME="Setup"></A>      <FONT FACE="Courier New">java &ndash;Xms256m &ndash;Xmx256m spec.jbb.JBBmain -propfile SPECjbb.props </FONT></PRE><P>
+The benchmarker will probably not want to keep these numbers, since
+the heap is fairly small and the properties files (<A HREF="SPECjbb.props"><U><FONT COLOR="#0000bb">SPECjbb.props</FONT></U></A>
+and <A HREF="SPECjbb_config.props"><U><FONT COLOR="#0000bb">SPECjbbconfig.props</FONT></U></A>)
+don't yet reflect the system under test. 
+</P>
+<H3>2.2 Setup 
+</H3>
+<P>Having done a trial run the benchmark, the benchmarker should now
+learn what the changeable parameters are, and where to find and
+change them in the properties files. Also, the documentation (and
+publishability) of the runs will be improved by editing the
+descriptive property file described below. 
+</P>
+<H3><A NAME="Properties File Setup"></A><A NAME="Properties_File_Setup"></A>
+2.2.1 Properties File Setup 
+</H3>
+<P>SPECjbb2005 takes two properties files as input: a control
+properties file and a descriptive properties file. The control
+properties file is used to modify the operation of the benchmark, for
+example altering the length of the measurement interval. The
+descriptive properties file is used to document the system under
+test; <STRONG>this documentation is required for publishable results,
+and is reflected in the output files.</STRONG> The values of the
+descriptive properties do not affect the workload. 
+</P>
+<P>The default name for the control properties file is SPECjbb.props,
+but may be overridden with a different name by using the -propfile
+command line option (see section 3 for an example). The name for the
+descriptive properties file is specified in the control properties
+file, using the input.include_file property. The default name, as
+distributed in the sample control properties file included with the
+kit, is SPECjbb_config.props. See below for a brief description of
+how to modify properties in these files. 
+</P>
+<P>A sample control properties file and a sample descriptive
+properties file are distributed with the SPECjbb2005 kit, using the
+default names. Before modifying these files, first make a copy of the
+originals to enable easy recovery of the default benchmark
+configuration. Also, if running on several platforms, the benchmarker
+will probably want to take advantage of the naming features described
+in the previous paragraph (e.g., SPECjbb_config.ALPHA_400.props,
+SPECjbb_config.NT_500.props). 
+</P>
+<H4><A NAME="Properties Format"></A><A NAME="Properties_Format"></A>2.2.1.1
+Properties Format 
+</H4>
+<P>Each line of a properties file is either blank, a comment, or a
+property assignment. Comments begin with the # character. Each
+property assignment is of the form name=value. &quot;name&quot; is
+the property identifier; &quot;name&quot; and &quot;property&quot;
+are often used synonymously. Property names are specific to the
+benchmark and must not be changed. See below for a discussion of the
+control properties that the benchmarker is likely to want to change
+and for a list of control properties that <STRONG>must not be changed
+in order for the SPECjbb2005 result to be publishable.</STRONG> See
+section 4 for examples of the specification of property values. 
+</P>
+<H4><A NAME="Control Properties"></A><A NAME="Control_Properties"></A>
+2.2.1.2 Control Properties 
+</H4>
+<P>The control properties file allows modification of three distinct
+benchmark behaviors: length of run, warehouse sequence, and garbage
+collection behavior. The benchmarker may experiment with any of these
+behaviors, but for publishable results, there are restrictions on the
+modifications. See the following paragraphs for these restrictions.
+The control properties file also contains a property specifying the
+benchmark name, but this should not be changed. 
+</P>
+<P>Warehouse sequence may be controlled in either of two ways. The
+usual method for specifying warehouse sequence is the set of three
+properties, <EM>input.starting_number_warehouses,
+input.increment_number_warehouses, and input.ending_number_warehouses</EM>
+, which causes the sequence of warehouses to progress from
+<EM>input.starting_number_warehouses</EM> to
+<EM>input.ending_number_warehouses</EM>, incrementing by
+<EM>input.increment_number_warehouses</EM>. The alternative method of
+specifying warehouse sequence is
+<EM>input.sequence_of_number_of_warehouses</EM>, which allows
+specification of an arbitrary list of positive integers in increasing
+order. <STRONG>For a publishable result the warehouse sequence must
+begin at 1 and increment by 1 . See <A HREF="#Control parameters"><U><FONT COLOR="#0000bb">Section
+4.1</FONT></U></A> for a discussion of requirements on the total
+number of warehouses that must be run. </STRONG>
+</P>
+<P>The length of the run is controlled by the properties:&nbsp;
+<I>input.per_jvm_warehouse_rampup, input.per_jvm_warehouse_rampdown&nbsp;
+</I>specifies, in seconds the ramp up and ramp down time for each JVM
+instance,&nbsp;&nbsp; <I>input.ramp_up_seconds,</I>
+<I>input.measurement_seconds</I>, and <I>input.expected_peak_warehouse</I>.
+<I>input.ramp_up_seconds</I> specifies, in seconds, the length of
+each warehouse interval before the <I>expected_peak_warehous,</I> and
+<I>input.measurement_seconds</I> specifies, in seconds, the length of
+each warehouse from there on.. <STRONG>For a result to be publishable
+<I>input.ramp_up_seconds</I> must be 30 and <I>input.measurement_seconds</I>
+must be 240.</STRONG> 
+</P>
+<P>&nbsp;</P>
+<H2><IMG SRC="ug_graph.jpg" NAME="Graphic2" ALIGN=BOTTOM WIDTH=960 HEIGHT=720 BORDER=0></H2>
+<H2><A NAME="Running SPECjbb2005"></A><A NAME="Running_SPECjbb2005"></A>
+3 Running SPECjbb2005</H2>
+<P>After completing setup as described in the previous section, the
+benchmark is ready to run.</P>
+<H3><A NAME="Running the benchmark"></A><A NAME="Running_the_benchmark"></A>
+3.2 Running the benchmark 
+</H3>
+<P>Try running the benchmark using either</P>
+<PRE STYLE="margin-left: 0.33in">   <FONT FACE="Courier New">run.sh</FONT>
+    
+   <FONT FACE="Courier New">or</FONT>
+   <FONT FACE="Courier New">run.bat</FONT></PRE><P>
+as appropriate to your operating system. These are provided as
+examples, and may require minor modifications for your particular
+environment. <BR>Alternately, set CLASSPATH:</P>
+<PRE STYLE="margin-left: 0.33in; margin-bottom: 0.2in">   <FONT FACE="Courier New">CLASSPATH=./jbb.jar:./check.jar: $CLASSPATH</FONT>
+   <FONT FACE="Courier New">Or</FONT>
+   <FONT FACE="Courier New">CLASSPATH=.\jbb.jar:.\check.jar: %CLASSPATH%</FONT>
+    </PRE><P>
+then run the following line:</P>
+<PRE STYLE="margin-left: 0.33in">      <FONT FACE="Courier New">java -Xms&lt;min&gt; -Xmx&lt;max&gt; spec.jbb.JBBmain -propfile SPECjbb.props</FONT>
+    </PRE><P>
+Most operating systems should be able to use a similar command line.
+Specifying more heap is allowed, and will probably help to get higher
+scores. 
+</P>
+<P>The benchmark output appears in the results directory for a
+single-JVM run and in a created subdirectory of that for a multi-JVM
+run by default. The output types are <EM>raw</EM>, <EM>results</EM>,
+<EM>html</EM>, and <EM>text</EM>, one of each for each JVM instance.
+The files are tagged with a sequential number, as</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SPECjbb.&lt;num&gt;.raw, 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SPECjbb.&lt;num&gt;.results, 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+SPECjbb.&lt;num&gt;.html, 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and SPECjbb.&lt;num&gt;.txt 
+</P>
+<P>respectively. The benchmark also produces SPECjbb.&lt;num&gt;.jpg,
+which SPECjbb.&lt;num&gt;.html refers to.. 
+</P>
+<H3><A NAME="Reporter"></A>3.3 Running the Reporter &nbsp;&nbsp;</H3>
+<P>Usually one doesn't need to run the Reporter manually, as the
+benchmark automatically creates all the file formats. However, if
+needed, a raw file can be processed with the Reporter tool to create:
+<EM>html with an html graph,</EM> <EM>html with a jpg graph,</EM> or
+<EM>nicely-formatted text.</EM> The html with a jpg graph requires
+Java 2. &nbsp;The html with an html graph is provided for those
+without Java 2. When the benchmark calls the Reporter, it will
+default to that which is available in the environment. 
+</P>
+<P>Additionally, the Reporter can be used to compare two results. 
+</P>
+<P>The most common way of running the Reporter is 
+</P>
+<PRE STYLE="margin-left: 0.33in">      <FONT FACE="Courier New">java spec.reporter.Reporter -e -r results/SPECjbb.&lt;num&gt;.raw -o</FONT>
+      <FONT FACE="Courier New">results/SPECjbb.&lt;num&gt;.html</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>There are a number of other options:</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>Usage: java spec.reporter.Reporter [options]</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>Required options are:</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-r      Results A SPEC results file, generated by a benchmark run.</FONT></FONT>
+        <FONT FACE="Courier New">May be in a mail message with mail headers.</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>Other options are:</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-a      Plain ASCII text output</FONT></FONT>
+        <FONT FACE="Courier New">default: generate HTML output with JPG graph</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-c      Second raw file, to compare</FONT></FONT>
+        <FONT FACE="Courier New">default: none</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-e      Do NOT echo raw results properties in HTML output</FONT></FONT>
+        <FONT FACE="Courier New">default: raw results inserted as HTML comments</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-h      Create graph in HTML rather than JPG</FONT></FONT>
+        <FONT FACE="Courier New">default: use JPG if have Java2</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-l      Label  Label to infix into the JPG name: SPECjbb.label.jpg</FONT></FONT>
+        <FONT FACE="Courier New">default: a random number</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-o      Output Output file for generated HTML</FONT></FONT>
+        <FONT FACE="Courier New">default: written to System.out</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-v      Verbose. List extra spec.testx.* properties</FONT></FONT>
+        <FONT FACE="Courier New">default: extra properties are not reported</FONT></PRE><P STYLE="margin-left: 0.79in; margin-right: 0.79in">
+So, comparing two results is done as follows:</P>
+<PRE>          <FONT FACE="Courier New">java spec.reporter.Reporter -e -r results/SPECjbb.&lt;num&gt;.raw -c</FONT>
+      <FONT FACE="Courier New">results/SPECjbb.&lt;other-num&gt;.raw -o results/compare.html</FONT></PRE><P STYLE="margin-left: 0.33in">
+The Multi JVM runs, use the reporter as follows:</P>
+<PRE STYLE="margin-left: 0.73in; margin-right: 0.39in"><FONT FACE="Courier New"><FONT SIZE=2>java spec.reporter.MultiVMReporter -a -r results -o multi-vm-report.txt </FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>Usage: java spec.reporter.MultiVMReporter [options] </FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>Required options are:</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-r      ResultsDir Directory with results files</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>Other options are:</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-a      Plain ASCII text output</FONT></FONT>
+        <FONT FACE="Courier New">default: generate HTML output with JPG graph</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-e      Do NOT echo raw results properties in HTML output</FONT></FONT>
+        <FONT FACE="Courier New">default: raw results inserted as HTML comments</FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>-o      Output Output file for generated HTML or TXT</FONT></FONT>
+        <FONT FACE="Courier New">default: index.html for HTML, MultiVMReport.txt for TXT</FONT>
+        <FONT FACE="Courier New">(NB: html links are generated as relative to the</FONT>
+        <FONT FACE="Courier New">directory with results files.)</FONT></PRE><P STYLE="margin-left: 0.73in; margin-right: 0.39in">
+Results submitted to SPEC will appear on the <A HREF="http://www.spec.org/"><U><FONT COLOR="#0000bb">SPEC</FONT></U></A>
+website in the asc and html(-jpg) formats. The reporter output has to
+be redirected or specified with -o filename. The Reporter will use
+only the last value when the same point (number of warehouses ) is
+repeated multiple times</P>
+<HR SIZE=1>
+<H3><A NAME="Customizing properties"></A><A NAME="Customizing_properties"></A>
+4 Customizing the properties files 
+</H3>
+<P><A HREF="#Properties File Setup"><U><FONT COLOR="#0000bb">Section
+2</FONT></U></A> introduced the properties files. These can be
+modified to control operation of the benchmark. There are two
+properties files: SPECjbb.props and SPECjbb_config.props. Their
+relationship is described in more detail in <A HREF="#Properties File Setup"><U><FONT COLOR="#0000bb">Section
+2.</FONT></U></A> Section 2 also describes the general format of the
+properties lines, and how to change them.</P>
+<PRE STYLE="margin-bottom: 0.2in"><FONT FACE="Courier New"><FONT SIZE=2>------------------------------SPECjbb.props--------------------------------</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Control parameters for SPECjbb benchmark #</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+This file has 2 sections; changable parameters and fixed parameters.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+The fixed parameters exist so that you may run tests any way you
+want,</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+however in order to have a valid, reportable run of SPECjbb, you must</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+reset them to their original values.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Changable input parameters #</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Warehouse sequence may be controlled in either of two ways. The more</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+usual method for specifying warehouse sequence is the triple</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.starting_number_warehouses, input.increment_number_warehouses,</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+and input.ending_number_warehouses, which causes the sequence of</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+warehouses to progress from input.starting_number_warehouses to</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.ending_number_warehouses, incrementing by</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.increment_number_warehouses.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+The alternative method of specifying warehouse sequence is</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.sequence_of_number_of_warehouses, which allows specification of</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+an arbitrary list of positive integers in increasing order.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+For a publishable result the warehouse sequence must begin at 1, </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+increment by 1 and go to at least 8 warehouses</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+The expected_peak_warehouses defaults to the result of the runtime
+call</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Runtime.getRuntime.availableProcessors()</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+It can be overridden here but then a submission should include an
+explanation</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+in the config.sw.notes field</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.jvm_instances=1</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.starting_number_warehouses=1</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.increment_number_warehouses=1</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#input.ending_number_warehouses=2</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#The
+default value for input.expected_peak_warehouse</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#is
+Runtime.getRuntime.availableProcessors</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#If
+you modify this property, the result must be submitted for review
+before publication</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#and
+an explanation should be included in the Notes section. See the run
+rules for details.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#input.expected_peak_warehouse
+=0</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#input.sequence_of_number_of_warehouses=1
+2 3 4 5 6 7 8</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+'show_warehouse_detail' controls whether to print per-warehouse</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+statistics in the raw results file. These statistics are not used</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+in the final report but may be useful when analyzing a JVMs behavior.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+When running a large number of warehouses (i.e. on a system with a</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+lot of CPUs), changing this to true will results in very large</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+raw files. For submissions to SPEC, it is recommended that this </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+attribute be set to false.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.show_warehouse_detail=false</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+'include_file' is the name for the descriptive properties file. On</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+systems where the file separator is \, use \\ as the file separator</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+here.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Examples:</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.include_file=SPECjbb_config.props</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.include_file=/path/to/SPECjbb_config.props</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.include_file=c:\\path\\to\\SPECjbb_config.props</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.include_file=SPECjbb_config.props</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+directory to store output files. On systems where the file separator </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+is \, use \\ as the file separator here.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+</FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Examples:</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.include_file=results</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.include_file=/path/to/results</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+input.include_file=c:\\path\\to\\results</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.output_directory=results</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Fixed input parameters #</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+YOUR RESULTS WILL BE INVALID IF YOU CHANGE THESE PARAMETERS #</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+DON'T CHANGE THIS PARAMETER, OR ELSE !!!!</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.suite=SPECjbb</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Benchmark logging level</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.log_level=INFO</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Deterministic Random Seed (required value is false)</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.deterministic_random_seed=false</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+rampup and rampdown specify rampup and rampdown for multi-jvm mode</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+only. (seconds)</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.per_jvm_warehouse_rampup=3</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.per_jvm_warehouse_rampdown=20</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+If you need to collect stats or profiles, it may be useful to
+increase</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+the 'measurement_seconds'. This will, however, invalidate your
+results</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Amount of time to run each point prior to the measurement window</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.ramp_up_seconds=30</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>#
+Time of measurement window</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New"><FONT SIZE=2>input.measurement_seconds=240</FONT></FONT></P>
+<PRE><FONT FACE="Courier New"><FONT SIZE=2>------------------------------end of SPECjbb.props--------------------------------</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>------------------------------SPECjbb_config.props--------------------------------</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># SPECjbb properties file</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># This is a SAMPLE file which you can use to specify characteristics of</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># a particular system under test, and to control benchmark</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># operation. You can reuse this file repeatedly, and have a version for</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># each system setup you use. You should edit the reporting fields</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># appropriately. All of this can still be edited in the output properties</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># file after you run the test, but putting the values in here can save</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># you some typing for attributes which do not change from test to test.</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># System Under Test hardware</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Company which sells the hardware</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.vendor=Neptune Ocean King Systems</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Home page for company which sells the hardware</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.vendor.url=http://www.neptune.com</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># What type of system was used</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.model=TurboBlaster 2</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># What type of processor(s) the system had</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.processor=ARM</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># MegaHertz rating of the chip. Usually an integer</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.MHz=300</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Number of chips in the system as configured</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.nchips=1</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Number of cores in the system as configured</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.ncores=2</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#Number of cores/chips</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.ncoresperchip=2</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Number of HW Threads configured</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.hwThreads=4</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Amount of physical memory in the system, in Megabytes. DO NOT USE MB</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># or GB, IT WILL CONFUSE THE REPORTER</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.memory=4096</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#Dexscribe the memory in the system - e.g. 4 of 8 DIMMs filled with 1GB DDR 2100 CAS3 memory</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.memory_description=punch cards</FONT></FONT>
+
+
+
+<FONT FACE="Courier New"><FONT SIZE=2># Amount of level 1 cache for instruction and data on each CPU</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.primaryCache=4KBI+4KBD</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Amount of level 2 cache, for instruction and data on each CPU</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.secondaryCache=64KB(I+D) off chip</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Amount of level 3 cache (or above)</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.otherCache=</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># The file system the class files reside on</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.fileSystem=UFS</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Size and type of disk on which the benchmark and OS reside on</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.disk=1 x 4GB SCSI (classes) 1 x 12GB SCSI (OS)</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Any other hardware you think is performance-relative. That is, you</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># would need this to reproduce the test</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.other=AT&amp;T Rotary Telephone</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.hw.available=Jan-2000</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># System Under Test software</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># The company that makes the JVM software</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.vendor=Phobos Ltd</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Home page for the company that makes the JVM software</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.vendor.url=http://www.phobos.uk.co</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Name of the JVM software product (including version)</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.JVM=Phobic Java 1.5.0</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Date when the JVM software product is shipping and generally available</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># to the public</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.JVMavailable=Jan-2000</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># How many megabytes used by the JVM heap. &quot;Unlimited&quot; or &quot;dynamic&quot; are </FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># allowable values for JVMs that adjust automatically</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.JVMheapInitial=256</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.JVMheapMax=1024</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#Is the JVM 32- or 64-bit? (or some other number?)</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.JVMbitness=32</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Command line to invoke the benchmark</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># On systems where the file separator is \, use \\ as the file separator</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># here</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.command_line=java -ms256m -mx1024m -spec.jbb.JBBmain -propfile Test1</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Operating system (including version)</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.OS=Phobos DOS V33.333 patch-level 78</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Date when the OS version is shipping and generally available to the</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># public</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.OSavailable=May-2000</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Free text description of what sort of tuning one has to do to either </FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># the OS or the JVM to get these results. This is where kernel tunables</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># belong. Use HTML list tags, if you want a list on the report page</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.tuning=Operating system tunings&lt;UL&gt;&lt;LI&gt;bufcache=1024&lt;/LI&gt;&lt;LI&gt;maxthreads_per_user=65536&lt;/LI&gt;&lt;/UL&gt;</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#Text explanation of the Ahead-of-Time Compilation mechanism</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.aot=&lt;p&gt;precompiled code for&lt;ul&gt;&lt;li&gt;Deliverytransaction.process&lt;/li&gt;&lt;li&gt;TransactionManager.go&lt;/li&gt;&lt;/ul&gt;loaded at startup&lt;/p&gt;</FONT></FONT>
+
+
+<FONT FACE="Courier New"><FONT SIZE=2># Any additional software that you think is need to reproduce the</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># performance measured on this test</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.other=Neptune JIT Accelerator 2.3b6</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Date when the other software is shipping and generally available to</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># the public</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.otherAvailable=Feb-2000</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># Tester information</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>#########################################################################</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># The company that ran and submitted the result</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.test.testedBy=Neptune Corp.</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># The person who ran and submitted this result (name does not go on</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># public pages</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.testx.testedByName=Willie the Mailboy</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># A web page where people within the aforementioned company might get</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2># more information</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.test.internalReference=http://pluto.eng/specpubs/mar2000/</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># The company's SPEC license number</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.test.specLicense=50</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2># Physically, where the results were gathered</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.test.location=Santa Monica, CA</FONT></FONT>
+
+<FONT FACE="Courier New"><FONT SIZE=2>#Notes</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>config.sw.notes=&quot;Notes here&quot;</FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=2>------------------------------end of SPECjbb_config.props-------------------------</FONT></FONT></PRE><P>
+These parameters can be categorized as:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Control
+parameters - Variables that describe the load to put on the server.
+Several of these are &quot;constants&quot; in the sense that a
+particular value is required for use in publishable runs. These are
+included in the control properties file, <EM>SPECjbb.props</EM> . 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Configuration
+description - Details about the system that are necessary for the
+final report, such as CPU types, memory sizes, etc. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;As
+distributed in the sample kit, these are in the included properties
+file, <EM>SPECjbb_config.props</EM> . 
+</P>
+<H3><A NAME="Control parameters"></A><A NAME="Control_parameters"></A>
+4.1 Control parameters</H3>
+<P>These are the parameters which specify the workload.</P>
+<P>jvm_instances</P>
+<P STYLE="margin-left: 0.5in">The number of JVM instances in the
+benchmark run.</P>
+<P STYLE="margin-left: 0.5in">&nbsp;</P>
+<P><A NAME="starting_number_warehouses"></A>starting_number_warehouses,
+increment_number_warehouses, ending_number_warehouses,
+expected_peak_warehouse</P>
+<P STYLE="margin-left: 0.5in">Parameters to specify a series of
+numbers of warehouses to run at once. For example, with the settings
+start=1, increment=1, and end=10 respectively, the benchmark will run
+first 1 warehouse, then 2 concurrent warehouses, then 3, and so on up
+to 10. Since the metric averages points from the expected peak to
+twice as many warehouses, the benchmark must be run to at least twice
+that number of warehouses. 
+</P>
+<P STYLE="margin-left: 0.5in">If the expected_peak_warehouse is not
+specified it will take the value of the result of the call
+Runtime.getRuntime.availableProcessors(). In the case where you
+override this default by specifying a value, any result must be
+submitted to the SPEC Java subcommittee before announcement of the
+results, and an explanation of the change shoud be put in the notes
+section of the report.  An example of an acceptable reason to
+override the default value would be if the availableProcessors() call
+does not return an accurate or valid value for the hardware
+architecture of the SUT. An example of an unacceptable reason would
+be decreasing the value from the default to hide scalability problems
+and artificially obtain a higher score.</P>
+<P><STRONG>Note:</STRONG> note that publication requires all the
+points from 1 to 2*n warehouses, where n is expected peak warehouse,
+and that the metric is computed from the points n to 2*n. In some
+cases, where the system under test is unable to successfully run all
+points up to 2*n, the runs may still be valid and publishable. See
+<A HREF="RunRules.html#Sequence"><U><FONT COLOR="#0000bb">section 2.3
+of the run and reporting rules</FONT></U></A>. 
+</P>
+<P><A NAME="sequence"></A>input.sequence_of_number_of_warehouses=7 10
+12</P>
+<P STYLE="margin-left: 0.5in">An alternative to the above. If using
+this, comment out one of starting_number_warehouses,
+increment_number_warehouses, or ending_number_warehouses. This allows
+skipping numbers of warehouses in a non-periodic fashion, or
+repeating a number of warehouses more than once. The list is assumed
+to be increasing; if it is not, the results may not appear as
+intended. 
+</P>
+<P>input.include_file=SPECjbb_config.props</P>
+<P STYLE="margin-left: 0.5in">The name of a file which contains other
+input parameters. The intended use is to allow segregation of
+&quot;config&quot; parameters from &quot;input&quot; parameters,
+easing changing one set without the other. This way, one can have
+several system configuration files for different systems, and simply
+change which one to include for a given run. Similarly, one system
+can easily have several sets of input parameters all referencing the
+same hardware/software descriptions. In fact, the parameters may be
+divided between this file and the specified propfile some other way
+if you want. Be careful not to lose any parameters. Duplicated
+parameters will take on the last value seen, with the include file
+following the propfile. 
+</P>
+<P>The next four are &quot;constants&quot;. Normally, you will not
+change these. They are provided for information only. Any changes to
+the benchmark constants will invalidate the run. SPEC does not
+endorse such changes, and obtained with modified benchmark constants
+are not publishable.</P>
+<P>The examples shown are the default and also the required values
+for valid runs.</P>
+<P>per_jvm_warehouse_rampup=3</P>
+<P STYLE="margin-left: 0.5in">The ramp up time for each JVM instance 
+</P>
+<P>per_jvm_warehouse_rampdown=20</P>
+<P STYLE="margin-left: 0.5in">The ramp down time for each JVM
+instance</P>
+<P>input.ramp_up_seconds=30</P>
+<P STYLE="margin-left: 0.5in">The length in seconds of each warehouse
+interval before the expected_peak_warehouse. &nbsp;&nbsp;This must be
+30 for a publishable run.</P>
+<P>input.measurement_seconds=240</P>
+<P STYLE="margin-left: 0.5in"><A NAME="Configuration_Description"></A>
+The length in seconds of each warehouse interval from the expected
+peak warehouse to the end of the run.&nbsp; This must be 240 for a
+publishable run.</P>
+<P STYLE="margin-left: 0.5in">&nbsp;</P>
+<P STYLE="margin-left: 0.5in">&nbsp;</P>
+<H3><A NAME="Configuration Description"></A><A NAME="Configuration_Description1"></A>
+4.2 Configuration description parameters</H3>
+<P>The Configuration description section should contain a full
+description of the testbed. It should have enough information to
+repeat the test results, including all necessary hardware, software
+and tuning parameters. All parameters with non-default values must be
+reported in the Notes section of the description.</P>
+<P>The configuration description has the following categories.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Server
+Hardware 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;JVM
+Software 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Test
+Information 
+</P>
+<P>Each category contains variables for describing it. For example,
+Hardware contains variables for CPUs, caches, controllers, etc. If a
+variable doesn't apply, leave it blank. If no variable exists for a
+part you need to describe, add some text to the notes section. The
+notes sections can contain multiple lines.<!-- by adding a 3-digit suffix
+to the variable.  For example, the notes_http variable can become
+notes_http001, notes_http002, etc.  
+-->
+</P>
+<P>The properties file included in the kit contains examples for
+filling out these fields.</P>
+<P><STRONG>Hardware:</STRONG> 
+</P>
+<P>config.hw.vendor=SAMPLE vendor 
+</P>
+<P STYLE="margin-left: 0.5in">This is the company which sells the
+hardware. 
+</P>
+<P>config.hw.vendor.url=http://www.neptune.com 
+</P>
+<P STYLE="margin-left: 0.5in">This is web page for the company which
+sells the hardware. 
+</P>
+<P>config.hw.model=TurboBlaster 2 
+</P>
+<P STYLE="margin-left: 0.5in">What type of system was used. 
+</P>
+<P>config.hw.processor=ARM 
+</P>
+<P STYLE="margin-left: 0.5in">What type of processor the system had. 
+</P>
+<P>config.hw.MHz=300 
+</P>
+<P STYLE="margin-left: 0.5in">MegaHertz rating of the chip. Usually
+an integer, except for Intel. 
+</P>
+<P>config.hw.nchips=1 
+</P>
+<P STYLE="margin-left: 0.5in">The number of chips in the system. 
+</P>
+<P>config.hw.ncores=2 
+</P>
+<P STYLE="margin-left: 0.5in">The number of cores in the system.</P>
+<P>config.hw.ncoresperchip=2 
+</P>
+<P STYLE="margin-left: 0.5in">The number of cores/chip.</P>
+<P>config.hw.hwThreads=4</P>
+<P STYLE="margin-left: 0.5in">The number of HW Threads configured.</P>
+<P>config.hw.memory=4096 
+</P>
+<P STYLE="margin-left: 0.5in">The amount of physical memory in the
+system under test, in megabytes. That's important to the reporter;
+saying &quot;4G&quot; or &quot;2Gb&quot; will confuse it, and your
+memory will be reported incorrectly. 
+</P>
+<P>config.hw.memory_description=punch cards</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+The memory layout and components.&nbsp; Key information to be
+included are the number of memory slots in the system, and the type
+of memory in them.</P>
+<P>config.hw.primaryCache=4KBI+4KBD 
+</P>
+<P STYLE="margin-left: 0.5in">The amount of level 1 cache, for
+instruction and data, on each CPU. 
+</P>
+<P>config.hw.secondaryCache=64KB(I+D) 
+</P>
+<P STYLE="margin-left: 0.5in">The amount of level 2 cache, for
+instruction and data, on each CPU. This example shows a combined
+cache. 
+</P>
+<P>config.hw.otherCache=none 
+</P>
+<P STYLE="margin-left: 0.5in">Level 3 cache or above. 
+</P>
+<P>config.hw.fileSystem=UFS 
+</P>
+<P STYLE="margin-left: 0.5in">The file system the classes reside on. 
+</P>
+<P>config.hw.disk=2 x 4GB SCSI 
+</P>
+<P STYLE="margin-left: 0.5in">Size and type of disk on which the
+benchmark and the OS reside on. This is to help with reproduction of
+results. 
+</P>
+<P>config.hw.other=none 
+</P>
+<P STYLE="margin-left: 0.5in">Anything you think is
+performance-relevant hardware-wise that someone would need to be told
+about in order to reproduce the result. 
+</P>
+<P>config.hw.available=Jan-2000 
+</P>
+<P STYLE="margin-left: 0.5in">The date when the hardware is shipping
+and generally available to the public. 
+</P>
+<P><STRONG>Software:</STRONG> 
+</P>
+<P>config.sw.vendor=Phobos Ltd 
+</P>
+<P STYLE="margin-left: 0.5in">This is the company which sells the JVM
+software. 
+</P>
+<P>config.sw.vendor.url=http://www.phobos.uk.co 
+</P>
+<P STYLE="margin-left: 0.5in">This is the web page for the company
+which sells the JVM software. 
+</P>
+<P>config.sw.JVM=Phobic Java 
+</P>
+<P STYLE="margin-left: 0.5in">This is the name of the JVM software
+product. 
+</P>
+<P>config.sw.JVMavailable=Jan-2000</P>
+<P STYLE="margin-left: 0.5in">The date when the product is shipping
+and generally available to the public. 
+</P>
+<P>config.sw.JVMheapInitial=256</P>
+<P STYLE="margin-left: 0.5in">How many megabytes of memory were used
+for the initial heap (-ms). &quot;Unlimited&quot; or &quot;dynamic&quot;
+are also allowed for JVMs which adjust automatically. 
+</P>
+<P>config.sw.JVMheapMax=1024 
+</P>
+<P STYLE="margin-left: 0.5in">How many megabytes of memory were used
+for the maximum heap (-mx). &quot;Unlimited&quot; or &quot;dynamic&quot;
+are also allowed for JVMs which adjust automatically. 
+</P>
+<P>config.sw.JVMbitness=32 
+</P>
+<P STYLE="margin-left: 0.5in">Specifies whether the JVM is 32- or
+64-bit ? (or some other number).</P>
+<P>config.sw.command_line=java -ms256m -mx1024m -spec.jbb.JBBmain
+-propfile Test1 
+</P>
+<P STYLE="margin-left: 0.5in">The command line used to invoke the
+benchmark. 
+</P>
+<P>config.sw.OS=Phobos 
+</P>
+<P STYLE="margin-left: 0.5in">The operating system on the system
+under test. 
+</P>
+<P>config.sw.OSavailable=Jan-2000</P>
+<P STYLE="margin-left: 0.5in">The date when the operating system is
+shipping and generally available to the public. 
+</P>
+<P>config.sw.tuning=none 
+</P>
+<P STYLE="margin-left: 0.5in">Free text description of what sort of
+tuning one has to do to either the OS or the JVM to get these
+results. This is where kernel tunables belong. 
+</P>
+<P>config.sw.aot=none</P>
+<P STYLE="margin-left: 0.5in">Text explanation of the Ahead-of-Time
+Compilation mechanism. 
+</P>
+<P>config.sw.other=Neptune JIT Accelerator 2.3b6 
+</P>
+<P STYLE="margin-left: 0.5in">Any additional software that you think
+is performance-relevant that someone would need to be told about in
+order to reproduce. 
+</P>
+<P>config.sw.otherAvailable=Feb-2000</P>
+<P STYLE="margin-left: 0.5in">When it's shipping and generally
+available. 
+</P>
+<P><STRONG>And, the test information:</STRONG></P>
+<P>config.test.testedBy=Neptune Corp. 
+</P>
+<P STYLE="margin-left: 0.5in">The company that ran and submitted this
+result. 
+</P>
+<P>config.testx.testedByName=Willie the Mailboy 
+</P>
+<P STYLE="margin-left: 0.5in">The person who ran and submitted this
+result. 
+</P>
+<P>config.test.internalReference=http://pluto.eng/specpubs/mar2000/ 
+</P>
+<P STYLE="margin-left: 0.5in">A web page where people within the
+aforementioned company might get more information. 
+</P>
+<P>config.test.specLicense=50 
+</P>
+<P STYLE="margin-left: 0.5in">The company's SPEC licence. 
+</P>
+<P>config.test.location=Santa Monica, CA 
+</P>
+<P STYLE="margin-left: 0.5in">Physically, where the results were
+gathered. 
+</P>
+<HR SIZE=1>
+<H2><A NAME="Operational Validity"></A><A NAME="Operational_Validity"></A>
+5 Operational Validity 
+</H2>
+<P>In order to be a publishable result, or directly comparable to
+existing published results, a run must pass several runtime validity
+checks:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;The
+checksum on jbb.jar must indicate that it is the same bytecodes which
+SPEC shipped. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Elapsed
+time of each measurement interval shall be within 0.5% lower to 10%
+higher than the specified measurement interval length (240 seconds). 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;The
+run must include all points to the minimum of 8 warehouses or twice
+as many warehouses as at the expected peak. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;The
+Java environment must pass the partial conformance testing done by
+the benchmark prior to running any points. 
+</P>
+<HR SIZE=1>
+<H2><A NAME="Metric"></A>6 Metrics 
+</H2>
+<P><FONT COLOR="#000000">SPECjbb2005 produces two throughput metrics,
+as follows: </FONT>
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in"><FONT COLOR="#000000">The
+total throughput measurement, bops</FONT></P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in"><FONT COLOR="#000000">The
+average throughput per JVM instance, bops/JVM</FONT></P>
+<P>The throughput metrics are calculated as follows:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;For
+each JVM instance, all points (numbers of warehouses) are run, from 1
+up to at least twice the number N of warehouses expected to produce
+the peak throughput. At a minimum all points from 1 to 8 must be run.
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;For
+all points from N to 2*N warehouses, the scores for the individual
+JVM instances are added.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;The
+summed throughputs for all the points from N warehouses to 2*N
+inclusive warehouses are averaged. This average is the SPECjbb2005
+bops metric. As explained in section 2.3 of the run and reporting
+rules, results from systems that are unable to run all points up to
+2*N warehouses are still considered valid. For all the missing points
+in the range N to 2*N, the throughput is considered to be 0 bops in
+the metric computation. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;The
+bops/JVM is obtained by dividing the SPECjbb2005 bops metric by the
+number of JVM instances.</P>
+<P>The reporting tool contained within SPECjbb2005 produces a graph
+of the throughput at all the measured points with warehouses on the
+horizontal axis and the summed throughputs on the vertical axis. All
+points from 1 to the minimum of 8 or 2*N are required to be run and
+reported. Missing points in the range N to 2*N will be reported to
+have a throughput of 0 bops. The points being averaged for the metric
+will be marked on the report.</P>
+<HR SIZE=1>
+<H2><A NAME="Results"></A>7 Results Reports 
+</H2>
+<P>Benchmark results are available in several forms:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Results
+files</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Html
+file 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Raw
+file 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Text
+report page 
+</P>
+<P>All of these are just different ways of presenting the same basic
+information. All include the SPECjbb2005 metrics, the total scores at
+individual numbers of warehouses, validation or error messages,
+information about the configuration, information about the input
+parameters, and details about each point.</P>
+<P>For this reason, these are described in detail only once, in the
+Html Result Pages section. The descriptions of the other formats will
+refer back to classifications of information described in the HTML
+section. Sample output pages are included with the kit ( <A HREF="output.txt"><U><FONT COLOR="#0000bb">Text</FONT></U></A>,
+<A HREF="output-jpg.html"><U><FONT COLOR="#0000bb">HTML-jpeg</FONT></U></A>,
+<A HREF="output.html"><U><FONT COLOR="#0000bb">HTML-only</FONT></U></A>,
+<A HREF="output.raw"><U><FONT COLOR="#0000bb">raw</FONT></U></A>,
+<A HREF="output.results"><U><FONT COLOR="#0000bb">results</FONT></U></A>.
+) Errors in the creation of any format (other than raw) do not
+prevent publication. <FONT COLOR="#ff0000">&nbsp;</FONT></P>
+<P>How to create the other formats from the raw file is described in
+<A HREF="#Reporter"><U><FONT COLOR="#0000bb">Section 3.3</FONT></U></A>
+.</P>
+<H3><A NAME="Raw file"></A><A NAME="Raw_file"></A>7.1 Raw files 
+</H3>
+<P>A benchmark run will generate one raw file pre JVM instance.&nbsp;
+The raw file(s) will be put in a subdirectory of the results
+directory with a name of the form SPECjbb.xxx where xxx is a numeric
+suffix.&nbsp; The <EM>SPECjbb.yyy.raw</EM> (yyy are numeric, with one
+for each JVM instance) files in that subdirectory contain all the
+inputs from the <EM>properties</EM> files and results from the test.
+The reporter tool uses this file to generate all the other file
+formats. The raw files are submitted to SPEC. <FONT COLOR="#ff0000">&nbsp;</FONT>(
+See <A HREF="#Submitting"><U><FONT COLOR="#0000bb">Submitting Results</FONT></U></A>
+)</P>
+<P>If you intend to postprocess the results, this is the best file to
+start from. All information is stored in field=value pairs. It can be
+read in to a Java program using the Properties class, or handled by
+Perl, awk, or shell using pattern match or grep.</P>
+<H3><A NAME="Outputs"></A>7.2 HTML Result Pages 
+</H3>
+<P>The <A HREF="output-jpg.html"><U><FONT COLOR="#0000bb">HTML result
+pages</FONT></U></A> contain the following elements.</P>
+<H3>SPECjbb2005 Metrics 
+</H3>
+<P STYLE="margin-left: 0.5in">See <A HREF="#Metric"><U><FONT COLOR="#0000bb">Section
+6</FONT></U></A> for to see how the metrics are calculated. 
+</P>
+<H3>Performance for each point in the benchmark. 
+</H3>
+<P STYLE="margin-left: 0.5in">Performance for each point, in the form
+of a chart and graph. (Text and the results files do not include a
+graph.) The dashed line (in the jpg graph) is at the level of the
+overall metric, stretching across the points which were averaged
+together to get the metric. 
+</P>
+<H3>Hardware and Software information 
+</H3>
+<P STYLE="margin-left: 0.5in">The hardware vendor and model name, the
+OS vendor and name/version, and the JVM software vendor and software
+name/version. Enough information to reproduce the environment. 
+</P>
+<H3>Availability and Configuration information 
+</H3>
+<P STYLE="margin-left: 0.5in">All the other information from the
+<A HREF="#Configuration Description"><U><FONT COLOR="#0000bb">Configuration
+description</FONT></U></A> entries in the descriptive properties
+file. 
+</P>
+<P>&nbsp;</P>
+<P>See <A HREF="RunRules.html#Availability"><U><FONT COLOR="#0000bb">The
+Run and Reporting section on Availability</FONT></U></A> for
+information on how to determine if results on your system meet the
+availability criteria for publication.</P>
+<H3>Notes and Tuning Information 
+</H3>
+<P STYLE="margin-left: 0.5in">The notes and tuning entries from the
+descriptive properties file. 
+</P>
+<H3>Operational Validity / Errors 
+</H3>
+<P STYLE="margin-left: 0.5in">Any errors encountered in the test
+inputs or results. <STRONG>To be valid, the test must have no errors
+reported in this section</STRONG>. Any errors will cause the word
+'Invalid' to appear next to the SPECjbb2005 result number (Text and
+HTML formats). See <A HREF="#Operational Validity"><U><FONT COLOR="#0000bb">Section
+5</FONT></U></A> for details on validity checks. 
+</P>
+<P>If a thread ran out of memory, it will be reported at the point in
+the output where the condition occurred. 
+</P>
+<H3>Details of Individual Points 
+</H3>
+<P STYLE="margin-left: 0.5in">For each number of warehouses, the
+counts of each type of transaction, along with their total and
+maximum response times, the percentage size of the range of
+transactions done by different threads, and amount of heap used, is
+presented. The average is not given, because it tends to be very
+small. You can compute it from the total and the count of
+transactions. 
+</P>
+<H3><A NAME="Screen ASCII"></A><A NAME="Screen_ASCII"></A>7.3 Text
+report file 
+</H3>
+<P>This is automatically generated by the benchmark run. You can also
+run</P>
+<PRE STYLE="margin-left: 0.33in; margin-bottom: 0.2in"><FONT FACE="Courier New"><FONT SIZE=2>java spec.reporter.Reporter -a -e -r results/SPECjbb.&lt;num&gt;.raw </FONT></FONT></PRE><P>
+to get the TextI report format. This is one of the formats available
+on the SPECjbb2005 result pages website. It is very similar to the
+html, except that it is lacking the chart. It is primarily for
+viewing/printing on a system without a browser.</P>
+<H3><A NAME="Screen Output"></A><A NAME="Screen_Output"></A>7.4
+Benchmark Output</H3>
+<P>The benchmark outputs data as it runs. The results for each JVM
+instance are written to standard output, which has been redirected in
+the default script for the run script.&nbsp; This output also appears
+in the <EM>results/SPECjbb.xxx/SPECjbb.yyy.results files</EM>. &nbsp;The
+following sections appear as part of this output.</P>
+<H3><A NAME="Input Summary"></A><A NAME="Input_Summary"></A>Test
+verification and summary of benchmark settings 
+</H3>
+<P STYLE="margin-left: 0.5in">See <A HREF="#Operational Validity"><U><FONT COLOR="#0000bb">Section
+5</FONT></U></A> for a description of the runtime validity checks.
+Some of these cannot be checked until the end of the run. Such checks
+are reported at the end of the .results file. 
+</P>
+<P>The conformance check and its results do not go into the .results
+file. Next, the parameters scroll down the screen. 
+</P>
+<H3><A NAME="Iteration Results"></A><A NAME="Iteration_Results"></A>Results
+from each point 
+</H3>
+<P>The results from each point in the benchmark print out the
+following:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Information
+about the minimum and maximum amount of work done by the
+threads/warehouses at that point. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Numerical
+results for each transaction type. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;'Min'
+and 'Max' and 'Avg' are the minimum, maximum, and average response
+times for each of the 5 transaction types. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;Count
+is the number of each type of transaction done during the run for
+this number of warehouses. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;'Total'
+is the total time spent in this type of transaction, so Avg is Total
+/ count. 
+</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;The
+'result' is the sum of the Counts divided by the number of seconds. 
+</P>
+<P STYLE="margin-left: 0.25in">&nbsp;</P>
+<PRE>Calculating results
+
+Minimum transactions by a warehouse = 470224
+Maximum transactions by a warehouse = 472731
+Difference (thread spread) = 2507 (0.53%)
+
+===============================================================================
+TOTALS FOR: COMPANY with 2 warehouses                                   
+................. SPECjbb2005 0.06 Results (time in seconds) .................
+                   Count     Total    Min     Max     Avg        Heap Space
+    New Order:    414459    223.27   0.000   2.084   0.001       total  254.1MB
+      Payment:    285744     75.24   0.000   2.082   0.000        used  219.7MB
+  OrderStatus:     28574      9.42   0.000   0.043   0.000
+     Delivery:     28575     61.09   0.001   0.068   0.002
+  Stock Level:     28574     11.51   0.000   0.042   0.000
+  Cust Report:    157029     81.42   0.000   0.132   0.001
+
+           throughput =    3928.64 bops
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</PRE><H3>
+<A NAME="Overall Score"></A><A NAME="Overall_Score"></A>Overall
+SPECjbb2005 result 
+</H3>
+<P>The equivalent of the text report is printed to the screen and
+.results file at the end of the run, summarizing it.</P>
+<H3><A NAME="Configuration Information"></A><A NAME="Configuration_Information"></A>
+Configuration Information 
+</H3>
+<P>All the descriptive properties are echoed to the screen and
+results file. Also, system and JVM properties acquired by
+System.getProperties() are echoed.</P>
+<HR SIZE=1>
+<H2><A NAME="Troubleshooting"></A>8 Troubleshooting 
+</H2>
+<P>Error messages are explained in greater detail below, listed by
+key words in the message.</P>
+<P>Messages from the benchmark:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;&quot;VALIDATION
+ERROR&quot; -- The JVM has produced a screen which looks different
+than expected for the transaction type specified in the message.
+Further messages show the difference between expected and produced
+lines in that screen. Determine why the JVM behaves differently than
+other JVM's. This message means the run is not publishable, even
+though the run proceeds.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;Out of memory&quot; -- There was not enough
+memory for an allocation. Increasing your heap space is recommended
+to fix this. In cases with a very large number of warehouses, it may
+be that you need to increase your allowed number of threads in your
+JVM or operating system.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;Property file error&quot; -- Some property in
+SPECjbb.props, SPECjbb_config.props, or the file which was specified
+as the properties file, was deleted, misspelled, or given a value
+outside of it's expected range. In most cases there is a further
+message indicating which one. Compare against a known good copy of
+the properties file. &quot;Unrecognized property&quot; most often
+indicates a misspelling. Note that booleans should be specified in
+lower case.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;No valid warehouse sequence specified&quot;
+-- specify (and uncomment) either sequence_of_number_of_warehouses or
+all three of starting_warehouse_number, ending_warehouse_number,
+increment_warehouse_number in the properties file. Warehouse numbers
+(in sequence_of_number_of_warehouses) should be increasing order.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;Error opening output file&quot; -- Check that
+the directory of the specified output file exists and is writable,
+and that there is not already a file of the given name with write
+permission turned off.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;INVALID: Run will NOT be compliant&quot; --
+One of the &quot;fixed&quot; properties was assigned a value other
+than that required for valid runs. See <A HREF="#Control parameters"><U><FONT COLOR="#0000bb">Section
+4.1</FONT></U></A>.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;An I/O Exception occurred&quot; -- Check
+whether there is enough disk space in the output directory disk or
+filesystem.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;JVM Check detected error&quot; -- This means
+that the small subset of JVM conformance testing failed. Further
+messages indicate what the discrepancy is.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;&quot;Fails
+validation&quot; -- Either jbb.jar was not first in the CLASSPATH, or
+the checksum of jbb.jar was not the expected value. This suggests
+that it has been recompiled or corrupted. If it is CLASSPATH, change
+CLASSPATH; otherwise, reinstall the kit. 
+</P>
+<P>Messages in the reports:</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;not compliant&quot; -- The &quot;fixed&quot;
+parameters were not the right values for a valid run. See <A HREF="#Control parameters"><U><FONT COLOR="#0000bb">Section
+4.1</FONT></U></A>.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;JVM failed operational validity check&quot;
+-- The JVM has produced a screen which looks different than expected
+for the transaction type specified in the message. Messages in the
+benchmark output (or results file) show the difference between
+expected and produced lines in that screen. Determine why the JVM
+behaves differently than other JVM's. This message means the run is
+not publishable, even though the run proceeded.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;conformance checking returned negative&quot;
+-- The small subset of JVM conformance testing found something
+non-conformant.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;recompiled or jbb.jar not first in CLASSPATH&quot;
+-- Either jbb.jar was not first in the CLASSPATH, or the checksum of
+jbb.jar was not the expected value. This suggests that it has been
+recompiled or corrupted. If it is CLASSPATH, change CLASSPATH;
+otherwise, reinstall the kit.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;Not having all required points&quot; --
+Points below the peak were missing. They are required for a
+publishable run.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;0's will be averaged in for points not
+measured&quot; -- Points between the peak and twice the number of
+warehouses at peak were missing. If it is possible to collect a run
+including these points, the score will be higher.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;At least points 1 to 8 are required&quot; --
+Specify a sequence of warehouses including all of the numbers from 1
+to 8. This is to make publications on the SPEC site more informative.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in; margin-bottom: 0.17in">
+&nbsp;&nbsp;&nbsp;&quot;Measurement interval failing to end in close
+enough time limits&quot; -- Further messages specify whether the
+measurement interval for a point ran too long or to short compared to
+the intended amount of time, and which point. Check that there is no
+other load on the system being measured, and that the JVM scheduler
+is not starving the thread which signals the end of the interval.</P>
+<P STYLE="margin-left: 0.5in; text-indent: -0.25in">&nbsp;&nbsp;&nbsp;Missing
+file separator: On systems where the file separator is \, use \\ as
+the file separator in the properties files. 
+</P>
+<P>Still have a problem that makes no sense? Contact <EM><A HREF="mailto:support@spec.org"><U><FONT COLOR="#0000bb">support@spec.org</FONT></U></A></EM>
+.</P>
+<HR SIZE=1>
+<H2><A NAME="Performance Tuning"></A><A NAME="Performance_Tuning"></A>
+9 Performance Tuning 
+</H2>
+<P>To tune the benchmark, analyze the workload and look for possible
+bottlenecks in the configuration. There are a number of factors or
+bottlenecks that could affect the performance of the benchmark on the
+system.</P>
+<P>The following tuning tips are for configuring the system to
+generate the best possible performance numbers for SPECjbb2005.
+Please note that these should not necessarily be used to configure
+and size real world systems.</P>
+<P><A NAME="JVM Tuning"></A><A NAME="JVM_Tuning"></A>JVM Software 
+</P>
+<P STYLE="margin-left: 0.5in">This is the critical component in
+determining the performance of the system for this workload. Use JVM
+profiling (java -prof or java -Xprof) to identify API routines most
+heavily called. Other tools may be available on your system.</P>
+<P><A NAME="Classpath"></A>CLASSPATH 
+</P>
+<P STYLE="margin-left: 0.5in">Having extra stuff in CLASSPATH can
+degrade performance on some JVMs. 
+</P>
+<P><A NAME="Memory Tuning"></A><A NAME="Memory_Tuning"></A>Memory 
+</P>
+<P STYLE="margin-left: 0.5in">SPECjbb2005 uses at least a heap size
+of 256 and is known to benefit from additional memory. Heap size is
+set via the -ms/-mx (or -Xms/-Xmx) options to java in many JVMs. 
+</P>
+<P><A NAME=" Threads"></A><A NAME="_Threads"></A>Threads 
+</P>
+<P STYLE="margin-left: 0.5in">The number of threads is approximately
+equal to the number of warehouses. For very large numbers of
+warehouses, you may need to increase operating system limits on
+threads. 
+</P>
+<P><A NAME="JVM locks"></A><A NAME="JVM_locks"></A>JVM Locking 
+</P>
+<P STYLE="margin-left: 0.5in">At a larger number of warehouses (and
+hence threads), the synchronization of application methods, or the
+JVM's internal use of locking, may prevent the JVM from using all
+available CPU cycles. If there is a bottleneck without consuming 100%
+of CPU, lock profiling with JVM or operating system tools may be
+helpful. 
+</P>
+<P><A NAME="Network Tuning"></A><A NAME="Network_Tuning"></A>Network 
+</P>
+<P STYLE="margin-left: 0.5in">SPECjbb<FONT COLOR="#000000">2005</FONT>
+does not run over the network. There is a very limited network
+activity to sync up the multiple JVM instances using socket
+communication which does not affect the benchmark performance.</P>
+<P><A NAME="IO Tuning"></A><A NAME="IO_Tuning"></A>Disk I/O 
+</P>
+<P STYLE="margin-left: 0.5in">SPECjbb<FONT COLOR="#000000">2005</FONT>
+does not write to disk as part of the measured workload. Classes are
+read from disk, of course, but that should be a negligible part of
+the workload. 
+</P>
+<HR SIZE=1>
+<H2><A NAME="Submitting"></A>10 Submitting results 
+</H2>
+<P>Upon a successful run, the results may be submitted to the SPEC
+Java sub-committee for review by mailing the <EM>SPECjbb.&lt;num&gt;.raw</EM>
+file to <EM>subjbb2005@spec.org</EM>. When mailing the output
+properties file, include it in the body of the mail message, don't
+send it as an attachment, and mail only one result per email message.
+&nbsp;</P>
+<P><STRONG>Note:</STRONG> The SPECjbb.&lt;num&gt;.raw files uses the
+configuration and parameter information in the <EM>properties</EM>
+file. Please edit the <EM>properties</EM> files with the correct
+information prior to running the benchmark for submission. 
+</P>
+<P>Every submission goes through a two-week review process. During
+the review, members of the sub-committee may ask for further
+information/clarifications on the submission. Once the result has
+been reviewed and approved by the sub-committee, it is displayed on
+the SPEC web site at <EM>www.spec.org</EM> . 
+</P>
+<HR SIZE=1 NOSHADE>
+<P><A HREF="http://www.spec.org/"><U><FONT COLOR="#0000bb">Home</FONT></U></A>
+- <A HREF="http://www.spec.org/spec/contact.html"><U><FONT COLOR="#0000bb">Contact</FONT></U></A>
+- <A HREF="http://www.spec.org/contents.html"><U><FONT COLOR="#0000bb">Site
+Map</FONT></U></A> - <A HREF="http://www.spec.org/spec/privacy_policy.html"><U><FONT COLOR="#0000bb">Privacy</FONT></U></A>
+- <A HREF="http://www.spec.org/spec/"><U><FONT COLOR="#0000bb">About
+SPEC</FONT></U></A> 
+</P>
+<HR SIZE=1 NOSHADE>
+<P><A HREF="mailto:webmaster@spec.org"><U><FONT COLOR="#0000bb">webmaster@spec.org</FONT></U></A>
+<BR>Last updated: <I>Fri June 9 12:02:02 PDT 2005</I></P>
+<P><FONT COLOR="#ff0000"><A HREF="http://www.spec.org/spec/copyright.html"><U>Copyright</U></A>
+</FONT>1995 - 2005 Standard Performance Evaluation Corporation <BR>URL:
+<I>http://www.spec.org/jbb2005/docs/UserGuide.html</I> 
+</P>
+<P><FONT COLOR="#ff0000">&nbsp;</FONT></P>
+</BODY>
+</HTML>

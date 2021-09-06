@@ -1,0 +1,60 @@
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Broker Volume Parameters:  NONE
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Customer Position Parameters:
+Parameter                               Default	Current	Default?
+By Cust ID:                             50	50	YES
+By Tax ID:                              50	50	YES
+Get History:                            50	50	YES
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Market Watch Parameters:
+Parameter                               Default	Current	Default?
+By Account ID:                          35	35	YES
+By Industry:                            5	5	YES
+By Watch List:                          60	60	YES
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Security Detail Parameters:
+Parameter                               Default	Current	Default?
+LOB Access Pct:                         1	1	YES
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Trade Lookup Parameters:
+Parameter                               Default	Current	Default?
+Frame 1 Pct:                            30	30	YES
+Frame 2 Pct:                            30	30	YES
+Frame 3 Pct:                            30	30	YES
+Frame 4 Pct:                            10	10	YES
+Frame 1 MaxRows:                        20	20	YES
+Frame 2 MaxRows:                        20	20	YES
+Frame 3 MaxRows:                        20	20	YES
+Frame 4 MaxRows:                        20	20	YES
+BackOffFromEndTimeFrame2:               115200	115200	YES
+BackOffFromEndTimeFrame3:               12000	12000	YES
+BackOffFromEndTimeFrame4:               30000	30000	YES
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Trade Order Parameters:
+Parameter                               Default	Current	Default?
+Market Trade Pct:                       60	60	YES
+Limit Trade Pct:                        40	40	YES
+Stop Loss Pct:                          50	50	YES
+Security by Name Pct:                   40	40	YES
+Security by Symbol Pct:                 60	60	YES
+Buy Order Pct:                          50	50	YES
+Sell Order Pct:                         50	50	YES
+LIFO Pct:                               35	35	YES
+Margin Trade Pct:                       8	8	YES
+Executor as Owner Pct:                  90	90	YES
+Rollback Pct:                           1	1	YES
+
+EGenDriverCE (EGen v1.11.0) 0 2013-05-05 17:28:27.348 Trade Update Parameters:
+Parameter                               Default	Current	Default?
+Frame 1 Pct:                            33	33	YES
+Frame 2 Pct:                            33	33	YES
+Frame 3 Pct:                            34	34	YES
+Frame 1 MaxRows:                        20	20	YES
+Frame 2 MaxRows:                        20	20	YES
+Frame 3 MaxRows:                        20	20	YES
+Frame 1 MaxRowsToUpdate:                20	20	YES
+Frame 2 MaxRowsToUpdate:                20	20	YES
+Frame 3 MaxRowsToUpdate:                20	20	YES
+BackOffFromEndTimeFrame2:               115200	115200	YES
+BackOffFromEndTimeFrame3:               12000	12000	YES
+

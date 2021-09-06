@@ -1,0 +1,8 @@
+Boost.Test WARNING: token "phrase-extract/test.domain" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: ScoreFeatureTest --random -- phrase-extract/test.domain
+Running 3 test cases...
+
+*** No errors detected
+
+EXIT STATUS: 0

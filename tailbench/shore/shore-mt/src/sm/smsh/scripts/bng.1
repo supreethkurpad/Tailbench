@@ -1,0 +1,133 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: bng.1,v 1.11.2.2 2009/12/21 18:45:13 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# This script tries to find out the read write performance of the shore server 
+# using multiple disks
+
+    if {[is_set objsize] == 0} {
+	# Set size of each tuple
+	set objsize 100
+	set nobjs   100000
+	set update_count  10  
+    }
+
+
+    proc per_thread_write { fid } {
+	global objsize
+	global nobjs
+	global update_count
+
+	set hdr "" 
+	set body [format "%0*s" $objsize a]
+
+	# 
+	# create a huge file
+	#
+	set wtime [ time {
+	    sm begin_xct
+
+	    set tid [sm xct_to_tid [sm xct]]
+	    verbose Creating $nobjs objects of size $objsize in file $fid
+
+	    set scan [sm scan_file_create $fid t_cc_append]
+	    sm multi_file_append $scan $hdr $objsize $body $nobjs
+	    sm scan_file_destroy $scan
+	    sm commit_xct
+
+	    for {set i 0} {$i < $update_count} {incr i} {
+		sm begin_xct
+		set scan [sm scan_file_create $fid t_cc_file]
+		sm multi_file_update $scan $objsize 
+		sm scan_file_destroy $scan
+		sm commit_xct
+	    }
+
+	} 1 ]
+	verbose fid $fid took $wtime
+    }
+
+
+    # Initialize the disks
+    verbose  initializing disks .. $volid
+    source $script_dir/bng.init
+
+    # Now print all the volids
+    verbose mounted devices: $volid_list
+
+    # Create one file per device
+    sm begin_xct
+    list fid_list
+    foreach i $volid_list {
+		lappend fid_list [sm create_file $i tmp ]
+    }
+    sm commit_xct
+
+    # Fork one thread per device to create a file on each device
+    list thread_list
+    set wtime [ time {
+
+		foreach i $fid_list {
+			lappend thread_list [fork_thread per_thread_write $i]
+		}
+
+		verbose Thread list = $thread_list
+
+	# Wait for them to finish
+
+		foreach i $thread_list {
+			join_thread $i
+		}
+    } 1 ]
+
+    verbose Total time, including tcl = $wtime
+
+    verbose forcing BP and invalidating ...
+    set wtime [ time {
+	    sm force_buffers true
+    } 1 ]
+    verbose Force time = $wtime
+
+    pstats
+
+    verbose Done !
+
+    sm begin_xct
+	foreach i $fid_list {
+		sm destroy_file $i
+	}
+    sm commit_xct
+
+deletecleanupvars {quota vol_list id_body_width size_page_align size dev
+				id_hdr_width vol existing}
+
+unset volid_list update_count fid_list wtime thread_list i nobjs objsize
+unset quota id_body_width size_page_align size dev 
+unset id_hdr_width vol existing 
+
+

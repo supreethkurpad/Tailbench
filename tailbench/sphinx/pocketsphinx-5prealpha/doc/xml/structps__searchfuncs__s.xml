@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structps__searchfuncs__s" kind="struct" language="C++" prot="public">
+    <compoundname>ps_searchfuncs_s</compoundname>
+    <includes refid="pocketsphinx__internal_8h" local="no">pocketsphinx_internal.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structps__searchfuncs__s_1aeba78bc55e0053208a406e5755e328c3" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ps_searchfuncs_s::start) (ps_search_t *search)</definition>
+        <argsstring>)(ps_search_t *search)</argsstring>
+        <name>start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="83" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1a5e339a33aaa9abce12aad960ccd8ec69" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ps_searchfuncs_s::step) (ps_search_t *search, int frame_idx)</definition>
+        <argsstring>)(ps_search_t *search, int frame_idx)</argsstring>
+        <name>step</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="84" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1af1b419057d3112ed400b3e8244350298" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ps_searchfuncs_s::finish) (ps_search_t *search)</definition>
+        <argsstring>)(ps_search_t *search)</argsstring>
+        <name>finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="85" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1a6ac3701ff0654da72bd55e89e4936884" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ps_searchfuncs_s::reinit) (ps_search_t *search, dict_t *dict, dict2pid_t *d2p)</definition>
+        <argsstring>)(ps_search_t *search, dict_t *dict, dict2pid_t *d2p)</argsstring>
+        <name>reinit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="86" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1a30c9ebb9036ed7286aba45f3f25abd7e" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* ps_searchfuncs_s::free) (ps_search_t *search)</definition>
+        <argsstring>)(ps_search_t *search)</argsstring>
+        <name>free</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="87" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1a94ff0b5cb1ae6660bba5ed3e9886e127" prot="public" static="no" mutable="no">
+        <type><ref refid="ps__lattice_8h_1af3c03aa650aafdaea0cbcfabe1a1c1e5" kindref="member">ps_lattice_t</ref> *(*</type>
+        <definition>ps_lattice_t*(* ps_searchfuncs_s::lattice) (ps_search_t *search)</definition>
+        <argsstring>)(ps_search_t *search)</argsstring>
+        <name>lattice</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="89" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1a74899805519c49115dd55477312bd3a9" prot="public" static="no" mutable="no">
+        <type>char const  *(*</type>
+        <definition>char const*(* ps_searchfuncs_s::hyp) (ps_search_t *search, int32 *out_score, int32 *out_is_final)</definition>
+        <argsstring>)(ps_search_t *search, int32 *out_score, int32 *out_is_final)</argsstring>
+        <name>hyp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="90" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1aa601dc1539edfb40284e94798ba2ab40" prot="public" static="no" mutable="no">
+        <type>int32(*</type>
+        <definition>int32(* ps_searchfuncs_s::prob) (ps_search_t *search)</definition>
+        <argsstring>)(ps_search_t *search)</argsstring>
+        <name>prob</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="91" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__searchfuncs__s_1a7bb9a58892eb6b25f97fac70b05b1f12" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx_8h_1a64d3ac229ef945017112bab4c2a5ec94" kindref="member">ps_seg_t</ref> *(*</type>
+        <definition>ps_seg_t*(* ps_searchfuncs_s::seg_iter) (ps_search_t *search, int32 *out_score)</definition>
+        <argsstring>)(ps_search_t *search, int32 *out_score)</argsstring>
+        <name>seg_iter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="92" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>V-table for search algorithm. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="574">
+        <label>ps_mgau_s</label>
+        <link refid="structps__mgau__s"/>
+        <childnode refid="575" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+      </node>
+      <node id="565">
+        <label>dict_t</label>
+        <link refid="structdict__t"/>
+        <childnode refid="566" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="569" relation="usage">
+          <edgelabel>word</edgelabel>
+        </childnode>
+      </node>
+      <node id="570">
+        <label>ps_search_s</label>
+        <link refid="structps__search__s"/>
+        <childnode refid="564" relation="usage">
+          <edgelabel>last_link</edgelabel>
+        </childnode>
+        <childnode refid="561" relation="usage">
+          <edgelabel>dag</edgelabel>
+        </childnode>
+        <childnode refid="560" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="571" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="565" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="573" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="570" relation="usage">
+          <edgelabel>pls</edgelabel>
+        </childnode>
+      </node>
+      <node id="571">
+        <label>dict2pid_t</label>
+        <link refid="structdict2pid__t"/>
+        <childnode refid="572" relation="usage">
+          <edgelabel>lrssid</edgelabel>
+          <edgelabel>rssid</edgelabel>
+        </childnode>
+        <childnode refid="565" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="566" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+      </node>
+      <node id="563">
+        <label>latlink_list_s</label>
+        <link refid="structlatlink__list__s"/>
+        <childnode refid="564" relation="usage">
+          <edgelabel>link</edgelabel>
+        </childnode>
+        <childnode refid="563" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="577">
+        <label>tmat_t</label>
+        <link refid="structtmat__t"/>
+      </node>
+      <node id="567">
+        <label>cd_tree_s</label>
+        <link refid="structcd__tree__s"/>
+      </node>
+      <node id="569">
+        <label>dictword_t</label>
+        <link refid="structdictword__t"/>
+      </node>
+      <node id="572">
+        <label>xwdssid_t</label>
+        <link refid="structxwdssid__t"/>
+      </node>
+      <node id="562">
+        <label>ps_latnode_s</label>
+        <link refid="structps__latnode__s"/>
+        <childnode refid="562" relation="usage">
+          <edgelabel>alt</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="563" relation="usage">
+          <edgelabel>exits</edgelabel>
+          <edgelabel>entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="568">
+        <label>mdef_entry_s</label>
+        <link refid="structmdef__entry__s"/>
+      </node>
+      <node id="579">
+        <label>ps_segfuncs_s</label>
+        <link refid="structps__segfuncs__s"/>
+        <childnode refid="578" relation="usage">
+          <edgelabel>seg_next</edgelabel>
+        </childnode>
+      </node>
+      <node id="575">
+        <label>ps_mgaufuncs_s</label>
+        <link refid="structps__mgaufuncs__s"/>
+      </node>
+      <node id="566">
+        <label>bin_mdef_s</label>
+        <link refid="structbin__mdef__s"/>
+        <childnode refid="567" relation="usage">
+          <edgelabel>cd_tree</edgelabel>
+        </childnode>
+        <childnode refid="568" relation="usage">
+          <edgelabel>phone</edgelabel>
+        </childnode>
+      </node>
+      <node id="578">
+        <label>ps_seg_s</label>
+        <link refid="structps__seg__s"/>
+        <childnode refid="579" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="570" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="560">
+        <label>ps_searchfuncs_s</label>
+        <link refid="structps__searchfuncs__s"/>
+        <childnode refid="561" relation="usage">
+          <edgelabel>lattice</edgelabel>
+        </childnode>
+        <childnode refid="578" relation="usage">
+          <edgelabel>seg_iter</edgelabel>
+        </childnode>
+      </node>
+      <node id="561">
+        <label>ps_lattice_s</label>
+        <link refid="structps__lattice__s"/>
+        <childnode refid="562" relation="usage">
+          <edgelabel>end</edgelabel>
+          <edgelabel>nodes</edgelabel>
+          <edgelabel>start</edgelabel>
+        </childnode>
+        <childnode refid="563" relation="usage">
+          <edgelabel>q_tail</edgelabel>
+          <edgelabel>q_head</edgelabel>
+        </childnode>
+        <childnode refid="565" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="570" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="573">
+        <label>acmod_s</label>
+        <link refid="structacmod__s"/>
+        <childnode refid="574" relation="usage">
+          <edgelabel>mgau</edgelabel>
+        </childnode>
+        <childnode refid="576" relation="usage">
+          <edgelabel>mllr</edgelabel>
+        </childnode>
+        <childnode refid="566" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="577" relation="usage">
+          <edgelabel>tmat</edgelabel>
+        </childnode>
+      </node>
+      <node id="576">
+        <label>ps_mllr_s</label>
+        <link refid="structps__mllr__s"/>
+      </node>
+      <node id="564">
+        <label>ps_latlink_s</label>
+        <link refid="structps__latlink__s"/>
+        <childnode refid="564" relation="usage">
+          <edgelabel>best_prev</edgelabel>
+        </childnode>
+        <childnode refid="562" relation="usage">
+          <edgelabel>from</edgelabel>
+          <edgelabel>to</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/pocketsphinx_internal.h" line="82" column="1" bodyfile="src/libpocketsphinx/pocketsphinx_internal.h" bodystart="82" bodyend="93"/>
+    <listofallmembers>
+      <member refid="structps__searchfuncs__s_1af1b419057d3112ed400b3e8244350298" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>finish</name></member>
+      <member refid="structps__searchfuncs__s_1a30c9ebb9036ed7286aba45f3f25abd7e" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>free</name></member>
+      <member refid="structps__searchfuncs__s_1a74899805519c49115dd55477312bd3a9" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>hyp</name></member>
+      <member refid="structps__searchfuncs__s_1a94ff0b5cb1ae6660bba5ed3e9886e127" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>lattice</name></member>
+      <member refid="structps__searchfuncs__s_1aa601dc1539edfb40284e94798ba2ab40" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>prob</name></member>
+      <member refid="structps__searchfuncs__s_1a6ac3701ff0654da72bd55e89e4936884" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>reinit</name></member>
+      <member refid="structps__searchfuncs__s_1a7bb9a58892eb6b25f97fac70b05b1f12" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>seg_iter</name></member>
+      <member refid="structps__searchfuncs__s_1aeba78bc55e0053208a406e5755e328c3" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>start</name></member>
+      <member refid="structps__searchfuncs__s_1a5e339a33aaa9abce12aad960ccd8ec69" prot="public" virt="non-virtual"><scope>ps_searchfuncs_s</scope><name>step</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

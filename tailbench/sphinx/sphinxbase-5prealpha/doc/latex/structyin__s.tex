@@ -1,0 +1,172 @@
+\section{yin\+\_\+s Struct Reference}
+\label{structyin__s}\index{yin\+\_\+s@{yin\+\_\+s}}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structyin__s_a25a7e0400397ab1fcbf82f4d0568722a}} 
+uint16 {\bfseries frame\+\_\+size}
+\item 
+float \textbf{ search\+\_\+threshold}
+\begin{DoxyCompactList}\small\item\em Size of analysis frame. \end{DoxyCompactList}\item 
+\mbox{\label{structyin__s_a6dd2dda40ad048fa8be8a21cf59ca77b}} 
+float \textbf{ search\+\_\+range}
+\begin{DoxyCompactList}\small\item\em Range around best local estimate to search. \end{DoxyCompactList}\item 
+uint16 \textbf{ nfr}
+\begin{DoxyCompactList}\small\item\em Number of frames read so far. \end{DoxyCompactList}\item 
+unsigned char \textbf{ wsize}
+\begin{DoxyCompactList}\small\item\em Size of smoothing window. \end{DoxyCompactList}\item 
+unsigned char \textbf{ wstart}
+\begin{DoxyCompactList}\small\item\em First frame in window. \end{DoxyCompactList}\item 
+unsigned char \textbf{ wcur}
+\begin{DoxyCompactList}\small\item\em Current frame of analysis. \end{DoxyCompactList}\item 
+\mbox{\label{structyin__s_a61ca0fc8444a1bdde10aca37dc9f0f56}} 
+unsigned char \textbf{ endut}
+\begin{DoxyCompactList}\small\item\em Hoch Hech! Are we at the utterance end? \end{DoxyCompactList}\item 
+float $\ast$$\ast$ \textbf{ diff\+\_\+window}
+\begin{DoxyCompactList}\small\item\em Window of difference function outputs. \end{DoxyCompactList}\item 
+uint16 $\ast$ \textbf{ period\+\_\+window}
+\begin{DoxyCompactList}\small\item\em Window of best period estimates. \end{DoxyCompactList}\item 
+\mbox{\label{structyin__s_adb8a1fa6168286b87244f35361a64926}} 
+int16 $\ast$ \textbf{ frame}
+\begin{DoxyCompactList}\small\item\em Storage for frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 51 of file yin.\+c.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structyin__s_a41981e290a7b03ae2dae834d4b6bf930}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!diff\+\_\+window@{diff\+\_\+window}}
+\index{diff\+\_\+window@{diff\+\_\+window}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{diff\+\_\+window}
+{\footnotesize\ttfamily float$\ast$$\ast$ yin\+\_\+s\+::diff\+\_\+window}
+
+
+
+Window of difference function outputs. 
+
+
+
+Definition at line 68 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+free(), and yin\+\_\+read().
+
+\mbox{\label{structyin__s_af4f11d14a36bbdc19863fa8335237423}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!nfr@{nfr}}
+\index{nfr@{nfr}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{nfr}
+{\footnotesize\ttfamily uint16 yin\+\_\+s\+::nfr}
+
+
+
+Number of frames read so far. 
+
+
+
+Definition at line 60 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+read(), and yin\+\_\+start().
+
+\mbox{\label{structyin__s_a1928cec127e250f6cd15249085bc9fc8}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!period\+\_\+window@{period\+\_\+window}}
+\index{period\+\_\+window@{period\+\_\+window}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{period\+\_\+window}
+{\footnotesize\ttfamily uint16$\ast$ yin\+\_\+s\+::period\+\_\+window}
+
+
+
+Window of best period estimates. 
+
+
+
+Definition at line 72 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+free(), and yin\+\_\+read().
+
+\mbox{\label{structyin__s_a48c5ec4512b28c565a6daee092dd87f3}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!search\+\_\+threshold@{search\+\_\+threshold}}
+\index{search\+\_\+threshold@{search\+\_\+threshold}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{search\+\_\+threshold}
+{\footnotesize\ttfamily float yin\+\_\+s\+::search\+\_\+threshold}
+
+
+
+Size of analysis frame. 
+
+Threshold for finding period 
+
+Definition at line 54 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+init().
+
+\mbox{\label{structyin__s_ab79376deb3761d5d3ae72f727ac25660}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!wcur@{wcur}}
+\index{wcur@{wcur}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{wcur}
+{\footnotesize\ttfamily unsigned char yin\+\_\+s\+::wcur}
+
+
+
+Current frame of analysis. 
+
+
+
+Definition at line 64 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+read().
+
+\mbox{\label{structyin__s_a024d8e9d70f94a7f62457154fb5a4b03}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!wsize@{wsize}}
+\index{wsize@{wsize}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{wsize}
+{\footnotesize\ttfamily unsigned char yin\+\_\+s\+::wsize}
+
+
+
+Size of smoothing window. 
+
+
+
+Definition at line 62 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+read(), and yin\+\_\+write().
+
+\mbox{\label{structyin__s_a18481851da6db4df2a469b80c2c5704e}} 
+\index{yin\+\_\+s@{yin\+\_\+s}!wstart@{wstart}}
+\index{wstart@{wstart}!yin\+\_\+s@{yin\+\_\+s}}
+\subsubsection{wstart}
+{\footnotesize\ttfamily unsigned char yin\+\_\+s\+::wstart}
+
+
+
+First frame in window. 
+
+
+
+Definition at line 63 of file yin.\+c.
+
+
+
+Referenced by yin\+\_\+read(), yin\+\_\+start(), and yin\+\_\+write().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libsphinxbase/fe/\textbf{ yin.\+c}\end{DoxyCompactItemize}

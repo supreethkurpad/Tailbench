@@ -1,0 +1,184 @@
+\section{ngram\+\_\+model\+\_\+s Struct Reference}
+\label{structngram__model__s}\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+
+
+Common implementation of ngram\+\_\+model\+\_\+t.  
+
+
+
+
+{\ttfamily \#include $<$ngram\+\_\+model\+\_\+internal.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structngram__model__s_a3b14986e4dc40ccec1f7e206b7f41d06}} 
+int \textbf{ refcount}
+\begin{DoxyCompactList}\small\item\em Reference count. \end{DoxyCompactList}\item 
+uint32 $\ast$ \textbf{ n\+\_\+counts}
+\begin{DoxyCompactList}\small\item\em Counts for 1, 2, 3, ... \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a3e41109b30668bdfc077614c1ef49960}} 
+int32 \textbf{ n\+\_\+1g\+\_\+alloc}
+\begin{DoxyCompactList}\small\item\em Number of allocated word strings (for new word addition) \end{DoxyCompactList}\item 
+int32 \textbf{ n\+\_\+words}
+\begin{DoxyCompactList}\small\item\em Number of actual word strings (N\+OT the same as the number of unigrams, due to class words). \end{DoxyCompactList}\item 
+uint8 \textbf{ n}
+\begin{DoxyCompactList}\small\item\em This is an n-\/gram model (1, 2, 3, ...). \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_adeb914f8e9f011a5c960f5ee9cd33919}} 
+uint8 \textbf{ n\+\_\+classes}
+\begin{DoxyCompactList}\small\item\em Number of classes (maximum 128) \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a78a3253febced2cae4732044da466ee6}} 
+uint8 \textbf{ writable}
+\begin{DoxyCompactList}\small\item\em Are word strings writable? \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_ac609a2f867496d6ca719351d566db328}} 
+uint8 \textbf{ flags}
+\begin{DoxyCompactList}\small\item\em Any other flags we might care about (F\+I\+X\+ME\+: Merge this and writable) \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a2ca373109c651ac998b33153eb38fd95}} 
+\textbf{ logmath\+\_\+t} $\ast$ \textbf{ lmath}
+\begin{DoxyCompactList}\small\item\em Log-\/math object. \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a76ea0c65b23de80091e7c602bdb43bde}} 
+float32 \textbf{ lw}
+\begin{DoxyCompactList}\small\item\em Language model scaling factor. \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a3d6bf5632760a16e52cb881d7010d774}} 
+int32 \textbf{ log\+\_\+wip}
+\begin{DoxyCompactList}\small\item\em Log of word insertion penalty. \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a65425a599c4bcc4dda809d81149b8fc0}} 
+int32 \textbf{ log\+\_\+zero}
+\begin{DoxyCompactList}\small\item\em Zero probability, cached here for quick lookup. \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_ae625e779e340845f03fb3da164e93039}} 
+char $\ast$$\ast$ \textbf{ word\+\_\+str}
+\begin{DoxyCompactList}\small\item\em Unigram names. \end{DoxyCompactList}\item 
+\textbf{ hash\+\_\+table\+\_\+t} $\ast$ \textbf{ wid}
+\begin{DoxyCompactList}\small\item\em Mapping of unigram names to word I\+Ds. \end{DoxyCompactList}\item 
+\mbox{\label{structngram__model__s_a4f910ab2c18b0e68dce92816a27fb139}} 
+int32 $\ast$ \textbf{ tmp\+\_\+wids}
+\begin{DoxyCompactList}\small\item\em Temporary array of word I\+Ds for ngram\+\_\+model\+\_\+get\+\_\+ngram() \end{DoxyCompactList}\item 
+struct \textbf{ ngram\+\_\+class\+\_\+s} $\ast$$\ast$ \textbf{ classes}
+\begin{DoxyCompactList}\small\item\em Word class definitions. \end{DoxyCompactList}\item 
+struct \textbf{ ngram\+\_\+funcs\+\_\+s} $\ast$ \textbf{ funcs}
+\begin{DoxyCompactList}\small\item\em Implementation-\/specific methods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Common implementation of ngram\+\_\+model\+\_\+t. 
+
+The details of bigram, trigram, and higher-\/order N-\/gram storage, if any, can vary somewhat depending on the file format in use. 
+
+Definition at line 55 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structngram__model__s_a39384af3e6b53591d433436db011ac8d}} 
+\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}!classes@{classes}}
+\index{classes@{classes}!ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+\subsubsection{classes}
+{\footnotesize\ttfamily struct \textbf{ ngram\+\_\+class\+\_\+s}$\ast$$\ast$ ngram\+\_\+model\+\_\+s\+::classes}
+
+
+
+Word class definitions. 
+
+
+
+Definition at line 74 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+add\+\_\+class\+\_\+word(), ngram\+\_\+ng\+\_\+prob(), and ngram\+\_\+ng\+\_\+score().
+
+\mbox{\label{structngram__model__s_ad3d9d8ad9773f958a89534220eda6fb9}} 
+\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}!funcs@{funcs}}
+\index{funcs@{funcs}!ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+\subsubsection{funcs}
+{\footnotesize\ttfamily struct \textbf{ ngram\+\_\+funcs\+\_\+s}$\ast$ ngram\+\_\+model\+\_\+s\+::funcs}
+
+
+
+Implementation-\/specific methods. 
+
+
+
+Definition at line 75 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+add\+\_\+word(), ngram\+\_\+model\+\_\+apply\+\_\+weights(), ngram\+\_\+model\+\_\+flush(), ngram\+\_\+model\+\_\+write(), ngram\+\_\+ng\+\_\+prob(), and ngram\+\_\+ng\+\_\+score().
+
+\mbox{\label{structngram__model__s_a3c87bc1b678662a2c8930b3b8c33a80f}} 
+\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}!n@{n}}
+\index{n@{n}!ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+\subsubsection{n}
+{\footnotesize\ttfamily uint8 ngram\+\_\+model\+\_\+s\+::n}
+
+
+
+This is an n-\/gram model (1, 2, 3, ...). 
+
+
+
+Definition at line 62 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+set\+\_\+add(), and ngram\+\_\+model\+\_\+write().
+
+\mbox{\label{structngram__model__s_a710daed84ee676f79dcbf510fca238e8}} 
+\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}!n\+\_\+counts@{n\+\_\+counts}}
+\index{n\+\_\+counts@{n\+\_\+counts}!ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+\subsubsection{n\+\_\+counts}
+{\footnotesize\ttfamily uint32$\ast$ ngram\+\_\+model\+\_\+s\+::n\+\_\+counts}
+
+
+
+Counts for 1, 2, 3, ... 
+
+grams 
+
+Definition at line 57 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+write().
+
+\mbox{\label{structngram__model__s_a74f85927ef0d5513a1e6c02d13864be3}} 
+\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}!n\+\_\+words@{n\+\_\+words}}
+\index{n\+\_\+words@{n\+\_\+words}!ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+\subsubsection{n\+\_\+words}
+{\footnotesize\ttfamily int32 ngram\+\_\+model\+\_\+s\+::n\+\_\+words}
+
+
+
+Number of actual word strings (N\+OT the same as the number of unigrams, due to class words). 
+
+
+
+Definition at line 59 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+set\+\_\+add(), ngram\+\_\+model\+\_\+set\+\_\+current\+\_\+wid(), ngram\+\_\+model\+\_\+set\+\_\+known\+\_\+wid(), ngram\+\_\+model\+\_\+set\+\_\+map\+\_\+words(), and ngram\+\_\+word().
+
+\mbox{\label{structngram__model__s_a75567419a8002ef6e916c81f5d9ee9ed}} 
+\index{ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}!wid@{wid}}
+\index{wid@{wid}!ngram\+\_\+model\+\_\+s@{ngram\+\_\+model\+\_\+s}}
+\subsubsection{wid}
+{\footnotesize\ttfamily \textbf{ hash\+\_\+table\+\_\+t}$\ast$ ngram\+\_\+model\+\_\+s\+::wid}
+
+
+
+Mapping of unigram names to word I\+Ds. 
+
+
+
+Definition at line 72 of file ngram\+\_\+model\+\_\+internal.\+h.
+
+
+
+Referenced by ngram\+\_\+unknown\+\_\+wid(), and ngram\+\_\+wid().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libsphinxbase/lm/ngram\+\_\+model\+\_\+internal.\+h\end{DoxyCompactItemize}

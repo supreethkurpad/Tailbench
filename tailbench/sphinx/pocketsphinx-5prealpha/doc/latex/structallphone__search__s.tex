@@ -1,0 +1,122 @@
+\section{allphone\+\_\+search\+\_\+s Struct Reference}
+\label{structallphone__search__s}\index{allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}}
+
+
+Implementation of allphone search structure.  
+
+
+
+
+{\ttfamily \#include $<$allphone\+\_\+search.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structallphone__search__s_aed4067ba47369dcbb84633cb436c209a}} 
+\textbf{ ps\+\_\+search\+\_\+t} {\bfseries base}
+\item 
+\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ \textbf{ hmmctx}
+\begin{DoxyCompactList}\small\item\em H\+MM context. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_ac1220a564a57a418312800df44bd95ca}} 
+ngram\+\_\+model\+\_\+t $\ast$ \textbf{ lm}
+\begin{DoxyCompactList}\small\item\em Ngram model set. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_ab4d9470249d15abca8e9fd01f1d437a7}} 
+int32 \textbf{ ci\+\_\+only}
+\begin{DoxyCompactList}\small\item\em Use context-\/independent phones for decoding. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a2646c8ad402da8a644ecebd28386de0d}} 
+\textbf{ phmm\+\_\+t} $\ast$$\ast$ \textbf{ ci\+\_\+phmm}
+\begin{DoxyCompactList}\small\item\em P\+H\+MM lists (for each CI phone) \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a9021eb4d9645cc3138535dfad8272601}} 
+int32 $\ast$ \textbf{ ci2lmwid}
+\begin{DoxyCompactList}\small\item\em Mapping of CI phones to LM word I\+Ds. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a8d99dcbcf48746431dd1b37c94b4839d}} 
+int32 {\bfseries beam}
+\item 
+\mbox{\label{structallphone__search__s_af1c69cfc6361bfed4ed0726cbdd4fbfa}} 
+int32 \textbf{ pbeam}
+\begin{DoxyCompactList}\small\item\em Effective beams after applying beam\+\_\+factor. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_ad2156dcb114cc598b55854ec1f139e81}} 
+int32 {\bfseries lw}
+\item 
+\mbox{\label{structallphone__search__s_ac4f20ffb4acb7c36a8e04cf7b88eafb2}} 
+int32 \textbf{ inspen}
+\begin{DoxyCompactList}\small\item\em Language weights. \end{DoxyCompactList}\item 
+\textbf{ frame\+\_\+idx\+\_\+t} \textbf{ frame}
+\begin{DoxyCompactList}\small\item\em Current frame. \end{DoxyCompactList}\item 
+float32 \textbf{ ascale}
+\begin{DoxyCompactList}\small\item\em Acoustic score scale for posterior probabilities. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a83712f4d89a500720b5bb3e8b2b67297}} 
+int32 \textbf{ n\+\_\+tot\+\_\+frame}
+\begin{DoxyCompactList}\small\item\em Total number of frames processed. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a24d1b4b58c797ff488651b6238040433}} 
+int32 \textbf{ n\+\_\+hmm\+\_\+eval}
+\begin{DoxyCompactList}\small\item\em Total H\+M\+Ms evaluated this utt. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a5759743790af0ec17f85f14f18004b71}} 
+int32 \textbf{ n\+\_\+sen\+\_\+eval}
+\begin{DoxyCompactList}\small\item\em Total senones evaluated this utt. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a6f01de182b60ca03ab9fed3bc63fadc5}} 
+\textbf{ blkarray\+\_\+list\+\_\+t} $\ast$ \textbf{ history}
+\begin{DoxyCompactList}\small\item\em List of history nodes allocated in each frame. \end{DoxyCompactList}\item 
+\mbox{\label{structallphone__search__s_a15739824f77c6f825d5324e826458721}} 
+glist\+\_\+t {\bfseries segments}
+\item 
+\mbox{\label{structallphone__search__s_ab933d7d82322055b5d0c62e27d7c1f5f}} 
+ptmr\+\_\+t \textbf{ perf}
+\begin{DoxyCompactList}\small\item\em Performance counter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of allphone search structure. 
+
+Definition at line 110 of file allphone\+\_\+search.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structallphone__search__s_a9ad3ecc228af52131028fb91927563dc}} 
+\index{allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}!ascale@{ascale}}
+\index{ascale@{ascale}!allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}}
+\subsubsection{ascale}
+{\footnotesize\ttfamily float32 allphone\+\_\+search\+\_\+s\+::ascale}
+
+
+
+Acoustic score scale for posterior probabilities. 
+
+
+
+Definition at line 123 of file allphone\+\_\+search.\+h.
+
+\mbox{\label{structallphone__search__s_a458aad951cc506c072d67d8d9f163fd7}} 
+\index{allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}!frame@{frame}}
+\index{frame@{frame}!allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}}
+\subsubsection{frame}
+{\footnotesize\ttfamily \textbf{ frame\+\_\+idx\+\_\+t} allphone\+\_\+search\+\_\+s\+::frame}
+
+
+
+Current frame. 
+
+
+
+Definition at line 122 of file allphone\+\_\+search.\+h.
+
+\mbox{\label{structallphone__search__s_aa82fce72da16af69af92aeca29beed3d}} 
+\index{allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}!hmmctx@{hmmctx}}
+\index{hmmctx@{hmmctx}!allphone\+\_\+search\+\_\+s@{allphone\+\_\+search\+\_\+s}}
+\subsubsection{hmmctx}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+context\+\_\+t}$\ast$ allphone\+\_\+search\+\_\+s\+::hmmctx}
+
+
+
+H\+MM context. 
+
+
+
+Definition at line 113 of file allphone\+\_\+search.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/allphone\+\_\+search.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,584 @@
+\section{src/libpocketsphinx/acmod.c File Reference}
+\label{acmod_8c}\index{src/libpocketsphinx/acmod.\+c@{src/libpocketsphinx/acmod.\+c}}
+
+
+Acoustic model structures for Pocket\+Sphinx.  
+
+
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/err.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/cmd\+\_\+ln.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/strfuncs.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/byteorder.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/feat.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/bio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}cmdln\+\_\+macro.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}acmod.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}s2\+\_\+semi\+\_\+mgau.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ptm\+\_\+mgau.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ms\+\_\+mgau.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{acmod_8c_a82e69009d3cd108c8aad8afe44fb1132}} 
+\#define {\bfseries W\+O\+R\+D\+S\+\_\+\+B\+I\+G\+E\+N\+D\+I\+AN}~1
+\item 
+\#define {\bfseries M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}(a,  h,  i)
+\item 
+\#define {\bfseries N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}(a,  h,  i)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{acmod_8c_a39230c685c29c80a042b44b4a9dd05dc}} 
+int {\bfseries acmod\+\_\+fe\+\_\+mismatch} (\textbf{ acmod\+\_\+t} $\ast$acmod, fe\+\_\+t $\ast$fe)
+\item 
+\mbox{\label{acmod_8c_a2ebfbf8b1f15be46019910c44a81f343}} 
+int {\bfseries acmod\+\_\+feat\+\_\+mismatch} (\textbf{ acmod\+\_\+t} $\ast$acmod, feat\+\_\+t $\ast$fcb)
+\item 
+\textbf{ acmod\+\_\+t} $\ast$ \textbf{ acmod\+\_\+init} (cmd\+\_\+ln\+\_\+t $\ast$config, logmath\+\_\+t $\ast$lmath, fe\+\_\+t $\ast$fe, feat\+\_\+t $\ast$fcb)
+\begin{DoxyCompactList}\small\item\em Initialize an acoustic model. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a1e3345e8ef8b060fc04e88f86e6afa4a}} 
+void \textbf{ acmod\+\_\+free} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Finalize an acoustic model. \end{DoxyCompactList}\item 
+\textbf{ ps\+\_\+mllr\+\_\+t} $\ast$ \textbf{ acmod\+\_\+update\+\_\+mllr} (\textbf{ acmod\+\_\+t} $\ast$acmod, \textbf{ ps\+\_\+mllr\+\_\+t} $\ast$mllr)
+\begin{DoxyCompactList}\small\item\em Adapt acoustic model using a linear transform. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_ac561943e80e1478d7153d3c6320d57d9}} 
+int \textbf{ acmod\+\_\+write\+\_\+senfh\+\_\+header} (\textbf{ acmod\+\_\+t} $\ast$acmod, F\+I\+LE $\ast$logfh)
+\begin{DoxyCompactList}\small\item\em Write senone dump file header. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+set\+\_\+senfh} (\textbf{ acmod\+\_\+t} $\ast$acmod, F\+I\+LE $\ast$logfh)
+\begin{DoxyCompactList}\small\item\em Start logging senone scores to a filehandle. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+set\+\_\+mfcfh} (\textbf{ acmod\+\_\+t} $\ast$acmod, F\+I\+LE $\ast$logfh)
+\begin{DoxyCompactList}\small\item\em Start logging M\+F\+C\+Cs to a filehandle. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+set\+\_\+rawfh} (\textbf{ acmod\+\_\+t} $\ast$acmod, F\+I\+LE $\ast$logfh)
+\begin{DoxyCompactList}\small\item\em Start logging raw audio to a filehandle. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a5fc67b1c8d3de7324c69c036e1c42991}} 
+void {\bfseries acmod\+\_\+grow\+\_\+feat\+\_\+buf} (\textbf{ acmod\+\_\+t} $\ast$acmod, int nfr)
+\item 
+int \textbf{ acmod\+\_\+set\+\_\+grow} (\textbf{ acmod\+\_\+t} $\ast$acmod, int grow\+\_\+feat)
+\begin{DoxyCompactList}\small\item\em Set memory allocation policy for utterance processing. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_aa3a5a89f76338e3e1bcfa7a2cecc5845}} 
+int \textbf{ acmod\+\_\+start\+\_\+utt} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Mark the start of an utterance. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a262372bdd6063f61e64b5417a449c1a9}} 
+int \textbf{ acmod\+\_\+end\+\_\+utt} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Mark the end of an utterance. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+process\+\_\+raw} (\textbf{ acmod\+\_\+t} $\ast$acmod, int16 const $\ast$$\ast$inout\+\_\+raw, size\+\_\+t $\ast$inout\+\_\+n\+\_\+samps, int full\+\_\+utt)
+\begin{DoxyCompactList}\small\item\em T\+O\+DO\+: Set queue length for utterance processing. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+process\+\_\+cep} (\textbf{ acmod\+\_\+t} $\ast$acmod, mfcc\+\_\+t $\ast$$\ast$$\ast$inout\+\_\+cep, int $\ast$inout\+\_\+n\+\_\+frames, int full\+\_\+utt)
+\begin{DoxyCompactList}\small\item\em Feed acoustic feature data into the acoustic model for scoring. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+process\+\_\+feat} (\textbf{ acmod\+\_\+t} $\ast$acmod, mfcc\+\_\+t $\ast$$\ast$feat)
+\begin{DoxyCompactList}\small\item\em Feed dynamic feature data into the acoustic model for scoring. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+set\+\_\+insenfh} (\textbf{ acmod\+\_\+t} $\ast$acmod, F\+I\+LE $\ast$senfh)
+\begin{DoxyCompactList}\small\item\em Set up a senone score dump file for input. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+rewind} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Rewind the current utterance, allowing it to be rescored. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+advance} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Advance the frame index. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a66d1f73cd1d975ec0da9de00b80b36e2}} 
+int \textbf{ acmod\+\_\+write\+\_\+scores} (\textbf{ acmod\+\_\+t} $\ast$acmod, int n\+\_\+active, uint8 const $\ast$active, int16 const $\ast$senscr, F\+I\+LE $\ast$senfh)
+\begin{DoxyCompactList}\small\item\em Write a frame of senone scores to a dump file. \end{DoxyCompactList}\item 
+int \textbf{ acmod\+\_\+read\+\_\+scores} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Read one frame of scores from senone score dump file. \end{DoxyCompactList}\item 
+mfcc\+\_\+t $\ast$$\ast$ \textbf{ acmod\+\_\+get\+\_\+frame} (\textbf{ acmod\+\_\+t} $\ast$acmod, int $\ast$inout\+\_\+frame\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em Get a frame of dynamic feature data. \end{DoxyCompactList}\item 
+int16 const  $\ast$ \textbf{ acmod\+\_\+score} (\textbf{ acmod\+\_\+t} $\ast$acmod, int $\ast$inout\+\_\+frame\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em Score one frame of data. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a3249e1ce0c8155dc23f332f97ddd493b}} 
+int \textbf{ acmod\+\_\+best\+\_\+score} (\textbf{ acmod\+\_\+t} $\ast$acmod, int $\ast$out\+\_\+best\+\_\+senid)
+\begin{DoxyCompactList}\small\item\em Get best score and senone index for current frame. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_aed43f033f434e34fd90c975909d81cb2}} 
+void \textbf{ acmod\+\_\+clear\+\_\+active} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Clear set of active senones. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a2a7f67d462279b2bc4774c7967ae61c7}} 
+void \textbf{ acmod\+\_\+activate\+\_\+hmm} (\textbf{ acmod\+\_\+t} $\ast$acmod, \textbf{ hmm\+\_\+t} $\ast$hmm)
+\begin{DoxyCompactList}\small\item\em Activate senones associated with an H\+MM. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_ad12224c741f7ea76faf88a29537f83dd}} 
+int32 \textbf{ acmod\+\_\+flags2list} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Build active list from. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a8b52ce1289cc84deda1cf98b4cebbca2}} 
+int32 \textbf{ acmod\+\_\+stream\+\_\+offset} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Get the offset of the utterance start of the current stream, helpful for stream-\/wide timing. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_ae065d2fafc704177e7537988c9d3b5c1}} 
+void \textbf{ acmod\+\_\+start\+\_\+stream} (\textbf{ acmod\+\_\+t} $\ast$acmod)
+\begin{DoxyCompactList}\small\item\em Reset the current stream. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a8c8dce7790c4486d1ee1b20d810805bf}} 
+void \textbf{ acmod\+\_\+set\+\_\+rawdata\+\_\+size} (\textbf{ acmod\+\_\+t} $\ast$acmod, int32 size)
+\begin{DoxyCompactList}\small\item\em Sets the limit of the raw audio data to store. \end{DoxyCompactList}\item 
+\mbox{\label{acmod_8c_a0804fc79c26de167a95ece1189effbec}} 
+void \textbf{ acmod\+\_\+get\+\_\+rawdata} (\textbf{ acmod\+\_\+t} $\ast$acmod, int16 $\ast$$\ast$buffer, int32 $\ast$size)
+\begin{DoxyCompactList}\small\item\em Retrieves the raw data collected during utterance decoding. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Acoustic model structures for Pocket\+Sphinx. 
+
+\begin{DoxyAuthor}{Author}
+David Huggins-\/\+Daines {\tt dhuggins@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{acmod_8c_a8017e0daafc566656931e15bef02cdee}} 
+\index{acmod.\+c@{acmod.\+c}!M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET@{M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}}
+\index{M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET@{M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}!acmod.\+c@{acmod.\+c}}
+\subsubsection{M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}
+{\footnotesize\ttfamily \#define M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{h,  }\item[{}]{i }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (hmm\_mpx\_ssid(h,i) != BAD_SSID)                          \(\backslash\)
+        bitvec\_set((a)->senone\_active\_vec, hmm\_mpx\_senid(h,i))
+\end{DoxyCode}
+
+
+Definition at line 1225 of file acmod.\+c.
+
+\mbox{\label{acmod_8c_aba1b554be23311cdd7f89ff2a209819b}} 
+\index{acmod.\+c@{acmod.\+c}!N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET@{N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}}
+\index{N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET@{N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}!acmod.\+c@{acmod.\+c}}
+\subsubsection{N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET}
+{\footnotesize\ttfamily \#define N\+O\+N\+M\+P\+X\+\_\+\+B\+I\+T\+V\+E\+C\+\_\+\+S\+ET(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{h,  }\item[{}]{i }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+bitvec\_set((a)->senone\_active\_vec,                                  \(\backslash\)
+               hmm\_nonmpx\_senid(h,i))
+\end{DoxyCode}
+
+
+Definition at line 1228 of file acmod.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{acmod_8c_a338971ea0aa27fb4796d224e4767642b}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+advance@{acmod\+\_\+advance}}
+\index{acmod\+\_\+advance@{acmod\+\_\+advance}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+advance()}
+{\footnotesize\ttfamily int acmod\+\_\+advance (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod }\end{DoxyParamCaption})}
+
+
+
+Advance the frame index. 
+
+This function moves to the next frame of input data. Subsequent calls to \doxyref{acmod\+\_\+score()}{p.}{acmod_8h_acd78e9bae06724df9c53f844d90c1c8a} will return scores for that frame, until the next call to \doxyref{acmod\+\_\+advance()}{p.}{acmod_8h_a338971ea0aa27fb4796d224e4767642b}.
+
+\begin{DoxyReturn}{Returns}
+New frame index. 
+\end{DoxyReturn}
+
+
+Definition at line 919 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::feat\+\_\+outidx, ps\+\_\+mgau\+\_\+s\+::frame\+\_\+idx, acmod\+\_\+s\+::mgau, acmod\+\_\+s\+::n\+\_\+feat\+\_\+alloc, acmod\+\_\+s\+::n\+\_\+feat\+\_\+frame, and acmod\+\_\+s\+::output\+\_\+frame.
+
+\mbox{\label{acmod_8c_a91c63cce3b20f231aa483bf054eca3c6}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+get\+\_\+frame@{acmod\+\_\+get\+\_\+frame}}
+\index{acmod\+\_\+get\+\_\+frame@{acmod\+\_\+get\+\_\+frame}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+get\+\_\+frame()}
+{\footnotesize\ttfamily mfcc\+\_\+t$\ast$$\ast$ acmod\+\_\+get\+\_\+frame (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{int $\ast$}]{inout\+\_\+frame\+\_\+idx }\end{DoxyParamCaption})}
+
+
+
+Get a frame of dynamic feature data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+frame\+\_\+idx} & Input\+: frame index to get, or N\+U\+LL to obtain features for the most recent frame. Output\+: frame index corresponding to this set of features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Feature array, or N\+U\+LL if requested frame is not available. 
+\end{DoxyReturn}
+
+
+Definition at line 1108 of file acmod.\+c.
+
+\mbox{\label{acmod_8c_a6f32b623cbc3d15a1e3c5d09aba7dabf}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+init@{acmod\+\_\+init}}
+\index{acmod\+\_\+init@{acmod\+\_\+init}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+init()}
+{\footnotesize\ttfamily \textbf{ acmod\+\_\+t}$\ast$ acmod\+\_\+init (\begin{DoxyParamCaption}\item[{cmd\+\_\+ln\+\_\+t $\ast$}]{config,  }\item[{logmath\+\_\+t $\ast$}]{lmath,  }\item[{fe\+\_\+t $\ast$}]{fe,  }\item[{feat\+\_\+t $\ast$}]{fcb }\end{DoxyParamCaption})}
+
+
+
+Initialize an acoustic model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & a command-\/line object containing parameters. This pointer is not retained by this object. \\
+\hline
+{\em lmath} & global log-\/math parameters. \\
+\hline
+{\em fe} & a previously-\/initialized acoustic feature module to use, or N\+U\+LL to create one automatically. If this is supplied and its parameters do not match those in the acoustic model, this function will fail. This pointer is not retained. \\
+\hline
+{\em fe} & a previously-\/initialized dynamic feature module to use, or N\+U\+LL to create one automatically. If this is supplied and its parameters do not match those in the acoustic model, this function will fail. This pointer is not retained. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a newly initialized acmod\+\_\+t, or N\+U\+LL on failure. 
+\end{DoxyReturn}
+
+
+Definition at line 230 of file acmod.\+c.
+
+
+
+References A\+C\+M\+O\+D\+\_\+\+I\+D\+LE, acmod\+\_\+s\+::config, acmod\+\_\+s\+::lmath, and acmod\+\_\+s\+::state.
+
+
+
+Referenced by ps\+\_\+reinit().
+
+\mbox{\label{acmod_8c_a9464f7708a361171469d613d401619fe}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+process\+\_\+cep@{acmod\+\_\+process\+\_\+cep}}
+\index{acmod\+\_\+process\+\_\+cep@{acmod\+\_\+process\+\_\+cep}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+process\+\_\+cep()}
+{\footnotesize\ttfamily int acmod\+\_\+process\+\_\+cep (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{mfcc\+\_\+t $\ast$$\ast$$\ast$}]{inout\+\_\+cep,  }\item[{int $\ast$}]{inout\+\_\+n\+\_\+frames,  }\item[{int}]{full\+\_\+utt }\end{DoxyParamCaption})}
+
+
+
+Feed acoustic feature data into the acoustic model for scoring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+cep} & In\+: Pointer to buffer of features Out\+: Pointer to next frame to be read \\
+\hline
+{\em inout\+\_\+n\+\_\+frames} & In\+: Number of frames available Out\+: Number of frames remaining \\
+\hline
+{\em full\+\_\+utt} & If non-\/zero, this block represents a full utterance and should be processed as such. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of frames of data processed. 
+\end{DoxyReturn}
+
+
+Definition at line 719 of file acmod.\+c.
+
+
+
+Referenced by ps\+\_\+process\+\_\+raw().
+
+\mbox{\label{acmod_8c_ab16e414d5a07519d7b462c32377e8a47}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+process\+\_\+feat@{acmod\+\_\+process\+\_\+feat}}
+\index{acmod\+\_\+process\+\_\+feat@{acmod\+\_\+process\+\_\+feat}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+process\+\_\+feat()}
+{\footnotesize\ttfamily int acmod\+\_\+process\+\_\+feat (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{mfcc\+\_\+t $\ast$$\ast$}]{feat }\end{DoxyParamCaption})}
+
+
+
+Feed dynamic feature data into the acoustic model for scoring. 
+
+Unlike \doxyref{acmod\+\_\+process\+\_\+raw()}{p.}{acmod_8h_a23e63c8833e6128ae248e183d42f9b2b} and \doxyref{acmod\+\_\+process\+\_\+cep()}{p.}{acmod_8h_a9464f7708a361171469d613d401619fe}, this function accepts a single frame at a time. This is because there is no need to do buffering when using dynamic features as input. However, if the dynamic feature buffer is full, this function will fail, so you should either always check the return value, or always pair a call to it with a call to \doxyref{acmod\+\_\+score()}{p.}{acmod_8h_acd78e9bae06724df9c53f844d90c1c8a}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em feat} & Pointer to one frame of dynamic features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of frames processed (either 0 or 1). 
+\end{DoxyReturn}
+
+
+Definition at line 817 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::grow\+\_\+feat, acmod\+\_\+s\+::n\+\_\+feat\+\_\+alloc, and acmod\+\_\+s\+::n\+\_\+feat\+\_\+frame.
+
+\mbox{\label{acmod_8c_a23e63c8833e6128ae248e183d42f9b2b}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+process\+\_\+raw@{acmod\+\_\+process\+\_\+raw}}
+\index{acmod\+\_\+process\+\_\+raw@{acmod\+\_\+process\+\_\+raw}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+process\+\_\+raw()}
+{\footnotesize\ttfamily int acmod\+\_\+process\+\_\+raw (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{int16 const $\ast$$\ast$}]{inout\+\_\+raw,  }\item[{size\+\_\+t $\ast$}]{inout\+\_\+n\+\_\+samps,  }\item[{int}]{full\+\_\+utt }\end{DoxyParamCaption})}
+
+
+
+T\+O\+DO\+: Set queue length for utterance processing. 
+
+This function allows multiple concurrent passes of search to operate on different parts of the utterance. Feed raw audio data to the acoustic model for scoring.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+raw} & In\+: Pointer to buffer of raw samples Out\+: Pointer to next sample to be read \\
+\hline
+{\em inout\+\_\+n\+\_\+samps} & In\+: Number of samples available Out\+: Number of samples remaining \\
+\hline
+{\em full\+\_\+utt} & If non-\/zero, this block represents a full utterance and should be processed as such. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of frames of data processed. 
+\end{DoxyReturn}
+
+
+Definition at line 627 of file acmod.\+c.
+
+
+
+Referenced by ps\+\_\+process\+\_\+raw().
+
+\mbox{\label{acmod_8c_a5c193164be78ad42944b7fb1be6299a2}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+read\+\_\+scores@{acmod\+\_\+read\+\_\+scores}}
+\index{acmod\+\_\+read\+\_\+scores@{acmod\+\_\+read\+\_\+scores}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+read\+\_\+scores()}
+{\footnotesize\ttfamily int acmod\+\_\+read\+\_\+scores (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod }\end{DoxyParamCaption})}
+
+
+
+Read one frame of scores from senone score dump file. 
+
+\begin{DoxyReturn}{Returns}
+Number of frames read or $<$0 on error. 
+\end{DoxyReturn}
+
+
+Definition at line 1032 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::feat\+\_\+outidx, acmod\+\_\+s\+::grow\+\_\+feat, acmod\+\_\+s\+::n\+\_\+feat\+\_\+alloc, and acmod\+\_\+s\+::n\+\_\+feat\+\_\+frame.
+
+
+
+Referenced by ps\+\_\+decode\+\_\+senscr().
+
+\mbox{\label{acmod_8c_a7b5f0b6edac2985b9b56d630cd705b99}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+rewind@{acmod\+\_\+rewind}}
+\index{acmod\+\_\+rewind@{acmod\+\_\+rewind}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+rewind()}
+{\footnotesize\ttfamily int acmod\+\_\+rewind (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod }\end{DoxyParamCaption})}
+
+
+
+Rewind the current utterance, allowing it to be rescored. 
+
+After calling this function, the internal frame index is reset, and \doxyref{acmod\+\_\+score()}{p.}{acmod_8h_acd78e9bae06724df9c53f844d90c1c8a} will return scores starting at the first frame of the current utterance. Currently, \doxyref{acmod\+\_\+set\+\_\+grow()}{p.}{acmod_8h_a1555dac8fa27f644d709c5c89bbfa881} must have been called to enable growing the feature buffer in order for this to work. In the future, senone scores may be cached instead.
+
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 for failure (if the utterance can\textquotesingle{}t be rewound due to no feature or score data available) 
+\end{DoxyReturn}
+
+
+Definition at line 897 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::feat\+\_\+outidx, ps\+\_\+mgau\+\_\+s\+::frame\+\_\+idx, acmod\+\_\+s\+::mgau, acmod\+\_\+s\+::n\+\_\+feat\+\_\+alloc, acmod\+\_\+s\+::n\+\_\+feat\+\_\+frame, acmod\+\_\+s\+::output\+\_\+frame, and acmod\+\_\+s\+::senscr\+\_\+frame.
+
+\mbox{\label{acmod_8c_acd78e9bae06724df9c53f844d90c1c8a}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+score@{acmod\+\_\+score}}
+\index{acmod\+\_\+score@{acmod\+\_\+score}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+score()}
+{\footnotesize\ttfamily int16 const$\ast$ acmod\+\_\+score (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{int $\ast$}]{inout\+\_\+frame\+\_\+idx }\end{DoxyParamCaption})}
+
+
+
+Score one frame of data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+frame\+\_\+idx} & Input\+: frame index to score, or N\+U\+LL to obtain scores for the most recent frame. Output\+: frame index corresponding to this set of scores. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of senone scores for this frame, or N\+U\+LL if no frame is available for scoring (such as if a frame index is requested that is not yet or no longer available). The data pointed to persists only until the next call to \doxyref{acmod\+\_\+score()}{p.}{acmod_8h_acd78e9bae06724df9c53f844d90c1c8a} or \doxyref{acmod\+\_\+advance()}{p.}{acmod_8h_a338971ea0aa27fb4796d224e4767642b}. 
+\end{DoxyReturn}
+
+
+Definition at line 1126 of file acmod.\+c.
+
+\mbox{\label{acmod_8c_a1555dac8fa27f644d709c5c89bbfa881}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+set\+\_\+grow@{acmod\+\_\+set\+\_\+grow}}
+\index{acmod\+\_\+set\+\_\+grow@{acmod\+\_\+set\+\_\+grow}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+set\+\_\+grow()}
+{\footnotesize\ttfamily int acmod\+\_\+set\+\_\+grow (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{int}]{grow\+\_\+feat }\end{DoxyParamCaption})}
+
+
+
+Set memory allocation policy for utterance processing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grow\+\_\+feat} & If non-\/zero, the internal dynamic feature buffer will expand as necessary to encompass any amount of data fed to the model. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+previous allocation policy. 
+\end{DoxyReturn}
+
+
+Definition at line 412 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::grow\+\_\+feat, and acmod\+\_\+s\+::n\+\_\+feat\+\_\+alloc.
+
+
+
+Referenced by ngram\+\_\+search\+\_\+init(), and ps\+\_\+process\+\_\+raw().
+
+\mbox{\label{acmod_8c_a58bd6038bec5d3901ac2057cacdd778a}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+set\+\_\+insenfh@{acmod\+\_\+set\+\_\+insenfh}}
+\index{acmod\+\_\+set\+\_\+insenfh@{acmod\+\_\+set\+\_\+insenfh}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+set\+\_\+insenfh()}
+{\footnotesize\ttfamily int acmod\+\_\+set\+\_\+insenfh (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{F\+I\+LE $\ast$}]{insenfh }\end{DoxyParamCaption})}
+
+
+
+Set up a senone score dump file for input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em insenfh} & File handle of dump file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 for failure 
+\end{DoxyReturn}
+
+
+Definition at line 884 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::compallsen, acmod\+\_\+s\+::config, acmod\+\_\+s\+::insenfh, and acmod\+\_\+s\+::n\+\_\+feat\+\_\+frame.
+
+
+
+Referenced by ps\+\_\+decode\+\_\+senscr().
+
+\mbox{\label{acmod_8c_a5753caa516c75bdc74b385d7aa66a97c}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+set\+\_\+mfcfh@{acmod\+\_\+set\+\_\+mfcfh}}
+\index{acmod\+\_\+set\+\_\+mfcfh@{acmod\+\_\+set\+\_\+mfcfh}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+set\+\_\+mfcfh()}
+{\footnotesize\ttfamily int acmod\+\_\+set\+\_\+mfcfh (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{F\+I\+LE $\ast$}]{logfh }\end{DoxyParamCaption})}
+
+
+
+Start logging M\+F\+C\+Cs to a filehandle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em acmod} & Acoustic model object. \\
+\hline
+{\em logfh} & Filehandle to log to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 on error. 
+\end{DoxyReturn}
+
+
+Definition at line 377 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::mfcfh.
+
+
+
+Referenced by ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{acmod_8c_a6979441ae866ea846ef41f8471b105a0}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+set\+\_\+rawfh@{acmod\+\_\+set\+\_\+rawfh}}
+\index{acmod\+\_\+set\+\_\+rawfh@{acmod\+\_\+set\+\_\+rawfh}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+set\+\_\+rawfh()}
+{\footnotesize\ttfamily int acmod\+\_\+set\+\_\+rawfh (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{F\+I\+LE $\ast$}]{logfh }\end{DoxyParamCaption})}
+
+
+
+Start logging raw audio to a filehandle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em acmod} & Acoustic model object. \\
+\hline
+{\em logfh} & Filehandle to log to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 on error. 
+\end{DoxyReturn}
+
+
+Definition at line 389 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::rawfh.
+
+
+
+Referenced by ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{acmod_8c_ab35cb48cdf326a3fb5223589d73ae0ce}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+set\+\_\+senfh@{acmod\+\_\+set\+\_\+senfh}}
+\index{acmod\+\_\+set\+\_\+senfh@{acmod\+\_\+set\+\_\+senfh}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+set\+\_\+senfh()}
+{\footnotesize\ttfamily int acmod\+\_\+set\+\_\+senfh (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{F\+I\+LE $\ast$}]{senfh }\end{DoxyParamCaption})}
+
+
+
+Start logging senone scores to a filehandle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em acmod} & Acoustic model object. \\
+\hline
+{\em logfh} & Filehandle to log to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 on error. 
+\end{DoxyReturn}
+
+
+Definition at line 366 of file acmod.\+c.
+
+
+
+References acmod\+\_\+write\+\_\+senfh\+\_\+header(), and acmod\+\_\+s\+::senfh.
+
+
+
+Referenced by ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{acmod_8c_a4205b92d38db562577eafc3c432593ab}} 
+\index{acmod.\+c@{acmod.\+c}!acmod\+\_\+update\+\_\+mllr@{acmod\+\_\+update\+\_\+mllr}}
+\index{acmod\+\_\+update\+\_\+mllr@{acmod\+\_\+update\+\_\+mllr}!acmod.\+c@{acmod.\+c}}
+\subsubsection{acmod\+\_\+update\+\_\+mllr()}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+mllr\+\_\+t}$\ast$ acmod\+\_\+update\+\_\+mllr (\begin{DoxyParamCaption}\item[{\textbf{ acmod\+\_\+t} $\ast$}]{acmod,  }\item[{\textbf{ ps\+\_\+mllr\+\_\+t} $\ast$}]{mllr }\end{DoxyParamCaption})}
+
+
+
+Adapt acoustic model using a linear transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mllr} & The new transform to use, or N\+U\+LL to update the existing transform. The decoder retains ownership of this pointer, so you should not attempt to free it manually. Use \doxyref{ps\+\_\+mllr\+\_\+retain()}{p.}{ps__mllr_8h_a2f40deff6976bf03a845aa474494edfb} if you wish to reuse it elsewhere. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The updated transform object for this decoder, or N\+U\+LL on failure. 
+\end{DoxyReturn}
+
+
+Definition at line 341 of file acmod.\+c.
+
+
+
+References acmod\+\_\+s\+::mllr, and ps\+\_\+mllr\+\_\+free().
+
+
+
+Referenced by ps\+\_\+update\+\_\+mllr().
+

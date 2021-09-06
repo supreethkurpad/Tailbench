@@ -1,0 +1,2 @@
+rm *.o tbench/tbench.class tbench_tbench.h tbench.jar
+Makefile:39: recipe for target 'clean' failed

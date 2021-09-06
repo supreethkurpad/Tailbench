@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structngram__raw__ord__s" kind="struct" language="C++" prot="public">
+    <compoundname>ngram_raw_ord_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structngram__raw__ord__s_1a6edf61363c62d4bc522d941fe76f70d5" prot="public" static="no" mutable="no">
+        <type><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref></type>
+        <definition>ngram_raw_t ngram_raw_ord_s::instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="53" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__raw__ord__s_1acf0c8badf6143bd3b840ac047da37692" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ngram_raw_ord_s::order</definition>
+        <argsstring></argsstring>
+        <name>order</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="54" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="257">
+        <label>ngram_raw_s</label>
+        <link refid="structngram__raw__s"/>
+      </node>
+      <node id="256">
+        <label>ngram_raw_ord_s</label>
+        <link refid="structngram__raw__ord__s"/>
+        <childnode refid="257" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/ngrams_raw.h" line="52" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.h" bodystart="52" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structngram__raw__ord__s_1a6edf61363c62d4bc522d941fe76f70d5" prot="public" virt="non-virtual"><scope>ngram_raw_ord_s</scope><name>instance</name></member>
+      <member refid="structngram__raw__ord__s_1acf0c8badf6143bd3b840ac047da37692" prot="public" virt="non-virtual"><scope>ngram_raw_ord_s</scope><name>order</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

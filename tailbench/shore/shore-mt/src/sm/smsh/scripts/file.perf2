@@ -1,0 +1,220 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.perf2,v 1.7 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+#
+# Test file's re-use of space (holes in file)
+# Creates a file with $nrecs, destroys every other one, leaving
+# $nrecs/2 records.  Re-creates (& destroys) $nrecs/2 recs
+# $numTests times.
+#
+# This uses ONE RECORD SIZE.
+# We need tests that use a variety of record sizes.
+#
+# Furthermore, the destroyed records are splattered
+# throughout the file and never result in a freed page,
+# so creating records doesn't allocate pages.  This should
+# be reflected in the stats.
+#
+# Also, if you set numTests to 1 and look at the order
+# in which records are re-created, it should be as follows:
+# first, re-use the later pages in the file (pids should be cached)
+# then do searches from the beginning.  Presently there's no 
+# way to avoid (re-)inspecting the pages whose pids are in the cache.
+#
+# set fileType to tmp or regular or load_file
+# set logging to yes or no here AND in .shoreconfig
+#
+#
+# set these just so you can unset them regardless....
+set buffer 1
+set fid 1
+set c 1
+set i 1
+set n 1
+set testTime 1
+
+set nrecs 200
+set nrecs 10000
+set numTests 1
+set objsize 100
+set fileType tmp
+# set fileType regular
+#set fileType insert_file
+# set fileType load_file
+set logging yes
+
+
+
+set instrument_flag 1
+set id_width %08d
+set hdr [format $id_width 1]
+
+proc destroyodd {fid where}  {
+    global rid nrecs
+    for {set i 1} {$i <= $nrecs} {incr i; incr i} {
+		verbose destroying $i $rid($i) $where
+		set err [catch {sm destroy_rec $rid($i)} caught]
+		if {$err} {
+		    verbose CAUGHT FAILURE TO DESTROY REC: $err $caught
+		}
+		set rid($i) "r(0.0.0.0)"
+    }
+}
+proc dotest {fid numTests}  {
+	global id_width volid buffer nrecs rid hdr objsize
+
+	sm force_buffers true
+
+	sm begin_xct
+	set result [
+	time {
+	    for {set i 1} {$i <= $nrecs} {incr i}  {
+			set rid($i) [sm create_rec $fid $hdr $objsize $buffer]
+			verbose created rid $i : $rid($i)
+			incr i
+			set rid($i) "r(0.0.0.0)"
+			verbose skipped rid $i : $rid($i)
+	    }
+	    # destroy in same xct
+	    destroyodd $fid "in test"
+    } $numTests 
+	]
+	set n [sm gather_xct_stats]
+	# set n NOSTATS
+	sm commit_xct
+
+	return [concat $result $n ]
+}
+
+if {0} {
+    # make a 64K buffer
+    set buffer ""
+    for {set i 48} {$i < 112} {incr i}  {
+	    set c [format "%c" $i]
+	    set buffer "$buffer$c"
+    }
+    for {set i 0} {$i < 10} {incr i}  {
+	    set buffer "$buffer$buffer"
+    }
+} else {
+    set buffer ""
+    for {set i 48} {$i < 112} {incr i}  {
+	    set c [format "%c" $i]
+	    set buffer "$buffer$c"
+    }
+    for {set i 0} {$i < 4} {incr i}  {
+	    set buffer "$buffer$buffer"
+    }
+}
+
+
+source $script_dir/vol.init
+clearstats
+
+verbose "********************************"
+verbose "** fileType: $fileType, logging: $logging, numTest: $numTests"
+verbose "********************************"
+
+if {0} {
+    # if so-desired,
+    # time append-only
+    sm begin_xct
+    set result [time {
+	    set fid [sm create_file $volid $fileType]
+
+	    set scan [sm scan_file_create $fid t_cc_append]
+	    sm multi_file_append $scan $hdr $objsize $buffer $nrecs
+	    sm scan_file_destroy $scan
+
+	    sm destroy_file $fid
+	    sm force_buffers true
+    } $numTests]
+    set n [sm gather_xct_stats]
+    verbose TIME for create/append/destroy file $nrecs records $numTests times:
+    verbose $result
+    verbose STATS for create/append/destroy file $nrecs records $numTests times:
+    verbose [pnzstats $n]
+    sm commit_xct
+}
+
+proc scanit { f } {
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+		set rid [sm pin_rid $pin] 
+		verbose found $rid
+		set pin [sm scan_file_next $scan 0]
+		set i [expr {$i+1} ]
+    }
+    catch { sm scan_file_destroy $scan } error
+    verbose $error
+    verbose scan found $i records
+}
+
+verbose "Prepare file with odd records only  ************************************************"
+sm begin_xct
+    set fid [sm create_file $volid $fileType]
+    for {set i 1} {$i <= $nrecs} {incr i}  {
+		set rid($i) [sm create_rec $fid $hdr $objsize $buffer]
+		verbose created $rid($i)
+    }
+
+    verbose STATS for creating file :
+    set n [sm gather_xct_stats]
+    verbose [pnzstats $n]
+
+    # verbose "SCANNING ... **************"
+	# scanit $fid
+
+    verbose "Destroying odd recs... **************"
+    destroyodd $fid "in main script"
+    set n [sm gather_xct_stats]
+    verbose STATS for creating and destroying:
+    verbose [pnzstats $n]
+sm commit_xct
+
+
+verbose "dotest  ************************************************"
+
+set testTime [dotest $fid $numTests]
+
+verbose Destroying file...
+sm begin_xct
+    sm destroy_file $fid
+sm commit_xct
+
+verbose TIME, STATS for $numTests tests:
+verbose [pnzstats $testTime]
+
+unset buffer 
+unset testTime 
+unset hdr 
+unset id_width 
+unset fid  c rid i  n
+unset nrecs numTests logging fileType objsize

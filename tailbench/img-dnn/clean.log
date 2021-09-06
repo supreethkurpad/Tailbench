@@ -1,0 +1,2 @@
+rm *.o img-dnn_integrated img-dnn_server_networked img-dnn_client_networked train
+Makefile:44: recipe for target 'clean' failed

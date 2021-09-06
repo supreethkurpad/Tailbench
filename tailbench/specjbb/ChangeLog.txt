@@ -1,0 +1,339 @@
+-------------------------------------------------------------------------------------------------
+                                     SPECjbb2005 ChangeLog
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+v1.04 Released on 06/13/2005
+-------------------------------------------------------------------------------------------------
+^ Samuel Kounev (Darmstadt University of Technology)
+  - Bug fix: "ops/s" and "bops/second" replaced with "bops" (osgjava-8693)
+    Affected files: UserGuide.html, WhitePaper.html, output-jpg.html, output.html, output.results, 
+    output.txt,TimerData.java, Metrics.java, Report.java, TextiReport.java
+  - Fixed a broken link to the SPEC order form in the FAQ.
+  - Fixed an error in the README.txt file (setup.class --> setup.jar).
+-------------------------------------------------------------------------------------------------
+v1.03 Released on 06/09/2005
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM)
+  - Added minor clarification in Section 3.5 of the Run Rules (see osgjava-8643).
+  - Fixed typo in TextiReport.java
+^ David Dagastine (Sun Microsystems)
+  - Fixed typo in SPECjbb.props
+^ Samuel Kounev (Darmstadt University of Technology)
+  - Replaced Java 1.2.2 with Java 1.5.0 in the sample configuration.
+-------------------------------------------------------------------------------------------------
+v1.02 Released on 06/03/2005
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM)  
+  - Removed the test for the actual peak being at least the expected peak wh, and updated the 
+    User's Guide, Design Doc, and FAQ to reflect this.
+^ David Dagastine (Sun Microsystems)  
+  - Removed the elapsed time tests for all the warehouses before the expected peak.
+  - Removed multi-vm instance timing checks for all the warehouses before the expected peak.
+    See osgjava-8600.
+  - Fixed a bug reported by Anil (Intel) causing problems if there is a blank space at the end
+    of property values in the properties file (osgjava-8616,8607,8630)
+^ Steve Realmuto (BEA Systems Inc.)  
+  - Updated the run rules removing the rule "measured_peak_wh must be >= expected_peak_wh"
+    See osgjava-8581,8588.
+^ Kishan Thomas (HP)
+  - Fixed broken links in the User's Guide (osgjava-8610).
+-------------------------------------------------------------------------------------------------
+v1.01 Released on 05/30/2005
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems)
+  - Modified the rampup and rampdown times for multi-jvm runs to use fixed values of 3 and 20 sec, 
+    respectively. This avoids instance timing check failures. See osgjava-8519,8538,8547,8562.
+  - Fixed some bugs related to instance timing and measurements (osgjava-8554).
+^ Alan Adamson (IBM)  
+  - Addressed connection reset by peer errors on multi-JVM runs, i.e. controller handshake bug 
+    See osgjava-8536,8549,8556,8564.
+  - Updated the FAQ to integrate changes suggested by Ricardo (osgjava-8541).
+  - Updated White Paper as suggested in osgjava-8525.
+^ Samuel Kounev (Darmstadt University of Technology)
+  - Made minor changes to the Run Rules as suggested by Jeremy (osgjava-8508). 
+  - Updated documentation to make links relative.
+  - Cleaned up javascript from documentation (osgjava-8531).
+  - Updated documentation to reflect changes to input.per_jvm_warehouse_rampup and 
+    input.per_jvm_warehouse_rampdown (osgjava-8537).
+-------------------------------------------------------------------------------------------------
+v1.00 Released on 05/25/2005
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM)  
+  - Addressed formatting issues when running with a large heap. 
+    Solution proposed by Jeremy Arnold (see osgjava-8482).
+  - Code checkup - fixed headers and formatting.
+  - Updated comments in SPECjbb.props
+^ Elena Ilyina (Intel)
+  - Wrote combined data of MultiJVM run in a separate raw file in order to be compatible with 
+    the SPEC search engine and tools (0047).
+  - Added color legend and X/Y axis labels for the graph, added hyperlinks from the JVM scores 
+    to the individual reports, remove references to "Multi-JVM Mode" (0044).
+  - Modified code to print error message in the html/txt report when Instance Timing Check fails. 
+    Added check instance timing to MultiVMTxtReport in the same way as it is done for html 
+    reporter (see osgjava-8487,8499).
+^ David Dagastine (Sun Microsystems)
+  - Made needed changes for per_jvm_warehouse_rampup and per_jvm_warehouse_rampdown to work 
+    correctly (see osgjava-8487,8500). Affected files: Company.java, JBBmain.java
+^ Samuel Kounev (Darmstadt University of Technology)
+  - Updated the README.txt file.
+  - Updated run.bat, runit.bat, run_multi.bat and runit_multi.bat to remove options to run 
+    using JDK 1.1 (see osgjava-8502).
+-------------------------------------------------------------------------------------------------
+v0.90 (Membership Review Release) - Released on 05/03/2005
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM)
+  - Addressed formatting problems in the text report and screen output and made changes to make 
+    sure jpg graphs are generated all the time rather than html graphs (osgjava-8328,8329,8353).
+  - Striped down the printing of IBM copyrights and TPC Fair Use, etc (osgjava-8380).
+  - Added latest version of the FAQ and Design Document (white paper).
+  - Updated the HW Threads field as agreed on con-call from April 29 (see osgjava-8397).
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel)
+  - Increased input.warehouse_population from 30 to 60 and reverted historyTable back to a TreeMap 
+    (see osgjava-8356,8350).
+  - Added batch files run_multi.bat and runit_multi.bat (osgjava-8383).
+  - In run_multi.sh replaced explicit repetition with loop (osgjava-8293,8383).
+  - Placed the results of a simple JVM run into a subdir SPECjbbSingeJVM (osgjava-8304) 
+    and renamed the directories where multi JVM results are collected to "SPECjbbMultiJVM.[xxx]".
+  - In JBBmain commented out System.out.println(java.awt.GraphicsEnvironment.isHeadless()) call.
+-------------------------------------------------------------------------------------------------  
+^ Kishan Thomas (HP)
+  - Added latest version of User's Guide and sample output files.
+-------------------------------------------------------------------------------------------------  
+^ Steve Realmuto (BEA)
+  - Added latest version of Run Rules document.
+-------------------------------------------------------------------------------------------------
+v0.06 (Beta2 Release) - Released on 04/22/2005
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems)
+  - Addressed scalability problem caused by synchronized accesses to company.mode
+    (osgjava-8190,8260).
+  - Implemented multi-jvm instance timing tests (osgjava-8321).
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM)
+  - Hashmap changes (osgjava-8289)
+  - Changes to the reporter to replace the precompiler gorp by an AOT Compilation section, 
+    to split the Number of CPUs bit up, to add the default expected peak (as the Procs Avail 
+    to Java), and to add HW Threads. Also refactored to change AsciiReport stuff to TextReport 
+    stuff (osgjava-8311,8312).
+  - Changed reporter to add memory configuration information (osgjava-8326).
+  - Added the "# of Cores/Chip" property to SPECjbb_config.props (osgjava-8324).
+-------------------------------------------------------------------------------------------------
+^ Mark Schroeder (IBM) (osgjava-8238)
+  Few changes for consistency and a couple of cosmetic changes:
+  - Company.java - Use logging facility to log informative and error messages related to 
+    multi-JVM events.
+  - JBBmain.java - Changed a few loops to be JDK 5.0 enhanced for loops and added some logging 
+    of multi-JVM events.
+  - CustomerReportTransaction.java - Added method entry/exit logging, which makes this transaction 
+    consistent with the other transactions. Also removed some unnecessary casting.
+  - StockLevelTransaction.java - Changed the iterator loop in process() to use the enhanced for 
+    loop syntax.
+  - XMLTransactionLog.java - Removed a cast that was not needed due to use of generics.
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel)
+  - Updated the multi JVM reporter (osgjava-8203):
+    * In the multi-curve graph added a plot line of the sum of all scores at each warehouse.
+    * Added the sum score curve and made JVM score curves smaller.
+  - Added text part of the Reporter: MultiVMTxtReporter. By default it generates the file 
+    MultiVMReport.txt in the same directory where other logs and reports files of current run 
+    are located. 
+  - Added a class MultiVMReporter that can be used to regenerate a report (html or txt) from the
+    command line (osgjava-8239). 
+-------------------------------------------------------------------------------------------------
+^ Samuel Kounev (Darmstadt University of Technology)
+  - Moved the spec.jbb.validity classes into a separate jar file (check.jar) as originally.
+    See osgjava-8114,8267. Affected files: build.xml, run.sh, runit.bat
+  - Removed the includes.lst file from the benchmark workspace since it is no longer used.
+-------------------------------------------------------------------------------------------------
+v0.05 (Beta Release) - Released on 03/28/2005
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems)
+  - Changed multi-JVM code to allow JVM instances to retry multiple times when attempting to 
+    establish connection with the Controller (osgjava-8175).
+  - Added a deterministic random option with a new property (input.deterministic_random_seed).
+  - Cleaned up the benchmark workspace and removed the following files: 
+    check.jar, jbb_no_precompile.jar and reporter.jar
+  - Added a new run script for multi-jvm tests, run_multi.sh, and changed run.sh back to a single 
+    jvm test script. 
+  - Made modifications to add a small rampup time per warehouse when running in multi-jvm mode.
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM)
+  - In Order.java changed orederlineList declaration from Object[] to Orderline[], removing 
+    type casts (osgjava-8189).
+  - Fixed synchronization issue in Company.java. Changed to make accesses to Company.mode 
+    synchronized (osgjava-8180,8189).  
+  - Modified code to exploit 5.0 Java language features (syntactic sugar). See osgjava-7883.
+  - In PepTest added code to check compliance of java.util.Random implementation (osgjava-8164).
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel)
+  - Modified reporter to support the multi-JVM mode (osgjava-8166,8187).
+-------------------------------------------------------------------------------------------------
+^ Veeru Mehta (HP)
+  - Changes for multi-JVM support (osgjava-8074,8084,8111)
+-------------------------------------------------------------------------------------------------
+v0.04 - Released on 03/10/2005
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM) and David Dagastine (Sun Microsystems)
+   - Action items from the F2F meeting - mostly code clean up (see osgjava-8047,8105 for details).
+   - Added code to set "java.awt.headless" to true, so failing to connect to an X server 
+     should not trigger generation of the html graph as it used to.
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel) 
+   - repackage everything in a single jar file
+        Affected files: build.xml, run.sh, runit.bat.
+   - replace QuickSort with J2SE API.
+        QuickSort.sort(Enumeration e) -> java.util.Collections.sort(List list). 
+        Affected files: JBBmain.java and JBBProperties.java.
+        QuickSort.java deleted.
+   - remove threadLimit and make threadList into a Vector instead of array
+        Affected file: Jbbmain.java.
+   For further details see osgjava-7999.
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel)
+   - Added new transaction type Customer Report (see osgjava-7965).
+   - Added 2 additional checks to Delivery transaction (see osgjava-7965):
+     * before delivering we check if customer balance is greater than order amount and 
+       if not we skip to the next order;
+     * then we check if the ordered quantity is available in stock at that moment and if not 
+       we skip to the next order;
+     * also we subtract the delivered quantity of items from stock
+   - In OrderStatusTransaction replaced call of getItemName() method with another method that 
+     makes a database query (see osgjava-7965).
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel) 
+   Allow warehouseCapacity to vary depending on properties (was hardcoded to 256) (osgjava-7965).
+-------------------------------------------------------------------------------------------------
+^ Mark Schroeder (IBM):   
+  - Fixed a bug in Company.java. Timing measurement info printed was incorrect (osgjava-7963).
+-------------------------------------------------------------------------------------------------
+v0.03 - Released on 01/21/2005
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems):
+  - Warehouse/customer size changes. 
+    Affected files: JBBProperties.java, JBBMain.java, Company.java, SPECjbb.props    
+    See osgjava-7933 for details.    
+-------------------------------------------------------------------------------------------------
+^ Mark Schroeder (IBM):
+   Changes to utilize Java logging - see osgjava-7829 for details.    
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems):
+  - BigDecimal.doubleValue() -> BigDecimal.toString()
+  - Modified TransactionLogBuffer.putDouble() to accept String arguments.
+  - Modified TransactionLogBuffer.putDollars() to accept BigDecimal arguments.
+    * Note: I plan to modify putDouble to accept BigDecimals as well, but to save time I put back 
+      the code as it currently is.  The argument change would be performance neutral.
+  - Modified the following classes which contain calls to putDouble and putDollars:
+    OrderStatusTransaction, PaymentTransaction and NewOrderTransaction.
+  - XML DOM Optimizations: 25% performance improvement.
+    * Removed setAttribute call in XMLTransactionLog.putLine()
+    * Reworked XMLTransactionLog.clear()
+    * Added call to Node.setStrictErrorChecking(false) to XMLTransactionLog.copy() 
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems):
+  - Removed the spec.jbb.infra.Collections package.
+  - Removed import of spec.jbb.infra.Collections package from Customer.java
+  - Renamed Display methods in Transaction.java (and *Transaction classes).
+    * initialDisplay renamed to initializeTransactionLog()
+    * secondDisplay renamed to processTransactionLog()
+  - Renamed XMLDocument to XMLTransactionLog.
+    * Renamed populateDocument method to populate()
+    * Renamed clearScreen method to clear()
+  - Renamed CharArrayDocument to TransactionLogBuffer.
+  - Reworked use of XMLTransactionLog.
+    * Moved initialization of constructor to *Transaction class constructors.
+    * Added call to clear at the tog of processTransactionLog()
+    * Replaced previous constructor call with populate()
+-------------------------------------------------------------------------------------------------
+v0.02 - Released on 11/04/2004
+-------------------------------------------------------------------------------------------------
+^ Samuel Kounev (Darmstadt University):
+  - In src/spec/jbb/infra/Util/XMLDocument.java:normalizeDocument() changed  
+    document.normalizeDocument() to document.normalize() (see osgjava-7695)
+^ David Dagastine (Sun Microsystems):
+  - Refactored XML usage to more correctly target production use, and to limit its impact on the
+    benchmark workload. This was achieved by reintroducing the 2D array for Document editing and 
+    updating, and then transforming the array data to a XML representation once the data is 
+    complete at the end of the secondDisplay methods. Changes were also made to the XML dtd file
+    and to TimerData to reflect this change.        
+  - Addressed bugs with IDs 0001, 0002 and 0003 in the dashboard (osgjava-7626,7668):
+    * Bug 0001: java.lang.NumberFormatException: For input string: "nu.ll" (reported in osgjava-7607)
+    * Bug 0002: java.lang.reflect.InvocationTargetException (reported in osgjava-7618)
+    * Bug 0003: OutOfMemoryException (reported in osgjava-7643 & 7650)
+-------------------------------------------------------------------------------------------------
+v0.01 - Released on 10/18/2004
+-------------------------------------------------------------------------------------------------
+^ Samuel Kounev (Darmstadt University):
+  - Updated ./run.sh to use "-Xms256m -Xmx256m" instead of "-ms256m -mx256m"
+  - Removed ./README102.txt, src/spec/jbb/infra/Factory/ExpandingContainer.java.v102 and 
+    ./src/spec/jbb/JBBmain.java.v101,JBBmain.java.v102,Company.java.v101,Transaction.java.v101
+  - Updated benchmark name and version in all source code files (SPECjbb2000 --> SPECjbb2005).
+  - Updated year in 'COPYRIGHT' property of source files (2000 --> 2005). Copyright statements in 
+    headers will be updated in a later version...
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems): 
+  - XMLDocument modifications
+    * moved reading of XML files to static block.
+    * modified copyDocument method
+    * removed copyScreen method.
+    * Removed use of copyScreen from secondDisplay methods in the *Transaction classes.
+  - Removed synchronization from itemTable objects in Warehouse.java
+-------------------------------------------------------------------------------------------------  
+^ Elena Ilyina (Intel): JBBmain refactoring 
+  - The following methods are factored out: initOutputDir(), commandLineParser(), 
+    runWarehouse() and callReporter().
+  - New class JBBProperties is created and the following methods are factored out 
+    to this class: getRequiredProperty(), getOptionalProperty(), getProps(), 
+    copyPropsToOutput(), checkCompliance() and new method setProp() is written.
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel): Changes to address 255 warehouse limit & thread spread limit
+-------------------------------------------------------------------------------------------------
+^ David Dagastine (Sun Microsystems): XML DisplayScreen changes
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel): Transaction unification
+   - Transaction class
+     * Abstract methods added so that subclasses can be accessed via a reference to Transaction.
+     * getInstance() method added to create new instances of transactions via reflection.
+     * Transaction Names and Classes defined.
+   - TransactionManager class
+     * Transaction creation via reflection implemented (see the methods createTxnInstances() 
+       and goValidate()).
+     * Code factored out of go() method into new methods: manualSelection(), readUserValue(), 
+       isMultiple(), goManual().
+     * Switch block replaced with a new method runTxn().
+   - NewOrderTransaction, PaymentTransaction, StockLevelTransaction, DeliveryTransaction and
+     OrderStatusTransaction classes
+     * getMenuName() method added.
+     * destroy() method was used in some classes instead of delete() - replaced with delete();     
+     * Unused backout() method removed.
+     * In DeliveryTransaction class process() method renamed to preprocess(), and queue() 
+       renamed to process() (for uniformity with the rest of Transaction subclasses).
+     * In all classes process() method made public boolean process() (for uniformity).
+     * In StockLevelTransaction class unused field inDistrictId removed.
+   - DeliveryHandler class
+     * process() method renamed to preprocess() to match the change in the DelivaryTransaction 
+       class.
+-------------------------------------------------------------------------------------------------
+^ Alan Adamson (IBM), Stefan Sarne (BEA): BigDecimal changes
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel): added build.xml and includes.lst files
+  Ant creates directory "./build" and puts all the compiled classes and jar-files into subdirs 
+  "tmp" and "dist" respectively. The benchmark can be run from the "./build/dist" directory.
+-------------------------------------------------------------------------------------------------
+^ Elena Ilyina (Intel): replaced BTree with TreeMap implementing JBBDataStorage:
+  Interface JBBDataStorage defined (It allows supporting existing BTree as well as TreeMap data 
+  structure). 
+  - All the classes that use BTree removed (longBTree, staticLongBtree, StringBtree, 
+    StringStaticBTree). 
+  - Defined class TreeMapDataStorage implementing JBBDataStorage interface. 
+  - Defined class Infrastructure that allows operating with different kinds of data storages 
+    (defines what the key type String or Integer - is and factors synchronicity out of 
+    implementation). 
+  - All references over the code replaced with JBBDataStorage. 
+  - Enumeration replaced with Iterator. 
+  - Some existent methods were rewritten in a more compact and natural form.
+-------------------------------------------------------------------------------------------------
+v0.00 
+^ Samuel Kounev (Darmstadt University):
+  * Checked-in initial code base for SPECjbb2005 - based on SPECjbb2000 v1.03
+-------------------------------------------------------------------------------------------------

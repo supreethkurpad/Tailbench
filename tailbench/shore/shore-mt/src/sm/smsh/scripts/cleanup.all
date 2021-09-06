@@ -1,0 +1,74 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: cleanup.all,v 1.13 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This scripts is for the purpose of maintaining the other scripts.
+# Put anything you want in the scripts list. After the each script
+# is run, this creates a list of the variables left around by the
+# script.  The list is written in the file named "garbage_variables"
+#
+
+
+set scripts [list \
+    vol.init \
+    btree_split.1 \
+    thread_fork_example \
+    rtree.1 rtree.2 rtree.3 \
+    sort.1 sort.2 sort.3 sort.4 \
+    free_ext free_page \
+    pin.1 pin.2 pin.3 \
+    vol.1 vol.3 \
+    thread.1 \
+    btree.1 btree.2 btree.3 btree.4 btree.5 btree.6 \
+    btree.7 btree.8 btree.9 \
+    btree.10 \
+    btree.30 \
+    bt.insert.1 bt.insert.2 bt.insert.3 bt.insert.4 bt.insert.5 \
+    bt.remove.1 bt.remove.2 bt.remove.3 bt.remove.4 \
+    file.1 file.2 file.3 file.4 file.5 \
+    file.6 file.7 file.8 \
+     alloc.1 alloc.3 \
+     lgrec.1 lgrec.2 lgrec.3 \
+     multi.1 multi.2 \
+     trans.1 trans.2 \
+    deadlock.1 deadlock.2 deadlock.4 \
+    lock.1 \
+     recovery.1 record_create_abort.1 \
+    lock.hier lock.hier_sm \
+    lock.upgrade \
+    quark.1\
+     recovery.1 \
+    lockrec_pin lockrec_sm lockfile_sm \
+     tmpfile.1 space_recovery \
+     file_destroy.1 createsmall.1\
+     file.undo.1 file.undo.2 \
+     prepare.1 \
+    ]
+
+runscripts $scripts

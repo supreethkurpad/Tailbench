@@ -1,0 +1,429 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="ad_8h" kind="file" language="C++">
+    <compoundname>ad.h</compoundname>
+    <includes local="no">sphinx_config.h</includes>
+    <includes refid="sphinxbase__export_8h" local="no">sphinxbase/sphinxbase_export.h</includes>
+    <includes refid="prim__type_8h" local="no">sphinxbase/prim_type.h</includes>
+    <includedby refid="ad__alsa_8c" local="yes">src/libsphinxad/ad_alsa.c</includedby>
+    <includedby refid="ad__base_8c" local="yes">src/libsphinxad/ad_base.c</includedby>
+    <includedby refid="ad__jack_8c" local="yes">src/libsphinxad/ad_jack.c</includedby>
+    <includedby refid="ad__openal_8c" local="yes">src/libsphinxad/ad_openal.c</includedby>
+    <includedby refid="ad__oss_8c" local="yes">src/libsphinxad/ad_oss.c</includedby>
+    <includedby refid="ad__pulse_8c" local="yes">src/libsphinxad/ad_pulse.c</includedby>
+    <includedby refid="ad__win32_8c" local="yes">src/libsphinxad/ad_win32.c</includedby>
+    <includedby refid="cont__seg_8c" local="no">src/sphinx_adtools/cont_seg.c</includedby>
+    <incdepgraph>
+      <node id="131">
+        <label>sphinxbase/sphinxbase_export.h</label>
+        <link refid="sphinxbase__export_8h_source"/>
+      </node>
+      <node id="132">
+        <label>sphinxbase/prim_type.h</label>
+        <link refid="prim__type_8h"/>
+        <childnode refid="130" relation="include">
+        </childnode>
+      </node>
+      <node id="130">
+        <label>sphinx_config.h</label>
+      </node>
+      <node id="129">
+        <label>include/sphinxbase/ad.h</label>
+        <link refid="ad_8h"/>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="134">
+        <label>src/libsphinxad/ad_alsa.c</label>
+        <link refid="ad__alsa_8c_source"/>
+      </node>
+      <node id="138">
+        <label>src/libsphinxad/ad_oss.c</label>
+        <link refid="ad__oss_8c_source"/>
+      </node>
+      <node id="136">
+        <label>src/libsphinxad/ad_jack.c</label>
+        <link refid="ad__jack_8c_source"/>
+      </node>
+      <node id="141">
+        <label>src/sphinx_adtools/cont_seg.c</label>
+        <link refid="cont__seg_8c_source"/>
+      </node>
+      <node id="139">
+        <label>src/libsphinxad/ad_pulse.c</label>
+        <link refid="ad__pulse_8c_source"/>
+      </node>
+      <node id="135">
+        <label>src/libsphinxad/ad_base.c</label>
+        <link refid="ad__base_8c_source"/>
+      </node>
+      <node id="137">
+        <label>src/libsphinxad/ad_openal.c</label>
+        <link refid="ad__openal_8c_source"/>
+      </node>
+      <node id="140">
+        <label>src/libsphinxad/ad_win32.c</label>
+        <link refid="ad__win32_8c_source"/>
+      </node>
+      <node id="133">
+        <label>include/sphinxbase/ad.h</label>
+        <link refid="ad_8h"/>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="140" relation="include">
+        </childnode>
+        <childnode refid="141" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="ad_8h_1af6fb753bcfbd8dedec800ba4d0fb8546" prot="public" static="no">
+        <name>DEFAULT_SAMPLES_PER_SEC</name>
+        <initializer>16000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="57" column="9" bodyfile="include/sphinxbase/ad.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ad_8h_1a8d1358baba080a2f6b0d350928af7a89" prot="public" static="no">
+        <name>AD_OK</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="60" column="9" bodyfile="include/sphinxbase/ad.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ad_8h_1a8aa969c2d485c3c17cf9abfd1bb88bdd" prot="public" static="no">
+        <name>AD_EOF</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="61" column="9" bodyfile="include/sphinxbase/ad.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ad_8h_1ad75f71249c0e72e6867599af315fe27d" prot="public" static="no">
+        <name>AD_ERR_GEN</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="62" column="9" bodyfile="include/sphinxbase/ad.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ad_8h_1a7ac31adbbd108d40792fc6ba3d14929f" prot="public" static="no">
+        <name>AD_ERR_NOT_OPEN</name>
+        <initializer>-2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="63" column="9" bodyfile="include/sphinxbase/ad.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ad_8h_1abdeca1c656c9ed4699402adb3556ae39" prot="public" static="no">
+        <name>AD_ERR_WAVE</name>
+        <initializer>-3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="64" column="9" bodyfile="include/sphinxbase/ad.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ad_8h_1ab24ff0fd795b652eaf1bacecfd7c98fb" prot="public" static="no">
+        <type>struct <ref refid="structad__rec__s" kindref="compound">ad_rec_s</ref></type>
+        <definition>typedef struct ad_rec_s ad_rec_t</definition>
+        <argsstring></argsstring>
+        <name>ad_rec_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="1" column="1" bodyfile="include/sphinxbase/ad.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ad_8h_1a43f66257a2457d6c711dc5c694bfc02f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT <ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        <definition>SPHINXBASE_EXPORT ad_rec_t* ad_open_dev</definition>
+        <argsstring>(const char *dev, int32 samples_per_sec)</argsstring>
+        <name>ad_open_dev</name>
+        <param>
+          <type>const char *</type>
+          <declname>dev</declname>
+          <briefdescription><para>Device name (platform-specific) </para></briefdescription>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>samples_per_sec</declname>
+          <briefdescription><para>Samples per second </para></briefdescription>
+        </param>
+        <briefdescription>
+<para>Open a specific audio device for recording. </para>        </briefdescription>
+        <detaileddescription>
+<para>The device is opened in non-blocking mode and placed in idle state.</para><para><simplesect kind="return"><para>pointer to read-only <ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> structure if successful, NULL otherwise. The return value to be used as the first argument to other recording functions. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="78" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="187" bodyend="219"/>
+        <referencedby refid="ad_8h_1a71b4eec805fbe5c398ea0897816de6f0" compoundref="ad__alsa_8c" startline="222" endline="225">ad_open_sps</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="ad_8h_1a71b4eec805fbe5c398ea0897816de6f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT <ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        <definition>SPHINXBASE_EXPORT ad_rec_t* ad_open_sps</definition>
+        <argsstring>(int32 samples_per_sec)</argsstring>
+        <name>ad_open_sps</name>
+        <param>
+          <type>int32</type>
+          <declname>samples_per_sec</declname>
+          <briefdescription><para>Samples per second </para></briefdescription>
+        </param>
+        <briefdescription>
+<para>Open the default audio device with a given sampling rate. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="87" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="222" bodyend="225"/>
+        <references refid="ad_8h_1a43f66257a2457d6c711dc5c694bfc02f" compoundref="ad__alsa_8c" startline="187" endline="219">ad_open_dev</references>
+        <referencedby refid="ad_8h_1a3def0da951e840fb4c72ef9259540686" compoundref="ad__alsa_8c" startline="228" endline="231">ad_open</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="ad_8h_1a3def0da951e840fb4c72ef9259540686" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT <ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        <definition>SPHINXBASE_EXPORT ad_rec_t* ad_open</definition>
+        <argsstring>(void)</argsstring>
+        <name>ad_open</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Open the default audio device. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="96" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="228" bodyend="231"/>
+        <references refid="ad_8h_1a71b4eec805fbe5c398ea0897816de6f0" compoundref="ad__alsa_8c" startline="222" endline="225">ad_open_sps</references>
+      </memberdef>
+      <memberdef kind="function" id="ad_8h_1a9cb212b93cb439ba04dec2109ca043ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT int32</type>
+        <definition>SPHINXBASE_EXPORT int32 ad_start_rec</definition>
+        <argsstring>(ad_rec_t *)</argsstring>
+        <name>ad_start_rec</name>
+        <param>
+          <type><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="101" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="252" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="ad_8h_1a20fb285a5f93e172f6a6e04359216aa5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT int32</type>
+        <definition>SPHINXBASE_EXPORT int32 ad_stop_rec</definition>
+        <argsstring>(ad_rec_t *)</argsstring>
+        <name>ad_stop_rec</name>
+        <param>
+          <type><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="106" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="279" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="ad_8h_1a6bcf3ed5e9d0c2d51086cae93bc3b3fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT int32</type>
+        <definition>SPHINXBASE_EXPORT int32 ad_close</definition>
+        <argsstring>(ad_rec_t *)</argsstring>
+        <name>ad_close</name>
+        <param>
+          <type><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="111" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="235" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="ad_8h_1ad4a5f4ab5267003169f6d3e15e54f697" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SPHINXBASE_EXPORT int32</type>
+        <definition>SPHINXBASE_EXPORT int32 ad_read</definition>
+        <argsstring>(ad_rec_t *, int16 *buf, int32 max)</argsstring>
+        <name>ad_read</name>
+        <param>
+          <type><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref> *</type>
+        </param>
+        <param>
+          <type>int16 *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/sphinxbase/ad.h" line="119" column="1" bodyfile="src/libsphinxad/ad_alsa.c" bodystart="301" bodyend="344"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>generic live audio interface for recording and playback </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c-basic-offset:<sp/>4;<sp/>indent-tabs-mode:<sp/>nil<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>1999-2014<sp/>Carnegie<sp/>Mellon<sp/>University.<sp/><sp/>All<sp/>rights</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>1.<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.<sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>2.<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>distribution.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>This<sp/>work<sp/>was<sp/>supported<sp/>in<sp/>part<sp/>by<sp/>funding<sp/>from<sp/>the<sp/>Defense<sp/>Advanced<sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Research<sp/>Projects<sp/>Agency<sp/>and<sp/>the<sp/>National<sp/>Science<sp/>Foundation<sp/>of<sp/>the<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>United<sp/>States<sp/>of<sp/>America,<sp/>and<sp/>the<sp/>CMU<sp/>Sphinx<sp/>Speech<sp/>Consortium.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY<sp/>``AS<sp/>IS&apos;&apos;<sp/>AND<sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>ANY<sp/>EXPRESSED<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/><sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>NOR<sp/>ITS<sp/>EMPLOYEES<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*/</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor">#ifndef<sp/>_AD_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_AD_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sphinx_config.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sphinxbase/sphinxbase_export.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="prim__type_8h" kindref="compound">sphinxbase/prim_type.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Fool<sp/>Emacs.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEFAULT_SAMPLES_PER_SEC<sp/>16000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Return<sp/>codes<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AD_OK<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AD_EOF<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AD_ERR_GEN<sp/><sp/><sp/><sp/><sp/><sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AD_ERR_NOT_OPEN<sp/>-2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AD_ERR_WAVE<sp/><sp/><sp/><sp/><sp/>-3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structad__rec__s" kindref="compound">ad_rec_s</ref><sp/><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref>;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*<ref refid="ad_8h_1a43f66257a2457d6c711dc5c694bfc02f" kindref="member">ad_open_dev</ref><sp/>(</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*dev,<sp/></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/>samples_per_sec<sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*<ref refid="ad_8h_1a71b4eec805fbe5c398ea0897816de6f0" kindref="member">ad_open_sps</ref><sp/>(</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/>samples_per_sec<sp/></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*<ref refid="ad_8h_1a3def0da951e840fb4c72ef9259540686" kindref="member">ad_open</ref><sp/>(<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Start<sp/>audio<sp/>recording.<sp/><sp/>Return<sp/>value:<sp/>0<sp/>if<sp/>successful,<sp/>&lt;0<sp/>otherwise<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">int32<sp/>ad_start_rec<sp/>(<ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Stop<sp/>audio<sp/>recording.<sp/><sp/>Return<sp/>value:<sp/>0<sp/>if<sp/>successful,<sp/>&lt;0<sp/>otherwise<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">int32<sp/>ad_stop_rec<sp/>(<ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Close<sp/>the<sp/>recording<sp/>device.<sp/><sp/>Return<sp/>value:<sp/>0<sp/>if<sp/>successful,<sp/>&lt;0<sp/>otherwise<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">int32<sp/>ad_close<sp/>(<ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/>Read<sp/>next<sp/>block<sp/>of<sp/>audio<sp/>samples<sp/>while<sp/>recording;<sp/>read<sp/>upto<sp/>max<sp/>samples<sp/>into<sp/>buf.</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/>Return<sp/>value:<sp/>#<sp/>samples<sp/>actually<sp/>read<sp/>(could<sp/>be<sp/>0<sp/>since<sp/>non-blocking);<sp/>-1<sp/>if<sp/>not</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*<sp/>recording<sp/>and<sp/>no<sp/>more<sp/>samples<sp/>remaining<sp/>to<sp/>be<sp/>read<sp/>from<sp/>most<sp/>recent<sp/>recording.</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">SPHINXBASE_EXPORT</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">int32<sp/>ad_read<sp/>(<ref refid="structad__rec__t" kindref="compound">ad_rec_t</ref><sp/>*,<sp/>int16<sp/>*buf,<sp/>int32<sp/>max);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="include/sphinxbase/ad.h"/>
+  </compounddef>
+</doxygen>

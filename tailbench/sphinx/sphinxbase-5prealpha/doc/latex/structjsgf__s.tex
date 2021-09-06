@@ -1,0 +1,143 @@
+\section{jsgf\+\_\+s Struct Reference}
+\label{structjsgf__s}\index{jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structjsgf__s_ad459d19b47134a9670ffa4e8c466c0df}} 
+char $\ast$ \textbf{ version}
+\begin{DoxyCompactList}\small\item\em J\+S\+GF version (from header) \end{DoxyCompactList}\item 
+\mbox{\label{structjsgf__s_ac7cba2982a4c14503afbe1df5f208002}} 
+char $\ast$ \textbf{ charset}
+\begin{DoxyCompactList}\small\item\em J\+S\+GF charset (default U\+T\+F-\/8) \end{DoxyCompactList}\item 
+\mbox{\label{structjsgf__s_a0423fa12efb23c307765d7d010908e0f}} 
+char $\ast$ \textbf{ locale}
+\begin{DoxyCompactList}\small\item\em J\+S\+GF locale (default C) \end{DoxyCompactList}\item 
+\mbox{\label{structjsgf__s_ab418c438a9c7f7e8aee029f006897656}} 
+char $\ast$ \textbf{ name}
+\begin{DoxyCompactList}\small\item\em Grammar name. \end{DoxyCompactList}\item 
+\textbf{ hash\+\_\+table\+\_\+t} $\ast$ \textbf{ rules}
+\begin{DoxyCompactList}\small\item\em Defined or imported rules in this grammar. \end{DoxyCompactList}\item 
+\textbf{ hash\+\_\+table\+\_\+t} $\ast$ \textbf{ imports}
+\begin{DoxyCompactList}\small\item\em Pointers to imported grammars. \end{DoxyCompactList}\item 
+\mbox{\label{structjsgf__s_af05b28c1350c76d64539403791522128}} 
+\textbf{ jsgf\+\_\+t} $\ast$ \textbf{ parent}
+\begin{DoxyCompactList}\small\item\em Parent grammar (if this is an imported one) \end{DoxyCompactList}\item 
+\textbf{ glist\+\_\+t} \textbf{ searchpath}
+\begin{DoxyCompactList}\small\item\em List of directories to search for grammars. \end{DoxyCompactList}\item 
+int \textbf{ nstate}
+\begin{DoxyCompactList}\small\item\em Number of generated states. \end{DoxyCompactList}\item 
+\textbf{ glist\+\_\+t} \textbf{ links}
+\begin{DoxyCompactList}\small\item\em Generated F\+SG links. \end{DoxyCompactList}\item 
+\textbf{ glist\+\_\+t} \textbf{ rulestack}
+\begin{DoxyCompactList}\small\item\em Stack of currently expanded rules. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 75 of file jsgf\+\_\+internal.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structjsgf__s_a7efd071684d4ef7f077b0b06ce7bbc78}} 
+\index{jsgf\+\_\+s@{jsgf\+\_\+s}!imports@{imports}}
+\index{imports@{imports}!jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsubsection{imports}
+{\footnotesize\ttfamily \textbf{ hash\+\_\+table\+\_\+t}$\ast$ jsgf\+\_\+s\+::imports}
+
+
+
+Pointers to imported grammars. 
+
+
+
+Definition at line 82 of file jsgf\+\_\+internal.\+h.
+
+
+
+Referenced by jsgf\+\_\+grammar\+\_\+new().
+
+\mbox{\label{structjsgf__s_a6ee31bac19680f01c413969a75ad838a}} 
+\index{jsgf\+\_\+s@{jsgf\+\_\+s}!links@{links}}
+\index{links@{links}!jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsubsection{links}
+{\footnotesize\ttfamily \textbf{ glist\+\_\+t} jsgf\+\_\+s\+::links}
+
+
+
+Generated F\+SG links. 
+
+
+
+Definition at line 88 of file jsgf\+\_\+internal.\+h.
+
+\mbox{\label{structjsgf__s_a380c1b82e1bd776438303159e5129773}} 
+\index{jsgf\+\_\+s@{jsgf\+\_\+s}!nstate@{nstate}}
+\index{nstate@{nstate}!jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsubsection{nstate}
+{\footnotesize\ttfamily int jsgf\+\_\+s\+::nstate}
+
+
+
+Number of generated states. 
+
+
+
+Definition at line 87 of file jsgf\+\_\+internal.\+h.
+
+\mbox{\label{structjsgf__s_af257160279ab56ffca65966aeac18ef9}} 
+\index{jsgf\+\_\+s@{jsgf\+\_\+s}!rules@{rules}}
+\index{rules@{rules}!jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsubsection{rules}
+{\footnotesize\ttfamily \textbf{ hash\+\_\+table\+\_\+t}$\ast$ jsgf\+\_\+s\+::rules}
+
+
+
+Defined or imported rules in this grammar. 
+
+
+
+Definition at line 81 of file jsgf\+\_\+internal.\+h.
+
+
+
+Referenced by jsgf\+\_\+grammar\+\_\+new(), and jsgf\+\_\+rule\+\_\+iter().
+
+\mbox{\label{structjsgf__s_a0980112df6f2f591e64158266eb04b69}} 
+\index{jsgf\+\_\+s@{jsgf\+\_\+s}!rulestack@{rulestack}}
+\index{rulestack@{rulestack}!jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsubsection{rulestack}
+{\footnotesize\ttfamily \textbf{ glist\+\_\+t} jsgf\+\_\+s\+::rulestack}
+
+
+
+Stack of currently expanded rules. 
+
+
+
+Definition at line 89 of file jsgf\+\_\+internal.\+h.
+
+\mbox{\label{structjsgf__s_aabb207f0909c661a831e5f931dd9f60e}} 
+\index{jsgf\+\_\+s@{jsgf\+\_\+s}!searchpath@{searchpath}}
+\index{searchpath@{searchpath}!jsgf\+\_\+s@{jsgf\+\_\+s}}
+\subsubsection{searchpath}
+{\footnotesize\ttfamily \textbf{ glist\+\_\+t} jsgf\+\_\+s\+::searchpath}
+
+
+
+List of directories to search for grammars. 
+
+
+
+Definition at line 84 of file jsgf\+\_\+internal.\+h.
+
+
+
+Referenced by jsgf\+\_\+grammar\+\_\+new().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libsphinxbase/lm/\textbf{ jsgf\+\_\+internal.\+h}\end{DoxyCompactItemize}

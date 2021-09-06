@@ -1,0 +1,33 @@
+P:{ {1   "}" }
+input operator:
+output operator:
+{ {1 "}" }}
+P:{ {3 "}}}"      }}
+input operator:
+output operator:
+{ {3 "}<2 times>" }}
+P:{ {30 "xxxxxxxxxxyyyyyyyyyyzzzzzzzzzz"} }
+input operator:
+output operator:
+{ {30 "x<9 times>y<9 times>z<9 times>" }}
+P:{ {30 "xxxxxxxxxxyyyyyyyyyyzzzzzzzzzz"}{10    "abcdefghij"} }
+input operator:
+output operator:
+{ {30 "x<9 times>y<9 times>z<9 times>" }{10 "abcdefghij" }}
+FINAL: { {3 "abc" }}
+ZVECS: 
+z(0).count() = 0
+z(0) is zero vec: 1
+zv.set(z).count() = 0
+zv is zero vec: 1
+z is zero vec: 1
+z.count() = 0
+zv.set(z).count() = 0
+zv(0) is zero vec: 1
+vec containing 0x80000003 (little-endian) prints as: { {4 "\03\0<1 times>\0200" }}
+vec containing 0xeffffffc (little-endian) prints as: { {4 "\0374\0377<1 times>\0357" }}
+cv <= lastv: 1
+cv prints as: { {1 "h" }}
+lastv prints as: { {1 "\0377" }}
+last1 prints as: { {1 "\0377" }}
+last2 prints as: { {1 "\0377" }}

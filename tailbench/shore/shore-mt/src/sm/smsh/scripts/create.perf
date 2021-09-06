@@ -1,0 +1,151 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: create.perf,v 1.10.2.1 2009/10/08 20:52:30 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#   Time creation of records 
+#   Parameters: 
+#   	        size of objects written 
+#		logging on or off
+#
+if [is_set fid] {
+} else {
+	echo This script runs only from all.perf
+	exit 1
+}
+set objsize [expr {8192 * 6}]
+
+#ignored for now
+set logging 1
+
+echo volid = $volid
+
+set config [sm config_info]
+
+if {$volid == 0} {
+    foreach i $smsh_device_list {
+	set dev  [lindex $i 0]
+	set size [lindex $i 1]
+	set vol  [lindex $i 2]
+
+	sm mount_dev $dev $vol
+
+	set junk [sm list_volumes $dev]
+	set vol_list [sm list_volumes $dev]
+	if { [llength $vol_list] == 0 } {
+	    set quota [sm get_device_quota $dev]
+	    echo creating volume $vol size $size on $dev
+	    sm create_vol $dev $vol $size
+	}
+
+	set quota [sm get_device_quota $dev]
+	set quota [sm get_volume_quota $vol]
+
+	set vol_list [sm list_volumes $dev]
+	# assert {[expr [llength $vol_list] == 1]}
+	# assert {[expr [string compare [lindex $vol_list 0] $vol.0.0.0:0] == 0]}
+    }
+}
+echo volid= $volid
+if {$volid == 0} {
+    set volid [lindex [lindex $smsh_device_list 0] 2]
+}
+
+set volsize [lindex [sm get_volume_quota $volid] 0]
+set used [lindex [sm get_volume_quota $volid] 1]
+set volsize [expr {$volsize - $used} ]
+set objksize [expr {$objsize / 1024} ]
+
+echo volsize = $volsize   
+echo objksize = $objksize 
+
+# figure out how many (presumably large) 
+# objects will fit on the volume
+
+set nobjs [expr {$volsize / $objksize} ]
+
+echo nobjs = $nobjs
+
+# round down to the nearest 100
+if { $nobjs > 100 } {
+	if { $nobjs > 10000 } {
+	    set nobjs [expr {$nobjs / 1000} ]
+	} 
+    set nobjs [expr {$nobjs / 100} ]
+    echo nobjs = $nobjs
+    set nobjs [expr {$nobjs * 100} ]
+}
+echo nobjs = $nobjs
+
+unset objksize
+
+set hdr "" 
+set id_body_width zvec%d
+set body [format $id_body_width $objsize]
+
+# 
+# in existing file, create a buncha records
+# in one transaction
+#
+# First, clear out the file
+#
+sm begin_xct
+    if {$fid!=0} {
+	echo sm destroy_file $fid 
+	sm destroy_file $fid 
+	set fid 0
+    }
+
+    # Now, start over and time it
+    set fid [sm create_file $volid ]
+    echo fid=$fid
+sm commit_xct
+
+echo CREATE $nobjs RECS of size $objsize fid=$fid
+
+set dummy [sm gather_stats reset]
+set wtime [ time {
+    sm begin_xct
+	for {set i 0} {$i < $nobjs} {incr i} {
+	    set r($i) [sm create_rec $fid $hdr $objsize $body]
+	}
+	sm force_buffers true
+    sm commit_xct
+} 1 ]
+
+echo
+
+pstats
+set dummy [sm gather_stats reset]
+echo 
+echo total create time = $wtime
+set sec [lindex $wtime 0]
+set tbytes [expr $objsize * $nobjs]
+echo [expr {$tbytes / $sec}] bytes per second
+
+unset r

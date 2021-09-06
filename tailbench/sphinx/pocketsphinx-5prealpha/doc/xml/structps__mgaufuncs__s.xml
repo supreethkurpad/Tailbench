@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structps__mgaufuncs__s" kind="struct" language="C++" prot="public">
+    <compoundname>ps_mgaufuncs_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structps__mgaufuncs__s_1a5f3570efd5d8a41003b9628663e66b4c" prot="public" static="no" mutable="no">
+        <type>char const  *</type>
+        <definition>char const* ps_mgaufuncs_s::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/acmod.h" line="99" column="1" bodyfile="src/libpocketsphinx/acmod.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__mgaufuncs__s_1a3176f3e6fb82c673ef54f63b76a3fca9" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ps_mgaufuncs_s::frame_eval) (ps_mgau_t *mgau, int16 *senscr, uint8 *senone_active, int32 n_senone_active, mfcc_t **feat, int32 frame, int32 compallsen)</definition>
+        <argsstring>)(ps_mgau_t *mgau, int16 *senscr, uint8 *senone_active, int32 n_senone_active, mfcc_t **feat, int32 frame, int32 compallsen)</argsstring>
+        <name>frame_eval</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/acmod.h" line="101" column="1" bodyfile="src/libpocketsphinx/acmod.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__mgaufuncs__s_1a02df073c4e7dc562b5dcd3ac2bb07eb8" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ps_mgaufuncs_s::transform) (ps_mgau_t *mgau, ps_mllr_t *mllr)</definition>
+        <argsstring>)(ps_mgau_t *mgau, ps_mllr_t *mllr)</argsstring>
+        <name>transform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/acmod.h" line="108" column="1" bodyfile="src/libpocketsphinx/acmod.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structps__mgaufuncs__s_1a38dad1a9d594cf9a239de75f6c2e8d98" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* ps_mgaufuncs_s::free) (ps_mgau_t *mgau)</definition>
+        <argsstring>)(ps_mgau_t *mgau)</argsstring>
+        <name>free</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/acmod.h" line="110" column="1" bodyfile="src/libpocketsphinx/acmod.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libpocketsphinx/acmod.h" line="98" column="1" bodyfile="src/libpocketsphinx/acmod.h" bodystart="98" bodyend="111"/>
+    <listofallmembers>
+      <member refid="structps__mgaufuncs__s_1a3176f3e6fb82c673ef54f63b76a3fca9" prot="public" virt="non-virtual"><scope>ps_mgaufuncs_s</scope><name>frame_eval</name></member>
+      <member refid="structps__mgaufuncs__s_1a38dad1a9d594cf9a239de75f6c2e8d98" prot="public" virt="non-virtual"><scope>ps_mgaufuncs_s</scope><name>free</name></member>
+      <member refid="structps__mgaufuncs__s_1a5f3570efd5d8a41003b9628663e66b4c" prot="public" virt="non-virtual"><scope>ps_mgaufuncs_s</scope><name>name</name></member>
+      <member refid="structps__mgaufuncs__s_1a02df073c4e7dc562b5dcd3ac2bb07eb8" prot="public" virt="non-virtual"><scope>ps_mgaufuncs_s</scope><name>transform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

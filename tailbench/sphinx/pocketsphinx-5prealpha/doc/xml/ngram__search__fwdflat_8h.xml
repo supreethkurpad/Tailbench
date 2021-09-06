@@ -1,0 +1,483 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="ngram__search__fwdflat_8h" kind="file" language="C++">
+    <compoundname>ngram_search_fwdflat.h</compoundname>
+    <includes refid="ngram__search_8h" local="yes">ngram_search.h</includes>
+    <includedby refid="ngram__search_8c" local="yes">src/libpocketsphinx/ngram_search.c</includedby>
+    <includedby refid="pocketsphinx_8c" local="yes">src/libpocketsphinx/pocketsphinx.c</includedby>
+    <incdepgraph>
+      <node id="1556">
+        <label>sphinxbase/ngram_model.h</label>
+      </node>
+      <node id="1562">
+        <label>sphinxbase/hash_table.h</label>
+      </node>
+      <node id="1581">
+        <label>dict.h</label>
+        <link refid="dict_8h"/>
+        <childnode refid="1562" relation="include">
+        </childnode>
+        <childnode refid="1582" relation="include">
+        </childnode>
+        <childnode refid="1575" relation="include">
+        </childnode>
+        <childnode refid="1566" relation="include">
+        </childnode>
+      </node>
+      <node id="1584">
+        <label>assert.h</label>
+      </node>
+      <node id="1582">
+        <label>s3types.h</label>
+        <link refid="s3types_8h"/>
+        <childnode refid="1583" relation="include">
+        </childnode>
+        <childnode refid="1584" relation="include">
+        </childnode>
+        <childnode refid="1569" relation="include">
+        </childnode>
+        <childnode refid="1558" relation="include">
+        </childnode>
+        <childnode refid="1585" relation="include">
+        </childnode>
+      </node>
+      <node id="1570">
+        <label>ps_mllr.h</label>
+        <link refid="ps__mllr_8h"/>
+        <childnode refid="1569" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+        <childnode refid="1566" relation="include">
+        </childnode>
+      </node>
+      <node id="1583">
+        <label>float.h</label>
+      </node>
+      <node id="1568">
+        <label>ps_lattice.h</label>
+        <link refid="ps__lattice_8h"/>
+        <childnode refid="1569" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+        <childnode refid="1566" relation="include">
+        </childnode>
+      </node>
+      <node id="1578">
+        <label>tmat.h</label>
+        <link refid="tmat_8h"/>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+      </node>
+      <node id="1554">
+        <label>sphinxbase/cmd_ln.h</label>
+      </node>
+      <node id="1560">
+        <label>sphinxbase/fe.h</label>
+      </node>
+      <node id="1580">
+        <label>sphinxbase/fixpoint.h</label>
+      </node>
+      <node id="1566">
+        <label>pocketsphinx_export.h</label>
+        <link refid="pocketsphinx__export_8h_source"/>
+      </node>
+      <node id="1573">
+        <label>acmod.h</label>
+        <link refid="acmod_8h"/>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+        <childnode refid="1560" relation="include">
+        </childnode>
+        <childnode refid="1561" relation="include">
+        </childnode>
+        <childnode refid="1574" relation="include">
+        </childnode>
+        <childnode refid="1558" relation="include">
+        </childnode>
+        <childnode refid="1569" relation="include">
+        </childnode>
+        <childnode refid="1570" relation="include">
+        </childnode>
+        <childnode refid="1575" relation="include">
+        </childnode>
+        <childnode refid="1578" relation="include">
+        </childnode>
+        <childnode refid="1579" relation="include">
+        </childnode>
+      </node>
+      <node id="1576">
+        <label>sphinxbase/mmio.h</label>
+      </node>
+      <node id="1585">
+        <label>sphinxbase/ckd_alloc.h</label>
+      </node>
+      <node id="1557">
+        <label>sphinxbase/listelem_alloc.h</label>
+      </node>
+      <node id="1553">
+        <label>ngram_search.h</label>
+        <link refid="ngram__search_8h"/>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+        <childnode refid="1557" relation="include">
+        </childnode>
+        <childnode refid="1558" relation="include">
+        </childnode>
+        <childnode refid="1559" relation="include">
+        </childnode>
+        <childnode refid="1579" relation="include">
+        </childnode>
+      </node>
+      <node id="1577">
+        <label>mdef.h</label>
+        <link refid="mdef_8h"/>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1562" relation="include">
+        </childnode>
+      </node>
+      <node id="1561">
+        <label>sphinxbase/feat.h</label>
+      </node>
+      <node id="1586">
+        <label>dict2pid.h</label>
+        <link refid="dict2pid_8h"/>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+        <childnode refid="1574" relation="include">
+        </childnode>
+        <childnode refid="1582" relation="include">
+        </childnode>
+        <childnode refid="1575" relation="include">
+        </childnode>
+        <childnode refid="1581" relation="include">
+        </childnode>
+      </node>
+      <node id="1569">
+        <label>sphinxbase/prim_type.h</label>
+      </node>
+      <node id="1567">
+        <label>cmdln_macro.h</label>
+        <link refid="cmdln__macro_8h_source"/>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1561" relation="include">
+        </childnode>
+        <childnode refid="1560" relation="include">
+        </childnode>
+      </node>
+      <node id="1579">
+        <label>hmm.h</label>
+        <link refid="hmm_8h"/>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1580" relation="include">
+        </childnode>
+        <childnode refid="1557" relation="include">
+        </childnode>
+        <childnode refid="1575" relation="include">
+        </childnode>
+      </node>
+      <node id="1574">
+        <label>sphinxbase/bitvec.h</label>
+      </node>
+      <node id="1564">
+        <label>pocketsphinx.h</label>
+        <link refid="pocketsphinx_8h"/>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+        <childnode refid="1560" relation="include">
+        </childnode>
+        <childnode refid="1561" relation="include">
+        </childnode>
+        <childnode refid="1566" relation="include">
+        </childnode>
+        <childnode refid="1567" relation="include">
+        </childnode>
+        <childnode refid="1568" relation="include">
+        </childnode>
+        <childnode refid="1570" relation="include">
+        </childnode>
+        <childnode refid="1571" relation="include">
+        </childnode>
+      </node>
+      <node id="1552">
+        <label>src/libpocketsphinx/ngram_search_fwdflat.h</label>
+        <link refid="ngram__search__fwdflat_8h"/>
+        <childnode refid="1553" relation="include">
+        </childnode>
+      </node>
+      <node id="1575">
+        <label>bin_mdef.h</label>
+        <link refid="bin__mdef_8h"/>
+        <childnode refid="1576" relation="include">
+        </childnode>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1566" relation="include">
+        </childnode>
+        <childnode refid="1577" relation="include">
+        </childnode>
+      </node>
+      <node id="1571">
+        <label>ps_search.h</label>
+        <link refid="ps__search_8h"/>
+        <childnode refid="1572" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+      </node>
+      <node id="1559">
+        <label>pocketsphinx_internal.h</label>
+        <link refid="pocketsphinx__internal_8h"/>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1560" relation="include">
+        </childnode>
+        <childnode refid="1561" relation="include">
+        </childnode>
+        <childnode refid="1562" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+        <childnode refid="1563" relation="include">
+        </childnode>
+        <childnode refid="1564" relation="include">
+        </childnode>
+        <childnode refid="1573" relation="include">
+        </childnode>
+        <childnode refid="1581" relation="include">
+        </childnode>
+        <childnode refid="1586" relation="include">
+        </childnode>
+      </node>
+      <node id="1558">
+        <label>sphinxbase/err.h</label>
+      </node>
+      <node id="1572">
+        <label>sphinxbase/fsg_model.h</label>
+      </node>
+      <node id="1555">
+        <label>sphinxbase/logmath.h</label>
+      </node>
+      <node id="1563">
+        <label>sphinxbase/profile.h</label>
+      </node>
+      <node id="1565">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1589">
+        <label>src/libpocketsphinx/pocketsphinx.c</label>
+        <link refid="pocketsphinx_8c_source"/>
+      </node>
+      <node id="1588">
+        <label>src/libpocketsphinx/ngram_search.c</label>
+        <link refid="ngram__search_8c"/>
+      </node>
+      <node id="1587">
+        <label>src/libpocketsphinx/ngram_search_fwdflat.h</label>
+        <link refid="ngram__search__fwdflat_8h"/>
+        <childnode refid="1588" relation="include">
+        </childnode>
+        <childnode refid="1589" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ngram__search__fwdflat_8h_1ad4b8ebd904c77f8a28f59cd5ca2c8307" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngram_fwdflat_init</definition>
+        <argsstring>(ngram_search_t *ngs)</argsstring>
+        <name>ngram_fwdflat_init</name>
+        <param>
+          <type><ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref> *</type>
+          <declname>ngs</declname>
+        </param>
+        <briefdescription>
+<para>Initialize N-Gram search for fwdflat decoding. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ngram_search_fwdflat.h" line="53" column="1" bodyfile="src/libpocketsphinx/ngram_search_fwdflat.c" bodystart="145" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__search__fwdflat_8h_1a8faf467f90162a7273b23304fc6e8586" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngram_fwdflat_deinit</definition>
+        <argsstring>(ngram_search_t *ngs)</argsstring>
+        <name>ngram_fwdflat_deinit</name>
+        <param>
+          <type><ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref> *</type>
+          <declname>ngs</declname>
+        </param>
+        <briefdescription>
+<para>Release memory associated with fwdflat decoding. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ngram_search_fwdflat.h" line="58" column="1" bodyfile="src/libpocketsphinx/ngram_search_fwdflat.c" bodystart="169" bodyend="189"/>
+        <referencedby refid="ngram__search_8h_1a9bafaa4af5a9a4f9e76a8daf54ac4a11" compoundref="ngram__search_8c" startline="289" endline="326">ngram_search_free</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="ngram__search__fwdflat_8h_1aa4879c06ddbc455a6f355084a9c574b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ngram_fwdflat_reinit</definition>
+        <argsstring>(ngram_search_t *ngs)</argsstring>
+        <name>ngram_fwdflat_reinit</name>
+        <param>
+          <type><ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref> *</type>
+          <declname>ngs</declname>
+        </param>
+        <briefdescription>
+<para>Rebuild search structures for updated language models. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ngram_search_fwdflat.h" line="63" column="1" bodyfile="src/libpocketsphinx/ngram_search_fwdflat.c" bodystart="192" bodyend="221"/>
+        <references refid="structngram__search__s_1a774f1640c5ece856f4bef98d98e7c959" compoundref="ngram__search_8h" startline="317">ngram_search_s::fwdflat_wordlist</references>
+      </memberdef>
+      <memberdef kind="function" id="ngram__search__fwdflat_8h_1a763c2c7aaa5d7f9c5107af73552a2149" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngram_fwdflat_start</definition>
+        <argsstring>(ngram_search_t *ngs)</argsstring>
+        <name>ngram_fwdflat_start</name>
+        <param>
+          <type><ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref> *</type>
+          <declname>ngs</declname>
+        </param>
+        <briefdescription>
+<para>Start fwdflat decoding for an utterance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ngram_search_fwdflat.h" line="68" column="1" bodyfile="src/libpocketsphinx/ngram_search_fwdflat.c" bodystart="374" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__search__fwdflat_8h_1ae77ef21ae92dbcc4b14f40469fbd4307" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ngram_fwdflat_search</definition>
+        <argsstring>(ngram_search_t *ngs, int frame_idx)</argsstring>
+        <name>ngram_fwdflat_search</name>
+        <param>
+          <type><ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref> *</type>
+          <declname>ngs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>frame_idx</declname>
+        </param>
+        <briefdescription>
+<para>Search one frame forward in an utterance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ngram_search_fwdflat.h" line="73" column="1" bodyfile="src/libpocketsphinx/ngram_search_fwdflat.c" bodystart="816" bodyend="877"/>
+      </memberdef>
+      <memberdef kind="function" id="ngram__search__fwdflat_8h_1ac855cf540ac4acdfa320629720ded6fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngram_fwdflat_finish</definition>
+        <argsstring>(ngram_search_t *ngs)</argsstring>
+        <name>ngram_fwdflat_finish</name>
+        <param>
+          <type><ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref> *</type>
+          <declname>ngs</declname>
+        </param>
+        <briefdescription>
+<para>Finish fwdflat decoding for an utterance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/ngram_search_fwdflat.h" line="78" column="1" bodyfile="src/libpocketsphinx/ngram_search_fwdflat.c" bodystart="929" bodyend="965"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Flat lexicon based Viterbi search. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c-basic-offset:<sp/>4;<sp/>indent-tabs-mode:<sp/>nil<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2008<sp/>Carnegie<sp/>Mellon<sp/>University.<sp/><sp/>All<sp/>rights</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>1.<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.<sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>2.<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>distribution.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>This<sp/>work<sp/>was<sp/>supported<sp/>in<sp/>part<sp/>by<sp/>funding<sp/>from<sp/>the<sp/>Defense<sp/>Advanced<sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Research<sp/>Projects<sp/>Agency<sp/>and<sp/>the<sp/>National<sp/>Science<sp/>Foundation<sp/>of<sp/>the<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>United<sp/>States<sp/>of<sp/>America,<sp/>and<sp/>the<sp/>CMU<sp/>Sphinx<sp/>Speech<sp/>Consortium.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY<sp/>``AS<sp/>IS&apos;&apos;<sp/>AND<sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>ANY<sp/>EXPRESSED<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/><sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>NOR<sp/>ITS<sp/>EMPLOYEES<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor">#ifndef<sp/>__NGRAM_SEARCH_FWDFLAT_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NGRAM_SEARCH_FWDFLAT_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SphinxBase<sp/>headers.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Local<sp/>headers.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ngram__search_8h" kindref="compound">ngram_search.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="ngram__search__fwdflat_8h_1ad4b8ebd904c77f8a28f59cd5ca2c8307" kindref="member">ngram_fwdflat_init</ref>(<ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref><sp/>*ngs);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="ngram__search__fwdflat_8h_1a8faf467f90162a7273b23304fc6e8586" kindref="member">ngram_fwdflat_deinit</ref>(<ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref><sp/>*ngs);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ngram__search__fwdflat_8h_1aa4879c06ddbc455a6f355084a9c574b4" kindref="member">ngram_fwdflat_reinit</ref>(<ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref><sp/>*ngs);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="ngram__search__fwdflat_8h_1a763c2c7aaa5d7f9c5107af73552a2149" kindref="member">ngram_fwdflat_start</ref>(<ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref><sp/>*ngs);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ngram__search__fwdflat_8h_1ae77ef21ae92dbcc4b14f40469fbd4307" kindref="member">ngram_fwdflat_search</ref>(<ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref><sp/>*ngs,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frame_idx);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="ngram__search__fwdflat_8h_1ac855cf540ac4acdfa320629720ded6fe" kindref="member">ngram_fwdflat_finish</ref>(<ref refid="structngram__search__s" kindref="compound">ngram_search_t</ref><sp/>*ngs);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>__NGRAM_SEARCH_FWDFLAT_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="src/libpocketsphinx/ngram_search_fwdflat.h"/>
+  </compounddef>
+</doxygen>

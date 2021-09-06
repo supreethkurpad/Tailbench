@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structhistory__s" kind="struct" language="C++" prot="public">
+    <compoundname>history_s</compoundname>
+    <includes refid="allphone__search_8h" local="no">allphone_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhistory__s_1a548a5d7505c78278114ab9b1d5e0ceaa" prot="public" static="no" mutable="no">
+        <type><ref refid="structphmm__s" kindref="compound">phmm_t</ref> *</type>
+        <definition>phmm_t* history_s::phmm</definition>
+        <argsstring></argsstring>
+        <name>phmm</name>
+        <briefdescription>
+<para>PHMM ending this path. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="82" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhistory__s_1af24720abad5e2e17a99c5aeffa7dc95e" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 history_s::score</definition>
+        <argsstring></argsstring>
+        <name>score</name>
+        <briefdescription>
+<para>Path score for this path. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="83" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhistory__s_1a09096eb94eba8ad29dc19f231192a24b" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 history_s::tscore</definition>
+        <argsstring></argsstring>
+        <name>tscore</name>
+        <briefdescription>
+<para>Transition score for this path. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="84" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhistory__s_1a59e1a1053ba224c4d015f08192c7fd96" prot="public" static="no" mutable="no">
+        <type><ref refid="hmm_8h_1ac9c9bae34d05f32736ae1743316737ef" kindref="member">frame_idx_t</ref></type>
+        <definition>frame_idx_t history_s::ef</definition>
+        <argsstring></argsstring>
+        <name>ef</name>
+        <briefdescription>
+<para>End frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="85" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhistory__s_1a0e9457246e140d8af571eea044178551" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 history_s::hist</definition>
+        <argsstring></argsstring>
+        <name>hist</name>
+        <briefdescription>
+<para>Previous history entry. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="86" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>History (paths) information at any point in allphone Viterbi search. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="226">
+        <label>plink_s</label>
+        <link refid="structplink__s"/>
+        <childnode refid="226" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="225" relation="usage">
+          <edgelabel>phmm</edgelabel>
+        </childnode>
+      </node>
+      <node id="224">
+        <label>history_s</label>
+        <link refid="structhistory__s"/>
+        <childnode refid="225" relation="usage">
+          <edgelabel>phmm</edgelabel>
+        </childnode>
+      </node>
+      <node id="225">
+        <label>phmm_s</label>
+        <link refid="structphmm__s"/>
+        <childnode refid="226" relation="usage">
+          <edgelabel>succlist</edgelabel>
+        </childnode>
+        <childnode refid="227" relation="usage">
+          <edgelabel>hmm</edgelabel>
+        </childnode>
+        <childnode refid="225" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="227">
+        <label>hmm_s</label>
+        <link refid="structhmm__s"/>
+        <childnode refid="228" relation="usage">
+          <edgelabel>ctx</edgelabel>
+        </childnode>
+      </node>
+      <node id="228">
+        <label>hmm_context_t</label>
+        <link refid="structhmm__context__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/allphone_search.h" line="81" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="81" bodyend="87"/>
+    <listofallmembers>
+      <member refid="structhistory__s_1a59e1a1053ba224c4d015f08192c7fd96" prot="public" virt="non-virtual"><scope>history_s</scope><name>ef</name></member>
+      <member refid="structhistory__s_1a0e9457246e140d8af571eea044178551" prot="public" virt="non-virtual"><scope>history_s</scope><name>hist</name></member>
+      <member refid="structhistory__s_1a548a5d7505c78278114ab9b1d5e0ceaa" prot="public" virt="non-virtual"><scope>history_s</scope><name>phmm</name></member>
+      <member refid="structhistory__s_1af24720abad5e2e17a99c5aeffa7dc95e" prot="public" virt="non-virtual"><scope>history_s</scope><name>score</name></member>
+      <member refid="structhistory__s_1a09096eb94eba8ad29dc19f231192a24b" prot="public" virt="non-virtual"><scope>history_s</scope><name>tscore</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,196 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: quark.1,v 1.19 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test quarks
+#	The syncronization on this gets really messy because it checks
+#	the sync_result, so sometimes we need sync points just to give
+#	the reader and writer time for that setting of the sync_result.
+#
+source $script_dir/vol.init
+
+set update_ops {update_rec update_rec_hdr append_rec truncate_rec}
+
+# count syncs; global variable printed by reader and writer
+
+sm begin_xct
+set f1 [sm create_file $volid]
+
+for {set i 0} {$i < [llength $update_ops]} {incr i} {
+    set rec($i) [sm create_rec $f1 rec$i 11 rec$i]
+    verbose forker rec $i = $rec($i)
+}
+sm commit_xct
+
+link_to_inter_thread_comm_buffer sync_result
+set sync_result "hello"
+
+# get the reader and writer proc.
+# They are in separate files so it's easier to edit them side-by-side
+source $script_dir/quark.1.sub.reader
+source $script_dir/quark.1.sub.writer
+
+verbose forker: forking 1 reader $rec(0) $rec(1)
+set t1 [ fork_thread reader $rec(0) $rec(1)]
+verbose forker: forking 2 writer $rec(0) $rec(1)
+set t2 [ fork_thread writer $rec(1) $rec(0)]
+
+# Forked threads will wait at 1st sync point so sync_result
+# should still be "hello"
+verbose forker: 0 finds sync_result $sync_result
+assert {expr [string compare $sync_result hello] == 0}
+verbose forker: 0 sync_result ok
+
+## -------------------------------------------------------------------
+##  STEP 1
+## -------------------------------------------------------------------
+verbose forker: about to sync 1
+named_sync_thread 3 "sync1 forker"
+verbose forker: about to sync 1-result-ready
+named_sync_thread 3 "sync1-result-ready forker"
+## -------------------------------------------------------------------
+# first sync 
+# reader:
+#    start an xct, 
+#    pin, 
+#    open quark, 
+#    pin, (no updates) 
+#    change sync_result
+# writer 
+#    wait for sync1-result
+## -------------------------------------------------------------------
+verbose forker: sync 1 done finds sync_result $sync_result
+assert {expr [string compare $sync_result "$rec(0) and $rec(1) are pinned"] == 0}
+verbose forker: 1 sync_result ok
+## -------------------------------------------------------------------
+# let both proceed, now that sync_result is checked1
+## -------------------------------------------------------------------
+verbose forker: about to sync 1-result
+named_sync_thread 3 "sync1 result forker"
+
+
+## -------------------------------------------------------------------
+##  STEP 2
+## -------------------------------------------------------------------
+# writer proceeds
+#    try updating record, 
+#    block on lock until reader gets sync2
+#    proceed to block on latch until reader gets sync3
+# forker: sleep long enough to reasonably ensure that the writer is blocked.   
+## -------------------------------------------------------------------
+verbose forker: sleep
+sm sleep 60
+verbose forker: wake
+
+named_sync_thread 2 "sync2 forker to reader"
+verbose forker: sync 2 forker to reader done
+
+## -------------------------------------------------------------------
+# let both proceed, now that sync_result is checked1
+# reader unpins one pin_i, closes quark
+## -------------------------------------------------------------------
+verbose forker: sync 3 
+named_sync_thread 2 "sync3 forker to reader"
+verbose forker: sync 3 forker to reader done
+## -------------------------------------------------------------------
+# Now make reader unpin the 2nd pin so writer can proceed
+## -------------------------------------------------------------------
+verbose forker: sync 4 
+named_sync_thread 2 "sync4 forker to reader"
+verbose forker: sync 4 forker to reader done
+
+set expected "$rec(1) lock released by quark"
+verbose forker: 2 finds sync_result=|$sync_result| expected=|$expected|
+assert {expr [string compare $sync_result $expected] == 0}
+verbose forker: 2 finds sync_result ok
+## -------------------------------------------------------------------
+
+# tell reader to release its locks by closing the quark. Reader
+# changes the sync_result and waits for next sync
+# Reader's closing quark allows writer to get the lock but
+# it still waits on the page latch.
+
+verbose forker: sync5 
+named_sync_thread 2 "sync5 forker to reader"
+
+
+# don't check sync_result until we know that reader has made the change.
+verbose forker: sync 6 to reader
+named_sync_thread 3 "sync6 forker to reader"
+
+set expected "$rec(0) lock released by commit"
+verbose forker: 3 finds sync_result=|$sync_result| expected=|$expected|
+assert {expr [string compare $sync_result $expected] == 0}
+verbose forker: 3 finds sync_result ok
+
+verbose forker: sync 7 to reader
+named_sync_thread 3 "sync7 forker to reader"
+
+## -------------------------------------------------------------------
+
+## -------------------------------------------------------------------
+# writer still waits for latch, so tell reader to destroy the 
+# pin (unlatching page),
+# which allows writer to proceed and update the rec and wait on sync2
+verbose forker: sync8 forker to writer 
+named_sync_thread 2 "sync8 forker to writer"
+
+verbose forker: sync9 forker to writer 
+named_sync_thread 2 "sync9 forker to writer"
+
+set expected "$rec(1) updated"
+verbose forker: 3 finds sync_result: $sync_result expected $expected
+assert {expr [string compare $sync_result $expected] == 0}
+## -------------------------------------------------------------------
+#
+verbose forker: sync10 forker to writer 
+named_sync_thread 2 "sync10 forker to writer"
+
+verbose forker: sync11 forker to writer 
+named_sync_thread 2 "sync11 forker to writer"
+
+set expected "$rec(0) updated"
+verbose forker: 3 finds sync_result: $sync_result expected $expected
+assert {expr [string compare $sync_result $expected] == 0}
+
+verbose forker: joining threads
+join_thread $t1 $t2
+
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+verbose done
+
+unset rec update_ops t1 t2 
+unset f1 i
+# can't unset sync_result -- it's linked to the comm buffer.
+addcleanupvars {sync_result}
+

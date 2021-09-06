@@ -1,0 +1,195 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.5,v 1.23.4.2 2010/01/12 02:02:00 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  Test btree remove
+#
+#
+
+proc scan_up_partial {ndx lb ub nrec} {
+    verbose "scan up partial:"
+    set scan [sm create_scan $ndx >= $lb <= $ub]
+
+    set lb [string trimleft $lb 0]
+    set ub [string trimleft $ub 0]
+
+    for {set i 1} {$i <= $nrec} {incr i} {
+	set r [sm scan_next $scan]
+	if {[string compare $r eof] == 0} then { break }
+	set key [string trimleft [lindex $r 0] 0]
+	set el [lindex $r 1]
+	verbose2 "scanned ($key, $el)"
+	assert {expr $key == $el}
+	assert {expr $key == $lb + $i - 1}
+    }
+    assert {expr $i > $nrec}
+    assert {expr [string compare [sm scan_next $scan] eof] == 0}
+    sm destroy_scan $scan
+    verbose "---- successful"
+}
+
+proc scan_up {ndx nrec}  {
+    #
+    # verify ascending
+    #
+    verbose "scan up:"
+    set scan [sm create_scan $ndx >= neg_inf <= pos_inf]
+    for {set i 1} {$i <= $nrec} {incr i}  {
+        set r [sm scan_next $scan]
+	if {[string compare $r eof] == 0} then { break }
+        set key [string trimleft [lindex $r 0] 0]
+        set el [lindex $r 1]
+        verbose2 "scanned ($key, $el)"
+        assert {expr $key == $el}
+        assert {expr $i == $key}
+    }
+    assert {expr $i > $nrec}
+    assert {expr [string compare [sm scan_next $scan] eof] == 0}
+    sm destroy_scan $scan
+    verbose "---- successful"
+}
+
+proc probe {ndx nrec} {
+    global short_form
+    verbose "probe:"
+    for {set i 1} {$i <= $nrec} {incr i} {
+        set el [sm find_assoc $ndx [format $short_form $i]]
+        assert {expr $i == $el}
+        verbose2 probed $i
+    }
+    verbose "---- successful"
+}
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+if {$logging==0} {
+    echo "Logging off: script not run. "
+} else {
+set nrec 200
+
+#
+# create index and load it up 
+#
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+set ndx [sm create_index $volid btree]
+verbose created index $ndx
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+for {set i 1} {$i <= $nrec} {incr i} {
+    verbose inserting $i
+    sm create_assoc $ndx [format $short_form $i] $i
+}
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+scan_up $ndx $nrec
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+verbose 92: emptying index $ndx
+for {set i 1} {$i <= $nrec} {incr i} {
+    verbose removing $i
+    sm destroy_assoc $ndx [format $short_form $i] $i
+    verbose removed $i
+}
+verbose sm abort_xct 
+sm abort_xct 
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+scan_up $ndx $nrec
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+verbose 104: emptying half the index $ndx
+for {set i 1} {$i <= [expr $nrec/2]} {incr i} {
+    verbose removing $i
+    sm destroy_assoc $ndx [format $short_form $i] $i
+}
+verbose removed all -- check index
+
+if {0} {
+    # turned off because it's a bogus test. If more log records
+    # get written after the first corrupted one, and if the
+    # corresponding pages in the buffer pool get written to disk,
+    # we end up with a WAL violation at recovery time.
+    verbose starting log corruption before destroying $i
+    sm start_log_corruption
+    sm destroy_assoc $ndx [format $short_form $i] $i
+    verbose syncing log
+    sm sync_log
+}
+
+############################
+verbose BTREE.5 unclean restart
+restart
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+scan_up $ndx $nrec
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+verbose 121: emptying index $ndx
+for {set i 1} {$i <= $nrec} {incr i} {
+    verbose removing $i
+    sm destroy_assoc $ndx [format $short_form $i] $i
+}
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+for {set i 1} {$i < $nrec} {incr i} {
+    catch {sm find_assoc $ndx [format $short_form $i]} err
+    assert {error_is $err "{not found}"} 
+}
+scan_up $ndx 0
+
+verbose [sm gather_stats]
+sm commit_xct
+
+sm begin_xct
+verbose [sm xct_to_tid [sm xct]]
+sm destroy_index $ndx
+sm commit_xct
+verbose [sm gather_stats]
+
+unset nrec ndx i err
+}
+

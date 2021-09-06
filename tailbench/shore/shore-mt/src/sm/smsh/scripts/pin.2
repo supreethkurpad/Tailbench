@@ -1,0 +1,196 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: pin.2,v 1.17.4.5 2010/03/19 22:20:36 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This script tests latching and locking with pin_i's.
+# It specifically tests for a latch/lock deadlock case
+# that used to deadlock the sm
+#
+source $script_dir/vol.init
+
+sm begin_xct
+
+verbose creating file
+set f1 [sm create_file $volid ]
+
+# change body width
+set id_body_width %0100d
+
+# verbose [format $id_body_width 1]
+
+verbose creating r1 and r2
+set r1 [ sm create_rec $f1 "" 11 [format $id_body_width 1] ]
+set r2 [ sm create_rec $f1 "" 11 [format $id_body_width 2] ]
+verbose $r1 $r2
+
+sm commit_xct
+
+proc rem1 { name } {
+	global r1 r2 
+	sm begin_xct
+	verbose rem1 $name [sm xct_to_tid [sm xct]]
+
+	set pin1 [sm pin_create]
+	verbose rem1 $name "sm pin_pin $pin1 $r1 SH"
+	sm pin_pin $pin1 $r1 SH
+
+	set pin2 [sm pin_create]
+	verbose rem1 $name "sm pin_pin $pin2 $r2 SH"
+	sm pin_pin $pin2 $r2 SH
+
+	verbose rem1 $name pinned $r1 and $r2
+	# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 1111111111111111111
+	verbose rem1 sync A
+	named_sync 3 A
+	verbose rem1 sync B
+	sync B
+
+	verbose rem1 updating $r1
+	if [catch {sm pin_update_rec $pin1 1 "Z"} err] {
+	    if {[error_is $err E_DEADLOCK] == 1} {
+			verbose rem1 $name "DEADLOCK in rem1 (expected)"
+			verbose rem1 $name (converted from latch-lock to lock-lock)
+			# see comments in pin.cpp pin_i::_repin
+	    }
+		assert {error_is $err E_DEADLOCK}
+		sm pin_unpin $pin1
+		sm pin_unpin $pin2
+		sm pin_destroy $pin1
+		sm pin_destroy $pin2
+		verbose rem1 $name abort
+		sm abort_xct
+
+	    verbose rem1 $name failed, aborted. sync C
+	# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 22222222222222222222
+		sync C
+	} else {
+	    verbose rem1 $name update complete. sync C
+	# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 22222222222222222222
+		sync D
+
+		sm pin_unpin $pin1
+		sm pin_unpin $pin2
+		sm pin_destroy $pin1
+		sm pin_destroy $pin2
+		verbose rem1 $name abort
+		sm abort_xct
+	}
+}
+
+proc rem2 { name } {
+	global r1 r2
+	# if we don't sync here, we'll have a latch-lock deadlock and
+	# we want this to be a lock-lock
+	sm begin_xct
+	verbose rem2 $name [sm xct_to_tid [sm xct]]
+	set pin2 [sm pin_create]
+
+	verbose rem2 $name "sm pin_pin $pin2 $r2 SH"
+	sm pin_pin $pin2 $r2 SH
+	verbose rem2 $name pinned $r2
+	# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 1111111111111111111
+	verbose rem2 sync A
+	named_sync 3 A
+	verbose rem2 sync B
+	sync BB
+
+	verbose rem2 $name updating $r2
+	if [catch {sm pin_update_rec $pin2 2 "Z"} err] {
+	    if {[error_is $err E_DEADLOCK] == 1} {
+		verbose rem2 $name "DEADLOCK in rem2 (expected)"
+		verbose rem2 $name (converted from latch-lock to lock-lock)
+		# see comments in pin.cpp pin_i::_repin
+	    }
+		assert {error_is $err E_DEADLOCK}
+
+		sm pin_unpin $pin2
+		sm pin_destroy $pin2
+		verbose rem2 $name abort
+		sm abort_xct
+
+	    verbose rem2 $name update failed, aborted. sync C
+	    # SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 22222222222222222222
+		sync CC
+	} else {
+	    sm dump_locks
+	    verbose rem2 $name update complete. sync C
+		# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 22222222222222222222
+		sync DD
+
+		sm pin_unpin $pin2
+		sm pin_destroy $pin2
+		verbose rem2 $name abort
+		sm abort_xct
+	}
+
+}
+
+verbose forking rem1
+set t1 [ fork_thread rem1 "1"]
+# t1 pins both $r1 $r2 in SH mode
+verbose forking rem2
+set t2 [ fork_thread rem2 "2"]
+# t2 pins both $r2 in SH mode
+# then they both sync:
+# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 1111111111111111111
+# this sync lets them go on to update
+# t1 wants to update r1, t2 wants to update t2
+#  One of the two will get a deadlock. 
+#  Originally we didn't have to match the syncs with the sync_thread
+#  calls exactly.
+#  Now we do, and the trouble here is that we don't have control
+#  over which gets the deadlock, but one of them does.
+#  Consequently we don't know which one to sync first.
+
+verbose named_sync 3 A rem1 t1 rem2 t2 
+named_sync 3 "$t1 $t2"
+sm sleep 10
+verbose sync_thread B rem1 t1 
+sync_thread $t1 
+verbose sync_thread B rem2 t2 
+sync_thread $t2 
+
+# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 22222222222222222222
+verbose sync_thread C/D rem1 rem2
+# sync_thread $t1 $t2
+# Because this is timing-dependent, I'll just pick one. It might
+# be the wrong one, alas.  I *might* have to eliminate this
+# test from the normal script set.
+sync_thread $t1 
+sync_thread $t2 
+
+verbose join_thread  rem1 rem2
+join_thread $t1 $t2
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+unset t1 t2 r1 r2 f1 
+

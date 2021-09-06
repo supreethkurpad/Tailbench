@@ -1,0 +1,108 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree_split.1,v 1.15 1999/06/07 19:05:22 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# start up
+#
+
+# set KEYTYPE b*1000
+set KEYTYPE B*1000
+
+source $script_dir/vol.init
+
+# set nrec 5000
+set nrec 800
+
+proc probe {ndx first last} {
+    verbose "probing:" $ndx " from " $first "to " $last
+    for {set i $first} {$i <= $last} {incr i} {
+	set el [sm find_assoc $ndx [format %03d $i] ]
+        if {$el != [format %075d $i]} {
+		verbose assert {failure about to occur == $i}
+		assert {[expr {[format %075d $i] == $el}]}
+	}
+	#assert {[expr {[format %075d $i] == $el}]}
+    }
+}
+
+#
+# create index and load it up 
+#
+sm begin_xct
+set ndx [sm create_index $volid btree regular $KEYTYPE]
+verbose created index $ndx
+
+for {set i 1} {$i <= $nrec} {incr i} {
+    #verbose inserting $i [format %03d $i] [format %075d $i]
+    if {$i%50 == 0} { verbose inserting $i [format %03d $i] [format %075d $i] }
+    sm create_assoc $ndx [format %03d $i] [format %075d $i]
+    #set el [sm find_assoc $ndx [format %03d $i] ]
+    #assert {[expr {[format %075d $i] == $el}]}
+
+    set odd_rm_start 100
+    if {$i == $odd_rm_start && $i%1 == 0 } {
+	verbose removing odd entries from 7 to $i
+	for {set j 7} {$j <= $i} {incr j; incr j} {
+	    sm destroy_assoc $ndx [format %03d $j] [format %075d $j]
+	}
+    }
+
+    if {$i > 1000 && $i%1 == 0 } {
+	probe $ndx [expr {$i - 10}]  $i
+    }
+    if {$i > 900 && $i%100 == 0 } {
+	probe $ndx $odd_rm_start $i
+    }
+}
+
+verbose "probe: whole index"
+for {set i 1} {$i <= $nrec} {incr i} {
+    verbose "probe: " $i
+    set el "not found"
+    catch {set el [sm find_assoc $ndx [format %03d $i] ]}
+    if {$el != [format %075d $i]} {
+	    verbose $i -> $el
+    }
+    # assert {[expr {[format %075d $i] == $el}]}
+}
+verbose probed [expr {$i - 1}]
+verbose "---- successful"
+
+verbose [sm gather_stats]
+
+sm commit_xct
+
+sm begin_xct
+sm destroy_index $ndx
+sm commit_xct
+verbose [sm gather_stats]
+
+unset nrec ndx odd_rm_start i el j
+unset KEYTYPE
+

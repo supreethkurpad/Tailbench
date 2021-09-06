@@ -1,0 +1,117 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: pin.5,v 1.9.4.2 2009/10/27 16:44:51 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#        Test lock-latch deadlocks: see that they get converted to
+#         lock-lock deadlocks by repin
+#
+source $script_dir/vol.init
+
+# clear stats
+set st [clearstats]
+
+sm begin_xct
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+
+set r1 [sm create_rec $f1 hdr12345 11 hellodata]
+set r2 [sm create_rec $f1 hdr12345 11 hellodata]
+set r3 [sm create_rec $f1 hdr12345 11 hellodata]
+
+verbose r1 = $r1 r2 = $r2 
+sm commit_xct
+
+proc test { kvl r1 who } {
+
+    sm begin_xct
+    set pin1 [sm pin_create]
+
+    if { $who == "scanner" } {
+        set mode SH
+        verbose $who: pinning $r1 in $mode
+        sm pin_pin $pin1 $r1 $mode
+    } else {
+        verbose $who: pinning $r1 in mode SH
+        sm pin_pin $pin1 $r1 SH
+        set mode EX
+        sm lock $kvl $mode LONG
+        verbose $who: holds LOCK [sm query_lock $kvl] on $kvl
+		sync
+    }
+
+
+    if { $who == "scanner" } {
+        set caught 0
+        verbose $who: trying to lock $kvl in mode $mode
+        set caught [catch {sm lock $kvl $mode LONG} err]
+        if {$caught == 0} {
+            verbose $who: holds [sm query_lock $kvl] on $kvl
+        }
+    }
+
+
+    if { $who == "scanner" } {
+        verbose $who: got $mode lock on $kvl
+    } else {
+		sync
+        verbose $who:  upgrading to EX
+        set caught [catch {sm pin_update_rec $pin1 0 DEFG} err]
+    }
+    sm pin_unpin $pin1
+    sm pin_destroy $pin1
+
+    if { $caught } {
+        verbose $who: got error $err 
+        assert { expr {[error_is $err E_DEADLOCK] == 1} }
+        verbose $who: $err was expected : will abort
+        sm abort_xct
+    } else {
+        sm commit_xct
+    }
+}
+
+
+# delete record
+set t1 [fork_thread test $r1 $r2 writer]
+
+# look at record
+set t2 [fork_thread test $r1 $r3 scanner]
+
+sync_thread $t1 
+sm sleep 100
+sync_thread $t1 
+
+join_thread $t1 $t2
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+unset f1 r1 r2 r3 st t1 t2
+

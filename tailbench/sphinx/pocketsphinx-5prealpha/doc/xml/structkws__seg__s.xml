@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structkws__seg__s" kind="struct" language="C++" prot="public">
+    <compoundname>kws_seg_s</compoundname>
+    <includes refid="kws__search_8h" local="no">kws_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structkws__seg__s_1ab8b059f475f5e64301195cf9816bde2a" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx_8h_1a64d3ac229ef945017112bab4c2a5ec94" kindref="member">ps_seg_t</ref></type>
+        <definition>ps_seg_t kws_seg_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+<para>Base structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/kws_search.h" line="55" column="1" bodyfile="src/libpocketsphinx/kws_search.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structkws__seg__s_1a5de99d98b2be6e0348033c9fc05ec139" prot="public" static="no" mutable="no">
+        <type>gnode_t *</type>
+        <definition>gnode_t* kws_seg_s::detection</definition>
+        <argsstring></argsstring>
+        <name>detection</name>
+        <briefdescription>
+<para>Keyword detection correspondent to segment. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/kws_search.h" line="56" column="1" bodyfile="src/libpocketsphinx/kws_search.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structkws__seg__s_1a7c7afd51e8b0484936fe23039f111151" prot="public" static="no" mutable="no">
+        <type><ref refid="hmm_8h_1ac9c9bae34d05f32736ae1743316737ef" kindref="member">frame_idx_t</ref></type>
+        <definition>frame_idx_t kws_seg_s::last_frame</definition>
+        <argsstring></argsstring>
+        <name>last_frame</name>
+        <briefdescription>
+<para>Last frame to raise the detection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/kws_search.h" line="57" column="1" bodyfile="src/libpocketsphinx/kws_search.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Segmentation &quot;iterator&quot; for KWS history. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="289">
+        <label>ps_mgau_s</label>
+        <link refid="structps__mgau__s"/>
+        <childnode refid="290" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+      </node>
+      <node id="280">
+        <label>dict_t</label>
+        <link refid="structdict__t"/>
+        <childnode refid="281" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="284" relation="usage">
+          <edgelabel>word</edgelabel>
+        </childnode>
+      </node>
+      <node id="275">
+        <label>ps_search_s</label>
+        <link refid="structps__search__s"/>
+        <childnode refid="276" relation="usage">
+          <edgelabel>last_link</edgelabel>
+        </childnode>
+        <childnode refid="279" relation="usage">
+          <edgelabel>dag</edgelabel>
+        </childnode>
+        <childnode refid="285" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="286" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="280" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="288" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="275" relation="usage">
+          <edgelabel>pls</edgelabel>
+        </childnode>
+      </node>
+      <node id="286">
+        <label>dict2pid_t</label>
+        <link refid="structdict2pid__t"/>
+        <childnode refid="287" relation="usage">
+          <edgelabel>lrssid</edgelabel>
+          <edgelabel>rssid</edgelabel>
+        </childnode>
+        <childnode refid="280" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="281" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+      </node>
+      <node id="278">
+        <label>latlink_list_s</label>
+        <link refid="structlatlink__list__s"/>
+        <childnode refid="276" relation="usage">
+          <edgelabel>link</edgelabel>
+        </childnode>
+        <childnode refid="278" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="292">
+        <label>tmat_t</label>
+        <link refid="structtmat__t"/>
+      </node>
+      <node id="282">
+        <label>cd_tree_s</label>
+        <link refid="structcd__tree__s"/>
+      </node>
+      <node id="284">
+        <label>dictword_t</label>
+        <link refid="structdictword__t"/>
+      </node>
+      <node id="287">
+        <label>xwdssid_t</label>
+        <link refid="structxwdssid__t"/>
+      </node>
+      <node id="277">
+        <label>ps_latnode_s</label>
+        <link refid="structps__latnode__s"/>
+        <childnode refid="277" relation="usage">
+          <edgelabel>alt</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="278" relation="usage">
+          <edgelabel>exits</edgelabel>
+          <edgelabel>entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="283">
+        <label>mdef_entry_s</label>
+        <link refid="structmdef__entry__s"/>
+      </node>
+      <node id="274">
+        <label>ps_segfuncs_s</label>
+        <link refid="structps__segfuncs__s"/>
+        <childnode refid="273" relation="usage">
+          <edgelabel>seg_next</edgelabel>
+        </childnode>
+      </node>
+      <node id="290">
+        <label>ps_mgaufuncs_s</label>
+        <link refid="structps__mgaufuncs__s"/>
+      </node>
+      <node id="272">
+        <label>kws_seg_s</label>
+        <link refid="structkws__seg__s"/>
+        <childnode refid="273" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+      <node id="281">
+        <label>bin_mdef_s</label>
+        <link refid="structbin__mdef__s"/>
+        <childnode refid="282" relation="usage">
+          <edgelabel>cd_tree</edgelabel>
+        </childnode>
+        <childnode refid="283" relation="usage">
+          <edgelabel>phone</edgelabel>
+        </childnode>
+      </node>
+      <node id="273">
+        <label>ps_seg_s</label>
+        <link refid="structps__seg__s"/>
+        <childnode refid="274" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="275" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="285">
+        <label>ps_searchfuncs_s</label>
+        <link refid="structps__searchfuncs__s"/>
+        <childnode refid="279" relation="usage">
+          <edgelabel>lattice</edgelabel>
+        </childnode>
+        <childnode refid="273" relation="usage">
+          <edgelabel>seg_iter</edgelabel>
+        </childnode>
+      </node>
+      <node id="279">
+        <label>ps_lattice_s</label>
+        <link refid="structps__lattice__s"/>
+        <childnode refid="277" relation="usage">
+          <edgelabel>end</edgelabel>
+          <edgelabel>nodes</edgelabel>
+          <edgelabel>start</edgelabel>
+        </childnode>
+        <childnode refid="278" relation="usage">
+          <edgelabel>q_tail</edgelabel>
+          <edgelabel>q_head</edgelabel>
+        </childnode>
+        <childnode refid="280" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="275" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="288">
+        <label>acmod_s</label>
+        <link refid="structacmod__s"/>
+        <childnode refid="289" relation="usage">
+          <edgelabel>mgau</edgelabel>
+        </childnode>
+        <childnode refid="291" relation="usage">
+          <edgelabel>mllr</edgelabel>
+        </childnode>
+        <childnode refid="281" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="292" relation="usage">
+          <edgelabel>tmat</edgelabel>
+        </childnode>
+      </node>
+      <node id="291">
+        <label>ps_mllr_s</label>
+        <link refid="structps__mllr__s"/>
+      </node>
+      <node id="276">
+        <label>ps_latlink_s</label>
+        <link refid="structps__latlink__s"/>
+        <childnode refid="276" relation="usage">
+          <edgelabel>best_prev</edgelabel>
+        </childnode>
+        <childnode refid="277" relation="usage">
+          <edgelabel>from</edgelabel>
+          <edgelabel>to</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/kws_search.h" line="54" column="1" bodyfile="src/libpocketsphinx/kws_search.h" bodystart="54" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structkws__seg__s_1ab8b059f475f5e64301195cf9816bde2a" prot="public" virt="non-virtual"><scope>kws_seg_s</scope><name>base</name></member>
+      <member refid="structkws__seg__s_1a5de99d98b2be6e0348033c9fc05ec139" prot="public" virt="non-virtual"><scope>kws_seg_s</scope><name>detection</name></member>
+      <member refid="structkws__seg__s_1a7c7afd51e8b0484936fe23039f111151" prot="public" virt="non-virtual"><scope>kws_seg_s</scope><name>last_frame</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

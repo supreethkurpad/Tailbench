@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structngram__model__trie__s" kind="struct" language="C++" prot="public">
+    <compoundname>ngram_model_trie_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structngram__model__trie__s_1a9afbd810822df0ba51b693debf430bc7" prot="public" static="no" mutable="no">
+        <type><ref refid="ngram__model_8h_1afaaf0c00e20056d97efcd97e4cae4ea7" kindref="member">ngram_model_t</ref></type>
+        <definition>ngram_model_t ngram_model_trie_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+<para>Base ngram_model_t structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_trie.h" line="47" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_trie.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__model__trie__s_1a2dc5840b57af65440a32f1d3166e0e60" prot="public" static="no" mutable="no">
+        <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+        <definition>lm_trie_t* ngram_model_trie_s::trie</definition>
+        <argsstring></argsstring>
+        <name>trie</name>
+        <briefdescription>
+<para>Trie structure that stores ngram relations and weights. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_trie.h" line="48" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_trie.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="239">
+        <label>lm_trie_quant_s</label>
+        <link refid="structlm__trie__quant__s"/>
+        <childnode refid="240" relation="usage">
+          <edgelabel>tables</edgelabel>
+          <edgelabel>longest</edgelabel>
+        </childnode>
+      </node>
+      <node id="237">
+        <label>ngram_model_trie_s</label>
+        <link refid="structngram__model__trie__s"/>
+        <childnode refid="238" relation="usage">
+          <edgelabel>trie</edgelabel>
+        </childnode>
+        <childnode refid="246" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+      <node id="240">
+        <label>bins_s</label>
+        <link refid="structbins__s"/>
+      </node>
+      <node id="252">
+        <label>ngram_funcs_s</label>
+        <link refid="structngram__funcs__s"/>
+      </node>
+      <node id="243">
+        <label>unigram_s</label>
+        <link refid="structunigram__s"/>
+      </node>
+      <node id="241">
+        <label>longest_s</label>
+        <link refid="structlongest__s"/>
+        <childnode refid="242" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+      <node id="242">
+        <label>base_s</label>
+        <link refid="structbase__s"/>
+      </node>
+      <node id="254">
+        <label>ngram_class_s::ngram_hash_s</label>
+        <link refid="structngram__class__s_1_1ngram__hash__s"/>
+      </node>
+      <node id="248">
+        <label>hash_entry_s</label>
+        <link refid="structhash__entry__s"/>
+        <childnode refid="248" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="238">
+        <label>lm_trie_s</label>
+        <link refid="structlm__trie__s"/>
+        <childnode refid="239" relation="usage">
+          <edgelabel>quant</edgelabel>
+        </childnode>
+        <childnode refid="241" relation="usage">
+          <edgelabel>longest</edgelabel>
+        </childnode>
+        <childnode refid="243" relation="usage">
+          <edgelabel>unigrams</edgelabel>
+        </childnode>
+        <childnode refid="244" relation="usage">
+          <edgelabel>middle_begin</edgelabel>
+          <edgelabel>middle_end</edgelabel>
+        </childnode>
+      </node>
+      <node id="245">
+        <label>bitarr_mask_s</label>
+        <link refid="structbitarr__mask__s"/>
+      </node>
+      <node id="247">
+        <label>hash_table_s</label>
+        <link refid="structhash__table__s"/>
+        <childnode refid="248" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+      </node>
+      <node id="253">
+        <label>ngram_class_s</label>
+        <link refid="structngram__class__s"/>
+        <childnode refid="254" relation="usage">
+          <edgelabel>nword_hash</edgelabel>
+        </childnode>
+      </node>
+      <node id="249">
+        <label>logmath_s</label>
+        <link refid="structlogmath__s"/>
+        <childnode refid="250" relation="usage">
+          <edgelabel>t</edgelabel>
+        </childnode>
+        <childnode refid="251" relation="usage">
+          <edgelabel>filemap</edgelabel>
+        </childnode>
+      </node>
+      <node id="250">
+        <label>logadd_s</label>
+        <link refid="structlogadd__s"/>
+      </node>
+      <node id="251">
+        <label>mmio_file_s</label>
+        <link refid="structmmio__file__s"/>
+      </node>
+      <node id="244">
+        <label>middle_s</label>
+        <link refid="structmiddle__s"/>
+        <childnode refid="245" relation="usage">
+          <edgelabel>next_mask</edgelabel>
+        </childnode>
+        <childnode refid="242" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+      <node id="246">
+        <label>ngram_model_s</label>
+        <link refid="structngram__model__s"/>
+        <childnode refid="247" relation="usage">
+          <edgelabel>wid</edgelabel>
+        </childnode>
+        <childnode refid="249" relation="usage">
+          <edgelabel>lmath</edgelabel>
+        </childnode>
+        <childnode refid="252" relation="usage">
+          <edgelabel>funcs</edgelabel>
+        </childnode>
+        <childnode refid="253" relation="usage">
+          <edgelabel>classes</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/ngram_model_trie.h" line="46" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_trie.h" bodystart="46" bodyend="49"/>
+    <listofallmembers>
+      <member refid="structngram__model__trie__s_1a9afbd810822df0ba51b693debf430bc7" prot="public" virt="non-virtual"><scope>ngram_model_trie_s</scope><name>base</name></member>
+      <member refid="structngram__model__trie__s_1a2dc5840b57af65440a32f1d3166e0e60" prot="public" virt="non-virtual"><scope>ngram_model_trie_s</scope><name>trie</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,135 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lock.perf,v 1.14.4.3 2009/12/21 18:45:15 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Time locks
+#
+source $script_dir/vol.init
+
+proc lock_stats {} {
+    set stats [sm gather_stats]
+    set req_i [expr [lsearch $stats lock_request_cnt] + 1]
+    set acq_i [expr [lsearch $stats lock_acquire_cnt] + 1]
+    set hit_i [expr [lsearch $stats lock_cache_hit_cnt] + 1]
+    set result [list "r=" [lindex $stats $req_i] "a=" [lindex $stats $acq_i] "h=" [lindex $stats $hit_i]]
+    return $result
+}
+
+set config [sm config_info]
+verbose config $config
+
+set num_req 10000
+set hdr "" 
+set data ""
+
+#sm set_lid_cache_enable disable
+
+sm begin_xct
+    set fid [sm create_file $volid ]
+    set rid [sm create_rec $fid $hdr 1 $data]
+sm commit_xct
+
+verbose #requests $num_req 
+verbose LOCK STARTING: 
+pstats
+
+sm begin_xct
+
+
+set dummy [sm gather_stats reset]
+sm set_lock_cache_enable enable
+set lock_time [ time {
+    sm lock_many $num_req $rid EX
+} 1 ]
+verbose
+verbose full record locks, cached=[sm lock_cache_enabled]
+verbose "\t" $lock_time , [lock_stats]
+
+
+set dummy [sm gather_stats reset]
+sm set_lock_cache_enable disable
+set lock_time [ time {
+    sm lock_many $num_req $rid EX
+} 1 ]
+verbose
+verbose full record locks, cached=[sm lock_cache_enabled] 
+verbose "\t" $lock_time , [lock_stats]
+
+
+set dummy [sm gather_stats reset]
+sm set_lock_cache_enable enable
+sm lock $fid EX
+set lock_time [ time {
+    sm lock_many $num_req $rid EX
+} 1 ]
+verbose
+verbose file is EX locked, cached=[sm lock_cache_enabled]
+verbose "\t" $lock_time , [lock_stats]
+
+
+set dummy [sm gather_stats reset]
+sm set_lock_cache_enable disable
+sm lock $fid EX
+set lock_time [ time {
+    sm lock_many $num_req $rid EX
+} 1 ]
+verbose
+verbose file is EX locked, cached=[sm lock_cache_enabled]
+verbose "\t" $lock_time , [lock_stats]
+
+
+set dummy [sm gather_stats reset]
+sm set_lock_cache_enable enable
+sm lock $volid EX 
+set lock_time [ time {
+    sm lock_many $num_req $rid EX
+} 1 ]
+verbose
+verbose volume is EX locked, cached=[sm lock_cache_enabled]
+verbose "\t" $lock_time , [lock_stats]
+
+
+set dummy [sm gather_stats reset]
+sm set_lock_cache_enable disable
+sm lock $volid EX 
+set lock_time [ time {
+    sm lock_many $num_req $rid EX
+} 1 ]
+verbose
+verbose volume is EX locked, cached=[sm lock_cache_enabled]
+verbose "\t" $lock_time , [lock_stats]
+
+
+pstats
+
+sm destroy_file $fid
+sm commit_xct
+
+unset rid dummy hdr data num_req lock_time fid config
+

@@ -1,0 +1,112 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: rtree.2,v 1.22.4.1 2010/01/12 02:02:03 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+if { $logging == 0 } {
+    echo "No logging: script not run."
+} else {
+
+set nrec 150
+set u "2.-1500.-1500.1500.1500"
+
+#
+# create rtree 
+#
+sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+set ndx [sm create_md_index $volid 2 rtree]
+verbose created rtree $ndx
+sm commit_xct
+
+#
+# load and abort 
+#
+sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+for {set i 1} {$i <= $nrec} {incr i} {
+    set box($i) [sm next_box $u]
+#    verbose inserting $box($i) $i
+    sm create_md_assoc $ndx $box($i) $i
+}
+verbose inserted $nrec entries
+sm rtree_stats $ndx
+#sm draw_rtree $ndx graph_out
+#sm print_md_index $ndx
+sm abort_xct
+
+#
+# reload
+#
+sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+for {set i 1} {$i <= $nrec} {incr i} {
+#    verbose inserting $box($i) $i
+    sm create_md_assoc $ndx $box($i) $i
+}
+verbose inserted $nrec entries
+#sm draw_rtree $ndx graph_out
+#sm print_md_index $ndx
+sm commit_xct
+
+sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+verbose probe:
+for {set i 1} {$i <= $nrec} {incr i} {
+#    verbose $i $box($i)
+    set el [sm find_md_assoc $ndx $box($i)]
+    assert {expr $i == $el}
+}
+verbose "---- successful"
+
+sm commit_xct
+
+sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+
+set q "2.-500.-500.500.500"
+#set q "2.-1500.-1500.1500.1500"
+
+sm rtree_query $ndx / $q
+sm rtree_query $ndx || $q
+sm rtree_query $ndx << $q
+
+sm commit_xct
+
+sm begin_xct
+	verbose tid [sm xct_to_tid [sm xct]]
+sm destroy_md_index $ndx
+sm commit_xct
+
+unset nrec ndx box q u el i
+}
+

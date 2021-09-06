@@ -1,0 +1,15 @@
+configure args: --enable-shore6 --enable-dbgsymbols SHORE_HOME=../shore-mt/
+
+Shore Kits configuration:
+  Version:         KITS_VERSION   shore-kits.2.1
+  Home:            KITS_HOME      /home/tailbench/Tailbench/tailbench/shore/shore-kits
+  Features:        KITS_FEATURES   caches
+  Shore SM home:   SHORE_HOME     ../shore-mt/
+  Shore SM type:   SHORE_TYPE     Shore-SM-6.X.X
+  Readline home:   READLINE_HOME  /usr
+  CXX compiler:    CXX            g++
+  CXX version:     CXX_VERSION    7.5.0
+  Architecture/OS: ARCHOS         x86_64_LINUX
+  Compilation:     COMP_OPTIONS   maximum dbgsymbols
+  CXXFLAGS          -ggdb  -O3 -finline-limit=1200 -fomit-frame-pointer -mtune=core2 -march=core2 -Wall -Wcast-align -Wextra -Wfloat-equal -Wno-return-type 	 -Wno-invalid-offsetof -Wno-conversion -Wno-system-headers -D_REENTRANT -DARCH_LP64 -m64  -std=c++98 -g
+  LDFLAGS          -lnsl -ldl -lm -lpthread -lrt -rdynamic -lncurses

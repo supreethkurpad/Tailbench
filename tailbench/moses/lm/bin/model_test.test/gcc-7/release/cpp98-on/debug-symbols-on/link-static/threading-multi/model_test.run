@@ -1,0 +1,11 @@
+Boost.Test WARNING: token "lm/test.arpa" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: model_test --random -- lm/test.arpa
+Boost.Test WARNING: token "lm/test_nounk.arpa" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: model_test --random -- lm/test_nounk.arpa
+Running 12 test cases...
+
+*** No errors detected
+
+EXIT STATUS: 0

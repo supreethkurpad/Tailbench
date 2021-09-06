@@ -1,0 +1,2 @@
+These are the CXX flags used with the last build: 
+-march=core2 -mtune=core2 -DNDEBUG -UDEBUG -ggdb -Wall -fno-strict-aliasing -Wextra -Wpointer-arith -Wwrite-strings -Woverloaded-virtual -Wno-deprecated -O3 -fexpensive-optimizations -finline-functions -DNO_FASTNEW -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -Wextra -Wall -Wno-long-long -pthread -m64 -DARCH_LP64 -I../src/atomic_ops

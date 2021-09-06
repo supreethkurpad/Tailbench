@@ -1,0 +1,151 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: deadlock.4,v 1.14.4.2 2009/11/23 22:34:44 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# Test Upgrade : there is no deadlock here in theory, however, the
+# deadlock detector (used to) will reason: if there's an upgrade request already
+# on this lock when another arrives, it's a deadlock; this is because
+# it's so contrived and unlikely that we'd ever upgrade to SH so the
+# deadlock detector can not worry about that false positive case.
+#
+# t1 and t2 have to wait for t3 to finish, and they will request
+# their upgrades before t3 finishes, so the deadlock detector will 
+# return eDEADLOCK here.
+#
+#    {1IS, 2IS, 3IX} <-- 1SH <-- 2SH 
+#
+#    NOTE: I removed this reasoning from the DLD so now it should NOT find a
+#    deadlock in this case.
+#
+set o1 "s(10.2)"
+
+proc t1 {} {
+    global o1
+    sm begin_xct
+    verbose t1 [sm xct_to_tid [sm xct]]
+    sm lock $o1 IS LONG
+	set my_lock [sm query_lock $o1]
+    verbose "t1: acquired $my_lock on $o1"
+    # verbose "{t1: sync"
+    sync
+    # verbose "t1: sync}"
+    verbose "t1: attempt to acquire SH on $o1"
+    catch {sm lock $o1 SH LONG} errorno
+    # no deadlock
+	# echo t1 errorno = "'$errorno'"
+    assert { expr {[error_is $errorno E_OK] == 1} }
+
+	set my_lock [sm query_lock $o1]
+    verbose "t1: acquired $my_lock on $o1"
+    assert { expr { [string  equal "$my_lock" "SH"] == 1 } }
+	# should end up with SH
+    verbose "t1: committing"
+    sm commit_xct
+	verbose "t1 SUCCESS"
+}
+
+proc t2 {} {
+    global o1
+    # verbose "{t2: sync"
+    sync
+    # verbose "t2: sync}"
+    sm begin_xct
+    verbose t2 [sm xct_to_tid [sm xct]]
+    sm lock $o1 IS LONG
+	set my_lock [sm query_lock $o1]
+    verbose "t2: acquired $my_lock on $o1"
+    # verbose "{t2: sync"
+    sync
+    # verbose "t2: sync}"
+    verbose "t2: attempt to acquire SH on $o1"
+    catch {sm lock $o1 SH LONG} errorno
+    # Should get deadlock here
+	# echo t2 errorno = "'$errorno'"
+    assert { expr {[error_is $errorno E_DEADLOCK] == 0} }
+	set my_lock [sm query_lock $o1]
+    ## assert { expr { [string  equal "$my_lock" "IS"] == 1 } }
+	# when I fixed the DLD logic, is should change from IS to SH:
+    assert { expr { [string  equal "$my_lock" "SH"] == 1 } }
+    verbose "t2: acquired $my_lock on $o1"
+    verbose "t2: committing"
+    sm commit_xct
+	verbose "t2 SUCCESS"
+}
+
+proc t3 {} {
+    global o1
+    sync
+    sm begin_xct
+    verbose t3 [sm xct_to_tid [sm xct]]
+    sm lock $o1 IX LONG
+	set my_lock [sm query_lock $o1]
+    verbose "t3: acquired $my_lock on $o1"
+    # verbose "{t3: sync"
+    sync
+    # verbose "t3: sync}"
+    verbose "t3: committing"
+    sm commit_xct
+	verbose t3 SUCCESS
+}
+
+#  immediately:   {1IS} (oldest tx)
+set x [fork_thread t1 {} ]
+set y [fork_thread t2 {} ]
+set z [fork_thread t3 {} ]
+
+sm sleep 1
+#  after its first sync:  {2IS}
+# verbose sync_thread t2
+sync_thread $y 
+
+sm sleep 1
+#  after its first sync:  {3IX} 
+# verbose sync_thread t3
+sync_thread $z
+
+sm sleep 10
+#  now     <-- 1SH <-- 2SH 
+#  but make sure that t1 happens first so
+#  that the deadlock is at t2
+#  Actually, the older tx is kept, but
+#  we assured that t1 is older by letting
+#  it being first and making t1 wait for
+#  that extra sync
+# verbose sync_thread t1
+sync_thread $x 
+
+verbose sync_thread t2
+sync_thread $y 
+
+verbose sync_thread t3
+sync_thread $z 
+
+join_thread $x $y $z
+
+unset x y z o1 
+

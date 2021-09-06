@@ -1,0 +1,164 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: multi.1,v 1.17 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#  Testing the following multi-thread-per-tx scenarios
+#
+#  thread 1: EX lock o1,o2,o3
+#  thread 2-a: SH lock o1 blocks in lock manager
+#  thread 2-b: SH lock o1 blocks on cond variable
+#  thread 2-c: SH lock o2 blocks on cond variable (how can this be?
+#  Shouldn't it block on the mutex first?)
+#  thread 1: commits, other 3 threads wake up
+#
+set_config_info
+# source $script_dir/vol.init
+undef_named_sync 4 silent
+define_named_sync 4 4
+
+proc t1 {} {
+    global volid o1 o2 o3
+    sm begin_xct
+	set x [sm xct]
+	verbose TX start tid = $x
+	sm lock $o1 EX LONG
+	sm lock $o2 EX LONG
+	sm lock $o3 EX LONG
+	verbose TX $x sync
+sync t1-1
+	verbose TX $x sync
+sync t1-2
+	verbose TX $x committing
+    sm commit_xct
+	verbose TX $x committed
+}
+
+proc t2 {x o} {
+    sm attach_xct $x
+	verbose TX $x sync
+named_sync 4 t2-1
+	verbose TX $x.$o locking
+	sm lock $o SH LONG
+	verbose TX $x.$o acquired, sync
+named_sync 4 t2-2
+	verbose TX $x.$o done
+    sm detach_xct $x
+	verbose detach done
+}
+
+set go 0
+if {$multi_threaded_xct == 0 } {
+	echo "Not configured for multi-threaded xcts"
+} else {
+	set go 1
+}
+if {$go == 1} {
+
+set o1			"k(s(10.0).100.200)"
+set o2			"k(s(10.0).100.340)"
+set o3			"k(s(10.0).300.999)"
+
+
+##########  main  ##########
+
+	sm begin_xct
+
+    set x [fork_thread t1 {}]
+
+	set tx [sm xct]
+	verbose started TX $tx
+    set y1 [fork_thread t2 $tx $o1]
+    set y2 [fork_thread t2 $tx $o2]
+    set y3 [fork_thread t2 $tx $o3]
+	verbose started 3 threads for t2
+	sm detach_xct $tx
+
+    verbose sync_thread $x 
+    sync_thread $x 
+
+if {$verbose_flag} { echo "A: sleep 1000" }
+    sm sleep 1000
+if {$verbose_flag} { 
+	 echo "DUMP XCTS A"
+	 sm dump_xcts 
+	 echo "DUMP LOCKS A"
+	 sm dump_locks 
+}
+if {$verbose_flag} { 
+    echo "B: sleep 1000" 
+}
+    sm sleep 1000
+
+    verbose named_sync 4 "$y1 $y2 $y3"
+    named_sync 4 "$y1 $y2 $y3"
+
+if {$verbose_flag} { echo "C: sleep 1000" }
+    sm sleep 1000
+if {$verbose_flag} { 
+	echo "DUMP XCTS B"
+	sm dump_xcts 
+	echo "DUMP LOCKS B"
+	sm dump_locks
+}
+if {$verbose_flag} { echo "D: sleep 1000" }
+    sm sleep 1000
+
+    verbose sync_thread $x 
+    sync_thread $x 
+
+if {$verbose_flag} { echo "E: sleep 1000" }
+    sm sleep 1000
+if {$verbose_flag} { 
+	echo "DUMP XCTS E"
+	sm dump_xcts 
+	echo "DUMP LOCKS E"
+	sm dump_locks
+}
+if {$verbose_flag} { echo "F: sleep 1000" }
+    sm sleep 1000
+
+    verbose named_sync 4 "$y1 $y2 $y3"
+    named_sync 4 "$y1 $y2 $y3"
+
+    verbose join_thread $x $y1 $y2 $y3
+    join_thread $x $y1 $y2 $y3
+
+	verbose WARNING sm state_xct is fragile
+	set s [sm state_xct $tx]
+	if {$s == "xct_active"} {
+		sm attach_xct $tx
+		sm commit_xct
+	}
+verbose "SUCCESS"
+unset tx o1 o2 o3  s
+unset y1 y2 y3 x 
+
+}
+
+unset go
+

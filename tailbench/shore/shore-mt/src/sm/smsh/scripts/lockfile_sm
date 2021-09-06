@@ -1,0 +1,198 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lockfile_sm,v 1.19.4.2 2009/12/14 23:57:55 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  This script tests 5x5 (IS, IX, SH, SIX, and EX) lock compatibility
+#  on file. 
+#
+#  The operations to set an IS lock on a file are
+#  (through hierarchical locking)
+#	sm read_rec
+#	sm read_rec_body
+#	sm print_rec
+#
+#  The operations to set an IX lock on a file are
+#  (through hierarchical locking)
+#	sm append_rec
+#	sm truncate_rec
+#	sm update_rec
+#	sm update_rec_hdr
+#
+#  The operations to set a SH lock on a file are
+#	sm scan_recs
+#
+#  The operations to set a SIX lock on a file are
+#	sm scan_recs, sm append_rec
+#	sm scan_recs, sm truncate_rec
+#	sm scan_recs, sm update_rec
+#	sm scan_recs, sm update_rec_hdr
+#
+#  The operations to set an EX lock on a file are
+#	sm destroy_file  (this is not yet implemented)
+#
+
+proc req_lock { fid rid lock op } {
+	global verbose_flag
+    sm begin_xct
+
+    case $lock in {
+
+	IS {  case $op in {
+		read 		{ verbose [sm read_rec $rid 0 0] }
+		read_body 	{ verbose [sm read_rec_body $rid 0 0] }
+		print 		{ verbose [sm print_rec $rid 0 0] }
+	      }
+	   }
+
+	IX {  case $op in {
+		update 		{ sm update_rec $rid 1 b }
+		update_hdr 	{ sm update_rec_hdr $rid 1 h }
+		append 		{ sm append_rec $rid z }
+		truncate 	{ sm truncate_rec $rid 1 }
+	      }
+	   }
+
+	SH {  case $op in {
+		scan 		{ verbose [sm scan_recs $fid] }
+	      }
+	   }
+
+	SIX {  
+	      verbose [sm scan_recs $fid]
+	      case $op in {
+		update 		{ sm update_rec $rid 1 b }
+		update_hdr 	{ sm update_rec_hdr $rid 1 h }
+		append 		{ sm append_rec $rid z }
+		truncate 	{ sm truncate_rec $rid 1 }
+	      }
+	   }
+
+	EX {  case $op in {
+		destroy 	{ sm destroy_file $fid }
+	      }
+	   }
+    }
+}
+
+proc rel_lock { args } {
+    sm commit_xct
+}
+
+proc holder { fid rid type op me } {
+	global verbose_flag
+    sync
+
+    verbose "$me: $type ($op) requesting lock on $fid"
+    req_lock $fid $rid $type $op
+    verbose "$me: $type ($op) lock on $fid granted"
+#    if { $verbose_flag } { sm dump_locks }
+
+    sync
+    sync
+
+    verbose "$me: $type ($op) releasing lock on $fid"
+    rel_lock
+#    verbose "$me: $type ($op) lock on $fid released"
+}
+
+proc requester { fid rid type op me } {
+	global verbose_flag
+    sync
+    sync
+
+    verbose "$me: $type ($op) requesting lock on $fid"
+    req_lock $fid $rid $type $op
+    verbose "$me: $type ($op) lock on $fid granted"
+#    if { $verbose_flag } { sm dump_locks }
+
+    sync
+
+    verbose "$me: $type ($op) releasing lock on $fid"
+    rel_lock
+#    verbose "$me: $type ($op) lock on $fid released"
+}
+
+proc testit { fid r1 r2 lock1 lock2 } {
+	global verbose_flag
+    global ops
+	sm reinit_fingerprints
+    foreach i $ops($lock1) { 
+    	foreach j $ops($lock2) { 
+	    set x [ fork_thread holder $fid $r1 $lock1 $i 1 ]
+	    set y [ fork_thread requester $fid $r2 $lock2 $j 2 ]
+
+	    sync_thread $x $y
+	    sync_thread $x $y
+	    sync_thread $x
+	    sync_thread $y
+	    join_thread $x $y
+	    verbose "----------------"
+	}
+    }
+}
+
+####  global variables ####
+
+set ops(IS) { read read_body print }
+set ops(IX) { append truncate update update_hdr }
+set ops(SH) { scan }
+set ops(SIX) { append truncate update update_hdr }
+set ops(EX) { destroy }
+
+##########  main  ########## 
+
+
+source $script_dir/vol.init
+
+sm begin_xct
+set fid [ sm create_file $volid ]
+set r1 [ sm create_rec $fid "hdr1" 0 "body1" ]
+set r2 [ sm create_rec $fid "hdr2" 0 "body2" ]
+sm commit_xct
+
+verbose volid = $volid
+verbose fid = $fid
+verbose r1 = $r1
+verbose r2 = $r2
+
+verbose "TEST:\tFile Locking with SM Rec/File Operations"
+
+foreach i { IS IX SH SIX } {
+    foreach j { IS IX SH SIX } {
+
+	verbose "==================   $i  $j  ====================="
+	testit $fid $r1 $r2 $i $j
+    }
+}
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct
+
+unset i j ops fid r1 r2
+

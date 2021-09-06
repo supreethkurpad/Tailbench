@@ -1,0 +1,94 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.1,v 1.29.4.1 2010/01/12 02:02:00 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test file create and destroy
+#
+
+source $script_dir/vol.init
+
+if { $logging==0 } {
+    echo "Logging off: script not run. "
+} else {
+
+verbose configuration info: [sm config_info]
+
+dstats $volid
+
+sm begin_xct
+set f0 [sm create_file $volid]]
+sm commit_xct
+verbose restart
+restart
+
+verbose begin
+
+sm begin_xct
+sm destroy_file $f0
+sm commit_xct
+
+
+sm begin_xct
+    set f1 [sm create_file $volid]
+    set f2 [sm create_file $volid]
+    verbose f1 = $f1
+    verbose f2 = $f2
+sm commit_xct
+
+verbose
+dstats $volid
+sm begin_xct
+verbose volume_quota (before destroy) [sm get_volume_quota $volid]
+set free_before [lindex [sm get_volume_quota $volid] 1]
+verbose destroy files $f1 and $f2 
+sm destroy_file $f1
+sm destroy_file $f2
+verbose volume_quota (before commit) [sm get_volume_quota $volid]
+set free_after [lindex [sm get_volume_quota $volid] 1]
+# space isn't freed until commit
+assert {expr {$free_before == $free_after}}
+sm commit_xct
+
+sm begin_xct
+verbose volume_quota (after commit) [sm get_volume_quota $volid]
+set free_after [lindex [sm get_volume_quota $volid] 1]
+assert {expr {$free_before > $free_after}}
+sm commit_xct
+verbose
+dstats $volid
+verbose stats
+pstats
+
+unset f0
+unset f1
+unset f2
+unset free_before
+unset free_after
+}
+

@@ -1,0 +1,120 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: deadlock.1,v 1.13.4.3 2009/11/23 22:34:44 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#  Testing that the following scenario is NOT a deadlock.
+#
+#  {t1 IS, t2 IX} <-- t3 S
+#  {t3 X} <-- t1 IS
+# 
+
+##########  global variables  ##########
+
+set A "s(10.0)"
+set B "s(20.0)"
+
+proc t1 {} {
+    global A B
+    sm begin_xct
+    verbose "t1: requesting \"$A\" IS LONG"
+    sm lock $A IS LONG
+    verbose "t1: IS granted on A=$A"
+	verbose "t1 sync"
+sync
+	verbose "t1 sync"
+sync
+    verbose "t1: requesting \"$B\" IS LONG"
+    sm lock $B IS LONG
+    verbose "t1: IS granted on B=$B"
+    sm commit_xct
+}
+
+proc t2 {} {
+    global A B
+    sm begin_xct
+    verbose "t2: requesting \"$A\" IX LONG"
+    sm lock $A IX LONG
+    verbose "t2: IX granted on A=$A"
+	verbose "t2 sync"
+sync
+	verbose "t2 sync"
+sync
+	verbose "t2 sync"
+sync
+    sm commit_xct
+    verbose "t2: commit, release IX lock on A"
+}
+
+proc t3 {} {
+    global A B
+    sm begin_xct
+    verbose "t3: requesting \"$B\" EX LONG"
+    sm lock $B EX LONG
+    verbose "t3: EX granted on B=$B"
+	verbose "t3 sync"
+sync
+	verbose "t3 sync"
+sync
+    verbose "t3: requesting \"$A\" SH LONG"
+    sm lock $A SH LONG
+    verbose "t3: SH granted on A=$A"
+    sm commit_xct
+}
+
+##########  main  ##########
+
+    set x1 [fork_thread t1 {}]
+	verbose t1 is $x1
+    set x2 [fork_thread t2 {}]
+	verbose t2 is $x2
+    set x3 [fork_thread t3 {}]
+	verbose t3 is $x3
+	yield
+
+	verbose "sync_thread $x1 $x2 $x3"
+    # sync_thread $x1 $x2 $x3
+    sync_thread $x1 $x2 $x3
+    verbose "setup completed --- {1IS, 2IX},  {3X}"
+    if {$verbose_flag}  {
+		sm dump_locks
+    }
+	verbose "sync_thread $x3"
+    sync_thread $x3 
+	verbose "sync_thread $x1"
+    sync_thread $x1
+	verbose "sync_thread $x2"
+    sync_thread $x2
+	verbose "sync_thread $x2"
+    sync_thread $x2
+	verbose "sync_thread $x1 $x2 $x3"
+    join_thread $x1 $x2 $x3
+verbose "SUCCESS"
+
+unset A B
+unset x1 x2 x3
+

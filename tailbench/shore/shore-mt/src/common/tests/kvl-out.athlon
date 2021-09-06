@@ -1,0 +1,15 @@
+kvl 3.2 abc
+kvl(store= s(3.2) key= { {3 "abc" }} elem= { })= k(s(3.2).6513249.0)
+kvl(store= s(3.2) key= { } elem= { })= k(s(3.2).0.0)
+kvl(store= s(3.2) key= { {3 "abc" }} elem= { })= k(s(3.2).6513249.0)
+kvl(store= s(3.2) key= { } elem= { })= k(s(3.2).0.0)
+kvl 3.2 abc xxxx
+kvl(store= s(3.2) key= { {3 "abc" }} elem= { {4 "x<3 times>" }})= k(s(3.2).6513249.2021161080)
+kvl(store= s(3.2) key= { } elem= { {4 "x<3 times>" }})= k(s(3.2).0.2021161080)
+kvl(store= s(3.2) key= { {3 "abc" }} elem= { })= k(s(3.2).6513249.0)
+kvl(store= s(3.2) key= { } elem= { })= k(s(3.2).0.0)
+kvl 1.8 Paradise Paradise
+kvl(store= s(1.8) key= { {8 "Paradise" }} elem= { {8 "Paradise" }})= k(s(1.8).709101029.709101029)
+kvl(store= s(1.8) key= { } elem= { {8 "Paradise" }})= k(s(1.8).0.709101029)
+kvl(store= s(1.8) key= { {8 "Paradise" }} elem= { })= k(s(1.8).709101029.0)
+kvl(store= s(1.8) key= { } elem= { })= k(s(1.8).0.0)

@@ -1,0 +1,62 @@
+\section{root\+\_\+chan\+\_\+s Struct Reference}
+\label{structroot__chan__s}\index{root\+\_\+chan\+\_\+s@{root\+\_\+chan\+\_\+s}}
+
+
+Lexical tree node data type for the first phone (root) of each dynamic H\+MM tree structure.  
+
+
+
+
+{\ttfamily \#include $<$ngram\+\_\+search.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ hmm\+\_\+t} \textbf{ hmm}
+\begin{DoxyCompactList}\small\item\em Basic H\+MM structure. \end{DoxyCompactList}\item 
+\mbox{\label{structroot__chan__s_ae0f0b90a7cb2fcb54cd7b30502dd497e}} 
+\textbf{ chan\+\_\+t} $\ast$ \textbf{ next}
+\begin{DoxyCompactList}\small\item\em first descendant of this channel \end{DoxyCompactList}\item 
+\mbox{\label{structroot__chan__s_a9a0db0131f3965ae2eb7dab7e84fc04d}} 
+int32 {\bfseries penult\+\_\+phn\+\_\+wid}
+\item 
+\mbox{\label{structroot__chan__s_af5bb41f0c9a03211ab90919f65be1564}} 
+int32 \textbf{ this\+\_\+phn\+\_\+wid}
+\begin{DoxyCompactList}\small\item\em list of words consisting of this single phone; actually the first of the list, like penult\+\_\+phn\+\_\+wid; -\/1 if none \end{DoxyCompactList}\item 
+\mbox{\label{structroot__chan__s_ad67c37bf4183f518acd7760c09a806f6}} 
+int16 \textbf{ ciphone}
+\begin{DoxyCompactList}\small\item\em first ciphone of this node; all words rooted at this node begin with this ciphone \end{DoxyCompactList}\item 
+\mbox{\label{structroot__chan__s_a0c0cf22caf4c97879af86865764f1675}} 
+int16 \textbf{ ci2phone}
+\begin{DoxyCompactList}\small\item\em second ciphone of this node; one root H\+MM for each unique right context \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Lexical tree node data type for the first phone (root) of each dynamic H\+MM tree structure. 
+
+Each state may have a different parent static H\+MM. Most fields are similar to those in chan\+\_\+t. 
+
+Definition at line 90 of file ngram\+\_\+search.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structroot__chan__s_a9d4d92ffa8b4079202ddebe3ba0eb290}} 
+\index{root\+\_\+chan\+\_\+s@{root\+\_\+chan\+\_\+s}!hmm@{hmm}}
+\index{hmm@{hmm}!root\+\_\+chan\+\_\+s@{root\+\_\+chan\+\_\+s}}
+\subsubsection{hmm}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+t} root\+\_\+chan\+\_\+s\+::hmm}
+
+
+
+Basic H\+MM structure. 
+
+This {\itshape must} be first in the structure because chan\+\_\+t and root\+\_\+chan\+\_\+t are sometimes used interchangeably. 
+
+Definition at line 91 of file ngram\+\_\+search.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ ngram\+\_\+search.\+h}\end{DoxyCompactItemize}

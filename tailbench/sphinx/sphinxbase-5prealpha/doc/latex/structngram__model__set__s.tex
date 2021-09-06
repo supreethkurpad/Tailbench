@@ -1,0 +1,169 @@
+\section{ngram\+\_\+model\+\_\+set\+\_\+s Struct Reference}
+\label{structngram__model__set__s}\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+
+
+Subclass of ngram\+\_\+model for grouping language models.  
+
+
+
+
+{\ttfamily \#include $<$ngram\+\_\+model\+\_\+set.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ngram\+\_\+model\+\_\+t} \textbf{ base}
+\begin{DoxyCompactList}\small\item\em Base ngram\+\_\+model\+\_\+t structure. \end{DoxyCompactList}\item 
+int32 \textbf{ n\+\_\+models}
+\begin{DoxyCompactList}\small\item\em Number of models in this set. \end{DoxyCompactList}\item 
+int32 \textbf{ cur}
+\begin{DoxyCompactList}\small\item\em Currently selected model, or -\/1 for none. \end{DoxyCompactList}\item 
+\textbf{ ngram\+\_\+model\+\_\+t} $\ast$$\ast$ \textbf{ lms}
+\begin{DoxyCompactList}\small\item\em Language models in this set. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \textbf{ names}
+\begin{DoxyCompactList}\small\item\em Names for language models. \end{DoxyCompactList}\item 
+int32 $\ast$ \textbf{ lweights}
+\begin{DoxyCompactList}\small\item\em Log interpolation weights. \end{DoxyCompactList}\item 
+int32 $\ast$$\ast$ \textbf{ widmap}
+\begin{DoxyCompactList}\small\item\em Word ID mapping for submodels. \end{DoxyCompactList}\item 
+int32 $\ast$ \textbf{ maphist}
+\begin{DoxyCompactList}\small\item\em Word ID mapping for N-\/\+Gram history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Subclass of ngram\+\_\+model for grouping language models. 
+
+Definition at line 50 of file ngram\+\_\+model\+\_\+set.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structngram__model__set__s_a3b88f17aa148ceac4f32dd4cbf5f4f81}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!base@{base}}
+\index{base@{base}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{base}
+{\footnotesize\ttfamily \textbf{ ngram\+\_\+model\+\_\+t} ngram\+\_\+model\+\_\+set\+\_\+s\+::base}
+
+
+
+Base ngram\+\_\+model\+\_\+t structure. 
+
+
+
+Definition at line 51 of file ngram\+\_\+model\+\_\+set.\+h.
+
+\mbox{\label{structngram__model__set__s_a031e7d7dcf1667f69e1cb980f45623cb}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!cur@{cur}}
+\index{cur@{cur}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{cur}
+{\footnotesize\ttfamily int32 ngram\+\_\+model\+\_\+set\+\_\+s\+::cur}
+
+
+
+Currently selected model, or -\/1 for none. 
+
+
+
+Definition at line 54 of file ngram\+\_\+model\+\_\+set.\+h.
+
+\mbox{\label{structngram__model__set__s_a862d4c4feb5a903101f4a0fdc5ba8a62}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!lms@{lms}}
+\index{lms@{lms}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{lms}
+{\footnotesize\ttfamily \textbf{ ngram\+\_\+model\+\_\+t}$\ast$$\ast$ ngram\+\_\+model\+\_\+set\+\_\+s\+::lms}
+
+
+
+Language models in this set. 
+
+
+
+Definition at line 55 of file ngram\+\_\+model\+\_\+set.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+set\+\_\+iter\+\_\+model().
+
+\mbox{\label{structngram__model__set__s_a11068bb0029c788c506bec4507dd6d23}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!lweights@{lweights}}
+\index{lweights@{lweights}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{lweights}
+{\footnotesize\ttfamily int32$\ast$ ngram\+\_\+model\+\_\+set\+\_\+s\+::lweights}
+
+
+
+Log interpolation weights. 
+
+
+
+Definition at line 57 of file ngram\+\_\+model\+\_\+set.\+h.
+
+\mbox{\label{structngram__model__set__s_af34ca232338c2d8c7dc8d13869ac09fd}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!maphist@{maphist}}
+\index{maphist@{maphist}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{maphist}
+{\footnotesize\ttfamily int32$\ast$ ngram\+\_\+model\+\_\+set\+\_\+s\+::maphist}
+
+
+
+Word ID mapping for N-\/\+Gram history. 
+
+
+
+Definition at line 59 of file ngram\+\_\+model\+\_\+set.\+h.
+
+\mbox{\label{structngram__model__set__s_a6c28858d5631a9c9dbc7b2c9583f5c5a}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!n\+\_\+models@{n\+\_\+models}}
+\index{n\+\_\+models@{n\+\_\+models}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{n\+\_\+models}
+{\footnotesize\ttfamily int32 ngram\+\_\+model\+\_\+set\+\_\+s\+::n\+\_\+models}
+
+
+
+Number of models in this set. 
+
+
+
+Definition at line 53 of file ngram\+\_\+model\+\_\+set.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+set\+\_\+iter\+\_\+next().
+
+\mbox{\label{structngram__model__set__s_aff5e13c45decde4c5bf30d8aa2b1c7d9}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!names@{names}}
+\index{names@{names}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{names}
+{\footnotesize\ttfamily char$\ast$$\ast$ ngram\+\_\+model\+\_\+set\+\_\+s\+::names}
+
+
+
+Names for language models. 
+
+
+
+Definition at line 56 of file ngram\+\_\+model\+\_\+set.\+h.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+set\+\_\+iter\+\_\+model().
+
+\mbox{\label{structngram__model__set__s_addebde44e2b7aa22dd82032c316fc962}} 
+\index{ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}!widmap@{widmap}}
+\index{widmap@{widmap}!ngram\+\_\+model\+\_\+set\+\_\+s@{ngram\+\_\+model\+\_\+set\+\_\+s}}
+\subsubsection{widmap}
+{\footnotesize\ttfamily int32$\ast$$\ast$ ngram\+\_\+model\+\_\+set\+\_\+s\+::widmap}
+
+
+
+Word ID mapping for submodels. 
+
+
+
+Definition at line 58 of file ngram\+\_\+model\+\_\+set.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libsphinxbase/lm/\textbf{ ngram\+\_\+model\+\_\+set.\+h}\end{DoxyCompactItemize}

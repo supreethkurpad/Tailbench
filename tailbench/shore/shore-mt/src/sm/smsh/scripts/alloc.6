@@ -1,0 +1,150 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: alloc.6,v 1.18.2.1 2010/03/19 22:20:35 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  Like alloc.2 but instead of scanning to destroy recs,
+#  it remembers the rids and destroys the recs w/o a scan.
+#
+
+source $script_dir/vol.init
+
+# format for body size -- >= one page
+set formsize [expr { $lg_rec_page_space - 10} ]
+
+set nrecs 10
+
+proc t1 {} {
+    global volid  f0 r0 formsize nrecs
+    sm begin_xct
+    verbose t1 is xact [sm xct]
+
+verbose named_sync 3 t1-1
+    named_sync 3 t1-1
+
+
+    verbose t1 creating $nrecs more recs ...
+    set scan [sm scan_file_create $f0 t_cc_append]
+    verbose t1 sm multi_file_append
+    sm multi_file_append $scan h$nrecs 1000 [formatlong 0 $formsize %010d  $nrecs] $nrecs
+    verbose t1 created $nrecs recs file $f0
+    sm scan_file_destroy $scan
+
+verbose named_sync 3 t1-2
+    named_sync 3 t1-2
+
+    scanit $f0 
+    sm commit_xct
+
+    verbose named_sync 3 t1-3
+    named_sync 3 t1-3
+
+    sm begin_xct
+    verbose t1 2nd xct re-scanning
+    scanit $f0 
+    sm commit_xct
+}
+proc scanit { f } {
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+	verbose $pin
+	set pin [sm scan_file_next $scan 0]
+	set i [expr {$i+1} ]
+    }
+    sm scan_file_destroy $scan
+    verbose scan found $i records
+}
+proc t2 {} {
+    global volid  f0 rid logging
+    sm begin_xct
+    verbose t2 xact [sm xct]
+    verbose t2 destroying all records ...
+    for { set i 1} { $i <= 10} { incr i} {
+	verbose t2 sm destroy_rec $rid($i) ...
+	sm destroy_rec $rid($i)
+	verbose t2 destroyed $rid($i)
+    }
+    verbose t2 destroyed $i recs file $f0
+verbose named_sync 3 t2-1
+named_sync 3 t2-1
+    if {$logging==0} {
+	verbose t2 Logging off: substituting commit for abort
+	sm commit_xct
+    } else {
+	verbose t2 aborting...
+	sm abort_xct
+    }
+verbose named_sync 3 t2-2
+named_sync 3 t2-2
+verbose named_sync 3 t2-3
+named_sync 3 t2-3
+}
+
+
+sm begin_xct
+set f0 [sm create_file $volid]]
+verbose created file $f0
+for { set i 1} { $i <= 10} { incr i} {
+    set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d  $i] ]
+    set rid($i) $j
+    verbose created rec $rid($i)
+}
+verbose created 10 recs file $f0
+sm commit_xct
+
+set y1 [fork_thread t1 {}]
+set y2 [fork_thread t2 {}]
+
+
+verbose named_sync 3 $y1 $y2
+named_sync 3 
+
+verbose named_sync 3 $y1 $y2
+named_sync 3 
+
+verbose named_sync 3 $y1 $y2
+named_sync 3 
+
+verbose join_thread $y1 $y2
+join_thread $y1 $y2
+
+verbose after join
+sm begin_xct
+scanit $f0
+sm commit_xct
+
+sm begin_xct
+dstats $volid
+sm destroy_file $f0
+dstats $volid
+sm commit_xct
+
+unset f0 y1 y2 formsize nrecs rid i j
+

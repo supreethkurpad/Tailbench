@@ -1,0 +1,41 @@
+ test 0
+------------------- MAP:
+idx: 0 count: 1
+idx: 0, val: 100
+idx: 1 count: 1
+idx: 1, val: 101
+idx: 2 count: 1
+idx: 2, val: 102
+idx: 4 count: 1
+idx: 4, val: 0
+ size 4
+
+---------------------- SET:
+ size 3
+
+idx: 0 count: 1
+idx: 1 count: 1
+idx: 2 count: 1
+---------------------- MULTIMAP:
+ size 5
+
+idx: 0 count: 1
+idx: 0, val: 100
+idx: 1 count: 3
+idx: 1, val: 101
+idx: 1 count: 3
+idx: 1, val: 101
+idx: 1 count: 3
+idx: 1, val: 101
+idx: 2 count: 1
+idx: 2, val: 102
+---------------------- MULTISET:
+ size 7
+
+idx: 0 count: 2
+idx: 0 count: 2
+idx: 1 count: 3
+idx: 1 count: 3
+idx: 1 count: 3
+idx: 2 count: 2
+idx: 2 count: 2

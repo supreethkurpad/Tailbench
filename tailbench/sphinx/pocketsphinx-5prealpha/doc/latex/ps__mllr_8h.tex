@@ -1,0 +1,33 @@
+\section{include/ps\+\_\+mllr.h File Reference}
+\label{ps__mllr_8h}\index{include/ps\+\_\+mllr.\+h@{include/ps\+\_\+mllr.\+h}}
+
+
+Model-\/space linear transforms for speaker adaptation.  
+
+
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/ngram\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$pocketsphinx\+\_\+export.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__mllr_8h_ad4b6bf4c3cb6a671f79f1d709857d5b1}} 
+typedef struct \textbf{ ps\+\_\+mllr\+\_\+s} \textbf{ ps\+\_\+mllr\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Feature space linear transform object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__mllr_8h_a05d268b1d79a1be2ae96093c96aad79d}} 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+mllr\+\_\+t} $\ast$ \textbf{ ps\+\_\+mllr\+\_\+read} (char const $\ast$file)
+\begin{DoxyCompactList}\small\item\em Read a speaker-\/adaptive linear transform from a file. \end{DoxyCompactList}\item 
+\mbox{\label{ps__mllr_8h_a2f40deff6976bf03a845aa474494edfb}} 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+mllr\+\_\+t} $\ast$ \textbf{ ps\+\_\+mllr\+\_\+retain} (\textbf{ ps\+\_\+mllr\+\_\+t} $\ast$mllr)
+\begin{DoxyCompactList}\small\item\em Retain a pointer to a linear transform. \end{DoxyCompactList}\item 
+\mbox{\label{ps__mllr_8h_ae56a8c52dd7513b1883536f2a729e1d0}} 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+mllr\+\_\+free} (\textbf{ ps\+\_\+mllr\+\_\+t} $\ast$mllr)
+\begin{DoxyCompactList}\small\item\em Release a pointer to a linear transform. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Model-\/space linear transforms for speaker adaptation. 
+

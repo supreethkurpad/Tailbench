@@ -1,0 +1,87 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: sort.3a,v 1.6 1999/06/07 19:05:45 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test sort_stream_i on integers and floats
+#	this is called by sort.1
+#    to test multiple integer and unsigned key types.
+#    This assumed that $ktype, and $nrec  are set by calling script
+#
+
+# create and load a stream in reverse order for sort
+# and make sure there are duplicates
+
+
+# create and load a stream in ascending order for sort in reverse order
+# this time make it descending
+
+proc do_sort_stream { volid ktype disnct updown } {
+    global nrec
+    sm begin_xct
+	sm begin_sort_stream $volid 2 $ktype 10 $disnct $updown
+
+	for {set i 0} {$i < $nrec} {incr i} {
+	    for {set j 0} {$j < $i } {incr j} {
+		if {$updown == "up" } {
+		    set data [expr { $nrec - $i }]
+		} else {
+		    set data $i
+		}
+		set hdr $data
+		if { $ktype == "b*1000" } {
+		    for {set c 0} {$c < $i} {incr c} {
+			set hdr "$hdr$data"
+		    }
+		}
+		set data "$data.$j"
+		sm sort_stream_put $ktype $hdr $data
+	    }
+	}
+
+	#display
+	verbose SORTED: $disnct $updown ...
+	for {set i 0} {$i < $nrec} {incr i} {
+	    for {set j 0} {$j < $i } {incr j} {
+		set r [sm sort_stream_get next $ktype]
+		if {$r == "eof"} then { break }
+		set key [string trimleft [lindex $r 0] 0]
+		set el [lindex $r 1]
+		verbose ($key,$el)
+	    }
+	}
+	sm sort_stream_end
+    sm commit_xct
+}
+
+do_sort_stream  $volid $ktype distinct up
+do_sort_stream  $volid $ktype distinct down
+
+do_sort_stream  $volid $ktype normal up
+do_sort_stream  $volid $ktype normal down
+

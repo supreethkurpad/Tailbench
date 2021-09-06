@@ -1,0 +1,247 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: alloc.11,v 1.1 2010/05/26 01:21:11 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test allocation & deallocation of pages
+#
+#  Like alloc.2 but instead of scanning to destroy recs,
+#  it remembers the rids and destroys the recs w/o a scan.
+#  The point of this is to create files with & w/o holes,
+#  and to see what the vol_t::caches do, w/ and w/o priming.
+#  To turn on/off the priming, we have to reompile sm_io.cpp, with
+#  a chosen value of do_prime_caches.
+#
+#  We look at statistics and times:
+#
+#  vol_last_page_cache_find_hit :  last page found in cache when 
+#                                   needed
+#  vol_histo_ext_cache_find_hit : 
+#  vol_alloc_exts : new extents allocated
+#  vol_resv_cache_hit : pages allocated from reserved extents
+#  vol_resv_cache_fail : attempts to allocat from reserved extents that failed
+#                 because the extent didn't have any free pages in it after all
+#
+
+sm gather_stats reset
+# initialized some linked variables
+set ndestroyed 0
+set ncreated 0
+link_to_inter_thread_comm_buffer ndestroyed
+link_to_inter_thread_comm_buffer ncreated
+
+source $script_dir/vol.init
+
+# format for body size -- >= one page
+# so that each rec takes a page
+set formsize [expr { $lg_rec_page_space - 100} ]
+set nrecs 200
+
+proc CREATE_MORE { nrecs } {
+    global volid  f0 r0 formsize logging ncreated
+	link_to_inter_thread_comm_buffer ncreated
+    sm begin_xct
+
+    # verbose CREATE_MORE creating $nrecs more recs ...
+    for { set i 1} { $i <= $nrecs} { incr i} {
+		# verbose creating rec ...
+		catch {sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i]} j 
+		if [error_is $j E_DEADLOCK] {
+		    verbose Caught(a) : $j
+			verbose CREATE_MORE aborting...
+			sm abort_xct
+		    return
+		}
+		# verbose CREATE_MORE created rec $j
+	}
+	set ncreated [expr {$ncreated + $nrecs}]
+    sm commit_xct
+}
+
+proc scanit { f } {
+    global rid
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+		set rid($i) [sm pin_rid $pin]
+		# verbose scan: rid($i) $rid($i)
+		set pin [sm scan_file_next $scan 0]
+		set i [expr {$i+1} ]
+    }
+	# verbose done with scan
+    catch { sm scan_file_destroy $scan } error
+    verbose scan found $i records
+}
+
+proc DESTROY_SOME { msg nrecs I J } {
+    global volid  f0 rid logging ndestroyed
+	link_to_inter_thread_comm_buffer ndestroyed
+    sm begin_xct
+    verbose DESTROY_SOME $msg destroying $J records out of every $I 
+	set k 1
+    for { set i 1} { $i <= $nrecs} { set i [expr {$i + $I}] } {
+		# verbose DESTROY_SOME i $i about to destroy $J records
+		# destroy J records
+		for { set j 0} {$j < $J} { incr j } {
+		    set which [expr {$i+$j}]
+			# verbose ---------> i $i j $j which $which
+			if {$which > $nrecs} {
+			   break
+		    }
+			# verbose ----------> sm destroy_rec $rid($which) ...
+			catch { sm destroy_rec $rid($which) } error
+			# when we run the concurrent-thread version,
+			# we'll get some errors. That's ok.
+			# verbose error = $error
+			# verbose ----------> destroyed $rid($which)
+			incr k
+		}
+		set i [expr {$i+$J} ]
+    }
+	set ndestroyed $k
+	sm commit_xct
+    verbose DESTROY_SOME $msg destroyed $k recs 
+}
+
+##  Create a file, consume a lot of pages.
+sm begin_xct
+set f0 [sm create_file $volid]
+verbose created file $f0
+set ttl [expr {$nrecs*2}]
+for { set i 1} { $i <= $ttl} { incr i} {
+    set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i] ]
+    set rid($i) $j
+    # verbose created rec $rid($i)
+}
+set ncreated $ttl
+unset i
+verbose created $ttl recs in file $f0
+unset ttl
+# scan file to create the rids array
+scanit $f0
+sm commit_xct
+
+# DESTROY_SOME: destroy every other rec 
+DESTROY_SOME ABC $nrecs 2 1 
+
+verbose xct: [sm dump_xcts]
+
+# Now, dismount & remount the volumes so that we are starting up cleanly:
+sm dismount_all
+source $script_dir/vol.init
+
+
+set t [time { CREATE_MORE $ndestroyed }]
+echo create time: $t
+# re-scan
+sm begin_xct
+scanit $f0
+sm commit_xct
+
+if { 0 } {
+	# destroy 5 recs out of every 10 in 
+	DESTROY_SOME DEF $nrecs 10 5 
+	set t [time { CREATE_MORE $ndestroyed }]
+	echo create time: $t
+}
+
+if { 1 } {
+# Next, try this w/o doing it in sync
+	set t [time {CREATE_MORE $nrecs} ]
+	echo create time: $t
+	set y1 [fork_thread DESTROY_SOME { GHI $nrecs 10 5 }]
+	set y2 [fork_thread DESTROY_SOME { JKL $nrecs 10 5 }]
+	set y3 [fork_thread CREATE_MORE { $nrecs }]
+	set y4 [fork_thread CREATE_MORE { $nrecs }]
+	join_thread $y1 $y2 $y3 $y4
+	unset y1 y2 y3 y4
+}
+
+set stats [sm gather_stats reset]
+verbose $ncreated new records created
+
+set x [select_stat $stats vol_cache_primes ]
+verbose $x 
+set x [select_stat $stats vol_cache_clears ]
+verbose $x  dismounts
+
+set x [select_stat $stats io_m_linear_searches]
+verbose $x 
+
+set x [select_stat $stats io_m_linear_search_extents]
+verbose $x  
+
+set x [select_stat $stats vol_alloc_exts ]
+verbose $x  
+
+set x [select_stat $stats vol_resv_cache_hit ]
+verbose $x  pages allocated from reserved extents
+
+set x [select_stat $stats vol_resv_cache_fail ]
+verbose $x  bogus reserved extent cache entries
+
+set x [select_stat $stats vol_last_page_cache_find_hit ]
+verbose $x  last page cache hits
+
+set x [select_stat $stats vol_last_extent_search]
+verbose $x  
+
+set x [select_stat $stats fm_alloc_pg ]
+verbose $x  
+
+set x [select_stat $stats fm_search_pages]
+verbose $x  
+
+set x [select_stat $stats fm_pagechache_hit]
+verbose $x  
+
+
+set stats [get_dstats $volid noaudit]
+set x [select_stat $stats file.fipg.small_rec_cnt]
+verbose $x 
+set x [select_stat $stats file.file_pg_cnt]
+verbose $x 
+set x [select_stat $stats file.unalloc_file_pg_cnt]
+verbose $x 
+
+#echo $stats
+
+unset stats x t
+
+# done.
+sm begin_xct
+sm destroy_file $f0
+sm commit_xct
+
+unset f0 rid formsize
+unset j nrecs
+# can't unset: is linked
+# unset ncreated ndestroyed 
+addcleanupvars {ncreated ndestroyed}
+

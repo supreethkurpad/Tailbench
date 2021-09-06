@@ -1,0 +1,136 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: sort.4a,v 1.9.4.1 2009/12/03 04:03:49 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test sort on integers and floats -- this is called by sort.4
+#    This assumes that $nrec, $ktype, $where, $dups  
+#       are set by calling script
+#	$nrec  is the number records to create
+#
+#	$ktype is the key type
+#	$where is "body" or "hdr" -- tells where the key is located 
+#	$dups is "distinct" or "normal" -- distinct means delete dup
+#		records (old sort) keys (new sort)
+#
+
+#create and load a file with integers in reverse order
+sm begin_xct
+set n [sm gather_xct_stats reset]
+
+set universe "2.0.0.1000.1000"
+if { $where == "body" } {
+    set hdrtype b*1000
+    set bodytype $ktype
+} else {
+    set hdrtype $ktype
+    set bodytype b*1000
+}
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+for {set i 0} {$i < $nrec} {incr i} {
+    if {$ktype=="spatial"} {
+       set x [expr {$nrec - $i} ]
+       set y [expr {$x * $i} ]
+       while { $y > $nrec } {
+	   set y [expr {$y - $nrec} ]
+       }
+       set hdr 2.$i.$y.$x.$i
+       verbose $hdr
+    } else {
+       set hdr [expr { $nrec - $i } ]
+    }
+    if { $where == "body" } {
+       sm create_typed_hdr_body_rec $f1 $pattern $hdrtype 100 $hdr $bodytype $universe
+    } else {
+       # body is just a big pattern
+       sm create_typed_hdr_rec $f1 $hdr 4 $pattern $hdrtype $universe
+    }
+}
+# print stats just for creating the input file
+set save_verbose_flag $verbose_flag
+# set verbose_flag 1
+# verbose cost of creating initial file:
+# pxstats reset
+# set verbose_flag $save_verbose_flag
+
+verbose input file = f1 = $f1
+verbose scans on f1 ...
+if {$ktype=="spatial"} {
+    verbose2 [sm scan_sorted_recs $f1 $hdrtype $bodytype $universe]
+} else {
+    verbose2 [sm scan_sorted_recs $f1 $hdrtype $bodytype]
+}
+
+sm commit_xct
+
+
+
+proc do_sort_and_display { f1 volid ktype hdrtype bodytype dups destruct where universe } {
+	global verbose_flag runsize
+	#sort and display 
+    sm begin_xct
+	verbose sort ...
+
+	set n [sm gather_xct_stats reset]
+
+	set f3 [sm sort_file $f1 $volid $runsize $ktype $where $dups $destruct regular $universe]
+
+	# set save_verbose_flag $verbose_flag
+	# set verbose_flag 1
+	verbose ktype, distinct, destruct = $ktype, $dups, $destruct
+	# pxstats reset
+	# set verbose_flag $save_verbose_flag
+
+	verbose output file = f3 = $f3
+	verbose scans on f3 ...
+	if {$ktype=="spatial"} {
+	    verbose2 [sm scan_sorted_recs $f3 $hdrtype $bodytype $universe]
+	} else {
+	    verbose2 [sm scan_sorted_recs $f3 $hdrtype $bodytype]
+	}
+
+	if { $destruct == "destruct" } {
+	    # used destruct for sort of this, so f1 doesn't exist anymore
+	    catch {sm destroy_file $f1} err
+	    assert { expr {[error_is $err E_BADSTID] == 1} }
+	}
+	sm destroy_file $f3
+    sm commit_xct
+}
+
+if {0} {
+    verbose first non-destructive
+    do_sort_and_display $f1 $volid $ktype $hdrtype $bodytype $dups keep $where $universe 
+}
+
+verbose second destructive
+do_sort_and_display $f1 $volid $ktype $hdrtype $bodytype $dups destruct $where $universe
+
+unset i f1 hdr save_verbose_flag n universe
+

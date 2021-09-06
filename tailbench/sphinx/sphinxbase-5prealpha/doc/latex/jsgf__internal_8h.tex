@@ -1,0 +1,88 @@
+\section{src/libsphinxbase/lm/jsgf\+\_\+internal.h File Reference}
+\label{jsgf__internal_8h}\index{src/libsphinxbase/lm/jsgf\+\_\+internal.\+h@{src/libsphinxbase/lm/jsgf\+\_\+internal.\+h}}
+
+
+Internal definitions for J\+S\+GF grammar compiler.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/hash\+\_\+table.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/glist.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/fsg\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/logmath.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/strfuncs.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/jsgf.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ jsgf\+\_\+s}
+\item 
+struct \textbf{ jsgf\+\_\+rule\+\_\+stack\+\_\+s}
+\item 
+struct \textbf{ jsgf\+\_\+rule\+\_\+s}
+\item 
+struct \textbf{ jsgf\+\_\+rhs\+\_\+s}
+\item 
+struct \textbf{ jsgf\+\_\+atom\+\_\+s}
+\item 
+struct \textbf{ jsgf\+\_\+link\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{jsgf__internal_8h_a85523a0c7d95c059d251b4e9829947aa}} 
+\#define {\bfseries Y\+Y\+\_\+\+N\+O\+\_\+\+I\+N\+P\+UT}~/$\ast$ Silence a compiler warning. $\ast$/
+\item 
+\mbox{\label{jsgf__internal_8h_ac4452bbb59863e64d73f4fe2d6cd394f}} 
+\#define {\bfseries jsgf\+\_\+atom\+\_\+is\+\_\+rule}(atom)~((atom)-\/$>$name[0] == \textquotesingle{}$<$\textquotesingle{})
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{jsgf__internal_8h_ad8fc00ae94c7a558005de3e89c35142f}} 
+typedef struct \textbf{ jsgf\+\_\+rhs\+\_\+s} {\bfseries jsgf\+\_\+rhs\+\_\+t}
+\item 
+\mbox{\label{jsgf__internal_8h_a439a04913bdb6a58d86ad152b952f0ee}} 
+typedef struct \textbf{ jsgf\+\_\+atom\+\_\+s} {\bfseries jsgf\+\_\+atom\+\_\+t}
+\item 
+\mbox{\label{jsgf__internal_8h_a5b84ef71c936d856751f19992a7245eb}} 
+typedef struct \textbf{ jsgf\+\_\+link\+\_\+s} {\bfseries jsgf\+\_\+link\+\_\+t}
+\item 
+\mbox{\label{jsgf__internal_8h_a7a1929b39761f5f252c3fb5965e9461b}} 
+typedef struct \textbf{ jsgf\+\_\+rule\+\_\+stack\+\_\+s} {\bfseries jsgf\+\_\+rule\+\_\+stack\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{jsgf__internal_8h_acb5af4a04abc56a8584eba9b937f8154}} 
+void {\bfseries jsgf\+\_\+add\+\_\+link} (\textbf{ jsgf\+\_\+t} $\ast$grammar, \textbf{ jsgf\+\_\+atom\+\_\+t} $\ast$atom, int from, int to)
+\item 
+\mbox{\label{jsgf__internal_8h_a0e59b63784fa8761358bb2bdf568bec1}} 
+\textbf{ jsgf\+\_\+atom\+\_\+t} $\ast$ {\bfseries jsgf\+\_\+atom\+\_\+new} (char $\ast$name, float weight)
+\item 
+\mbox{\label{jsgf__internal_8h_ab9dc2ab39224cda76c43822150cf7e67}} 
+\textbf{ jsgf\+\_\+atom\+\_\+t} $\ast$ {\bfseries jsgf\+\_\+kleene\+\_\+new} (\textbf{ jsgf\+\_\+t} $\ast$jsgf, \textbf{ jsgf\+\_\+atom\+\_\+t} $\ast$atom, int plus)
+\item 
+\mbox{\label{jsgf__internal_8h_a4a07cb0721add8783f0ea24dfacd6c0f}} 
+\textbf{ jsgf\+\_\+rule\+\_\+t} $\ast$ {\bfseries jsgf\+\_\+optional\+\_\+new} (\textbf{ jsgf\+\_\+t} $\ast$jsgf, \textbf{ jsgf\+\_\+rhs\+\_\+t} $\ast$exp)
+\item 
+\mbox{\label{jsgf__internal_8h_ae7e6644fc37252110c3c0ea0edd229f7}} 
+\textbf{ jsgf\+\_\+rule\+\_\+t} $\ast$ {\bfseries jsgf\+\_\+define\+\_\+rule} (\textbf{ jsgf\+\_\+t} $\ast$jsgf, char $\ast$name, \textbf{ jsgf\+\_\+rhs\+\_\+t} $\ast$rhs, int is\+\_\+public)
+\item 
+\mbox{\label{jsgf__internal_8h_afe1e47584e4dd80929552ffed77373f2}} 
+\textbf{ jsgf\+\_\+rule\+\_\+t} $\ast$ {\bfseries jsgf\+\_\+import\+\_\+rule} (\textbf{ jsgf\+\_\+t} $\ast$jsgf, char $\ast$name)
+\item 
+\mbox{\label{jsgf__internal_8h_a289d683bf62d1a5aaac6917fa64f54f2}} 
+int {\bfseries jsgf\+\_\+atom\+\_\+free} (\textbf{ jsgf\+\_\+atom\+\_\+t} $\ast$atom)
+\item 
+\mbox{\label{jsgf__internal_8h_af2faf6fb74ad1e4d43cf990c1bcec672}} 
+int {\bfseries jsgf\+\_\+rule\+\_\+free} (\textbf{ jsgf\+\_\+rule\+\_\+t} $\ast$rule)
+\item 
+\mbox{\label{jsgf__internal_8h_ad152a23eb0f0d9af8417919fc93074fd}} 
+\textbf{ jsgf\+\_\+rule\+\_\+t} $\ast$ {\bfseries jsgf\+\_\+rule\+\_\+retain} (\textbf{ jsgf\+\_\+rule\+\_\+t} $\ast$rule)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Internal definitions for J\+S\+GF grammar compiler. 
+

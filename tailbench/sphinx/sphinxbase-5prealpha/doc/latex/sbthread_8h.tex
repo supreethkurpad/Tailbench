@@ -1,0 +1,145 @@
+\section{include/sphinxbase/sbthread.h File Reference}
+\label{sbthread_8h}\index{include/sphinxbase/sbthread.\+h@{include/sphinxbase/sbthread.\+h}}
+
+
+Simple portable thread functions.  
+
+
+{\ttfamily \#include $<$sphinx\+\_\+config.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/cmd\+\_\+ln.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{sbthread_8h_a068f6028c760eee1e4eb4655ac7e7424}} 
+typedef struct \textbf{ sbthread\+\_\+s} \textbf{ sbthread\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Thread object. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_aad7adcc2e5f2fd6d2f429c25a52356ef}} 
+typedef struct \textbf{ sbmsgq\+\_\+s} \textbf{ sbmsgq\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Asynchronous message queue object. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a21bc1100c4336693a6f25cdeec40cbec}} 
+typedef struct \textbf{ sbmtx\+\_\+s} \textbf{ sbmtx\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Mutex (critical section) object. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a312dae368aa1662b07f199ea802cdefa}} 
+typedef struct \textbf{ sbevent\+\_\+s} \textbf{ sbevent\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Event object. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a1064427e3f6e981f8321a885c022cc03}} 
+typedef int($\ast$ \textbf{ sbthread\+\_\+main}) (\textbf{ sbthread\+\_\+t} $\ast$th)
+\begin{DoxyCompactList}\small\item\em Entry point for a thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{sbthread_8h_abfe1f703f4e17a2940c88d86d1987a8f}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ sbthread\+\_\+t} $\ast$ \textbf{ sbthread\+\_\+start} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$config, \textbf{ sbthread\+\_\+main} func, void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em Start a new thread. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a09c5c428b02b743c99d20bb2b11d964b}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbthread\+\_\+wait} (\textbf{ sbthread\+\_\+t} $\ast$th)
+\begin{DoxyCompactList}\small\item\em Wait for a thread to complete. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_aa7827b760dfa47d95141f4896698e5c5}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ sbthread\+\_\+free} (\textbf{ sbthread\+\_\+t} $\ast$th)
+\begin{DoxyCompactList}\small\item\em Free a thread object. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_ab03c2f299f3e94b9f53aac1c1eaa0695}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ sbthread\+\_\+config} (\textbf{ sbthread\+\_\+t} $\ast$th)
+\begin{DoxyCompactList}\small\item\em Get configuration object from a thread. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a130f2273128498e0f1d875cf6c0c2928}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void $\ast$ \textbf{ sbthread\+\_\+arg} (\textbf{ sbthread\+\_\+t} $\ast$th)
+\begin{DoxyCompactList}\small\item\em Get argument pointer from a thread. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a5dfe1b7bb9c8d9aea7339e99a89307af}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ sbmsgq\+\_\+t} $\ast$ \textbf{ sbthread\+\_\+msgq} (\textbf{ sbthread\+\_\+t} $\ast$th)
+\begin{DoxyCompactList}\small\item\em Get message queue from a thread. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbthread\+\_\+send} (\textbf{ sbthread\+\_\+t} $\ast$th, size\+\_\+t len, void const $\ast$data)
+\begin{DoxyCompactList}\small\item\em Send an asynchronous message to a thread. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ sbmsgq\+\_\+t} $\ast$ \textbf{ sbmsgq\+\_\+init} (size\+\_\+t depth)
+\begin{DoxyCompactList}\small\item\em Create a message queue. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_ab1ab59934422a5fac90ce0c4b66ffcc8}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ sbmsgq\+\_\+free} (\textbf{ sbmsgq\+\_\+t} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Free a message queue. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_ab0591b5cb626be52dd22edf8fa13a3e3}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbmsgq\+\_\+send} (\textbf{ sbmsgq\+\_\+t} $\ast$q, size\+\_\+t len, void const $\ast$data)
+\begin{DoxyCompactList}\small\item\em Post a message to a queue. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_ab3a421d172a92ef5ad371442a66767b5}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void $\ast$ \textbf{ sbmsgq\+\_\+wait} (\textbf{ sbmsgq\+\_\+t} $\ast$q, size\+\_\+t $\ast$out\+\_\+len, int sec, int nsec)
+\begin{DoxyCompactList}\small\item\em Wait for a message from a queue. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a28067c5be5370074d21668620a68b229}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ sbmtx\+\_\+t} $\ast$ \textbf{ sbmtx\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Create a mutex. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a3b86c81160360234944737b4eab73125}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbmtx\+\_\+trylock} (\textbf{ sbmtx\+\_\+t} $\ast$mtx)
+\begin{DoxyCompactList}\small\item\em Try to acquire a mutex. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a6615e839f7c8ef3ebb6b288525f002cd}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbmtx\+\_\+lock} (\textbf{ sbmtx\+\_\+t} $\ast$mtx)
+\begin{DoxyCompactList}\small\item\em Acquire a mutex. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_af65691258c916c68f1b5d000aaea233f}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbmtx\+\_\+unlock} (\textbf{ sbmtx\+\_\+t} $\ast$mtx)
+\begin{DoxyCompactList}\small\item\em Release a mutex. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_aa17a6a93744eb813ca80bf098c69bdba}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ sbmtx\+\_\+free} (\textbf{ sbmtx\+\_\+t} $\ast$mtx)
+\begin{DoxyCompactList}\small\item\em Dispose of a mutex. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a1b3fa1cf6b82dcd82ab8d4124ab12490}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ sbevent\+\_\+t} $\ast$ \textbf{ sbevent\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize an event. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_afe8253a0e804a019ad0d8c540eec75af}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ sbevent\+\_\+free} (\textbf{ sbevent\+\_\+t} $\ast$evt)
+\begin{DoxyCompactList}\small\item\em Free an event. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_a7c01e3e70c2ab8e961d59db84aa5fa68}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbevent\+\_\+signal} (\textbf{ sbevent\+\_\+t} $\ast$evt)
+\begin{DoxyCompactList}\small\item\em Signal an event. \end{DoxyCompactList}\item 
+\mbox{\label{sbthread_8h_ac211760e4dffccf0102db65fb6f2c5b3}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ sbevent\+\_\+wait} (\textbf{ sbevent\+\_\+t} $\ast$evt, int sec, int nsec)
+\begin{DoxyCompactList}\small\item\em Wait for an event to be signalled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Simple portable thread functions. 
+
+\begin{DoxyAuthor}{Author}
+David Huggins-\/\+Daines {\tt dhuggins@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\label{sbthread_8h_a535a4d0d3f71c30f32d75b6268cc5e1e}} 
+\index{sbthread.\+h@{sbthread.\+h}!sbmsgq\+\_\+init@{sbmsgq\+\_\+init}}
+\index{sbmsgq\+\_\+init@{sbmsgq\+\_\+init}!sbthread.\+h@{sbthread.\+h}}
+\subsubsection{sbmsgq\+\_\+init()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ sbmsgq\+\_\+t}$\ast$ sbmsgq\+\_\+init (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{depth }\end{DoxyParamCaption})}
+
+
+
+Create a message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em depth} & Depth of the queue. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 444 of file sbthread.\+c.
+
+
+
+References ckd\+\_\+calloc.
+
+
+
+Referenced by sbthread\+\_\+start().
+
+\mbox{\label{sbthread_8h_a932830409403ab4a03f0ffefe907551e}} 
+\index{sbthread.\+h@{sbthread.\+h}!sbthread\+\_\+send@{sbthread\+\_\+send}}
+\index{sbthread\+\_\+send@{sbthread\+\_\+send}!sbthread.\+h@{sbthread.\+h}}
+\subsubsection{sbthread\+\_\+send()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int sbthread\+\_\+send (\begin{DoxyParamCaption}\item[{\textbf{ sbthread\+\_\+t} $\ast$}]{th,  }\item[{size\+\_\+t}]{len,  }\item[{void const $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Send an asynchronous message to a thread. 
+
+Each thread gets a message queue by default, so this is just a wrapper around \doxyref{sbmsgq\+\_\+send()}{p.}{sbthread_8h_ab0591b5cb626be52dd22edf8fa13a3e3}. 
+
+Definition at line 728 of file sbthread.\+c.
+
+
+
+References sbmsgq\+\_\+send().
+

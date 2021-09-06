@@ -1,0 +1,85 @@
+\section{chan\+\_\+s Struct Reference}
+\label{structchan__s}\index{chan\+\_\+s@{chan\+\_\+s}}
+
+
+Lexical tree node data type.  
+
+
+
+
+{\ttfamily \#include $<$ngram\+\_\+search.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ hmm\+\_\+t} \textbf{ hmm}
+\begin{DoxyCompactList}\small\item\em Basic H\+MM structure. \end{DoxyCompactList}\item 
+\mbox{\label{structchan__s_a260b68eff64150d0ae9ce4db7feb1300}} 
+struct \textbf{ chan\+\_\+s} $\ast$ \textbf{ next}
+\begin{DoxyCompactList}\small\item\em first descendant of this channel; or, in the case of the last phone of a word, the next alternative right context channel \end{DoxyCompactList}\item 
+\mbox{\label{structchan__s_a52e85d037ca3a8b21ff1eed1d469ca15}} 
+struct \textbf{ chan\+\_\+s} $\ast$ \textbf{ alt}
+\begin{DoxyCompactList}\small\item\em sibling; i.\+e., next descendant of parent H\+MM \end{DoxyCompactList}\item 
+\mbox{\label{structchan__s_a33da51d8524073abc792519d0738ca0b}} 
+int32 \textbf{ ciphone}
+\begin{DoxyCompactList}\small\item\em ciphone for this node \end{DoxyCompactList}\item 
+\mbox{\label{structchan__s_a8c60fed876760c48952eb19e8dae41a8}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>int32 \textbf{ penult\_phn\_wid}\\
+\>\>{\em list of words whose last phone follows this one; this field indicates the first of the list; the rest must be built up in a separate array. }\\
+\>int32 \textbf{ rc\_id}\\
+\>\>{\em right-\/context id for last phone of words }\\
+\} {\bfseries info}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Lexical tree node data type. 
+
+Not the first H\+MM for words, which multiplex H\+M\+Ms based on different left contexts. This structure is used both in the dynamic H\+MM tree structure and in the per-\/word last-\/phone right context fanout. 
+
+Definition at line 64 of file ngram\+\_\+search.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structchan__s_a742d6a125ac468b95a1ddd880a956e35}} 
+\index{chan\+\_\+s@{chan\+\_\+s}!hmm@{hmm}}
+\index{hmm@{hmm}!chan\+\_\+s@{chan\+\_\+s}}
+\subsubsection{hmm}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+t} chan\+\_\+s\+::hmm}
+
+
+
+Basic H\+MM structure. 
+
+This {\itshape must} be first in the structure because chan\+\_\+t and root\+\_\+chan\+\_\+t are sometimes used interchangeably 
+
+Definition at line 65 of file ngram\+\_\+search.\+h.
+
+
+
+Referenced by ngram\+\_\+search\+\_\+free\+\_\+all\+\_\+rc().
+
+\mbox{\label{structchan__s_a136796f6a13c0d6989120f9aa25b85f1}} 
+\index{chan\+\_\+s@{chan\+\_\+s}!penult\+\_\+phn\+\_\+wid@{penult\+\_\+phn\+\_\+wid}}
+\index{penult\+\_\+phn\+\_\+wid@{penult\+\_\+phn\+\_\+wid}!chan\+\_\+s@{chan\+\_\+s}}
+\subsubsection{penult\+\_\+phn\+\_\+wid}
+{\footnotesize\ttfamily int32 chan\+\_\+s\+::penult\+\_\+phn\+\_\+wid}
+
+
+
+list of words whose last phone follows this one; this field indicates the first of the list; the rest must be built up in a separate array. 
+
+Used only within H\+MM tree. -\/1 if none 
+
+Definition at line 75 of file ngram\+\_\+search.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ ngram\+\_\+search.\+h}\end{DoxyCompactItemize}

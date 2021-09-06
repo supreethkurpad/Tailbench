@@ -1,0 +1,88 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.undo.2,v 1.9 1999/06/07 19:05:30 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test Create, Destroy, Read of Records
+#
+
+source $script_dir/vol.init
+if {$logging == 0} {
+    echo "Logging off: script not run."
+} else {
+
+if {$volid == 0} {
+    set volid 10
+    sm create_vol $volid 222 1000
+
+    set volid [sm init_vol_logical_id $volid 100]
+    sm mount
+}
+
+set num_rec 24
+set id_hdr_width %06d
+set id_body_width %08d
+
+sm begin_xct
+    set fid [sm create_file $volid regular]
+    verbose commit create of file
+sm commit_xct
+
+sm begin_xct
+
+set rid(0) $null_rid
+verbose creating $num_rec records
+for {set i 1} {$i <= $num_rec} {incr i} {
+    verbose creating $i
+    set rid($i) [
+	sm create_rec $fid [format $id_hdr_width $i] 10 [format $id_body_width $i]
+    ]
+}
+
+verbose aborting create of $num_rec records
+sm abort_xct
+
+sm begin_xct
+
+set rid(0) $null_rid
+verbose creating $num_rec records
+for {set i 1} {$i <= $num_rec} {incr i} {
+    verbose creating $i
+    set rid($i) [
+	sm create_rec $fid [format $id_hdr_width $i] 10 data.[format $id_body_width $i]
+    ]
+}
+
+verbose committed create
+
+sm destroy_file $fid
+sm commit_xct
+
+unset rid i fid num_rec
+}
+

@@ -1,0 +1,128 @@
+\section{include/sphinxbase/heap.h File Reference}
+\label{heap_8h}\index{include/sphinxbase/heap.\+h@{include/sphinxbase/heap.\+h}}
+
+
+Heap Implementation.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{heap_8h_a0ffa4ec8648c254bf19eee352b69dc7a}} 
+typedef struct \textbf{ heap\+\_\+s} {\bfseries heap\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{heap_8h_a9bc21333ce58caaf58e802d8b0190efd}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ heap\+\_\+t} $\ast$ \textbf{ heap\+\_\+new} (void)
+\begin{DoxyCompactList}\small\item\em Allocate a new heap and return handle to it. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ heap\+\_\+insert} (\textbf{ heap\+\_\+t} $\ast$heap, void $\ast$data, int32 val)
+\begin{DoxyCompactList}\small\item\em Insert a new item into the given heap. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ heap\+\_\+top} (\textbf{ heap\+\_\+t} $\ast$heap, void $\ast$$\ast$data, int32 $\ast$val)
+\begin{DoxyCompactList}\small\item\em Return the topmost item in the heap. \end{DoxyCompactList}\item 
+\mbox{\label{heap_8h_a387c8913b4c62ad1a5c4702a4e6dbdbf}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ heap\+\_\+pop} (\textbf{ heap\+\_\+t} $\ast$heap, void $\ast$$\ast$data, int32 $\ast$val)
+\begin{DoxyCompactList}\small\item\em Like heap\+\_\+top but also pop the top item off the heap. \end{DoxyCompactList}\item 
+\mbox{\label{heap_8h_aa2dbc059f9707e434098694e8c69157e}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ heap\+\_\+remove} (\textbf{ heap\+\_\+t} $\ast$heap, void $\ast$data)
+\begin{DoxyCompactList}\small\item\em Remove an item from the heap. \end{DoxyCompactList}\item 
+\mbox{\label{heap_8h_a1c713d67123e96974505edfa4346cb0f}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT size\+\_\+t \textbf{ heap\+\_\+size} (\textbf{ heap\+\_\+t} $\ast$heap)
+\begin{DoxyCompactList}\small\item\em Return the number of items in the heap. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ heap\+\_\+destroy} (\textbf{ heap\+\_\+t} $\ast$heap)
+\begin{DoxyCompactList}\small\item\em Destroy the given heap; free the heap nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Heap Implementation. 
+
+General Comment\+: Sorted heap structure with three main operations\+:
+
+
+\begin{DoxyEnumerate}
+\item Insert a data item (with two attributes\+: an application supplied pointer and an integer value; the heap is maintained in ascending order of the integer value).
+\item Return the currently topmost item (i.\+e., item with smallest associated value).
+\item Return the currently topmost item and pop it off the heap. 
+\end{DoxyEnumerate}
+
+\subsection{Function Documentation}
+\mbox{\label{heap_8h_ab12b1efd6392eb574d2da9c981e7320c}} 
+\index{heap.\+h@{heap.\+h}!heap\+\_\+destroy@{heap\+\_\+destroy}}
+\index{heap\+\_\+destroy@{heap\+\_\+destroy}!heap.\+h@{heap.\+h}}
+\subsubsection{heap\+\_\+destroy()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int heap\+\_\+destroy (\begin{DoxyParamCaption}\item[{\textbf{ heap\+\_\+t} $\ast$}]{heap }\end{DoxyParamCaption})}
+
+
+
+Destroy the given heap; free the heap nodes. 
+
+N\+O\+TE\+: Data pointers in the nodes are N\+OT freed. Return value\+: 0 if successful, -\/1 otherwise. 
+
+Definition at line 281 of file heap.\+c.
+
+
+
+References ckd\+\_\+free(), heapnode\+\_\+s\+::data, heap\+\_\+pop(), and heapnode\+\_\+s\+::val.
+
+
+
+Referenced by huff\+\_\+code\+\_\+build\+\_\+int(), and huff\+\_\+code\+\_\+build\+\_\+str().
+
+\mbox{\label{heap_8h_a64bcded2de5086c5d246ff760caa74a3}} 
+\index{heap.\+h@{heap.\+h}!heap\+\_\+insert@{heap\+\_\+insert}}
+\index{heap\+\_\+insert@{heap\+\_\+insert}!heap.\+h@{heap.\+h}}
+\subsubsection{heap\+\_\+insert()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int heap\+\_\+insert (\begin{DoxyParamCaption}\item[{\textbf{ heap\+\_\+t} $\ast$}]{heap,  }\item[{void $\ast$}]{data,  }\item[{int32}]{val }\end{DoxyParamCaption})}
+
+
+
+Insert a new item into the given heap. 
+
+Return value\+: 0 if successful, -\/1 otherwise. 
+\begin{DoxyParams}{Parameters}
+{\em heap} & In\+: Heap into which item is to be inserted \\
+\hline
+{\em data} & In\+: Application-\/determined data pointer \\
+\hline
+{\em val} & In\+: According to item entered in sorted heap \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 161 of file heap.\+c.
+
+
+
+References ckd\+\_\+free(), heapnode\+\_\+s\+::l, and heapnode\+\_\+s\+::r.
+
+
+
+Referenced by huff\+\_\+code\+\_\+build\+\_\+int(), and huff\+\_\+code\+\_\+build\+\_\+str().
+
+\mbox{\label{heap_8h_ae70da6b59215654c2cd5ec177eaf2aec}} 
+\index{heap.\+h@{heap.\+h}!heap\+\_\+top@{heap\+\_\+top}}
+\index{heap\+\_\+top@{heap\+\_\+top}!heap.\+h@{heap.\+h}}
+\subsubsection{heap\+\_\+top()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int heap\+\_\+top (\begin{DoxyParamCaption}\item[{\textbf{ heap\+\_\+t} $\ast$}]{heap,  }\item[{void $\ast$$\ast$}]{data,  }\item[{int32 $\ast$}]{val }\end{DoxyParamCaption})}
+
+
+
+Return the topmost item in the heap. 
+
+Return value\+: 1 if heap is not empty and the topmost value is returned; 0 if heap is empty; -\/1 if some error occurred. 
+\begin{DoxyParams}{Parameters}
+{\em heap} & In\+: Heap whose topmost item is to be returned \\
+\hline
+{\em data} & Out\+: Data pointer associated with the topmost item \\
+\hline
+{\em val} & Out\+: Value associated with the topmost item \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 221 of file heap.\+c.
+

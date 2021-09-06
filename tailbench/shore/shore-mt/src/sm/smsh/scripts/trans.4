@@ -1,0 +1,148 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: trans.4,v 1.9.2.1 2009/06/23 01:01:46 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# Test prepared xcts and temporary files after restart without
+# manually remounting the volumes.  The restart should keep the
+# required volume mounted and destroy non-locked tmp files.
+#
+# fid    created in xct 1, should remain after xct 2 aborts
+# tfid1  tmp created in xct 1, not used in xct 2, should be destroyed on restart
+# tfid2  tmp created in xct 1, updated in xct 2, should remain after xct 2 aborts
+# tfid3  tmp created in xct 1, read in xct 2, should be destroyed on restart
+# tfid4  tmp created in xct 2, should exist after restart, destroyed in abort
+#
+
+
+proc check_file_gone {fid} {
+    global Use_logical_id
+
+    verbose check_file_gone: trying to add record to file $fid
+	if [catch {sm destroy_file $fid} catcherr] {
+		verbose (EXPECTED) scan_rids error: $catcherr
+		assert {error_is $catcherr E_BADSTID}
+	}
+}
+
+proc test {clean} {
+    global volid
+
+	verbose begin xct 1
+	sm begin_xct
+	set fid [sm create_file $volid]
+	verbose created file fid=$fid
+	set tfid1 [sm create_file $volid tmp]
+	verbose created tmp file tfid1=$tfid1
+	set tfid2 [sm create_file $volid tmp]
+	verbose created tmp file tfid2=$tfid2
+	set tfid3 [sm create_file $volid tmp]
+	verbose created tmp file tfid3=$tfid3
+	set trid3 [sm create_rec $tfid3 header 4 body]
+	verbose created rec $trid3
+	sm commit_xct
+
+	verbose
+	verbose begin xct 2
+	sm begin_xct
+	set rid [sm create_rec $fid header 4 body]
+	verbose rid=$rid
+
+	set trid2 [sm create_rec $tfid2 header 4 body]
+	verbose trid2=$trid2
+
+	set value [sm read_rec $trid3 0 0]
+	verbose read rec $trid3
+	verbose $value
+
+	set tfid4 [sm create_file $volid tmp]
+	verbose created tmp file tfid4=$tfid4
+	set trid4 [sm create_rec $tfid4 header 4 body]
+	verbose trid4=$trid4
+
+	verbose
+	verbose "Enter 2 pc" "globalXctId"
+	sm enter2pc "globalXctId"
+	sm set_coordinator none
+
+	set vote [sm prepare_xct]
+	verbose vote=$vote
+
+	verbose
+	verbose restarting without manually remounting volumes...
+	sm restart $clean
+	verbose restarted
+
+	verbose recover2pc "globalXctId"
+	set t [sm recover2pc "globalXctId"]
+	assert {expr $t != 0}
+	assert {expr [string compare [sm xct] $t] != 0}
+	verbose xct ABORTING
+	sm abort_xct
+	verbose xct ABORTED
+
+	verbose
+	sm begin_xct
+	verbose file $tfid1 should be gone from restart
+	verbose file $tfid3 should be gone from restart
+	verbose file $tfid4 should be gone from abort
+	verbose file $tfid2 should still exist
+
+	verbose destroying file $fid
+	sm destroy_file $fid
+
+	verbose file $tfid1 should be gone
+	check_file_gone $tfid1
+
+	verbose destroying file $tfid2
+	sm destroy_file $tfid2
+
+	verbose file $tfid3 should be gone
+	check_file_gone $tfid3
+
+	verbose file $tfid4 should be gone
+	check_file_gone $tfid4
+	sm commit_xct
+}
+
+source $script_dir/vol.init
+
+if {$logging == 0} {
+    return "Logging off: script not run. "
+}
+
+source $script_dir/vol.init
+
+verbose
+verbose TESTING with unclean restart
+test false
+verbose
+verbose
+verbose TESTING with clean restart
+test true
+

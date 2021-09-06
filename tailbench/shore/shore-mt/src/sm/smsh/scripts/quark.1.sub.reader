@@ -1,0 +1,108 @@
+proc reader {rid1 rid2} {
+    global sync_result 
+    link_to_inter_thread_comm_buffer sync_result
+	set null "      "
+
+	# ---------------------------------------------------------------
+	# STEP 1
+	# ---------------------------------------------------------------
+	# ---------------------------------- sync 1
+    verbose $null $null reader: sync 1 "rrrrrrrrrrrrrr "
+    named_sync 3 "1-rrrrrrrrrrr"
+    verbose $null $null reader: got sync 1 
+
+    sm begin_xct
+    verbose $null $null reader: pinning $rid1
+    set pin [sm pin_create]
+    sm pin_pin $pin $rid1 0
+    sm pin_unpin $pin
+
+    set quark [sm open_quark]
+    verbose $null $null reader opened quark $quark
+    verbose $null $null reader: pinning $rid2 in quark $quark
+    sm pin_pin $pin $rid2 01
+    set sync_result "$rid1 and $rid2 are pinned"
+
+	# ---------------------------------- sync 1-result
+	## let forker print sync_result
+    verbose $null $null reader: waiting sync 1-result-ready
+    named_sync 3 "1-result-ready (reader)"
+    verbose $null $null reader: got sync 1-result-ready
+    verbose $null $null reader: waiting sync 1-result
+    named_sync 3 "1-result (reader)"
+    verbose $null $null reader: got sync 1-result
+
+	# ---------------------------------------------------------------
+	# STEP 2
+	# ---------------------------------------------------------------
+	# ---------------------------------- sync 2
+	## let writer block 
+    verbose $null $null reader: waiting sync 2
+    named_sync 2 "2 (reader)"
+    verbose $null $null reader: got sync 2
+
+    # pin again and see if blocks writer
+    set pin2 [sm pin_create]
+    verbose $null $null reader: pin $rid2
+    sm pin_pin $pin2 $rid2 0
+
+    verbose $null $null reader: unpin $rid1
+    sm pin_unpin $pin2 
+
+    # pin rid1 again to make sure it's not freed
+    verbose $null $null reader: pin $rid1 instead
+    sm pin_pin $pin2 $rid1 0
+
+    verbose $null $null reader: unpin $rid1
+    sm pin_unpin $pin2 
+    sm pin_destroy $pin2
+
+	# ---------------------------------- sync 3
+    verbose $null $null reader: waiting sync 3 "rrrrrrrrrrrrrrrr "
+    named_sync 2 "3-rrrrrrrrr"
+    verbose $null $null reader: got sync 3 "rrrrrrrrrrrrrrrr "
+
+	# let writer proceed and grab the lock, but wait on the latch
+    verbose $null $null reader closing quark $quark
+    sm close_quark $quark 
+
+    set sync_result "$rid2 lock released by quark"
+    verbose $null $null reader: set sync_result to $sync_result
+
+	# ---------------------------------- sync 4
+    verbose $null $null reader: sync 4
+    named_sync 2 "4 (reader)"
+	#forker checks sync_result
+
+	# ---------------------------------- sync 5
+    verbose $null $null reader: sync 3 5 (reader)
+    named_sync 2 "5 (reader)"
+
+    # make sure we can open and close again
+
+    set quark [sm open_quark]
+    verbose $null $null reader opened quark $quark
+    verbose $null $null reader closing quark $quark
+    sm close_quark $quark 
+
+	# destroying the pin unpins the page so writer can proceed.
+    sm pin_destroy $pin
+
+    set sync_result "$rid1 lock released by commit"
+    verbose $null $null reader: set sync_result to $sync_result
+
+	# ---------------------------------- sync 6
+    verbose $null $null reader: sync 3 5 (reader)
+    named_sync 3 "6 (reader)"
+
+	#forker checks sync_result
+
+
+	# ---------------------------------- sync 7
+	verbose $null $null reader: sync 7 
+    named_sync 3 "7 (reader)"
+    sm commit_xct
+    verbose $null $null reader: committed
+
+	verbose $null $null reader: done
+}

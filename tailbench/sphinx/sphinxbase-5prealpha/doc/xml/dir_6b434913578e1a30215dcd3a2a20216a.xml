@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_6b434913578e1a30215dcd3a2a20216a" kind="dir">
+    <compoundname>src/libsphinxad</compoundname>
+    <innerfile refid="ad__alsa_8c">ad_alsa.c</innerfile>
+    <innerfile refid="ad__base_8c">ad_base.c</innerfile>
+    <innerfile refid="ad__jack_8c">ad_jack.c</innerfile>
+    <innerfile refid="ad__openal_8c">ad_openal.c</innerfile>
+    <innerfile refid="ad__oss_8c">ad_oss.c</innerfile>
+    <innerfile refid="ad__pulse_8c">ad_pulse.c</innerfile>
+    <innerfile refid="ad__win32_8c">ad_win32.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxad/"/>
+  </compounddef>
+</doxygen>

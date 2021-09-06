@@ -1,0 +1,185 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: random.all,v 1.15 2010/06/08 22:28:29 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This scripts is meant to be run with the shell script "runsmsh"
+# or by itself.  Its purpose is to run the scripts in the following
+# list in (pseudo-)random order, INDEFINITELY.
+#
+#
+
+
+set myscripts [list \
+ vol.reinit\
+ vol.init\
+ alloc.1\
+ alloc.4\
+ alloc.3\
+ alloc.7\
+ alloc.6 \
+ alloc.11\
+ alloc.9\
+ alloc.10\
+ alloc.5 \
+ alloc.8\
+ alloc.2 \
+ bng.1\
+ bt.insert.1\
+ bt.insert.2\
+ bt.insert.3\
+ bt.insert.4\
+ btree.1\
+ btree.10\
+ btree.2\
+ btree.20\
+ btree.21\
+ btree.3\
+ btree.30 \
+ btree.31 \
+ btree.32 \
+ btree.33 \
+ btree.4\
+ btree.5\
+ btree.6\
+ btree.8\
+ btree.err.1\
+ btree.err.2\
+ btree.err.3\
+ btree.err.4\
+ btree.load\
+ btree_split.1\
+ bt.remove.1\
+ bt.remove.2\
+ bt.remove.3\
+ bt.remove.4\
+ cd.perf.0\
+ cd.perf.1\
+ cd.perf.2\
+ cd.perf.3\
+ cd.perf.4\
+ cd.perf.5\
+ cd.perf.6\
+ cd.perf.7\
+ cd.perf.8\
+ \
+ multi.1\
+ multi.2\
+ multi.3\
+ deadlock.1\
+ deadlock.2\
+ deadlock.4\
+ deadlock.5\
+ deadlock.6\
+ quark.1 \
+ file.activity2 \
+ file.activity \
+ c.perf\
+ createsmall.1\
+ file.1\
+ file.5\
+ file.6\
+ file.7\
+ file.8\
+ file.many\
+ file.undo.1\
+ file.undo.2\
+ free_page\
+ lgrec.1\
+ lgrec.2\
+ lgrec.4\
+ lock.1\
+ lock.hier\
+ lock.hier_sm\
+ lock.upgrade\
+ mpw\
+ pin.1\
+ pin.2\
+ pin.3\
+ pin.4\
+ pin.5\
+ record_create_abort.1\
+ recovery.1\
+ recovery.2\
+ recovery.4\
+ rtree.1\
+ rtree.2\
+ rtree.3\
+ rtree.4\
+ sort.1\
+ sort.2\
+ sort.3\
+ sort.4\
+ space_recovery\
+ thread_fork_example\
+ tmpfile.1\
+ tmpfile.2 \
+ tmpfile.3\
+ vol.1\
+ vol.3\
+ lock.perf\
+ loadrec.perf\
+ simplewrite.perf\
+ freepage.bug \
+ file.perf2 \
+ file.perf3 \
+ btree.7 \
+ btree.9\
+ btree.6int\
+ btree.simple.1\
+ file_destroy.1\
+ bt.insert.5 \
+ trans.all\
+ lgrec.very.3 \
+ lockrec_sm \
+ lockrec_pin \
+ file.2 \
+ free_ext \
+]
+
+echo $myscripts
+source $script_dir/vol.init
+
+set garbage [open garbage_variables w]
+
+cleanup $garbage
+addcleanupvars {i script}
+
+while { 1 } {
+    set i [random [llength $myscripts]]
+    set script [lindex $myscripts [expr $i] ]
+    echo
+    echo "SCRIPTS (from random.all): $myscripts"
+    echo "RUNNING (from random.all): $script"
+    runscripts $script
+    cleanup $garbage
+}
+
+unset garbage
+
+deletecleanupvars {i script myscripts}

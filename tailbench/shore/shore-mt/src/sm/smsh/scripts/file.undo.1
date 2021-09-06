@@ -1,0 +1,67 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.undo.1,v 1.10 1999/06/07 19:05:30 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# This script demonstrates a bug in the abort code
+
+source $script_dir/vol.init
+if {$logging == 0} {
+    echo "Logging off: script not run."
+} else {
+if {$volid == 0} {
+    set volid 10
+    sm create_vol $volid 222 1000 
+    set volid [sm init_vol_logical_id $volid 100]
+    sm mount
+}
+
+# create a string larger that the largest small record
+set_config_info
+set app_len $lg_rec_page_space 
+# Sometimes tcl croaks on long formats
+# set app_form %0$app_len\d
+# set app_data [format $app_form 1]
+# unset app_form
+set app_data zvec$app_len
+verbose app_data
+
+sm begin_xct
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+
+set r1 [sm create_rec $f1 "hdr" 1 $app_data]
+
+sm append_rec $r1 $app_data
+sm truncate_rec $r1 $app_len
+sm append_rec $r1 $app_data
+#sm truncate_rec $r1 $app_len
+
+sm abort_xct
+unset app_len app_data r1 f1 
+}
+

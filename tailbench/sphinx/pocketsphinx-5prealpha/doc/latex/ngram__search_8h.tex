@@ -1,0 +1,210 @@
+\section{src/libpocketsphinx/ngram\+\_\+search.h File Reference}
+\label{ngram__search_8h}\index{src/libpocketsphinx/ngram\+\_\+search.\+h@{src/libpocketsphinx/ngram\+\_\+search.\+h}}
+
+
+N-\/\+Gram based multi-\/pass search (\char`\"{}\+F\+B\+S\char`\"{})  
+
+
+{\ttfamily \#include $<$sphinxbase/cmd\+\_\+ln.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/logmath.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/ngram\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/listelem\+\_\+alloc.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/err.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pocketsphinx\+\_\+internal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hmm.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ chan\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Lexical tree node data type. \end{DoxyCompactList}\item 
+struct \textbf{ root\+\_\+chan\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Lexical tree node data type for the first phone (root) of each dynamic H\+MM tree structure. \end{DoxyCompactList}\item 
+struct \textbf{ bptbl\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Back pointer table (forward pass lattice; actually a tree) \end{DoxyCompactList}\item 
+struct \textbf{ bptbl\+\_\+seg\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Segmentation \char`\"{}iterator\char`\"{} for backpointer table results. \end{DoxyCompactList}\item 
+struct \textbf{ lastphn\+\_\+cand\+\_\+s}
+\item 
+struct \textbf{ last\+\_\+ltrans\+\_\+t}
+\item 
+struct \textbf{ cand\+\_\+sf\+\_\+t}
+\item 
+struct \textbf{ bestbp\+\_\+rc\+\_\+s}
+\item 
+struct \textbf{ ngram\+\_\+search\+\_\+stats\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Various statistics for profiling. \end{DoxyCompactList}\item 
+struct \textbf{ ngram\+\_\+search\+\_\+s}
+\begin{DoxyCompactList}\small\item\em N-\/\+Gram search module structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ngram__search_8h_a346ebebfc9fdaefced106c1560667ac0}} 
+\#define {\bfseries C\+A\+N\+D\+\_\+\+S\+F\+\_\+\+A\+L\+L\+O\+C\+S\+I\+ZE}~32
+\item 
+\mbox{\label{ngram__search_8h_a10e17daabad292e65cac7099c3678660}} 
+\#define {\bfseries N\+O\+\_\+\+BP}~-\/1
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \textbf{ chan\+\_\+s} \textbf{ chan\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Lexical tree node data type. \end{DoxyCompactList}\item 
+typedef struct \textbf{ root\+\_\+chan\+\_\+s} \textbf{ root\+\_\+chan\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Lexical tree node data type for the first phone (root) of each dynamic H\+MM tree structure. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a81093c091a82066374627744595840e6}} 
+typedef struct \textbf{ bptbl\+\_\+s} \textbf{ bptbl\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Back pointer table (forward pass lattice; actually a tree) \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a89d7d2a948a3cc2d55c77120cbd35e0d}} 
+typedef struct \textbf{ bptbl\+\_\+seg\+\_\+s} \textbf{ bptbl\+\_\+seg\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Segmentation \char`\"{}iterator\char`\"{} for backpointer table results. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a74085ad31c843ef11c5fbc360449eda5}} 
+typedef struct \textbf{ lastphn\+\_\+cand\+\_\+s} {\bfseries lastphn\+\_\+cand\+\_\+t}
+\item 
+\mbox{\label{ngram__search_8h_aedd2fc2265aea00bbc36fcd6c2ad17c1}} 
+typedef struct \textbf{ bestbp\+\_\+rc\+\_\+s} {\bfseries bestbp\+\_\+rc\+\_\+t}
+\item 
+\mbox{\label{ngram__search_8h_ae68375016e7d208d22042a7dd4a0f37c}} 
+typedef struct \textbf{ ngram\+\_\+search\+\_\+stats\+\_\+s} \textbf{ ngram\+\_\+search\+\_\+stats\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Various statistics for profiling. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_aa8139adca6864a4ce9a03a48aa2af711}} 
+typedef struct \textbf{ ngram\+\_\+search\+\_\+s} {\bfseries ngram\+\_\+search\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ngram__search_8h_a04f80b377c847026254fb85596e2f43c}} 
+\textbf{ ps\+\_\+search\+\_\+t} $\ast$ \textbf{ ngram\+\_\+search\+\_\+init} (const char $\ast$name, ngram\+\_\+model\+\_\+t $\ast$lm, cmd\+\_\+ln\+\_\+t $\ast$config, \textbf{ acmod\+\_\+t} $\ast$acmod, \textbf{ dict\+\_\+t} $\ast$dict, \textbf{ dict2pid\+\_\+t} $\ast$d2p)
+\begin{DoxyCompactList}\small\item\em Initialize the N-\/\+Gram search module. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a9bafaa4af5a9a4f9e76a8daf54ac4a11}} 
+void \textbf{ ngram\+\_\+search\+\_\+free} (\textbf{ ps\+\_\+search\+\_\+t} $\ast$ngs)
+\begin{DoxyCompactList}\small\item\em Finalize the N-\/\+Gram search module. \end{DoxyCompactList}\item 
+int \textbf{ ngram\+\_\+search\+\_\+mark\+\_\+bptable} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, int frame\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em Record the current frame\textquotesingle{}s index in the backpointer table. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_ae36649be6f5a2190e759e7ed13bd7b6b}} 
+void \textbf{ ngram\+\_\+search\+\_\+save\+\_\+bp} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, int frame\+\_\+idx, int32 w, int32 score, int32 path, int32 rc)
+\begin{DoxyCompactList}\small\item\em Enter a word in the backpointer table. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a1ddcc1a9cb3e164ceb2140097ed23a3e}} 
+void \textbf{ ngram\+\_\+search\+\_\+alloc\+\_\+all\+\_\+rc} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, int32 w)
+\begin{DoxyCompactList}\small\item\em Allocate last phone channels for all possible right contexts for word w. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a15477192481dffcb29e9c4167eff6c3c}} 
+void \textbf{ ngram\+\_\+search\+\_\+free\+\_\+all\+\_\+rc} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, int32 w)
+\begin{DoxyCompactList}\small\item\em Allocate last phone channels for all possible right contexts for word w. \end{DoxyCompactList}\item 
+int \textbf{ ngram\+\_\+search\+\_\+find\+\_\+exit} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, int frame\+\_\+idx, int32 $\ast$out\+\_\+best\+\_\+score, int32 $\ast$out\+\_\+is\+\_\+final)
+\begin{DoxyCompactList}\small\item\em Find the best word exit for the current frame in the backpointer table. \end{DoxyCompactList}\item 
+char const  $\ast$ \textbf{ ngram\+\_\+search\+\_\+bp\+\_\+hyp} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, int bpidx)
+\begin{DoxyCompactList}\small\item\em Backtrace from a given backpointer index to obtain a word hypothesis. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a2fa760c99f77eb075157304f4359941e}} 
+void \textbf{ ngram\+\_\+compute\+\_\+seg\+\_\+scores} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, float32 lwf)
+\begin{DoxyCompactList}\small\item\em Compute language and acoustic scores for backpointer table entries. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_ac30e7dec4bbfeee9f5163abf4bbd1014}} 
+\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$ \textbf{ ngram\+\_\+search\+\_\+lattice} (\textbf{ ps\+\_\+search\+\_\+t} $\ast$search)
+\begin{DoxyCompactList}\small\item\em Construct a word lattice from the current hypothesis. \end{DoxyCompactList}\item 
+\mbox{\label{ngram__search_8h_a25a80e488425b2bd4e24eb753c9295a5}} 
+int32 \textbf{ ngram\+\_\+search\+\_\+exit\+\_\+score} (\textbf{ ngram\+\_\+search\+\_\+t} $\ast$ngs, \textbf{ bptbl\+\_\+t} $\ast$pbe, int rcphone)
+\begin{DoxyCompactList}\small\item\em Get the exit score for a backpointer entry with a given right context. \end{DoxyCompactList}\item 
+void \textbf{ ngram\+\_\+search\+\_\+set\+\_\+lm} (ngram\+\_\+model\+\_\+t $\ast$lm)
+\begin{DoxyCompactList}\small\item\em Sets the global language model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+N-\/\+Gram based multi-\/pass search (\char`\"{}\+F\+B\+S\char`\"{}) 
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\label{ngram__search_8h_a2c5740fe4792d870b73f4100b32e9324}} 
+\index{ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}!chan\+\_\+t@{chan\+\_\+t}}
+\index{chan\+\_\+t@{chan\+\_\+t}!ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}}
+\subsubsection{chan\+\_\+t}
+{\footnotesize\ttfamily typedef struct \textbf{ chan\+\_\+s}  \textbf{ chan\+\_\+t}}
+
+
+
+Lexical tree node data type. 
+
+Not the first H\+MM for words, which multiplex H\+M\+Ms based on different left contexts. This structure is used both in the dynamic H\+MM tree structure and in the per-\/word last-\/phone right context fanout. \mbox{\label{ngram__search_8h_aab8eee3f73f666d0e12c5b355a651cff}} 
+\index{ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}!root\+\_\+chan\+\_\+t@{root\+\_\+chan\+\_\+t}}
+\index{root\+\_\+chan\+\_\+t@{root\+\_\+chan\+\_\+t}!ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}}
+\subsubsection{root\+\_\+chan\+\_\+t}
+{\footnotesize\ttfamily typedef struct \textbf{ root\+\_\+chan\+\_\+s}  \textbf{ root\+\_\+chan\+\_\+t}}
+
+
+
+Lexical tree node data type for the first phone (root) of each dynamic H\+MM tree structure. 
+
+Each state may have a different parent static H\+MM. Most fields are similar to those in chan\+\_\+t. 
+
+\subsection{Function Documentation}
+\mbox{\label{ngram__search_8h_aee393a136f8f7e8b98161e6eed7b1dd9}} 
+\index{ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}!ngram\+\_\+search\+\_\+bp\+\_\+hyp@{ngram\+\_\+search\+\_\+bp\+\_\+hyp}}
+\index{ngram\+\_\+search\+\_\+bp\+\_\+hyp@{ngram\+\_\+search\+\_\+bp\+\_\+hyp}!ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}}
+\subsubsection{ngram\+\_\+search\+\_\+bp\+\_\+hyp()}
+{\footnotesize\ttfamily char const$\ast$ ngram\+\_\+search\+\_\+bp\+\_\+hyp (\begin{DoxyParamCaption}\item[{\textbf{ ngram\+\_\+search\+\_\+t} $\ast$}]{ngs,  }\item[{int}]{bpidx }\end{DoxyParamCaption})}
+
+
+
+Backtrace from a given backpointer index to obtain a word hypothesis. 
+
+\begin{DoxyReturn}{Returns}
+a {\bfseries read-\/only} string with the best hypothesis. 
+\end{DoxyReturn}
+
+
+Definition at line 553 of file ngram\+\_\+search.\+c.
+
+\mbox{\label{ngram__search_8h_ac6a01bb08e7b8d1deb39763a98148cb0}} 
+\index{ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}!ngram\+\_\+search\+\_\+find\+\_\+exit@{ngram\+\_\+search\+\_\+find\+\_\+exit}}
+\index{ngram\+\_\+search\+\_\+find\+\_\+exit@{ngram\+\_\+search\+\_\+find\+\_\+exit}!ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}}
+\subsubsection{ngram\+\_\+search\+\_\+find\+\_\+exit()}
+{\footnotesize\ttfamily int ngram\+\_\+search\+\_\+find\+\_\+exit (\begin{DoxyParamCaption}\item[{\textbf{ ngram\+\_\+search\+\_\+t} $\ast$}]{ngs,  }\item[{int}]{frame\+\_\+idx,  }\item[{int32 $\ast$}]{out\+\_\+best\+\_\+score,  }\item[{int32 $\ast$}]{out\+\_\+is\+\_\+final }\end{DoxyParamCaption})}
+
+
+
+Find the best word exit for the current frame in the backpointer table. 
+
+\begin{DoxyReturn}{Returns}
+the backpointer index of the best word exit. 
+\end{DoxyReturn}
+
+
+Definition at line 506 of file ngram\+\_\+search.\+c.
+
+
+
+References ngram\+\_\+search\+\_\+s\+::n\+\_\+frame.
+
+\mbox{\label{ngram__search_8h_a7772e007b7d7fdf437c87aeb08b59c71}} 
+\index{ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}!ngram\+\_\+search\+\_\+mark\+\_\+bptable@{ngram\+\_\+search\+\_\+mark\+\_\+bptable}}
+\index{ngram\+\_\+search\+\_\+mark\+\_\+bptable@{ngram\+\_\+search\+\_\+mark\+\_\+bptable}!ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}}
+\subsubsection{ngram\+\_\+search\+\_\+mark\+\_\+bptable()}
+{\footnotesize\ttfamily int ngram\+\_\+search\+\_\+mark\+\_\+bptable (\begin{DoxyParamCaption}\item[{\textbf{ ngram\+\_\+search\+\_\+t} $\ast$}]{ngs,  }\item[{int}]{frame\+\_\+idx }\end{DoxyParamCaption})}
+
+
+
+Record the current frame\textquotesingle{}s index in the backpointer table. 
+
+\begin{DoxyReturn}{Returns}
+the current backpointer index. 
+\end{DoxyReturn}
+
+
+Definition at line 329 of file ngram\+\_\+search.\+c.
+
+
+
+References ngram\+\_\+search\+\_\+s\+::frm\+\_\+wordlist, and ngram\+\_\+search\+\_\+s\+::n\+\_\+frame\+\_\+alloc.
+
+\mbox{\label{ngram__search_8h_a0e681022d3fa0e63da066aad123245e7}} 
+\index{ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}!ngram\+\_\+search\+\_\+set\+\_\+lm@{ngram\+\_\+search\+\_\+set\+\_\+lm}}
+\index{ngram\+\_\+search\+\_\+set\+\_\+lm@{ngram\+\_\+search\+\_\+set\+\_\+lm}!ngram\+\_\+search.\+h@{ngram\+\_\+search.\+h}}
+\subsubsection{ngram\+\_\+search\+\_\+set\+\_\+lm()}
+{\footnotesize\ttfamily void ngram\+\_\+search\+\_\+set\+\_\+lm (\begin{DoxyParamCaption}\item[{ngram\+\_\+model\+\_\+t $\ast$}]{lm }\end{DoxyParamCaption})}
+
+
+
+Sets the global language model. 
+
+Sets the language model to use if nothing was passed in configuration 
+
+Definition at line 1406 of file ngram\+\_\+search.\+c.
+

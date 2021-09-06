@@ -1,0 +1,121 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.30,v 1.14.4.2 2010/01/12 02:01:59 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This script demonstrates a bug which occurs
+# when four threads try inserting entries to 
+# the same btree at the same time. 
+
+# WARNING: this runs for a long time 
+#
+
+source $script_dir/vol.init
+
+if {$multi_threaded_xct == 0 } {
+    echo "Not configured for multi-threaded xcts"
+    return
+} 
+set ntries 16
+set nrecs 100
+set protocol t_cc_kvl
+
+proc go_go_gadget {name ndx seed also} {
+    global ntries volid nrecs short_form protocol
+	for {set j 1} {$j <= $nrecs} {incr j} {
+		sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+		set tid [sm xct_to_tid [sm xct]]
+		for {set i 1} {$i <= $ntries} {incr i} {
+			set key [expr {$i + $seed * $ntries} ]
+			verbose thread $name ($tid): creating entry $key "->" $j
+			if [catch {sm create_assoc $ndx [format $short_form $key]  $j} err] {
+				verbose 1 $i: $err
+				if [error_is $err E_DEADLOCK] {
+					verbose ************************************ DEADLOCK!
+					if { [string compare $protocol t_cc_modkvl] == 0 } {
+						assert { 0 }
+					}
+				} else {
+					assert {error_is $err E_DUPLICATE}
+				}
+			} else {
+				verbose thread $name ($tid): created entry $key "->" $j
+			}
+			set also [expr {1 - $also}]
+			if { $also == 1 } {
+				set key1 [expr {$i + ($seed - 1) * $ntries} ]
+				verbose thread $name ($tid): destroying entry $key "->" $j
+				if [catch {sm destroy_assoc $ndx [format $short_form $key1]  $j} err] {
+					verbose 2 $i: $err
+					if [error_is $err E_DEADLOCK] {
+						verbose ************************************ DEADLOCK!
+						if { [string compare $protocol t_cc_modkvl] == 0 } {
+							assert { 0 }
+						}
+					} else {
+						assert {error_is $err FC_NOTFOUND}
+					}
+				} else {
+					verbose thread $name ($tid): REMOVED entry $key1 "->" $j
+				}
+			}
+		}
+		sm commit_xct
+	}
+}
+
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+set ndx [sm create_index $volid btree regular b*1000 $protocol]
+sm commit_xct
+
+verbose waiting for threads
+
+set t1 [fork_thread go_go_gadget "t1" $ndx "1" "0" ]
+set t11 [fork_thread go_go_gadget "t1" $ndx "1" "1" ]
+set t2 [fork_thread go_go_gadget "t2" $ndx "2" "1" ]
+set t22 [fork_thread go_go_gadget "t2" $ndx "2" "0" ]
+set t3 [fork_thread go_go_gadget "t3" $ndx "3" "0" ]
+set t33 [fork_thread go_go_gadget "t3" $ndx "3" "1" ]
+set t4 [fork_thread go_go_gadget "t4" $ndx "4" "1" ]
+set t44 [fork_thread go_go_gadget "t4" $ndx "4" "0" ]
+
+
+join_thread $t1 $t2 $t3 $t4 $t11 $t22 $t33 $t44
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+sm destroy_index $ndx
+sm commit_xct
+
+
+verbose threads done
+
+unset t1 t2 t3 t4 t11 t22 t33 t44
+unset ntries nrecs ndx protocol
+

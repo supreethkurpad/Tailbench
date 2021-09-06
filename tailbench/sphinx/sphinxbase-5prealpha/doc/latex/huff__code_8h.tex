@@ -1,0 +1,65 @@
+\section{include/sphinxbase/huff\+\_\+code.h File Reference}
+\label{huff__code_8h}\index{include/sphinxbase/huff\+\_\+code.\+h@{include/sphinxbase/huff\+\_\+code.\+h}}
+
+
+Huffman code and bitstream implementation.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/cmd\+\_\+ln.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{huff__code_8h_a99a5188e6a18682c96100cd5232af0f4}} 
+typedef struct \textbf{ huff\+\_\+code\+\_\+s} {\bfseries huff\+\_\+code\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{huff__code_8h_a278b925caf4f2c93cbb63adc8f77bfa6}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ huff\+\_\+code\+\_\+t} $\ast$ \textbf{ huff\+\_\+code\+\_\+build\+\_\+int} (int32 const $\ast$values, int32 const $\ast$frequencies, int nvals)
+\begin{DoxyCompactList}\small\item\em Create a codebook from 32-\/bit integer data. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_af5d0c85a2ad206c277ecde2a085af790}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ huff\+\_\+code\+\_\+t} $\ast$ \textbf{ huff\+\_\+code\+\_\+build\+\_\+str} (char $\ast$const $\ast$values, int32 const $\ast$frequencies, int nvals)
+\begin{DoxyCompactList}\small\item\em Create a codebook from string data. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a873745b79dac884cbb1b5bdf12e069e6}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ huff\+\_\+code\+\_\+t} $\ast$ \textbf{ huff\+\_\+code\+\_\+read} (F\+I\+LE $\ast$infh)
+\begin{DoxyCompactList}\small\item\em Read a codebook from a file. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a6b91641e852a8eb4c4d32f40ff6dd055}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ huff\+\_\+code\+\_\+write} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, F\+I\+LE $\ast$outfh)
+\begin{DoxyCompactList}\small\item\em Write a codebook to a file. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a821658831cbe9b1199c756435d0ad4aa}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ huff\+\_\+code\+\_\+dump} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, F\+I\+LE $\ast$dumpfh)
+\begin{DoxyCompactList}\small\item\em Print a codebook to a file as text (for debugging) \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a26a70d1b1704f1af985e67127e622a7b}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ huff\+\_\+code\+\_\+t} $\ast$ \textbf{ huff\+\_\+code\+\_\+retain} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc)
+\begin{DoxyCompactList}\small\item\em Retain a pointer to a Huffman codec object. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_ac8678d07a65af1963cc0b3bd8b10d646}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ huff\+\_\+code\+\_\+free} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc)
+\begin{DoxyCompactList}\small\item\em Release a pointer to a Huffman codec object. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a9698821197737e3e1be9533a3059c82c}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT F\+I\+LE $\ast$ \textbf{ huff\+\_\+code\+\_\+attach} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, F\+I\+LE $\ast$fh, char const $\ast$mode)
+\begin{DoxyCompactList}\small\item\em Attach a Huffman codec to a file handle for input/output. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a403f575701c1d5fd2ddef1d001cf53e3}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT F\+I\+LE $\ast$ \textbf{ huff\+\_\+code\+\_\+detach} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc)
+\begin{DoxyCompactList}\small\item\em Detach a Huffman codec from its file handle. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_acf369555b8784eee944f7ebc97b6b825}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ huff\+\_\+code\+\_\+encode\+\_\+int} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, int32 sym, uint32 $\ast$outcw)
+\begin{DoxyCompactList}\small\item\em Encode an integer, writing it to the file handle, if any. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a24fe76f501a7a0485f3e9485c60fae32}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ huff\+\_\+code\+\_\+encode\+\_\+str} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, char const $\ast$sym, uint32 $\ast$outcw)
+\begin{DoxyCompactList}\small\item\em Encode a string, writing it to the file handle, if any. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_a9155dd07a0a24393ef0e4e66cb314140}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ huff\+\_\+code\+\_\+decode\+\_\+int} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, int $\ast$outval, char const $\ast$$\ast$inout\+\_\+data, size\+\_\+t $\ast$inout\+\_\+data\+\_\+len, int $\ast$inout\+\_\+offset)
+\begin{DoxyCompactList}\small\item\em Decode an integer, reading it from the file if no data given. \end{DoxyCompactList}\item 
+\mbox{\label{huff__code_8h_aec0908ece3a695f8a3f6619d8d726e57}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$ \textbf{ huff\+\_\+code\+\_\+decode\+\_\+str} (\textbf{ huff\+\_\+code\+\_\+t} $\ast$hc, char const $\ast$$\ast$inout\+\_\+data, size\+\_\+t $\ast$inout\+\_\+data\+\_\+len, int $\ast$inout\+\_\+offset)
+\begin{DoxyCompactList}\small\item\em Decode a string, reading it from the file if no data given. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Huffman code and bitstream implementation. 
+
+This interface supports building canonical Huffman codes from string and integer values. It also provides support for encoding and decoding from strings and files, and for reading and writing codebooks from files. 

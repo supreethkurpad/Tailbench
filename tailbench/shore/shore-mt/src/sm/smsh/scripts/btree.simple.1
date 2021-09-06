@@ -1,0 +1,156 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.simple.1,v 1.5.2.3 2010/03/19 22:20:35 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#
+# NB: this is for use with runtests.pl (crash testing)
+#
+
+source $script_dir/vol.init
+
+proc T3 {ndx key} {
+    # T2 scans
+    verbose T3 sync
+    named_sync 3
+
+    sm begin_xct
+    set elem T3
+    verbose T3 adding entry: $key $elem
+    sm create_assoc $ndx $key $elem
+    sm commit_xct
+
+    verbose T3 sync
+    sync
+    # T2 scans
+
+    verbose T3 done.
+}
+
+proc T2 { ndx key } {
+
+    verbose T2 scan ...
+    sm begin_xct
+    # 10 is plenty
+    set nrec 10 
+    # scan index : now we hold kvl locks on each element if the index
+	# has kvl locking.  
+    set scan [sm create_scan $ndx >= neg_inf <= pos_inf]
+    for {set i 1} {$i <= $nrec} {incr i}  {
+		set r [sm scan_next $scan]
+		if {[string compare $r eof] == 0} then { break }
+		set key [string trimleft [lindex $r 0] 0]
+		set el [lindex $r 1]
+		verbose "T2 scanned ($key, $el)"
+		}
+    verbose "T2 eof"
+    sm destroy_scan $scan
+
+    verbose T2 sync 
+    named_sync 3
+    # T3 inserts -- but will be held up by the kvl locking.
+    verbose T2 sync 
+    sync
+	
+    verbose T2 scan again
+    # scan index again
+    set nrec 10
+    set scan [sm create_scan $ndx >= neg_inf <= pos_inf]
+	for {set i 1} {$i <= $nrec} {incr i}  {
+		set r [sm scan_next $scan]
+		if {[string compare $r eof] == 0} then { break }
+		set key [string trimleft [lindex $r 0] 0]
+		set el [lindex $r 1]
+		verbose "scanned ($key, $el)"
+	}
+    verbose "eof"
+    sm destroy_scan $scan
+
+    verbose T2 sync 
+    sync
+
+    sm commit_xct
+
+
+    verbose T2 done.
+}
+
+
+foreach cc { t_cc_kvl t_cc_im } {
+    verbose "******************************************" $cc
+    sm begin_xct
+    set ndx [sm create_index $volid btree regular b*1000 $cc]
+
+    # insert one item with key=valu1
+    set key 1
+    set elem T1
+    sm create_assoc $ndx $key $elem
+
+    sm commit_xct
+	verbose index $ndx created with one entry $key -> $elem
+
+    set i 1
+    set t($i) [fork_thread T2 $ndx $key ]
+    incr i
+    set t($i) [fork_thread T3 $ndx $key ]
+
+	verbose named_sync 3 "T2 T3"
+	named_sync 3 "T2 T3"
+
+	# give T3 time to start xct and grab locks and wait
+	sm sleep 1
+
+	verbose -----------------------------------------------------------
+	verbose dumping locks after T2 scan and T3 waits for lock
+	if {$verbose_flag} {
+		sm dump_locks
+	}
+	verbose -----------------------------------------------------------
+
+	# Let T2 scan again and wait before committing
+	verbose sync_thread T2 again
+    sync_thread $t(1) 
+
+	#  NOTE: order must be T2 T3
+	verbose sync_thread T2 last time
+    sync_thread $t(1)
+	verbose sync_thread T3 last time
+    sync_thread $t(2) 
+
+	verbose join_thread T2 T3
+    join_thread $t(1) $t(2)
+
+    sm begin_xct
+    sm destroy_index $ndx
+    sm commit_xct
+}
+
+verbose threads done
+
+unset t cc key i elem ndx
+

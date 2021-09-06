@@ -1,0 +1,98 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: trans.1,v 1.13.4.4 2009/12/21 18:45:19 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# Test various combinations of commit/abort/prepare/extern2pc
+#
+
+set do_file_create 1
+source $script_dir/trans.tcl
+
+if {$logging == 0} {
+    return "Logging off: script not run. "
+}
+
+set finishlist { 
+	restart.clean restart.dirty extern.abort
+	extern.commit extern.abort
+	extern.prepare.commit extern.prepare.abort
+	prepare.commit prepare.abort 
+	commit abort 
+	}
+
+if {1} {
+# first: do this sequenially
+foreach a $actionlist {
+    foreach f $finishlist {
+
+	set y [fork_thread trans $a $f]
+	join_thread $y
+
+    }
+}
+}
+# next: do this concurrently
+# however, we cannot have multiple threads restarting, because
+# they call the ssm destructor/constructor sequence
+# so we must modify it to disallow multiple restarts
+# In fact, we have to find a way to make all the tcl threads
+# croak when a restart happens, and we don't have that yet.
+# Could use cancellation points (??) or some explicit mechanism
+# in the scripts
+set finishlist { 
+	restart.dirty extern.abort
+	extern.commit extern.abort
+	extern.prepare.commit extern.prepare.abort
+	prepare.commit prepare.abort 
+	commit abort 
+	}
+if {0} {
+	set i 0
+	foreach a $actionlist {
+		foreach f $finishlist {
+			set y($i) [fork_thread trans $a $f]
+			echo forked $y($i) $a $f
+			incr i
+		}
+	}
+	for {set j 0} {j < $i} {incr j} {
+		echo join_thread $y($i)
+		join_thread $y($i)
+	}
+}
+
+sm begin_xct
+sm destroy_file $f0
+sm commit_xct
+
+unset a f
+unset finishlist actionlist y
+# these are cleaned up by trans.all
+# unset docheckpoint do_file_create f0 nrecs nrecsnow
+

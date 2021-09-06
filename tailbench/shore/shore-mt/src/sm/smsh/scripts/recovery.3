@@ -1,0 +1,182 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: recovery.3,v 1.1.2.3 2010/03/25 18:05:30 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+######################  NOTES ###############################################
+#
+#	Test specific case of handling of error when running
+# out of log space (or otherwise being unable to write the log)
+# page.cpp, page_p::reclaim()  when log_page_reclaim fails.
+#
+# NB: RUN THIS WITH MINIMUM LOG SIZE : -sm_logsize 8192
+#
+# NOTE: no way to tell if we in fact fail on log_page_reclaim :
+# with num_page 100, rec_per_page 5 and -sm_logsize 8192 I was able
+# to make it fail in log_page_alloc_in_ext.
+# 
+# THis is NOT meant to be run with regular "all" scripts, as
+# it can be very time-consuming.
+# ###########################################################################
+
+source $script_dir/vol.init
+
+# 54 is maximum we can create all in 1 tx
+# set num_page 54
+# set num_page 1100
+set num_page 100
+set fudge 0
+
+set rec_per_page 5
+verbose max_small_rec = $max_small_rec
+set rec_size [expr {($max_small_rec/$rec_per_page) - $fudge}]
+verbose rec_size = $rec_size
+set num_rec [expr {$num_page * $rec_per_page}]
+verbose num_rec = $num_rec
+
+set fmt [format %s%d%s % $rec_size d]
+verbose fmt  $fmt
+set data [format $fmt 1] 
+# verbose data = $data
+verbose data length = [string length $data]
+
+set big_rec_size [expr {($max_small_rec/($rec_per_page/2)) - $fudge}]
+verbose big_rec_size = $big_rec_size
+set fmt2 [format %s%d%s % $big_rec_size d]
+verbose fmt2  $fmt2
+set data2 [format $fmt2 1] 
+# verbose data2 = $data2
+verbose data2 length = [string length $data2]
+set rid(0) $null_rid
+
+# create a file with maximum-sized small records so that we can
+# allocate the pages
+# The number of records is such that if we do it in 1 xct,
+# we run out of log space.
+sm begin_xct
+set fid [sm create_file $volid regular]
+set fid2 [sm create_file $volid regular]
+sm commit_xct
+
+for {set i 1} {$i <= $num_rec} {incr i} {
+sm begin_xct
+    set rid($i) [
+	sm create_rec $fid "1" 1 $data
+    ]
+    # verbose :$i: created $rid($i)
+sm commit_xct
+}
+
+
+# now, trying to get into the case of running out of log space
+# in page_p::reclaim, we'll delete the last record on every 
+# page, then we'll try to append them back in all in one tx
+# hopefully we'll run out of log space fairly quickly, and be able to
+# do so on the same page each time
+# To reproduce the situation, we have to run out of log space while
+# reclaiming the last slot on a page.
+
+for {set i 1} {$i <= $num_rec} {incr i} {
+sm begin_xct
+    for {set j 2} {$j < $rec_per_page} {incr j} {
+	if [expr $i > $num_rec] {
+	    break
+        }
+        # verbose skipping $rid($i)
+	incr i
+    }
+    if [expr $i > $num_rec] {
+       verbose :$num_rec: destroying $rid($num_rec)
+       sm destroy_rec $rid($num_rec)
+    } else {
+       # verbose :$i: destroying $rid($i)
+       sm destroy_rec $rid($i)
+    }
+sm commit_xct
+}
+
+verbose LAST REC :$num_rec: RID: $rid($num_rec)
+
+
+# now make data bigger so that we run out of log
+# space sooner
+# first, here's a procedure that chews up log space
+proc chew {num_rec} {
+    global volid data2 fid2
+    verbose chew: fid2 $fid2 num_rec $num_rec of size [string length $data2]
+    for {set i 1} {$i <= $num_rec} {incr i} {
+        sm create_rec $fid2 "1" 1 $data2
+    }
+    verbose end chew
+}
+
+set num_try 5
+set num_try 50
+for {set t 1} {$t <= $num_try} {incr t} {
+	verbose try number $t
+	verbose checkpoint
+	set y [sm checkpoint]
+	verbose sync log
+	set y [sm sync_log]
+	sm begin_xct
+
+	# chew up log space elsewhere
+	set chewnum $num_rec
+	verbose new xct chew $chewnum
+	chew $chewnum
+
+	for {set i 1} {$i <= $num_rec} {incr i} {
+		
+		if [catch {set rid($i) [sm create_rec $fid "1" 1 $data]} err ] {
+			verbose $t: RECORD $i:  RID: $rid($i) ERROR: $err
+			if [expr {[error_is $err E_OUTOFLOGSPACE] == 0} ] {
+				verbose try $t: unexpected error  $err  expected E_OUTOFLOGSPACE
+				exit
+			}
+			if [expr {[error_is $err E_OUTOFLOGSPACE] == 1} ] {
+				verbose "SUCCESS in running out of log space."
+			}
+			verbose $t: :$i: force_buffers
+			sm force_buffers 
+			verbose $t: :$i: aborting
+			sm abort_xct
+			break
+		}
+		verbose $t: :$i: created $rid($i)
+		sm force_buffers 
+	}
+	set tx [sm xct]
+	if [expr $tx != 0] {
+		verbose committing
+		sm commit_xct 
+	}
+}
+
+unset fudge tx num_try y chewnum i rid
+unset fid fid2 fmt rec_per_page 
+unset err j data2 t rec_size num_page big_rec_size
+unset num_rec data fmt2

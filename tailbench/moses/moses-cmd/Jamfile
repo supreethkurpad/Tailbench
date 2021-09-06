@@ -1,0 +1,20 @@
+import modules ;
+local TBENCH_PATH = [ modules.peek : TBENCH_PATH ] ;
+
+alias deps : IOWrapper.cpp mbr.cpp LatticeMBR.cpp TranslationAnalysis.cpp ..//z ..//boost_iostreams ..//boost_filesystem ../moses//moses  ;
+
+alias tbench_integrated_objs : $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ;
+
+alias tbench_server_networked_objs : $(TBENCH_PATH)/tbench_server_networked.o ;
+
+alias tbench_client_networked_objs : $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_client_networked.o ../moses-cmd//client.o ;
+
+obj client.o : Client.cpp ;
+
+exe moses_integrated : Main.cpp deps tbench_integrated_objs client.o ;
+exe moses_server_networked : Main.cpp deps tbench_server_networked_objs ;
+exe moses_client_networked : tbench_client_networked_objs client.o ;
+
+# exe lmbrgrid : LatticeMBRGrid.cpp deps ;
+
+alias programs : moses_integrated moses_server_networked moses_client_networked ;

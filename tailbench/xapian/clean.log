@@ -1,0 +1,1 @@
+rm -f xapian_integrated genTerms xapian_networked_server xapian_networked_client

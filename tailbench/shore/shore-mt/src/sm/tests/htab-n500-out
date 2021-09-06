@@ -1,0 +1,9 @@
+creating tests with 500 tries, 1000 upper bound on pages,  volume 1, store 5.
+Remaining Init 0 Inserted 128 Evicted 372 Returned 0 Removed 0 Unaccounted 0
+FINAL NEW htab stats:
+bf_htab_insertions 500
+bf_htab_harsh_lookups 1372
+bf_htab_lookups 2000
+bf_htab_lookups_failed 1372
+bf_htab_removes 372
+BPool HTable stats part2: #buffers 128 #slots 128  100% full 

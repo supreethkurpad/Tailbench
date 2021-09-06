@@ -1,0 +1,75 @@
+
+ {---------------------- SH / SH  ------------------334
+	before first acquire 
+ mode NL num_holders 0 latch_cnt 0 is_latched false is_mine false held_by_me 0
+ ---------------------------------------------------334}
+
+ {---------------------- SH / SH  ------------------355
+	 after first acquire 
+ mode SH num_holders 1 latch_cnt 1 is_latched true is_mine false held_by_me 1
+ ---------------------------------------------------355}
+
+ {---------------------- SH / SH  ------------------424
+	 after 2nd acquire (duplicate) 
+ mode SH num_holders 1 latch_cnt 2 is_latched true is_mine false held_by_me 2
+ ---------------------------------------------------424}
+
+ {---------------------- SH / SH  ------------------477
+	 after first release (from duplicate) 
+ mode SH num_holders 1 latch_cnt 1 is_latched true is_mine false held_by_me 1
+ ---------------------------------------------------477}
+
+ {---------------------- SH / SH  ------------------496
+	 after 2nd release
+ mode NL num_holders 0 latch_cnt 0 is_latched false is_mine false held_by_me 0
+ ---------------------------------------------------496}
+
+ {---------------------- SH / EX  ------------------334
+	before first acquire 
+ mode NL num_holders 0 latch_cnt 0 is_latched false is_mine false held_by_me 0
+ ---------------------------------------------------334}
+
+ {---------------------- SH / EX  ------------------355
+	 after first acquire 
+ mode SH num_holders 1 latch_cnt 1 is_latched true is_mine false held_by_me 1
+ ---------------------------------------------------355}
+
+ {---------------------- SH / EX  ------------------392
+	 after 2nd acquire (upgrade) 
+ mode EX num_holders 1 latch_cnt 2 is_latched true is_mine true held_by_me 2
+ ---------------------------------------------------392}
+
+ {---------------------- SH / EX  ------------------462
+	 after first release (from upgrade) 
+ mode EX num_holders 1 latch_cnt 1 is_latched true is_mine true held_by_me 1
+ ---------------------------------------------------462}
+
+ {---------------------- SH / EX  ------------------496
+	 after 2nd release
+ mode NL num_holders 0 latch_cnt 0 is_latched false is_mine false held_by_me 0
+ ---------------------------------------------------496}
+
+ {---------------------- EX / EX  ------------------334
+	before first acquire 
+ mode NL num_holders 0 latch_cnt 0 is_latched false is_mine false held_by_me 0
+ ---------------------------------------------------334}
+
+ {---------------------- EX / EX  ------------------355
+	 after first acquire 
+ mode EX num_holders 1 latch_cnt 1 is_latched true is_mine true held_by_me 1
+ ---------------------------------------------------355}
+
+ {---------------------- EX / EX  ------------------424
+	 after 2nd acquire (duplicate) 
+ mode EX num_holders 1 latch_cnt 2 is_latched true is_mine true held_by_me 2
+ ---------------------------------------------------424}
+
+ {---------------------- EX / EX  ------------------477
+	 after first release (from duplicate) 
+ mode EX num_holders 1 latch_cnt 1 is_latched true is_mine true held_by_me 1
+ ---------------------------------------------------477}
+
+ {---------------------- EX / EX  ------------------496
+	 after 2nd release
+ mode NL num_holders 0 latch_cnt 0 is_latched false is_mine false held_by_me 0
+ ---------------------------------------------------496}

@@ -1,0 +1,164 @@
+\section{src/libsphinxbase/util/err.c File Reference}
+\label{err_8c}\index{src/libsphinxbase/util/err.\+c@{src/libsphinxbase/util/err.\+c}}
+
+
+Somewhat antiquated logging and error interface.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/err.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/prim\+\_\+type.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/filename.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sphinxbase/ckd\+\_\+alloc.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{err_8c_a23fe928bb5db93f1d9c7a999f63211cc}} 
+void {\bfseries err\+\_\+msg} (err\+\_\+lvl\+\_\+t lvl, const char $\ast$path, long ln, const char $\ast$fmt,...)
+\item 
+\mbox{\label{err_8c_a90f421daf48e5018f7de39a0f544467e}} 
+void {\bfseries err\+\_\+msg\+\_\+system} (err\+\_\+lvl\+\_\+t lvl, const char $\ast$path, long ln, const char $\ast$fmt,...)
+\item 
+\mbox{\label{err_8c_a6f045c44edb6a8d23718a21753d02ca6}} 
+void {\bfseries err\+\_\+logfp\+\_\+cb} (void $\ast$user\+\_\+data, err\+\_\+lvl\+\_\+t lvl, const char $\ast$fmt,...)
+\item 
+int \textbf{ err\+\_\+set\+\_\+logfile} (const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Append all log messages to a given file. \end{DoxyCompactList}\item 
+void \textbf{ err\+\_\+set\+\_\+logfp} (F\+I\+LE $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Direct all logging to a given filehandle if default logfp callback is set. \end{DoxyCompactList}\item 
+F\+I\+LE $\ast$ \textbf{ err\+\_\+get\+\_\+logfp} (void)
+\begin{DoxyCompactList}\small\item\em Get the current logging filehandle. \end{DoxyCompactList}\item 
+int \textbf{ err\+\_\+set\+\_\+debug\+\_\+level} (int level)
+\begin{DoxyCompactList}\small\item\em Set debugging verbosity level. \end{DoxyCompactList}\item 
+int \textbf{ err\+\_\+get\+\_\+debug\+\_\+level} (void)
+\begin{DoxyCompactList}\small\item\em Get debugging verbosity level. \end{DoxyCompactList}\item 
+void \textbf{ err\+\_\+set\+\_\+callback} (err\+\_\+cb\+\_\+f cb, void $\ast$user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Sets function to output error messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Somewhat antiquated logging and error interface. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{err_8c_a393ad2383651d1fed0223c92208a6631}} 
+\index{err.\+c@{err.\+c}!err\+\_\+get\+\_\+debug\+\_\+level@{err\+\_\+get\+\_\+debug\+\_\+level}}
+\index{err\+\_\+get\+\_\+debug\+\_\+level@{err\+\_\+get\+\_\+debug\+\_\+level}!err.\+c@{err.\+c}}
+\subsubsection{err\+\_\+get\+\_\+debug\+\_\+level()}
+{\footnotesize\ttfamily int err\+\_\+get\+\_\+debug\+\_\+level (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Get debugging verbosity level. 
+
+Note that debugging messages are only enabled when compiled with -\/\+D\+D\+E\+B\+UG. 
+
+Definition at line 287 of file err.\+c.
+
+\mbox{\label{err_8c_ae32e95118a1273e1e99584f2c555231a}} 
+\index{err.\+c@{err.\+c}!err\+\_\+get\+\_\+logfp@{err\+\_\+get\+\_\+logfp}}
+\index{err\+\_\+get\+\_\+logfp@{err\+\_\+get\+\_\+logfp}!err.\+c@{err.\+c}}
+\subsubsection{err\+\_\+get\+\_\+logfp()}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ err\+\_\+get\+\_\+logfp (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Get the current logging filehandle. 
+
+\begin{DoxyReturn}{Returns}
+Current logging filehandle, N\+U\+LL if logging is disabled. Initially it returns stderr 
+\end{DoxyReturn}
+
+
+Definition at line 268 of file err.\+c.
+
+\mbox{\label{err_8c_ab9e9e148e2ab44b15a41a6e11a015c68}} 
+\index{err.\+c@{err.\+c}!err\+\_\+set\+\_\+callback@{err\+\_\+set\+\_\+callback}}
+\index{err\+\_\+set\+\_\+callback@{err\+\_\+set\+\_\+callback}!err.\+c@{err.\+c}}
+\subsubsection{err\+\_\+set\+\_\+callback()}
+{\footnotesize\ttfamily void err\+\_\+set\+\_\+callback (\begin{DoxyParamCaption}\item[{err\+\_\+cb\+\_\+f}]{callback,  }\item[{void $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Sets function to output error messages. 
+
+Use it to redirect the logging to your application. By default the handler which dumps messages to stderr is set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em -\/} & callback to pass messages too. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 293 of file err.\+c.
+
+\mbox{\label{err_8c_ac7956e03cd685da5fe6e134c462f73e1}} 
+\index{err.\+c@{err.\+c}!err\+\_\+set\+\_\+debug\+\_\+level@{err\+\_\+set\+\_\+debug\+\_\+level}}
+\index{err\+\_\+set\+\_\+debug\+\_\+level@{err\+\_\+set\+\_\+debug\+\_\+level}!err.\+c@{err.\+c}}
+\subsubsection{err\+\_\+set\+\_\+debug\+\_\+level()}
+{\footnotesize\ttfamily int err\+\_\+set\+\_\+debug\+\_\+level (\begin{DoxyParamCaption}\item[{int}]{level }\end{DoxyParamCaption})}
+
+
+
+Set debugging verbosity level. 
+
+Note that debugging messages are only enabled when compiled with -\/\+D\+D\+E\+B\+UG.
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & Verbosity level to set, or 0 to disable debug messages. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 279 of file err.\+c.
+
+\mbox{\label{err_8c_ad6ec7800ca74f21b9f8f69fcc765f30b}} 
+\index{err.\+c@{err.\+c}!err\+\_\+set\+\_\+logfile@{err\+\_\+set\+\_\+logfile}}
+\index{err\+\_\+set\+\_\+logfile@{err\+\_\+set\+\_\+logfile}!err.\+c@{err.\+c}}
+\subsubsection{err\+\_\+set\+\_\+logfile()}
+{\footnotesize\ttfamily int err\+\_\+set\+\_\+logfile (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Append all log messages to a given file. 
+
+Previous logging filehandle is closed (unless it was stdout or stderr).
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & File path to send log messages to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 for success, $<$0 for failure (e.\+g. if file does not exist) 
+\end{DoxyReturn}
+
+
+Definition at line 241 of file err.\+c.
+
+\mbox{\label{err_8c_a1ed9de93e9eab18d18be6290b0b187e7}} 
+\index{err.\+c@{err.\+c}!err\+\_\+set\+\_\+logfp@{err\+\_\+set\+\_\+logfp}}
+\index{err\+\_\+set\+\_\+logfp@{err\+\_\+set\+\_\+logfp}!err.\+c@{err.\+c}}
+\subsubsection{err\+\_\+set\+\_\+logfp()}
+{\footnotesize\ttfamily void err\+\_\+set\+\_\+logfp (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{stream }\end{DoxyParamCaption})}
+
+
+
+Direct all logging to a given filehandle if default logfp callback is set. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em logfp} & Filehandle to send log messages to, or N\+U\+LL to disable logging. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 255 of file err.\+c.
+

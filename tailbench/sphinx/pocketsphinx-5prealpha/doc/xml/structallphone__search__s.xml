@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structallphone__search__s" kind="struct" language="C++" prot="public">
+    <compoundname>allphone_search_s</compoundname>
+    <includes refid="allphone__search_8h" local="no">allphone_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structallphone__search__s_1aed4067ba47369dcbb84633cb436c209a" prot="public" static="no" mutable="no">
+        <type><ref refid="pocketsphinx__internal_8h_1adc3de4d62e46c5e6cb93d09fb61be8ee" kindref="member">ps_search_t</ref></type>
+        <definition>ps_search_t allphone_search_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="111" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1aa82fce72da16af69af92aeca29beed3d" prot="public" static="no" mutable="no">
+        <type><ref refid="structhmm__context__t" kindref="compound">hmm_context_t</ref> *</type>
+        <definition>hmm_context_t* allphone_search_s::hmmctx</definition>
+        <argsstring></argsstring>
+        <name>hmmctx</name>
+        <briefdescription>
+<para>HMM context. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="113" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1ac1220a564a57a418312800df44bd95ca" prot="public" static="no" mutable="no">
+        <type>ngram_model_t *</type>
+        <definition>ngram_model_t* allphone_search_s::lm</definition>
+        <argsstring></argsstring>
+        <name>lm</name>
+        <briefdescription>
+<para>Ngram model set. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="114" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1ab4d9470249d15abca8e9fd01f1d437a7" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::ci_only</definition>
+        <argsstring></argsstring>
+        <name>ci_only</name>
+        <briefdescription>
+<para>Use context-independent phones for decoding. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="115" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a2646c8ad402da8a644ecebd28386de0d" prot="public" static="no" mutable="no">
+        <type><ref refid="structphmm__s" kindref="compound">phmm_t</ref> **</type>
+        <definition>phmm_t** allphone_search_s::ci_phmm</definition>
+        <argsstring></argsstring>
+        <name>ci_phmm</name>
+        <briefdescription>
+<para>PHMM lists (for each CI phone) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="116" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a9021eb4d9645cc3138535dfad8272601" prot="public" static="no" mutable="no">
+        <type>int32 *</type>
+        <definition>int32* allphone_search_s::ci2lmwid</definition>
+        <argsstring></argsstring>
+        <name>ci2lmwid</name>
+        <briefdescription>
+<para>Mapping of CI phones to LM word IDs. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="117" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a8d99dcbcf48746431dd1b37c94b4839d" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::beam</definition>
+        <argsstring></argsstring>
+        <name>beam</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="119" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1af1c69cfc6361bfed4ed0726cbdd4fbfa" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::pbeam</definition>
+        <argsstring></argsstring>
+        <name>pbeam</name>
+        <briefdescription>
+<para>Effective beams after applying beam_factor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="119" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1ad2156dcb114cc598b55854ec1f139e81" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::lw</definition>
+        <argsstring></argsstring>
+        <name>lw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="120" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1ac4f20ffb4acb7c36a8e04cf7b88eafb2" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::inspen</definition>
+        <argsstring></argsstring>
+        <name>inspen</name>
+        <briefdescription>
+<para>Language weights. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="120" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a458aad951cc506c072d67d8d9f163fd7" prot="public" static="no" mutable="no">
+        <type><ref refid="hmm_8h_1ac9c9bae34d05f32736ae1743316737ef" kindref="member">frame_idx_t</ref></type>
+        <definition>frame_idx_t allphone_search_s::frame</definition>
+        <argsstring></argsstring>
+        <name>frame</name>
+        <briefdescription>
+<para>Current frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="122" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a9ad3ecc228af52131028fb91927563dc" prot="public" static="no" mutable="no">
+        <type>float32</type>
+        <definition>float32 allphone_search_s::ascale</definition>
+        <argsstring></argsstring>
+        <name>ascale</name>
+        <briefdescription>
+<para>Acoustic score scale for posterior probabilities. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="123" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a83712f4d89a500720b5bb3e8b2b67297" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::n_tot_frame</definition>
+        <argsstring></argsstring>
+        <name>n_tot_frame</name>
+        <briefdescription>
+<para>Total number of frames processed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="125" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a24d1b4b58c797ff488651b6238040433" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::n_hmm_eval</definition>
+        <argsstring></argsstring>
+        <name>n_hmm_eval</name>
+        <briefdescription>
+<para>Total HMMs evaluated this utt. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="126" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a5759743790af0ec17f85f14f18004b71" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 allphone_search_s::n_sen_eval</definition>
+        <argsstring></argsstring>
+        <name>n_sen_eval</name>
+        <briefdescription>
+<para>Total senones evaluated this utt. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="127" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a6f01de182b60ca03ab9fed3bc63fadc5" prot="public" static="no" mutable="no">
+        <type><ref refid="structblkarray__list__s" kindref="compound">blkarray_list_t</ref> *</type>
+        <definition>blkarray_list_t* allphone_search_s::history</definition>
+        <argsstring></argsstring>
+        <name>history</name>
+        <briefdescription>
+<para>List of history nodes allocated in each frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="130" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1a15739824f77c6f825d5324e826458721" prot="public" static="no" mutable="no">
+        <type>glist_t</type>
+        <definition>glist_t allphone_search_s::segments</definition>
+        <argsstring></argsstring>
+        <name>segments</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="132" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structallphone__search__s_1ab933d7d82322055b5d0c62e27d7c1f5f" prot="public" static="no" mutable="no">
+        <type>ptmr_t</type>
+        <definition>ptmr_t allphone_search_s::perf</definition>
+        <argsstring></argsstring>
+        <name>perf</name>
+        <briefdescription>
+<para>Performance counter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="134" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation of allphone search structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="29">
+        <label>ps_mgau_s</label>
+        <link refid="structps__mgau__s"/>
+        <childnode refid="30" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>dict_t</label>
+        <link refid="structdict__t"/>
+        <childnode refid="19" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="22" relation="usage">
+          <edgelabel>word</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>ps_search_s</label>
+        <link refid="structps__search__s"/>
+        <childnode refid="14" relation="usage">
+          <edgelabel>last_link</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>dag</edgelabel>
+        </childnode>
+        <childnode refid="23" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="26" relation="usage">
+          <edgelabel>d2p</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="28" relation="usage">
+          <edgelabel>acmod</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>pls</edgelabel>
+        </childnode>
+      </node>
+      <node id="34">
+        <label>plink_s</label>
+        <link refid="structplink__s"/>
+        <childnode refid="34" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="33" relation="usage">
+          <edgelabel>phmm</edgelabel>
+        </childnode>
+      </node>
+      <node id="26">
+        <label>dict2pid_t</label>
+        <link refid="structdict2pid__t"/>
+        <childnode refid="27" relation="usage">
+          <edgelabel>lrssid</edgelabel>
+          <edgelabel>rssid</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+      </node>
+      <node id="16">
+        <label>latlink_list_s</label>
+        <link refid="structlatlink__list__s"/>
+        <childnode refid="14" relation="usage">
+          <edgelabel>link</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>allphone_search_s</label>
+        <link refid="structallphone__search__s"/>
+        <childnode refid="11" relation="usage">
+          <edgelabel>history</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>hmmctx</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+        <childnode refid="33" relation="usage">
+          <edgelabel>ci_phmm</edgelabel>
+        </childnode>
+      </node>
+      <node id="32">
+        <label>tmat_t</label>
+        <link refid="structtmat__t"/>
+      </node>
+      <node id="20">
+        <label>cd_tree_s</label>
+        <link refid="structcd__tree__s"/>
+      </node>
+      <node id="22">
+        <label>dictword_t</label>
+        <link refid="structdictword__t"/>
+      </node>
+      <node id="27">
+        <label>xwdssid_t</label>
+        <link refid="structxwdssid__t"/>
+      </node>
+      <node id="15">
+        <label>ps_latnode_s</label>
+        <link refid="structps__latnode__s"/>
+        <childnode refid="15" relation="usage">
+          <edgelabel>alt</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>exits</edgelabel>
+          <edgelabel>entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>blkarray_list_s</label>
+        <link refid="structblkarray__list__s"/>
+      </node>
+      <node id="21">
+        <label>mdef_entry_s</label>
+        <link refid="structmdef__entry__s"/>
+      </node>
+      <node id="25">
+        <label>ps_segfuncs_s</label>
+        <link refid="structps__segfuncs__s"/>
+        <childnode refid="24" relation="usage">
+          <edgelabel>seg_next</edgelabel>
+        </childnode>
+      </node>
+      <node id="30">
+        <label>ps_mgaufuncs_s</label>
+        <link refid="structps__mgaufuncs__s"/>
+      </node>
+      <node id="33">
+        <label>phmm_s</label>
+        <link refid="structphmm__s"/>
+        <childnode refid="34" relation="usage">
+          <edgelabel>succlist</edgelabel>
+        </childnode>
+        <childnode refid="35" relation="usage">
+          <edgelabel>hmm</edgelabel>
+        </childnode>
+        <childnode refid="33" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>bin_mdef_s</label>
+        <link refid="structbin__mdef__s"/>
+        <childnode refid="20" relation="usage">
+          <edgelabel>cd_tree</edgelabel>
+        </childnode>
+        <childnode refid="21" relation="usage">
+          <edgelabel>phone</edgelabel>
+        </childnode>
+      </node>
+      <node id="35">
+        <label>hmm_s</label>
+        <link refid="structhmm__s"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>ctx</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>hmm_context_t</label>
+        <link refid="structhmm__context__t"/>
+      </node>
+      <node id="24">
+        <label>ps_seg_s</label>
+        <link refid="structps__seg__s"/>
+        <childnode refid="25" relation="usage">
+          <edgelabel>vt</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="23">
+        <label>ps_searchfuncs_s</label>
+        <link refid="structps__searchfuncs__s"/>
+        <childnode refid="17" relation="usage">
+          <edgelabel>lattice</edgelabel>
+        </childnode>
+        <childnode refid="24" relation="usage">
+          <edgelabel>seg_iter</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>ps_lattice_s</label>
+        <link refid="structps__lattice__s"/>
+        <childnode refid="15" relation="usage">
+          <edgelabel>end</edgelabel>
+          <edgelabel>nodes</edgelabel>
+          <edgelabel>start</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>q_tail</edgelabel>
+          <edgelabel>q_head</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>dict</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>search</edgelabel>
+        </childnode>
+      </node>
+      <node id="28">
+        <label>acmod_s</label>
+        <link refid="structacmod__s"/>
+        <childnode refid="29" relation="usage">
+          <edgelabel>mgau</edgelabel>
+        </childnode>
+        <childnode refid="31" relation="usage">
+          <edgelabel>mllr</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>mdef</edgelabel>
+        </childnode>
+        <childnode refid="32" relation="usage">
+          <edgelabel>tmat</edgelabel>
+        </childnode>
+      </node>
+      <node id="31">
+        <label>ps_mllr_s</label>
+        <link refid="structps__mllr__s"/>
+      </node>
+      <node id="14">
+        <label>ps_latlink_s</label>
+        <link refid="structps__latlink__s"/>
+        <childnode refid="14" relation="usage">
+          <edgelabel>best_prev</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>from</edgelabel>
+          <edgelabel>to</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/allphone_search.h" line="110" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="110" bodyend="136"/>
+    <listofallmembers>
+      <member refid="structallphone__search__s_1a9ad3ecc228af52131028fb91927563dc" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>ascale</name></member>
+      <member refid="structallphone__search__s_1aed4067ba47369dcbb84633cb436c209a" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>base</name></member>
+      <member refid="structallphone__search__s_1a8d99dcbcf48746431dd1b37c94b4839d" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>beam</name></member>
+      <member refid="structallphone__search__s_1a9021eb4d9645cc3138535dfad8272601" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>ci2lmwid</name></member>
+      <member refid="structallphone__search__s_1ab4d9470249d15abca8e9fd01f1d437a7" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>ci_only</name></member>
+      <member refid="structallphone__search__s_1a2646c8ad402da8a644ecebd28386de0d" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>ci_phmm</name></member>
+      <member refid="structallphone__search__s_1a458aad951cc506c072d67d8d9f163fd7" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>frame</name></member>
+      <member refid="structallphone__search__s_1a6f01de182b60ca03ab9fed3bc63fadc5" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>history</name></member>
+      <member refid="structallphone__search__s_1aa82fce72da16af69af92aeca29beed3d" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>hmmctx</name></member>
+      <member refid="structallphone__search__s_1ac4f20ffb4acb7c36a8e04cf7b88eafb2" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>inspen</name></member>
+      <member refid="structallphone__search__s_1ac1220a564a57a418312800df44bd95ca" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>lm</name></member>
+      <member refid="structallphone__search__s_1ad2156dcb114cc598b55854ec1f139e81" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>lw</name></member>
+      <member refid="structallphone__search__s_1a24d1b4b58c797ff488651b6238040433" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>n_hmm_eval</name></member>
+      <member refid="structallphone__search__s_1a5759743790af0ec17f85f14f18004b71" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>n_sen_eval</name></member>
+      <member refid="structallphone__search__s_1a83712f4d89a500720b5bb3e8b2b67297" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>n_tot_frame</name></member>
+      <member refid="structallphone__search__s_1af1c69cfc6361bfed4ed0726cbdd4fbfa" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>pbeam</name></member>
+      <member refid="structallphone__search__s_1ab933d7d82322055b5d0c62e27d7c1f5f" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>perf</name></member>
+      <member refid="structallphone__search__s_1a15739824f77c6f825d5324e826458721" prot="public" virt="non-virtual"><scope>allphone_search_s</scope><name>segments</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

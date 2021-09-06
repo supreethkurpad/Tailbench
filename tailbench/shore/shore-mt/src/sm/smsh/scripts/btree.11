@@ -1,0 +1,75 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.11,v 1.9 2010/06/08 22:28:28 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+set nrec 1000
+
+source $script_dir/vol.init
+
+if {$logging==0} {
+    echo "Logging off: script not run. "
+} else {
+    set xlist { i4 u4 f8 f4 i8 u8 b1 i1 u1 i2 u2 }
+    set xlistlen [llength $xlist]
+    set x 0
+    if {1} {
+
+	# set nulls to one of { notnull nullok }
+	set nulls nullok
+
+	for {set x 0} {$x < $xlistlen} {incr x} {
+	    set experiment [lindex $xlist $x] 
+	    sm begin_xct
+	    verbose sm test_bulkload_int_btree $volid $nrec $experiment $nulls
+	    sm test_bulkload_int_btree $volid $nrec $experiment $nulls
+	    verbose DONE: w/ sm test_bulkload_int_btree $volid $nrec $experiment $nulls
+	    set n [sm gather_xct_stats reset]
+	    sm commit_xct
+	    verbose $n
+	}
+    }
+
+    # do b*1000 separately, because it has a max # records
+    set nulls nullok
+    set experiment b*1000
+    set nrec 126
+
+    sm begin_xct
+    verbose sm test_bulkload_int_btree $volid $nrec $experiment $nulls
+    sm test_bulkload_int_btree $volid $nrec $experiment $nulls
+
+    # stats
+    set n [sm gather_xct_stats reset]
+    sm commit_xct
+    verbose $n
+
+    unset experiment xlistlen n x xlist
+}
+
+unset nrec
+

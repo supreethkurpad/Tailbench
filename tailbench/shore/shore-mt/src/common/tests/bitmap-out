@@ -1,0 +1,11 @@
+test bitmap of 71 bits, stored in 9 bytes (72 bits).
+Clear Map:    passed
+Set Map:      passed
+Set:          passed
+Clear:        passed
+First Set:    passed
+First Clear:  passed
+Last Set:     passed
+Last Clear:   passed
+Num Set:      passed
+Num Clear:    passed

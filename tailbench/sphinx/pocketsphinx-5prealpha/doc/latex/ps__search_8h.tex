@@ -1,0 +1,504 @@
+\section{include/ps\+\_\+search.h File Reference}
+\label{ps__search_8h}\index{include/ps\+\_\+search.\+h@{include/ps\+\_\+search.\+h}}
+
+
+User can configure several \char`\"{}search\char`\"{} objects with different grammars and langauge models and switch them in runtime to provide interactive experience for the user.  
+
+
+{\ttfamily \#include $<$sphinxbase/fsg\+\_\+model.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/ngram\+\_\+model.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__search_8h_ae3fe90e6eb1fa74e30783e20468280c1}} 
+typedef struct \textbf{ ps\+\_\+search\+\_\+iter\+\_\+s} \textbf{ ps\+\_\+search\+\_\+iter\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Pocket\+Sphinx search iterator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+search} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Actives search with the provided name. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT const char $\ast$ \textbf{ ps\+\_\+get\+\_\+search} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps)
+\begin{DoxyCompactList}\small\item\em Returns name of curent search in decoder. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+unset\+\_\+search} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Unsets the search and releases related resources. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+search\+\_\+iter} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps)
+\begin{DoxyCompactList}\small\item\em Returns iterator over current searches. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+search\+\_\+iter\+\_\+next} (\textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Updates search iterator to point to the next position. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT const char $\ast$ \textbf{ ps\+\_\+search\+\_\+iter\+\_\+val} (\textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Retrieves the name of the search the iterator points to. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void \textbf{ ps\+\_\+search\+\_\+iter\+\_\+free} (\textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Delete an unfinished search iterator. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT ngram\+\_\+model\+\_\+t $\ast$ \textbf{ ps\+\_\+get\+\_\+lm} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Get the language model set object for this decoder. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+lm} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, ngram\+\_\+model\+\_\+t $\ast$lm)
+\begin{DoxyCompactList}\small\item\em Adds new search based on N-\/gram language model. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+lm\+\_\+file} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Adds new search based on N-\/gram language model. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT fsg\+\_\+model\+\_\+t $\ast$ \textbf{ ps\+\_\+get\+\_\+fsg} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Get the finite-\/state grammar set object for this decoder. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+fsg} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, fsg\+\_\+model\+\_\+t $\ast$fsg)
+\begin{DoxyCompactList}\small\item\em Adds new search based on finite state grammar. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+jsgf\+\_\+file} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Adds new search using J\+S\+GF model. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+jsgf\+\_\+string} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, const char $\ast$jsgf\+\_\+string)
+\begin{DoxyCompactList}\small\item\em Adds new search using J\+S\+GF model. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT const char $\ast$ \textbf{ ps\+\_\+get\+\_\+kws} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Get the current Key phrase to spot. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+kws} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, const char $\ast$keyfile)
+\begin{DoxyCompactList}\small\item\em Adds keywords from a file to spotting. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+keyphrase} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, const char $\ast$keyphrase)
+\begin{DoxyCompactList}\small\item\em Adds new keyword to spot. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+allphone} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, ngram\+\_\+model\+\_\+t $\ast$lm)
+\begin{DoxyCompactList}\small\item\em Adds new search based on phone N-\/gram language model. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ ps\+\_\+set\+\_\+allphone\+\_\+file} (\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$ps, const char $\ast$name, const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Adds new search based on phone N-\/gram language model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+User can configure several \char`\"{}search\char`\"{} objects with different grammars and langauge models and switch them in runtime to provide interactive experience for the user. 
+
+There are different possible search modes\+:
+
+
+\begin{DoxyItemize}
+\item keyword -\/ efficiently looks for keyphrase and ignores other speech. allows to configure detection threshold. 
+\item grammar -\/ recognizes speech according to J\+S\+GF grammar. Unlike keyphrase grammar search doesn\textquotesingle{}t ignore words which are not in grammar but tries to recognize them. 
+\item ngram/lm -\/ recognizes natural speech with a language model. 
+\item allphone -\/ recognizes phonemes with a phonetic language model. 
+\end{DoxyItemize}
+
+Each search has a name and can be referenced by a name, names are application-\/specific. The function ps\+\_\+set\+\_\+search allows to activate the search previously added by a name. Only single search can be activated at time.
+
+To add the search one needs to point to the grammar/language model describing the search. The location of the grammar is specific to the application.
+
+The exact design of a searches depends on your application. For example, you might want to listen for activation keyword first and once keyword is recognized switch to ngram search to recognize actual command. Once you recognized the command you can switch to grammar search to recognize the confirmation and then switch back to keyword listening mode to wait for another command.
+
+If only a simple recognition is required it is sufficient to add a single search or just configure the required mode with configuration options. 
+
+\subsection{Function Documentation}
+\mbox{\label{ps__search_8h_a3a15f664d2d004d610e999adb4339dbe}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+get\+\_\+fsg@{ps\+\_\+get\+\_\+fsg}}
+\index{ps\+\_\+get\+\_\+fsg@{ps\+\_\+get\+\_\+fsg}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+get\+\_\+fsg()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT fsg\+\_\+model\+\_\+t$\ast$ ps\+\_\+get\+\_\+fsg (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Get the finite-\/state grammar set object for this decoder. 
+
+If F\+SG decoding is not enabled, this returns N\+U\+LL. Call ps\+\_\+set\+\_\+fsgset() to enable it.
+
+\begin{DoxyReturn}{Returns}
+The current F\+SG set object for this decoder, or N\+U\+LL if none is available. 
+\end{DoxyReturn}
+
+
+Definition at line 561 of file pocketsphinx.\+c.
+
+\mbox{\label{ps__search_8h_a8e2e66391b7c1e6cd1aac24d635ed3ea}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+get\+\_\+kws@{ps\+\_\+get\+\_\+kws}}
+\index{ps\+\_\+get\+\_\+kws@{ps\+\_\+get\+\_\+kws}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+get\+\_\+kws()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT const char$\ast$ ps\+\_\+get\+\_\+kws (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Get the current Key phrase to spot. 
+
+If K\+WS is not enabled, this returns N\+U\+LL. Call ps\+\_\+update\+\_\+kws() to enable it.
+
+\begin{DoxyReturn}{Returns}
+The current keyphrase to spot 
+\end{DoxyReturn}
+
+
+Definition at line 570 of file pocketsphinx.\+c.
+
+\mbox{\label{ps__search_8h_af55ad6ec21a7e67845f3c74149a34b1a}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+get\+\_\+lm@{ps\+\_\+get\+\_\+lm}}
+\index{ps\+\_\+get\+\_\+lm@{ps\+\_\+get\+\_\+lm}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+get\+\_\+lm()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT ngram\+\_\+model\+\_\+t$\ast$ ps\+\_\+get\+\_\+lm (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Get the language model set object for this decoder. 
+
+If N-\/\+Gram decoding is not enabled, this will return N\+U\+LL. You will need to enable it using ps\+\_\+set\+\_\+lmset().
+
+\begin{DoxyReturn}{Returns}
+The language model set object for this decoder. The decoder retains ownership of this pointer, so you should not attempt to free it manually. Use ngram\+\_\+model\+\_\+retain() if you wish to reuse it elsewhere. 
+\end{DoxyReturn}
+
+
+Definition at line 552 of file pocketsphinx.\+c.
+
+\mbox{\label{ps__search_8h_ae2b728c9b05e733605d33fa19472ef8e}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+get\+\_\+search@{ps\+\_\+get\+\_\+search}}
+\index{ps\+\_\+get\+\_\+search@{ps\+\_\+get\+\_\+search}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+get\+\_\+search()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT const char$\ast$ ps\+\_\+get\+\_\+search (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps }\end{DoxyParamCaption})}
+
+
+
+Returns name of curent search in decoder. 
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 501 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::search, and ps\+\_\+decoder\+\_\+s\+::searches.
+
+\mbox{\label{ps__search_8h_a661c72707484ec2528319c9f6976fb7c}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+search\+\_\+iter@{ps\+\_\+search\+\_\+iter}}
+\index{ps\+\_\+search\+\_\+iter@{ps\+\_\+search\+\_\+iter}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+search\+\_\+iter()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+search\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+search\+\_\+iter (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps }\end{DoxyParamCaption})}
+
+
+
+Returns iterator over current searches. 
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 528 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::searches.
+
+\mbox{\label{ps__search_8h_a41e404de59cbd7bfc32f2da3ec7e6137}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+search\+\_\+iter\+\_\+free@{ps\+\_\+search\+\_\+iter\+\_\+free}}
+\index{ps\+\_\+search\+\_\+iter\+\_\+free@{ps\+\_\+search\+\_\+iter\+\_\+free}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+search\+\_\+iter\+\_\+free()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT void ps\+\_\+search\+\_\+iter\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Delete an unfinished search iterator. 
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 546 of file pocketsphinx.\+c.
+
+\mbox{\label{ps__search_8h_a4bd6d4f2b19be2351987c11694eaec9a}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+search\+\_\+iter\+\_\+next@{ps\+\_\+search\+\_\+iter\+\_\+next}}
+\index{ps\+\_\+search\+\_\+iter\+\_\+next@{ps\+\_\+search\+\_\+iter\+\_\+next}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+search\+\_\+iter\+\_\+next()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT \textbf{ ps\+\_\+search\+\_\+iter\+\_\+t}$\ast$ ps\+\_\+search\+\_\+iter\+\_\+next (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Updates search iterator to point to the next position. 
+
+This function automatically frees the iterator object upon reaching the final entry. \begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 534 of file pocketsphinx.\+c.
+
+\mbox{\label{ps__search_8h_a86d9b5968b9fe317a6335345fb9a2dd0}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+search\+\_\+iter\+\_\+val@{ps\+\_\+search\+\_\+iter\+\_\+val}}
+\index{ps\+\_\+search\+\_\+iter\+\_\+val@{ps\+\_\+search\+\_\+iter\+\_\+val}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+search\+\_\+iter\+\_\+val()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT const char $\ast$ ps\+\_\+search\+\_\+iter\+\_\+val (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+search\+\_\+iter\+\_\+t} $\ast$}]{itor }\end{DoxyParamCaption})}
+
+
+
+Retrieves the name of the search the iterator points to. 
+
+Updates search iterator to point to the next position.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}
+\end{DoxySeeAlso}
+This function automatically frees the iterator object upon reaching the final entry. \begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 540 of file pocketsphinx.\+c.
+
+\mbox{\label{ps__search_8h_aa38c96913dd3a06cbab54ce834af5141}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+allphone@{ps\+\_\+set\+\_\+allphone}}
+\index{ps\+\_\+set\+\_\+allphone@{ps\+\_\+set\+\_\+allphone}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+allphone()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+allphone (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{ngram\+\_\+model\+\_\+t $\ast$}]{lm }\end{DoxyParamCaption})}
+
+
+
+Adds new search based on phone N-\/gram language model. 
+
+Associates N-\/gram search with the provided name. The search can be activated using \doxyref{ps\+\_\+set\+\_\+search()}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}. 
+\end{DoxySeeAlso}
+
+
+Definition at line 618 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::acmod, ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::d2p, and ps\+\_\+decoder\+\_\+s\+::dict.
+
+
+
+Referenced by ps\+\_\+set\+\_\+allphone\+\_\+file().
+
+\mbox{\label{ps__search_8h_a66bebfccb8ece9e7bff411329f25ee5e}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+allphone\+\_\+file@{ps\+\_\+set\+\_\+allphone\+\_\+file}}
+\index{ps\+\_\+set\+\_\+allphone\+\_\+file@{ps\+\_\+set\+\_\+allphone\+\_\+file}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+allphone\+\_\+file()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+allphone\+\_\+file (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Adds new search based on phone N-\/gram language model. 
+
+Convenient method to load N-\/gram model and create a search.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+allphone}{p.}{ps__search_8h_aa38c96913dd3a06cbab54ce834af5141} 
+\end{DoxySeeAlso}
+
+
+Definition at line 626 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::lmath, and ps\+\_\+set\+\_\+allphone().
+
+\mbox{\label{ps__search_8h_afde3539cbbf8c67cb98a02ca779055af}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+fsg@{ps\+\_\+set\+\_\+fsg}}
+\index{ps\+\_\+set\+\_\+fsg@{ps\+\_\+set\+\_\+fsg}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+fsg()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+fsg (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{fsg\+\_\+model\+\_\+t $\ast$}]{fsg }\end{DoxyParamCaption})}
+
+
+
+Adds new search based on finite state grammar. 
+
+Associates F\+SG search with the provided name. The search can be activated using \doxyref{ps\+\_\+set\+\_\+search()}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 657 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::acmod, ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::d2p, and ps\+\_\+decoder\+\_\+s\+::dict.
+
+
+
+Referenced by ps\+\_\+set\+\_\+jsgf\+\_\+file(), and ps\+\_\+set\+\_\+jsgf\+\_\+string().
+
+\mbox{\label{ps__search_8h_ae845bbf6a3e5b859e833f6cc0d1ba55f}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+jsgf\+\_\+file@{ps\+\_\+set\+\_\+jsgf\+\_\+file}}
+\index{ps\+\_\+set\+\_\+jsgf\+\_\+file@{ps\+\_\+set\+\_\+jsgf\+\_\+file}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+jsgf\+\_\+file()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+jsgf\+\_\+file (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Adds new search using J\+S\+GF model. 
+
+Convenient method to load J\+S\+GF model and create a search.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+fsg}{p.}{ps__search_8h_afde3539cbbf8c67cb98a02ca779055af} 
+\end{DoxySeeAlso}
+
+
+Definition at line 665 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::lmath, and ps\+\_\+set\+\_\+fsg().
+
+\mbox{\label{ps__search_8h_a3c51b0eab27ac9df20ee54e1d87b3ca3}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+jsgf\+\_\+string@{ps\+\_\+set\+\_\+jsgf\+\_\+string}}
+\index{ps\+\_\+set\+\_\+jsgf\+\_\+string@{ps\+\_\+set\+\_\+jsgf\+\_\+string}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+jsgf\+\_\+string()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+jsgf\+\_\+string (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{jsgf\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+Adds new search using J\+S\+GF model. 
+
+Convenience method to parse J\+S\+GF model from string and create a search.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+fsg}{p.}{ps__search_8h_afde3539cbbf8c67cb98a02ca779055af} 
+\end{DoxySeeAlso}
+
+
+Definition at line 704 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::lmath, and ps\+\_\+set\+\_\+fsg().
+
+\mbox{\label{ps__search_8h_a7965534ad5e48f0b46f326d7da186a2a}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+keyphrase@{ps\+\_\+set\+\_\+keyphrase}}
+\index{ps\+\_\+set\+\_\+keyphrase@{ps\+\_\+set\+\_\+keyphrase}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+keyphrase()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+keyphrase (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{keyphrase }\end{DoxyParamCaption})}
+
+
+
+Adds new keyword to spot. 
+
+Associates K\+WS search with the provided name. The search can be activated using \doxyref{ps\+\_\+set\+\_\+search()}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 649 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::acmod, ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::d2p, and ps\+\_\+decoder\+\_\+s\+::dict.
+
+\mbox{\label{ps__search_8h_a0780564ad3f12179b0291ac87774cea1}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+kws@{ps\+\_\+set\+\_\+kws}}
+\index{ps\+\_\+set\+\_\+kws@{ps\+\_\+set\+\_\+kws}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+kws()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+kws (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{keyfile }\end{DoxyParamCaption})}
+
+
+
+Adds keywords from a file to spotting. 
+
+Associates K\+WS search with the provided name. The search can be activated using \doxyref{ps\+\_\+set\+\_\+search()}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083} 
+\end{DoxySeeAlso}
+
+
+Definition at line 641 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::acmod, ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::d2p, and ps\+\_\+decoder\+\_\+s\+::dict.
+
+\mbox{\label{ps__search_8h_aa76b495c63c665a21a49d7cb51c66d74}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+lm@{ps\+\_\+set\+\_\+lm}}
+\index{ps\+\_\+set\+\_\+lm@{ps\+\_\+set\+\_\+lm}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+lm()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+lm (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{ngram\+\_\+model\+\_\+t $\ast$}]{lm }\end{DoxyParamCaption})}
+
+
+
+Adds new search based on N-\/gram language model. 
+
+Associates N-\/gram search with the provided name. The search can be activated using \doxyref{ps\+\_\+set\+\_\+search()}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+search}{p.}{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}. 
+\end{DoxySeeAlso}
+
+
+Definition at line 595 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::acmod, ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::d2p, ps\+\_\+decoder\+\_\+s\+::dict, and ngram\+\_\+search\+\_\+init().
+
+
+
+Referenced by ps\+\_\+set\+\_\+lm\+\_\+file().
+
+\mbox{\label{ps__search_8h_a78372effd2aa6bddf7b71d6e2e9c3776}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+lm\+\_\+file@{ps\+\_\+set\+\_\+lm\+\_\+file}}
+\index{ps\+\_\+set\+\_\+lm\+\_\+file@{ps\+\_\+set\+\_\+lm\+\_\+file}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+lm\+\_\+file()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+lm\+\_\+file (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Adds new search based on N-\/gram language model. 
+
+Convenient method to load N-\/gram model and create a search.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+lm}{p.}{ps__search_8h_aa76b495c63c665a21a49d7cb51c66d74} 
+\end{DoxySeeAlso}
+
+
+Definition at line 603 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::config, ps\+\_\+decoder\+\_\+s\+::lmath, and ps\+\_\+set\+\_\+lm().
+
+\mbox{\label{ps__search_8h_a4072a93e8ce9a4229d17c9bce6ad1083}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+set\+\_\+search@{ps\+\_\+set\+\_\+search}}
+\index{ps\+\_\+set\+\_\+search@{ps\+\_\+set\+\_\+search}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+set\+\_\+search()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+set\+\_\+search (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Actives search with the provided name. 
+
+Activates search with the provided name. The search must be added before using either \doxyref{ps\+\_\+set\+\_\+fsg()}{p.}{ps__search_8h_afde3539cbbf8c67cb98a02ca779055af}, \doxyref{ps\+\_\+set\+\_\+lm()}{p.}{ps__search_8h_aa76b495c63c665a21a49d7cb51c66d74} or \doxyref{ps\+\_\+set\+\_\+kws()}{p.}{ps__search_8h_a0780564ad3f12179b0291ac87774cea1}.
+
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+
+
+Definition at line 483 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::search.
+
+\mbox{\label{ps__search_8h_a300fd82f4b1621663a0d870da61497b0}} 
+\index{ps\+\_\+search.\+h@{ps\+\_\+search.\+h}!ps\+\_\+unset\+\_\+search@{ps\+\_\+unset\+\_\+search}}
+\index{ps\+\_\+unset\+\_\+search@{ps\+\_\+unset\+\_\+search}!ps\+\_\+search.\+h@{ps\+\_\+search.\+h}}
+\subsubsection{ps\+\_\+unset\+\_\+search()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int ps\+\_\+unset\+\_\+search (\begin{DoxyParamCaption}\item[{\textbf{ ps\+\_\+decoder\+\_\+t} $\ast$}]{ps,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Unsets the search and releases related resources. 
+
+Unsets the search previously added with using either \doxyref{ps\+\_\+set\+\_\+fsg()}{p.}{ps__search_8h_afde3539cbbf8c67cb98a02ca779055af}, \doxyref{ps\+\_\+set\+\_\+lm()}{p.}{ps__search_8h_aa76b495c63c665a21a49d7cb51c66d74} or \doxyref{ps\+\_\+set\+\_\+kws()}{p.}{ps__search_8h_a0780564ad3f12179b0291ac87774cea1}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{ps\+\_\+set\+\_\+fsg}{p.}{ps__search_8h_afde3539cbbf8c67cb98a02ca779055af} 
+
+\doxyref{ps\+\_\+set\+\_\+lm}{p.}{ps__search_8h_aa76b495c63c665a21a49d7cb51c66d74} 
+
+\doxyref{ps\+\_\+set\+\_\+kws}{p.}{ps__search_8h_a0780564ad3f12179b0291ac87774cea1} 
+\end{DoxySeeAlso}
+
+
+Definition at line 516 of file pocketsphinx.\+c.
+
+
+
+References ps\+\_\+decoder\+\_\+s\+::search, and ps\+\_\+decoder\+\_\+s\+::searches.
+

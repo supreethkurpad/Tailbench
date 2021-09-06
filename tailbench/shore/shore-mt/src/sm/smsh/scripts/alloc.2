@@ -1,0 +1,191 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: alloc.2,v 1.20.4.4 2010/03/19 22:20:35 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#
+#
+#        Test allocation & deallocation of pages
+#
+#   NB: The statistics-gathering checks assertions on the files 
+#   don't when transactions are operating on the same files - 
+#   one MUST use audit=true to make the stats-gathering function
+#   grab the necessary locks to make it safe.
+#
+
+source $script_dir/vol.init
+
+# format for body size -- >= one page
+set formsize [expr { $lg_rec_page_space - 10} ]
+
+set nrecs 10
+set nrecs 2
+
+proc t1 {} {
+    global volid  f0 r0 formsize nrecs
+    sm begin_xct
+    verbose t1 is xact [sm xct]
+
+verbose sync t1-1
+sync "t1-1"
+
+    verbose t1 creating $nrecs more recs ...
+    for { set i 1} { $i <= $nrecs} { incr i} {
+        set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i] ]
+        verbose t1 created rec $j
+    }
+    verbose t1 created $nrecs recs file $f0
+
+verbose sync t1-2
+sync "t1-2"
+
+    scanit $f0 t1
+    sm commit_xct
+
+    sm begin_xct
+    verbose t1 2nd xct re-scanning
+    scanit $f0 t1
+    sm commit_xct
+}
+proc scanit { f who } {
+    global verbose_flag
+    verbose $who BEFORE SCAN:
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+        verbose $who scanned [sm pin_rid $pin]
+        set pin [sm scan_file_next $scan 0]
+        set i [expr {$i+1} ]
+    }
+
+    # verbose LOCK TABLE AFTER SCAN in $who:
+    # sm dump_locks
+
+    sm scan_file_destroy $scan
+    verbose $who scan found $i records
+}
+
+proc t2 {} {
+    global volid  f0 logging
+    sm begin_xct
+    verbose t2 xact is  [sm xct]
+    verbose t2 destroying all records ...
+    set scan [sm scan_file_create $f0 t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+        verbose $pin
+        verbose t2 destroy_rec [sm pin_rid $pin]
+        sm destroy_rec [sm pin_rid $pin]
+        set pin [sm scan_file_next $scan 0]
+        set i [expr {$i+1} ]
+    }
+    sm scan_file_destroy $scan
+    verbose t2 destroyed $i recs file $f0
+
+    scanit $f0 t2
+
+verbose sync t2-1
+sync "t2-1"
+
+    if {$logging==0} {
+        verbose Logging off: substituting commit for abort
+        sm commit_xct
+    } else {
+        verbose t2 aborting...
+        sm abort_xct
+        verbose t2 aborted finished...
+    }
+
+    sm begin_xct
+    verbose t2 2nd xct re-scanning
+    scanit $f0 t2
+    sm commit_xct
+
+verbose sync t2-2
+sync "t2-2"
+
+verbose end of t2:
+}
+
+
+sm begin_xct
+set f0 [sm create_file $volid]]
+verbose created file $f0 -- stats after create file
+dstats $volid
+
+
+
+for { set i 1} { $i <= $nrecs } { incr i} {
+    set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i] ]
+    verbose created rec $j
+}
+verbose created $nrecs recs file $f0
+sm commit_xct
+
+sm begin_xct
+scanit $f0 t0
+sm commit_xct
+
+
+set y1 [fork_thread t1 {}]
+set y2 [fork_thread t2 {}]
+
+# sm dump_threads
+
+# t1-1 and t2-1
+# t1 could jump in and try to create the records before
+# t2 can scan. Then we could hang unless we sync it first.
+verbose sync_thread $y1 $y2
+sync_thread $y1 $y2
+
+#t1-2
+verbose sync_thread $y1 
+sync_thread $y1
+#t2-2
+verbose sync_thread $y2 
+sync_thread $y2
+
+verbose join_thread $y1 $y2
+join_thread $y1 $y2
+
+verbose after join
+
+sm begin_xct
+scanit $f0 t0
+sm commit_xct
+
+sm begin_xct
+dstats $volid
+sm destroy_file $f0
+dstats $volid
+sm commit_xct
+
+unset f0 y1 y2 nrecs formsize i j
+

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structBCinfo" kind="struct" language="C++" prot="public">
+    <compoundname>BCinfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structBCinfo_1a3465f7cb1203532a3dc29c5a01e05526" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BCinfo::e0</definition>
+        <argsstring></argsstring>
+        <name>e0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/dtoa.c" line="290" column="1" bodyfile="src/libsphinxbase/util/dtoa.c" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structBCinfo_1ac189da9f6f82f8846017c40e5872e4a7" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BCinfo::nd</definition>
+        <argsstring></argsstring>
+        <name>nd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/dtoa.c" line="290" column="1" bodyfile="src/libsphinxbase/util/dtoa.c" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structBCinfo_1a9d30accd41a03e88ebd52591258b76fa" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BCinfo::nd0</definition>
+        <argsstring></argsstring>
+        <name>nd0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/dtoa.c" line="290" column="1" bodyfile="src/libsphinxbase/util/dtoa.c" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structBCinfo_1a59b720f0388e80e21b950723aa53b56e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int BCinfo::scale</definition>
+        <argsstring></argsstring>
+        <name>scale</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/dtoa.c" line="290" column="1" bodyfile="src/libsphinxbase/util/dtoa.c" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/util/dtoa.c" line="289" column="1" bodyfile="src/libsphinxbase/util/dtoa.c" bodystart="288" bodyend="291"/>
+    <listofallmembers>
+      <member refid="structBCinfo_1a3465f7cb1203532a3dc29c5a01e05526" prot="public" virt="non-virtual"><scope>BCinfo</scope><name>e0</name></member>
+      <member refid="structBCinfo_1ac189da9f6f82f8846017c40e5872e4a7" prot="public" virt="non-virtual"><scope>BCinfo</scope><name>nd</name></member>
+      <member refid="structBCinfo_1a9d30accd41a03e88ebd52591258b76fa" prot="public" virt="non-virtual"><scope>BCinfo</scope><name>nd0</name></member>
+      <member refid="structBCinfo_1a59b720f0388e80e21b950723aa53b56e" prot="public" virt="non-virtual"><scope>BCinfo</scope><name>scale</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,231 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.2,v 1.44.2.1 2009/09/14 00:10:46 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test file create and destroy
+#
+source $script_dir/vol.init
+
+if { $logging==0 } {
+    echo "Logging off: script not run. "
+} else {
+
+verbose gathering volume stats
+dstats $volid
+sm begin_xct
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+
+verbose after create
+dstats $f1
+
+set r1 [sm create_rec $f1 hdr1 11 mike]
+verbose r1 = $r1
+set read_result [sm read_rec $r1 0 0]
+verbose read of $r1: $read_result
+
+set r2 [sm create_rec $f1 hdr12345 11 abcdefghijklmnopqrstuvwxyz]
+verbose r2 = $r2
+set read_result [sm read_rec $r2 0 0]
+verbose read of $r2: $read_result
+
+set r3 [sm create_rec $f1 hdr12345 11 1234]
+verbose r3 = $r3
+set read_result [sm read_rec $r3 0 0]
+verbose read of $r3: $read_result
+
+sm update_rec $r2 3 DEFG
+set read_result [sm read_rec $r2 0 0]
+verbose read of $r2: $read_result
+
+sm update_rec_hdr $r2 3 WXYZ
+verbose check of update_rec_hdr $r2: [sm read_rec $r2 0 0]
+
+sm append_rec $r2 123456
+verbose check of append $r2: [sm read_rec $r2 0 0]
+
+sm append_rec $r2 7890
+verbose check of append $r2: [sm read_rec $r2 0 0]
+
+sm truncate_rec $r2 3 
+verbose check of truncate $r2: [sm read_rec $r2 0 0]
+
+sm truncate_rec $r2 20 
+verbose check of truncate $r2: [sm read_rec $r2 0 0]
+
+sm truncate_rec $r3 4
+verbose check of truncate $r3: [sm read_rec $r3 0 0]
+
+sm append_rec $r3 abcd
+verbose check of append $r3: [sm read_rec $r3 0 0]
+
+verbose Attempting scans 1  $f1 
+sm scan_recs $f1
+
+verbose Attempting scans 2  $f1 $r2
+sm scan_recs $f1 $r2
+
+verbose Attempting scans 3 from start...
+set scan [sm scan_file_create $f1 t_cc_record]
+set pin [sm scan_file_next $scan 0]
+while {$pin != "NULL"} {
+    verbose found record [sm pin_rid $pin]
+    set pin [sm scan_file_next $scan 0]
+}
+sm scan_file_destroy $scan
+
+
+verbose BEFORE commit
+dstats $f1
+sm commit_xct
+
+
+sm begin_xct
+set catcherr 1
+catch {sm get_du_statistics $f1} 
+sm commit_xct
+
+sm begin_xct
+
+verbose destroying all records ...
+set scan [sm scan_file_create $f1 t_cc_record]
+verbose set pin ...
+set pin [sm scan_file_next $scan 0]
+while {$pin != "NULL"} {
+	verbose sm destroy_rec [sm pin_rid $pin]
+    sm destroy_rec [sm pin_rid $pin]
+	verbose destroyed ... getting next
+    set pin [sm scan_file_next $scan 0]
+	verbose next returned $pin
+}
+verbose destroy $scan
+sm scan_file_destroy $scan
+
+sm destroy_file $f1
+verbose Verifying file destroy -- THIS SHOULD GENERATE 2 ERRORS
+
+catch {sm scan_recs $f1} catcherr
+verbose (EXPECTED) scan_recs error: $catcherr
+catch {sm read_rec $r2 0 0} catcherr
+verbose (EXPECTED) read_rec error: $catcherr
+
+verbose aborting file destroy
+sm abort_xct
+
+verbose "re-scanning file"
+
+sm begin_xct
+catch {sm scan_recs $f1} catcherr
+sm destroy_file $f1
+verbose committing file destroy
+sm commit_xct
+
+sm begin_xct
+verbose Verifying file destroy -- THIS SHOULD GENERATE 2 ERRORS
+
+catch {sm scan_recs $f1} catcherr
+verbose (EXPECTED) scan_recs error: $catcherr
+catch {sm read_rec $r2 0 0} catcherr
+verbose (EXPECTED) read_rec error: $catcherr
+
+sm commit_xct
+verbose committed last xct
+
+
+#
+# The purpose of the follow code is to test scanning a file
+# a page at a time
+#
+verbose testing file scan, 1 page at a time...
+
+catch {unset r}
+
+sm begin_xct
+set f10 [sm create_file $volid]
+set rec_size [expr $max_small_rec/2]
+
+for {set i 1} {$i <= 3} {incr i} {
+    # record r is first on a new page
+    set r($i) [sm create_rec $f10 "" 11 [formatlong 0 $rec_size %0d $i]]
+    sm create_rec $f10 "" 11 "dummy record"
+    sm create_rec $f10 "" 11 "dummy record"
+}
+
+verbose testing scan_next_page
+set scan [sm scan_file_create $f10 t_cc_page]
+set pin [sm scan_file_next_page $scan 0]
+set i 1
+while {$pin != "NULL"} {
+    verbose [sm pin_rid $pin] == $r($i)
+    assert {expr [string compare [sm pin_rid $pin] $r($i)] == 0}
+    set pin [sm scan_file_next_page $scan 0]
+    incr i
+}
+sm scan_file_destroy $scan
+verbose destroying file $f10
+sm destroy_file $f10
+verbose commit
+sm commit_xct
+
+dstats $volid
+
+
+
+#
+# Now we test for a page space allocation bug.
+#
+# It will die with:
+#     w (fatal): assertion failed in "page.cpp:85"
+# while aborting the last transaction
+#
+set hdr8 ""
+set d4 [format %04d 1 ]
+set d36 [format %036d 1 ]
+
+sm begin_xct
+set f [sm create_file $volid]
+set r2 [sm create_rec $f $hdr8 0 $d36]
+verbose create rec $r2
+verbose destroy rec $r2
+sm destroy_rec $r2
+verbose create new rec 1
+sm create_rec $f $hdr8 0 $d4
+verbose create new rec 2
+sm create_rec $f $hdr8 0 $d4
+
+verbose abort
+sm abort_xct
+
+unset i r r1 r2 r3
+unset rec_size read_result
+unset hdr8 d4 pin d36 scan
+unset f f10 f1
+unset catcherr
+}
+

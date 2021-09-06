@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structvad__data__s" kind="struct" language="C++" prot="public">
+    <compoundname>vad_data_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvad__data__s_1a7fcf13dc6c3a82f78ada0ecba3d24a7c" prot="public" static="no" mutable="no">
+        <type>uint8</type>
+        <definition>uint8 vad_data_s::in_speech</definition>
+        <argsstring></argsstring>
+        <name>in_speech</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/fe_internal.h" line="110" column="1" bodyfile="src/libsphinxbase/fe/fe_internal.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvad__data__s_1aed450610319fbbb871b59af6304291b0" prot="public" static="no" mutable="no">
+        <type>int16</type>
+        <definition>int16 vad_data_s::pre_speech_frames</definition>
+        <argsstring></argsstring>
+        <name>pre_speech_frames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/fe_internal.h" line="111" column="1" bodyfile="src/libsphinxbase/fe/fe_internal.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvad__data__s_1af52e7fa8b38e1668a379b544d897f4f9" prot="public" static="no" mutable="no">
+        <type>int16</type>
+        <definition>int16 vad_data_s::post_speech_frames</definition>
+        <argsstring></argsstring>
+        <name>post_speech_frames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/fe_internal.h" line="112" column="1" bodyfile="src/libsphinxbase/fe/fe_internal.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvad__data__s_1a940abb6ae872a35dc8a7f405e5e7a6a6" prot="public" static="no" mutable="no">
+        <type><ref refid="structprespch__buf__s" kindref="compound">prespch_buf_t</ref> *</type>
+        <definition>prespch_buf_t* vad_data_s::prespch_buf</definition>
+        <argsstring></argsstring>
+        <name>prespch_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/fe_internal.h" line="113" column="1" bodyfile="src/libsphinxbase/fe/fe_internal.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="306">
+        <label>vad_data_s</label>
+        <link refid="structvad__data__s"/>
+        <childnode refid="307" relation="usage">
+          <edgelabel>prespch_buf</edgelabel>
+        </childnode>
+      </node>
+      <node id="307">
+        <label>prespch_buf_s</label>
+        <link refid="structprespch__buf__s"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/fe/fe_internal.h" line="109" column="1" bodyfile="src/libsphinxbase/fe/fe_internal.h" bodystart="109" bodyend="114"/>
+    <listofallmembers>
+      <member refid="structvad__data__s_1a7fcf13dc6c3a82f78ada0ecba3d24a7c" prot="public" virt="non-virtual"><scope>vad_data_s</scope><name>in_speech</name></member>
+      <member refid="structvad__data__s_1af52e7fa8b38e1668a379b544d897f4f9" prot="public" virt="non-virtual"><scope>vad_data_s</scope><name>post_speech_frames</name></member>
+      <member refid="structvad__data__s_1aed450610319fbbb871b59af6304291b0" prot="public" virt="non-virtual"><scope>vad_data_s</scope><name>pre_speech_frames</name></member>
+      <member refid="structvad__data__s_1a940abb6ae872a35dc8a7f405e5e7a6a6" prot="public" virt="non-virtual"><scope>vad_data_s</scope><name>prespch_buf</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

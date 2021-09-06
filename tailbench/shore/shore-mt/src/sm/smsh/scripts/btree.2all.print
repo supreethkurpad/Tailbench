@@ -1,0 +1,170 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.2all.print,v 1.9.2.2 2010/01/12 02:01:59 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+
+#  test all types of btree keys
+# same as 2all but NEEDS verbose on. Only runs tests for the
+# kinds of print that are supported so far,
+# and use a small number of records
+#
+#
+# NB: To make see this, you have to uncomment out the sm->print_index()
+# call in shell2.cpp in the test_typed_btree function.
+
+set nrec 10
+#
+
+#
+# start up
+#
+source $script_dir/vol.init
+
+set ok 1
+set bad 0
+set save_random 0
+
+
+verbose "testing integer key btree (non-unique)"
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+
+set old_verbose $verbose_flag
+set verbose_flag 1
+
+if { $ok } {
+    # ok on pentium
+    verbose sm test_typed_btree $volid $nrec f8
+    if { $save_random } { write_random ssh.seed.f8 }
+    sm test_typed_btree $volid $nrec f8
+
+}
+if { $ok } {
+    # ok on pentium
+    verbose sm test_typed_btree $volid $nrec f4
+    if { $save_random } { write_random ssh.seed.f4 }
+    sm test_typed_btree $volid $nrec f4
+}
+
+if { $ok } {
+	# ok on pentium
+
+sm commit_xct
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+
+    verbose sm test_typed_btree $volid $nrec i4
+    if { $save_random } { write_random ssh.seed.i4 }
+    sm test_typed_btree $volid $nrec i4
+
+}
+if { $ok } {
+	# ok on pentium
+
+    verbose sm test_typed_btree $volid $nrec i2
+    if { $save_random } { write_random ssh.seed.i2 }
+    sm test_typed_btree $volid $nrec i2
+
+}
+if { $ok } {
+    # problem on pentium
+
+    verbose sm test_typed_btree $volid $nrec i1
+    if { $save_random } { write_random ssh.seed.i1 }
+    sm test_typed_btree $volid $nrec i1
+
+}
+if { $ok } {
+	# ok on pentium
+ 
+sm commit_xct
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+
+    verbose sm test_typed_btree $volid $nrec b1
+    if { $save_random } { write_random ssh.seed.b1 }
+    sm test_typed_btree $volid $nrec b1
+
+}
+
+if { $ok } {
+    # ok on pentium
+    # get errors
+    verbose sm test_typed_btree $volid $nrec b23
+    if { $save_random } { write_random ssh.seed.b23 }
+    sm test_typed_btree $volid $nrec b23
+
+}
+if { $ok } {
+    # ok on pentium
+
+    verbose sm test_typed_btree $volid $nrec b*1000
+    if { $save_random } { write_random ssh.seed.b1000 }
+    sm test_typed_btree $volid $nrec b*1000
+
+
+sm commit_xct
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+
+}
+
+if { $ok } {
+	# OK
+    verbose sm test_typed_btree $volid $nrec u4
+    # read_random ssh.seed.u4
+    if { $save_random } { write_random ssh.seed.u4 }
+    sm test_typed_btree $volid $nrec u4
+
+}
+
+if { $ok } {
+	#oK
+    verbose sm test_typed_btree $volid $nrec u2
+    # read_random ssh.seed.u2
+    if { $save_random } { write_random ssh.seed.u2 }
+    sm test_typed_btree $volid $nrec u2
+
+}
+if { $ok } {
+	#problem
+    verbose sm test_typed_btree $volid $nrec u1
+    # read_random ssh.seed.u1
+    if { $save_random } { write_random ssh.seed.u1 }
+    sm test_typed_btree $volid $nrec u1
+
+}
+
+sm commit_xct
+
+set verbose_flag $old_verbose
+
+unset nrec old_verbose
+unset bad ok save_random
+

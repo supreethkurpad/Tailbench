@@ -1,0 +1,230 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.1,v 1.24 1999/06/07 19:05:31 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test Large records
+#
+source $script_dir/vol.init
+
+set num_rec 4
+
+#
+# checkrec:
+# reads $rid($i) and checks header
+# for expected value and length.
+# if 2nd arg($content) is 1,
+# it inspects body also
+#
+proc checkrec {i bodycontent} {
+    global rid id_width
+    global pattern
+    set r [sm read_rec $rid($i) 0 0]
+    set id [format $id_width $i]
+    # check body and hdr
+    # verbose rid=[lindex $r 0]
+    set sizes [lindex $r 1]
+    set hdr [lindex $r 2]
+    verbose assert {expr [string compare $hdr hdr=$id] == 0}
+    assert {expr [string compare $hdr hdr=$id] == 0}
+    set body [lindex $r 4]
+    set blength [string length $body]
+    scan [lindex $r 3] "Bytes:%d-%d" first last
+    verbose $blength == $last?
+    assert {expr {$blength == $last}}
+    set cmp [string range $pattern 0 [expr {$last - 1}]]
+
+    if [expr {$bodycontent == 1}] {
+	set plength [string length $pattern]
+	scan $sizes "size(h.b)=%d.%d" first last
+	verbose $plength == $last?
+	assert {expr {$plength == $last}}
+
+	verbose $body == $cmp?
+	assert {expr [string compare $body $cmp] == 0}
+    }
+    verbose "check completed"
+}
+
+set id_width %08d
+
+set s [format data 1]
+
+set_config_info
+
+if {$page_size == 8192} {
+    set pattern_cnt 3200
+} else {
+    set pattern_cnt 400
+}
+
+set pattern_block ".123456789"
+set pattern ""
+for {set i 0} {$i < $pattern_cnt} {incr i} {
+    set pattern $pattern$pattern_block
+    #verbose $pattern
+}
+
+###############################################
+#  create  num_rec records
+#
+sm begin_xct
+set fid [sm create_file $volid ]
+set rid(0) $null_rid
+verbose creating $num_rec 
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set rid($i) [
+	sm create_rec $fid [format $id_width $i] 2000 $pattern
+    ]
+    verbose created $i
+}
+verbose done creating $num_rec records
+sm commit_xct
+
+sm begin_xct
+verbose checking all recs
+for {set i 2} {$i <= $num_rec} {incr i} {
+    checkrec $i 1
+}
+sm commit_xct
+
+dstats $volid
+
+###############################################
+#   read inserted records
+#
+sm begin_xct
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set r [sm read_rec $rid($i) 0 0]
+    set id [format $id_width $i]
+    #verbose $i $id $r
+    set hdr [lindex $r 2]
+    assert {expr {[string compare $hdr hdr=$id] == 0}}
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+verbose scanning after separate scan using pin
+sm scan_recs $fid
+
+sm commit_xct
+
+sm begin_xct
+###############################################
+#   append to the records
+#
+verbose APPEND hello ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm append_rec $rid($i) "hello"
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+verbose APPEND AAApattern ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm append_rec $rid($i) AAA$pattern
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+verbose scanning after separate scan using pin
+sm scan_recs $fid
+
+###############################################
+#   update the records
+#
+verbose UPDATE 970 hello ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm update_rec $rid($i) 970 hello 
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+verbose UPDATE 1910 hello_this_is_a_long_update ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm update_rec $rid($i) 1910 hello_this_is_a_long_update 
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+verbose UPDATE 1964 aaapattern ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm update_rec $rid($i) 1944 aaapatternzzz
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+###############################################
+#   truncate the records
+#
+verbose TRUNCATE 2 ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm truncate_rec $rid($i) 2 
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+verbose TRUNCATE 2000 ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm truncate_rec $rid($i) 2000
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+verbose TRUNCATE (to cause forwarding with logical IDs) ...
+for {set i 1} {$i <= $num_rec} {incr i} {
+    sm truncate_rec $rid($i) 5541
+    verbose [sm read_rec $rid($i) 0 0 ]
+}
+
+sm commit_xct
+
+###############################################
+#   delete all odd records
+verbose DESTROY all odd records
+sm begin_xct
+verbose destroying [expr $num_rec/2]
+for {set i 1} {$i <= $num_rec} {incr i; incr i} {
+    sm destroy_rec $rid($i)
+}
+sm commit_xct
+
+###############################################
+#   re-read even records
+#
+verbose checking even records
+sm begin_xct
+for {set i 2} {$i <= $num_rec} {incr i; incr i} {
+    checkrec $i 0
+}
+verbose trying an odd record -- THIS SHOULD GENERATE AN ERROR
+catch {[sm read_rec $rid(1) 0 0]} result
+verbose $result
+
+verbose trying an even record
+verbose [sm read_rec $rid(2) 0 0]
+
+sm commit_xct
+
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct
+
+unset r pattern pattern_cnt rid pattern_block s id_width
+unset result id fid hdr num_rec i 
+
+return "lgrec.1 done"
+

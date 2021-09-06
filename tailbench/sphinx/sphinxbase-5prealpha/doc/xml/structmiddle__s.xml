@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structmiddle__s" kind="struct" language="C++" prot="public">
+    <compoundname>middle_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmiddle__s_1a06bca01f45a1e2a9d0ee8040e22beddc" prot="public" static="no" mutable="no">
+        <type><ref refid="structbase__s" kindref="compound">base_t</ref></type>
+        <definition>base_t middle_s::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="68" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmiddle__s_1a6b56277629ab1b401f9a961b0c6141c0" prot="public" static="no" mutable="no">
+        <type><ref refid="bitarr_8h_1abcb7d3674c4b4bbed7af00ddfc07a11f" kindref="member">bitarr_mask_t</ref></type>
+        <definition>bitarr_mask_t middle_s::next_mask</definition>
+        <argsstring></argsstring>
+        <name>next_mask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="69" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmiddle__s_1a24db9be23c98fa75868e1eab3fa65983" prot="public" static="no" mutable="no">
+        <type>uint8</type>
+        <definition>uint8 middle_s::quant_bits</definition>
+        <argsstring></argsstring>
+        <name>quant_bits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="70" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmiddle__s_1abde413ddd25555083c3e4d2d7f9c8dcd" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* middle_s::next_source</definition>
+        <argsstring></argsstring>
+        <name>next_source</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="71" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="186">
+        <label>base_s</label>
+        <link refid="structbase__s"/>
+      </node>
+      <node id="185">
+        <label>bitarr_mask_s</label>
+        <link refid="structbitarr__mask__s"/>
+      </node>
+      <node id="184">
+        <label>middle_s</label>
+        <link refid="structmiddle__s"/>
+        <childnode refid="185" relation="usage">
+          <edgelabel>next_mask</edgelabel>
+        </childnode>
+        <childnode refid="186" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/lm_trie.h" line="67" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="67" bodyend="72"/>
+    <listofallmembers>
+      <member refid="structmiddle__s_1a06bca01f45a1e2a9d0ee8040e22beddc" prot="public" virt="non-virtual"><scope>middle_s</scope><name>base</name></member>
+      <member refid="structmiddle__s_1a6b56277629ab1b401f9a961b0c6141c0" prot="public" virt="non-virtual"><scope>middle_s</scope><name>next_mask</name></member>
+      <member refid="structmiddle__s_1abde413ddd25555083c3e4d2d7f9c8dcd" prot="public" virt="non-virtual"><scope>middle_s</scope><name>next_source</name></member>
+      <member refid="structmiddle__s_1a24db9be23c98fa75868e1eab3fa65983" prot="public" virt="non-virtual"><scope>middle_s</scope><name>quant_bits</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,106 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lock.1,v 1.20 1999/06/07 19:05:33 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  This script tests 6x6 lock compatibility table on volume,
+#  file, and record.
+#
+
+catch {unset rid}
+catch {unset fid}
+
+
+set lock_mode 		{IS IX SH SIX UD EX}
+set rid			"k(s(10.0).100.200)"
+set fid			"s(10.0)"
+set vid			"10"
+
+proc get_lock {id mode compat} {
+    sm begin_xct
+    set e [catch { sm lock $id $mode INSTANT 0}]
+    sm commit_xct
+
+    #
+    # If compat is 1, then e should be 0; it means locks are compatible.
+    # If compat is 0, then e should be 1; it means locks are incompatible.
+    #
+    assert {expr $compat != $e}
+}
+
+############################################################
+#   for each mode in lock_mode, 
+#	acquire the lock in mode,
+#	for each cmode in lock_mode,
+#	    fork a child to get the lock in cmode in INSTANT duration,
+#	    check to see if it can acquire the lock according to compat table
+#
+proc lock_test { id } {
+    global lock_mode
+    global compat
+    global verbose_flag
+
+    foreach mode $lock_mode {
+	sm begin_xct
+	sm lock $id $mode LONG
+	if {$verbose_flag}  {sm dump_locks}
+
+	foreach cmode $lock_mode {
+	    verbose ====  $mode  and  $cmode  ====
+
+	    set job [fork_thread get_lock $id $cmode $compat($mode,$cmode)]
+	    join_thread $job
+	}
+	verbose VTABLE LOCK:
+	vtable lock
+
+	verbose VTABLE XCT:
+	vtable xct
+
+	sm commit_xct
+	if {$verbose_flag}  {sm dump_locks}
+	# verbose press RETURN to continue
+	# gets stdin
+    }
+}
+
+verbose "TEST:\t6x6 Lock Compatibility on Record, File, and Volume"
+
+verbose "\n*******  Volume Locking  *******\n"
+lock_test $vid
+
+verbose "\n*******  File Locking  *******\n"
+lock_test $fid
+
+verbose "\n*******  Record Locking  *******\n"
+lock_test $rid
+
+verbose "STATUS:\tOK"
+
+unset lock_mode rid vid fid
+

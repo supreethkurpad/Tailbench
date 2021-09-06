@@ -1,0 +1,90 @@
+
+proc writer {rid1 rid2} {
+    global sync_result gs
+    link_to_inter_thread_comm_buffer sync_result
+	set null "            "
+
+	#-------------------------------------------------------------------
+	# STEP 1
+	#-------------------------------------------------------------------
+	# ------------------------------------ sync 1
+    verbose $null writer: sync 1  " WWWWWWWWWWWWWWWWWWWWW "
+    named_sync 3 "1-WWWWWWWWW"
+    verbose $null writer: got sync 1  
+
+	## reader does work:
+	##     opens quark, pins rid2, sets sync_result
+
+	# wait until forker prints sync_result
+	# ------------------------------------ sync 1-result
+    verbose $null writer: waiting sync 1-result-ready  
+    named_sync 3 "1-result-ready (writer)"
+    verbose $null writer: got sync 1-result-ready  
+
+    verbose $null writer: waiting sync 1-result  
+    named_sync 3 "1-result (writer)"
+    verbose $null writer: got sync 1-result  
+
+	#-------------------------------------------------------------------
+	# STEP 2
+	#-------------------------------------------------------------------
+	## writer (me) does work:
+	##   pin rec1, 
+	##   update it, 
+	##   set sync_result
+	## while reader waits for sync 2
+
+
+    sm begin_xct
+    set pin [sm pin_create]
+    verbose $null writer: pinning $rid1 for write
+    sm pin_pin $pin $rid1 0
+
+    verbose $null writer: pin_update_rec $rid1 X
+    sm pin_update_rec $pin 1 "X"
+
+    verbose $null writer: pinned $rid1 done, unpinning
+    sm pin_unpin $pin
+
+	# ------------------------------------ sync 6
+    verbose $null writer: sync 6  " WWWWWWWWWWWWWWWWWWWWWWW "
+    named_sync 3 "6-WWWWWWWWWWWWWW"
+	# ------------------------------------ sync 7
+    verbose $null writer: sync 7  " WWWWWWWWWWWWWWWWWWWWWWW "
+    named_sync 3 "7-WWWWWWWWWWWWWW"
+	# ------------------------------------ sync 8
+    verbose $null writer: sync 8  " WWWWWWWWWWWWWWWWWWWWWWW "
+    named_sync 2 "8-WWWWWWWWWWWWWW"
+
+    verbose $null writer: $rid1 $rid2
+    set sync_result "$rid1 updated"
+    verbose $null writer: set sync_result to $sync_result
+
+	# ------------------------------------ sync 9
+    verbose $null writer: sync 9  " WWWWWWWWWWWWWWWWWWWWWWW "
+    named_sync 2 "9-WWWWWWWWWWWWWW"
+
+	# ------------------------------------ sync 10
+    verbose $null writer: sync 10  " WWWWWWWWWWWWWWWWWWWWWWW "
+    named_sync 2 "10-WWWWWWWWWWWWWW"
+	## reader pins and unpins
+
+    verbose $null writer: pin $rid2
+    sm pin_pin $pin $rid2 0
+
+    verbose $null writer: pinning $rid2 for write
+    sm pin_update_rec $pin 1 "X"
+
+    set sync_result "$rid2 updated"
+    verbose $null writer: set sync_result to $sync_result
+
+	# ------------------------------------ sync 11
+    verbose $null writer: sync 11  " WWWWWWWWWWWWWWWWWWWWWWW "
+    named_sync 2 "10-WWWWWWWWWWWWWW"
+
+    sm pin_destroy $pin
+    verbose $null writer: committing
+    sm commit_xct
+
+    verbose $null writer: done
+}

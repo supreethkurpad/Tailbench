@@ -1,0 +1,8 @@
+import modules ;
+local TBENCH_PATH = [ modules.peek : TBENCH_PATH ] ;
+
+fakelib OnDiskPt : OnDiskWrapper.cpp SourcePhrase.cpp TargetPhrase.cpp Word.cpp Phrase.cpp PhraseNode.cpp TargetPhraseCollection.cpp Vocab.cpp OnDiskQuery.cpp ../moses//headers ;
+
+exe CreateOnDiskPt : Main.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses OnDiskPt ;
+exe queryOnDiskPt : queryOnDiskPt.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses OnDiskPt ;
+

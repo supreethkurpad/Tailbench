@@ -1,0 +1,347 @@
+\section{src/libpocketsphinx/dict.h File Reference}
+\label{dict_8h}\index{src/libpocketsphinx/dict.\+h@{src/libpocketsphinx/dict.\+h}}
+
+
+Operations on dictionary.  
+
+
+{\ttfamily \#include $<$sphinxbase/hash\+\_\+table.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}s3types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bin\+\_\+mdef.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pocketsphinx\+\_\+export.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ dictword\+\_\+t}
+\begin{DoxyCompactList}\small\item\em a structure for one dictionary word. \end{DoxyCompactList}\item 
+struct \textbf{ dict\+\_\+t}
+\begin{DoxyCompactList}\small\item\em a structure for a dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{dict_8h_a8d8a7f13ae4607c024a3e9f0c34ba2b9}} 
+\#define {\bfseries S3\+D\+I\+C\+T\+\_\+\+I\+N\+C\+\_\+\+SZ}~4096
+\item 
+\mbox{\label{dict_8h_a361b948b42f9cfdf5c7fa9dfc8a71a94}} 
+\#define \textbf{ dict\+\_\+size}(d)~((d)-\/$>$n\+\_\+word)
+\begin{DoxyCompactList}\small\item\em Packaged macro access to dictionary members. \end{DoxyCompactList}\item 
+\mbox{\label{dict_8h_a21147dad416a87bf085b86bc32a62810}} 
+\#define {\bfseries dict\+\_\+num\+\_\+fillers}(d)~(dict\+\_\+filler\+\_\+end(d) -\/ dict\+\_\+filler\+\_\+start(d))
+\item 
+\#define \textbf{ dict\+\_\+num\+\_\+real\+\_\+words}(d)~(\textbf{ dict\+\_\+size}(d) -\/ (dict\+\_\+filler\+\_\+end(d) -\/ dict\+\_\+filler\+\_\+start(d)) -\/ 2)
+\begin{DoxyCompactList}\small\item\em Number of \char`\"{}real words\char`\"{} in the dictionary. \end{DoxyCompactList}\item 
+\mbox{\label{dict_8h_a5ad27f5fb02c9f5dd811e0d04aca9231}} 
+\#define {\bfseries dict\+\_\+basewid}(d,  w)~((d)-\/$>$word[w].basewid)
+\item 
+\mbox{\label{dict_8h_a960244692f448457dbea9498108fe2d9}} 
+\#define {\bfseries dict\+\_\+wordstr}(d,  w)~((w) $<$ 0 ? N\+U\+LL \+: (d)-\/$>$word[w].word)
+\item 
+\mbox{\label{dict_8h_a84df59782b43012dafcaebc716cbd932}} 
+\#define {\bfseries dict\+\_\+basestr}(d,  w)~((d)-\/$>$word[dict\+\_\+basewid(d,w)].word)
+\item 
+\mbox{\label{dict_8h_ad28133467ed803b4219ae1452bff929c}} 
+\#define {\bfseries dict\+\_\+nextalt}(d,  w)~((d)-\/$>$word[w].alt)
+\item 
+\mbox{\label{dict_8h_ab40570a0b06cdcbc9a22d9777936e780}} 
+\#define {\bfseries dict\+\_\+pronlen}(d,  w)~((d)-\/$>$word[w].pronlen)
+\item 
+\mbox{\label{dict_8h_a8785ab6264a5c6cf0b8da6bf79a46de4}} 
+\#define \textbf{ dict\+\_\+pron}(d,  w,  p)~((d)-\/$>$word[w].ciphone[p])
+\begin{DoxyCompactList}\small\item\em The CI phones of the word w at position p. \end{DoxyCompactList}\item 
+\mbox{\label{dict_8h_aa6e902650918309eb90b83cbbed96401}} 
+\#define {\bfseries dict\+\_\+filler\+\_\+start}(d)~((d)-\/$>$filler\+\_\+start)
+\item 
+\mbox{\label{dict_8h_a236a26fcd9e5464631c563a03e05c719}} 
+\#define {\bfseries dict\+\_\+filler\+\_\+end}(d)~((d)-\/$>$filler\+\_\+end)
+\item 
+\mbox{\label{dict_8h_a56c28444a8e3ffeb71a3329df2509257}} 
+\#define {\bfseries dict\+\_\+startwid}(d)~((d)-\/$>$startwid)
+\item 
+\mbox{\label{dict_8h_ab00b6ceb46292b3c10b571d5cc7eac1d}} 
+\#define {\bfseries dict\+\_\+finishwid}(d)~((d)-\/$>$finishwid)
+\item 
+\mbox{\label{dict_8h_a3e35b701bf6eefd7c17436a45409b623}} 
+\#define {\bfseries dict\+\_\+silwid}(d)~((d)-\/$>$silwid)
+\item 
+\mbox{\label{dict_8h_addf34f870858c4dd751896113c6f62b4}} 
+\#define {\bfseries dict\+\_\+is\+\_\+single\+\_\+phone}(d,  w)~((d)-\/$>$word[w].pronlen == 1)
+\item 
+\mbox{\label{dict_8h_aac0e78a257dde5c082fe2053b19c7346}} 
+\#define {\bfseries dict\+\_\+first\+\_\+phone}(d,  w)~((d)-\/$>$word[w].ciphone[0])
+\item 
+\mbox{\label{dict_8h_a6504d5e7dcac8096894e1a8cea35b7db}} 
+\#define {\bfseries dict\+\_\+second\+\_\+phone}(d,  w)~((d)-\/$>$word[w].ciphone[1])
+\item 
+\mbox{\label{dict_8h_a75ebbbca085999e695278cc3c02895ef}} 
+\#define {\bfseries dict\+\_\+second\+\_\+last\+\_\+phone}(d,  w)~((d)-\/$>$word[w].ciphone[(d)-\/$>$word[w].pronlen -\/ 2])
+\item 
+\mbox{\label{dict_8h_a47f1f648ae9d6544ec067d2a327d1316}} 
+\#define {\bfseries dict\+\_\+last\+\_\+phone}(d,  w)~((d)-\/$>$word[w].ciphone[(d)-\/$>$word[w].pronlen -\/ 1])
+\item 
+\mbox{\label{dict_8h_a383b5d67202951a19989b0fca2e5462b}} 
+\#define {\bfseries S3\+\_\+\+S\+T\+A\+R\+T\+\_\+\+W\+O\+RD}~\char`\"{}$<$s$>$\char`\"{}
+\item 
+\mbox{\label{dict_8h_a22c7450ba073a0d1e1a3a2a99304d5c8}} 
+\#define {\bfseries S3\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+W\+O\+RD}~\char`\"{}$<$/s$>$\char`\"{}
+\item 
+\mbox{\label{dict_8h_afb3127621782f91be8536c2c95a20dd8}} 
+\#define {\bfseries S3\+\_\+\+S\+I\+L\+E\+N\+C\+E\+\_\+\+W\+O\+RD}~\char`\"{}$<$sil$>$\char`\"{}
+\item 
+\mbox{\label{dict_8h_a07d5343a9b10d6f6ea885c28c5d36a4b}} 
+\#define {\bfseries S3\+\_\+\+U\+N\+K\+N\+O\+W\+N\+\_\+\+W\+O\+RD}~\char`\"{}$<$U\+NK$>$\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ dict\+\_\+t} $\ast$ \textbf{ dict\+\_\+init} (cmd\+\_\+ln\+\_\+t $\ast$config, \textbf{ bin\+\_\+mdef\+\_\+t} $\ast$mdef)
+\begin{DoxyCompactList}\small\item\em Initialize a new dictionary. \end{DoxyCompactList}\item 
+\mbox{\label{dict_8h_a4bfa8e3b7b9ff30165375d1c97bb04b8}} 
+int \textbf{ dict\+\_\+write} (\textbf{ dict\+\_\+t} $\ast$dict, char const $\ast$filename, char const $\ast$format)
+\begin{DoxyCompactList}\small\item\em Write dictionary to a file. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT s3wid\+\_\+t \textbf{ dict\+\_\+wordid} (\textbf{ dict\+\_\+t} $\ast$d, const char $\ast$word)
+\begin{DoxyCompactList}\small\item\em Return word id for given word string if present. \end{DoxyCompactList}\item 
+int \textbf{ dict\+\_\+filler\+\_\+word} (\textbf{ dict\+\_\+t} $\ast$d, s3wid\+\_\+t w)
+\begin{DoxyCompactList}\small\item\em Return 1 if w is a filler word, 0 if not. \end{DoxyCompactList}\item 
+P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int \textbf{ dict\+\_\+real\+\_\+word} (\textbf{ dict\+\_\+t} $\ast$d, s3wid\+\_\+t w)
+\begin{DoxyCompactList}\small\item\em Test if w is a \char`\"{}real\char`\"{} word, i.\+e. \end{DoxyCompactList}\item 
+s3wid\+\_\+t \textbf{ dict\+\_\+add\+\_\+word} (\textbf{ dict\+\_\+t} $\ast$d, char const $\ast$word, \textbf{ s3cipid\+\_\+t} const $\ast$p, int32 np)
+\begin{DoxyCompactList}\small\item\em Add a word with the given ciphone pronunciation list to the dictionary. \end{DoxyCompactList}\item 
+const char $\ast$ \textbf{ dict\+\_\+ciphone\+\_\+str} (\textbf{ dict\+\_\+t} $\ast$d, s3wid\+\_\+t wid, int32 pos)
+\begin{DoxyCompactList}\small\item\em Return value\+: CI phone string for the given word, phone position. \end{DoxyCompactList}\item 
+int32 \textbf{ dict\+\_\+word2basestr} (char $\ast$word)
+\begin{DoxyCompactList}\small\item\em If the given word contains a trailing \char`\"{}(....)\char`\"{} (i.\+e., a Sphinx-\/\+II style alternative pronunciation specification), strip that trailing portion from it. \end{DoxyCompactList}\item 
+\mbox{\label{dict_8h_a0edf70be186e8940af9d21243083cb8b}} 
+\textbf{ dict\+\_\+t} $\ast$ \textbf{ dict\+\_\+retain} (\textbf{ dict\+\_\+t} $\ast$d)
+\begin{DoxyCompactList}\small\item\em Retain a pointer to an \doxyref{dict\+\_\+t}{p.}{structdict__t}. \end{DoxyCompactList}\item 
+\mbox{\label{dict_8h_a51ee6c067decce8dbc182f95f7b33e91}} 
+int \textbf{ dict\+\_\+free} (\textbf{ dict\+\_\+t} $\ast$d)
+\begin{DoxyCompactList}\small\item\em Release a pointer to a dictionary. \end{DoxyCompactList}\item 
+void \textbf{ dict\+\_\+report} (\textbf{ dict\+\_\+t} $\ast$d)
+\begin{DoxyCompactList}\small\item\em Report a dictionary structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Operations on dictionary. 
+
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{dict_8h_a529d92f69f39e1f8c4a94e60a9509201}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+num\+\_\+real\+\_\+words@{dict\+\_\+num\+\_\+real\+\_\+words}}
+\index{dict\+\_\+num\+\_\+real\+\_\+words@{dict\+\_\+num\+\_\+real\+\_\+words}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+num\+\_\+real\+\_\+words}
+{\footnotesize\ttfamily \#define dict\+\_\+num\+\_\+real\+\_\+words(\begin{DoxyParamCaption}\item[{}]{d }\end{DoxyParamCaption})~(\textbf{ dict\+\_\+size}(d) -\/ (dict\+\_\+filler\+\_\+end(d) -\/ dict\+\_\+filler\+\_\+start(d)) -\/ 2)}
+
+
+
+Number of \char`\"{}real words\char`\"{} in the dictionary. 
+
+This is the number of words that are not fillers, $<$s$>$, or $<$/s$>$. 
+
+Definition at line 158 of file dict.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{dict_8h_a24888ac8e24259e553c43c4655b38432}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+add\+\_\+word@{dict\+\_\+add\+\_\+word}}
+\index{dict\+\_\+add\+\_\+word@{dict\+\_\+add\+\_\+word}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+add\+\_\+word()}
+{\footnotesize\ttfamily s3wid\+\_\+t dict\+\_\+add\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ dict\+\_\+t} $\ast$}]{d,  }\item[{char const $\ast$}]{word,  }\item[{\textbf{ s3cipid\+\_\+t} const $\ast$}]{p,  }\item[{int32}]{np }\end{DoxyParamCaption})}
+
+
+
+Add a word with the given ciphone pronunciation list to the dictionary. 
+
+Return value\+: Result word id if successful, B\+A\+D\+\_\+\+S3\+W\+ID otherwise 
+\begin{DoxyParams}{Parameters}
+{\em d} & The dictionary structure. \\
+\hline
+{\em word} & The word. \\
+\hline
+{\em p} & The pronunciation. \\
+\hline
+{\em np} & Number of phones. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 80 of file dict.\+c.
+
+
+
+References dict\+\_\+t\+::max\+\_\+words, and dict\+\_\+t\+::n\+\_\+word.
+
+
+
+Referenced by ps\+\_\+add\+\_\+word().
+
+\mbox{\label{dict_8h_a8587d077f5303554df0e26a181bfb0bf}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+ciphone\+\_\+str@{dict\+\_\+ciphone\+\_\+str}}
+\index{dict\+\_\+ciphone\+\_\+str@{dict\+\_\+ciphone\+\_\+str}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+ciphone\+\_\+str()}
+{\footnotesize\ttfamily const char$\ast$ dict\+\_\+ciphone\+\_\+str (\begin{DoxyParamCaption}\item[{\textbf{ dict\+\_\+t} $\ast$}]{d,  }\item[{s3wid\+\_\+t}]{wid,  }\item[{int32}]{pos }\end{DoxyParamCaption})}
+
+
+
+Return value\+: CI phone string for the given word, phone position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & In\+: Dictionary to look up \\
+\hline
+{\em wid} & In\+: Component word being looked up \\
+\hline
+{\em pos} & In\+: Pronunciation phone position \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 69 of file dict.\+c.
+
+
+
+References bin\+\_\+mdef\+\_\+ciphone\+\_\+str(), dictword\+\_\+t\+::ciphone, dict\+\_\+t\+::mdef, and dict\+\_\+t\+::word.
+
+\mbox{\label{dict_8h_aa5cade4dc6464c620718b86344540aff}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+filler\+\_\+word@{dict\+\_\+filler\+\_\+word}}
+\index{dict\+\_\+filler\+\_\+word@{dict\+\_\+filler\+\_\+word}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+filler\+\_\+word()}
+{\footnotesize\ttfamily int dict\+\_\+filler\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ dict\+\_\+t} $\ast$}]{d,  }\item[{s3wid\+\_\+t}]{w }\end{DoxyParamCaption})}
+
+
+
+Return 1 if w is a filler word, 0 if not. 
+
+A filler word is one that was read in from the filler dictionary; however, sentence S\+T\+A\+RT and F\+I\+N\+I\+SH words are not filler words. 
+\begin{DoxyParams}{Parameters}
+{\em d} & The dictionary structure \\
+\hline
+{\em w} & The word ID \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 413 of file dict.\+c.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+bestpath(), ps\+\_\+lattice\+\_\+penalize\+\_\+fillers(), and ps\+\_\+lattice\+\_\+posterior().
+
+\mbox{\label{dict_8h_a05d8dac3e5fe5399ccb8bf7776e203e2}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+init@{dict\+\_\+init}}
+\index{dict\+\_\+init@{dict\+\_\+init}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+init()}
+{\footnotesize\ttfamily \textbf{ dict\+\_\+t}$\ast$ dict\+\_\+init (\begin{DoxyParamCaption}\item[{cmd\+\_\+ln\+\_\+t $\ast$}]{config,  }\item[{\textbf{ bin\+\_\+mdef\+\_\+t} $\ast$}]{mdef }\end{DoxyParamCaption})}
+
+
+
+Initialize a new dictionary. 
+
+If config and mdef are supplied, then the dictionary will be read from the files specified by the -\/dict and -\/fdict options in config, with case sensitivity determined by the -\/dictcase option.
+
+Otherwise an empty case-\/sensitive dictionary will be created.
+
+Return ptr to \doxyref{dict\+\_\+t}{p.}{structdict__t} if successful, N\+U\+LL otherwise. 
+\begin{DoxyParams}{Parameters}
+{\em config} & Configuration (-\/dict, -\/fdict, -\/dictcase) or N\+U\+LL \\
+\hline
+{\em mdef} & For looking up CI phone I\+Ds (or N\+U\+LL) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 252 of file dict.\+c.
+
+
+
+References dict\+\_\+t\+::max\+\_\+words.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+read(), and ps\+\_\+load\+\_\+dict().
+
+\mbox{\label{dict_8h_ad2eba4ca92dd1a3721608e003d95d8c1}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+real\+\_\+word@{dict\+\_\+real\+\_\+word}}
+\index{dict\+\_\+real\+\_\+word@{dict\+\_\+real\+\_\+word}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+real\+\_\+word()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT int dict\+\_\+real\+\_\+word (\begin{DoxyParamCaption}\item[{\textbf{ dict\+\_\+t} $\ast$}]{d,  }\item[{s3wid\+\_\+t}]{w }\end{DoxyParamCaption})}
+
+
+
+Test if w is a \char`\"{}real\char`\"{} word, i.\+e. 
+
+neither a filler word nor S\+T\+A\+R\+T/\+F\+I\+N\+I\+SH. 
+\begin{DoxyParams}{Parameters}
+{\em d} & The dictionary structure \\
+\hline
+{\em w} & The word ID \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 427 of file dict.\+c.
+
+
+
+Referenced by dict\+\_\+write(), ps\+\_\+astar\+\_\+hyp(), and ps\+\_\+lattice\+\_\+hyp().
+
+\mbox{\label{dict_8h_a41cca433a75fd2663bee115296639666}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+report@{dict\+\_\+report}}
+\index{dict\+\_\+report@{dict\+\_\+report}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+report()}
+{\footnotesize\ttfamily void dict\+\_\+report (\begin{DoxyParamCaption}\item[{\textbf{ dict\+\_\+t} $\ast$}]{d }\end{DoxyParamCaption})}
+
+
+
+Report a dictionary structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & A dictionary structure \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 499 of file dict.\+c.
+
+
+
+References dict\+\_\+t\+::max\+\_\+words, and dict\+\_\+t\+::n\+\_\+word.
+
+\mbox{\label{dict_8h_a3a128531ae9c077be9882119ed05fe3a}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+word2basestr@{dict\+\_\+word2basestr}}
+\index{dict\+\_\+word2basestr@{dict\+\_\+word2basestr}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+word2basestr()}
+{\footnotesize\ttfamily int32 dict\+\_\+word2basestr (\begin{DoxyParamCaption}\item[{char $\ast$}]{word }\end{DoxyParamCaption})}
+
+
+
+If the given word contains a trailing \char`\"{}(....)\char`\"{} (i.\+e., a Sphinx-\/\+II style alternative pronunciation specification), strip that trailing portion from it. 
+
+Note that the given string is modified. Return value\+: If string was modified, the character position at which the original string was truncated; otherwise -\/1. 
+
+Definition at line 442 of file dict.\+c.
+
+\mbox{\label{dict_8h_ad3729eb1a02a9a321e17933f7e90c80e}} 
+\index{dict.\+h@{dict.\+h}!dict\+\_\+wordid@{dict\+\_\+wordid}}
+\index{dict\+\_\+wordid@{dict\+\_\+wordid}!dict.\+h@{dict.\+h}}
+\subsubsection{dict\+\_\+wordid()}
+{\footnotesize\ttfamily P\+O\+C\+K\+E\+T\+S\+P\+H\+I\+N\+X\+\_\+\+E\+X\+P\+O\+RT s3wid\+\_\+t dict\+\_\+wordid (\begin{DoxyParamCaption}\item[{\textbf{ dict\+\_\+t} $\ast$}]{d,  }\item[{const char $\ast$}]{word }\end{DoxyParamCaption})}
+
+
+
+Return word id for given word string if present. 
+
+Otherwise return B\+A\+D\+\_\+\+S3\+W\+ID 
+
+Definition at line 399 of file dict.\+c.
+
+
+
+References B\+A\+D\+\_\+\+S3\+W\+ID, and dict\+\_\+t\+::ht.
+
+
+
+Referenced by ps\+\_\+lookup\+\_\+word().
+

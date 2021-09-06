@@ -1,0 +1,548 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="ngrams__raw_8h" kind="file" language="C++">
+    <compoundname>ngrams_raw.h</compoundname>
+    <includes refid="hash__table_8h" local="no">sphinxbase/hash_table.h</includes>
+    <includes refid="logmath_8h" local="no">sphinxbase/logmath.h</includes>
+    <includes refid="prim__type_8h" local="no">sphinxbase/prim_type.h</includes>
+    <includes refid="pio_8h" local="no">sphinxbase/pio.h</includes>
+    <includes refid="err_8h" local="no">sphinxbase/err.h</includes>
+    <includedby refid="lm__trie__quant_8h" local="yes">src/libsphinxbase/lm/lm_trie_quant.h</includedby>
+    <includedby refid="ngrams__raw_8c" local="yes">src/libsphinxbase/lm/ngrams_raw.c</includedby>
+    <incdepgraph>
+      <node id="2065">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="2055">
+        <label>sphinxbase/sphinxbase_export.h</label>
+        <link refid="sphinxbase__export_8h_source"/>
+      </node>
+      <node id="2063">
+        <label>stdarg.h</label>
+      </node>
+      <node id="2059">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2054">
+        <label>sphinxbase/hash_table.h</label>
+        <link refid="hash__table_8h"/>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+        <childnode refid="2058" relation="include">
+        </childnode>
+      </node>
+      <node id="2067">
+        <label>errno.h</label>
+      </node>
+      <node id="2056">
+        <label>sphinxbase/prim_type.h</label>
+        <link refid="prim__type_8h"/>
+        <childnode refid="2057" relation="include">
+        </childnode>
+      </node>
+      <node id="2060">
+        <label>sphinxbase/logmath.h</label>
+        <link refid="logmath_8h"/>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+        <childnode refid="2061" relation="include">
+        </childnode>
+      </node>
+      <node id="2061">
+        <label>sphinxbase/cmd_ln.h</label>
+        <link refid="cmd__ln_8h"/>
+        <childnode refid="2062" relation="include">
+        </childnode>
+        <childnode refid="2063" relation="include">
+        </childnode>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+      </node>
+      <node id="2057">
+        <label>sphinx_config.h</label>
+      </node>
+      <node id="2058">
+        <label>sphinxbase/glist.h</label>
+        <link refid="glist_8h"/>
+        <childnode refid="2059" relation="include">
+        </childnode>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+      </node>
+      <node id="2066">
+        <label>sphinxbase/err.h</label>
+        <link refid="err_8h"/>
+        <childnode refid="2063" relation="include">
+        </childnode>
+        <childnode refid="2062" relation="include">
+        </childnode>
+        <childnode refid="2059" relation="include">
+        </childnode>
+        <childnode refid="2067" relation="include">
+        </childnode>
+        <childnode refid="2055" relation="include">
+        </childnode>
+      </node>
+      <node id="2064">
+        <label>sphinxbase/pio.h</label>
+        <link refid="pio_8h"/>
+        <childnode refid="2062" relation="include">
+        </childnode>
+        <childnode refid="2065" relation="include">
+        </childnode>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+      </node>
+      <node id="2062">
+        <label>stdio.h</label>
+      </node>
+      <node id="2053">
+        <label>src/libsphinxbase/lm/ngrams_raw.h</label>
+        <link refid="ngrams__raw_8h"/>
+        <childnode refid="2054" relation="include">
+        </childnode>
+        <childnode refid="2060" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+        <childnode refid="2064" relation="include">
+        </childnode>
+        <childnode refid="2066" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2073">
+        <label>src/libsphinxbase/lm/ngram_model.c</label>
+        <link refid="ngram__model_8c_source"/>
+      </node>
+      <node id="2074">
+        <label>src/libsphinxbase/lm/ngram_model_trie.c</label>
+        <link refid="ngram__model__trie_8c_source"/>
+      </node>
+      <node id="2072">
+        <label>src/libsphinxbase/lm/ngram_model_trie.h</label>
+        <link refid="ngram__model__trie_8h_source"/>
+        <childnode refid="2073" relation="include">
+        </childnode>
+        <childnode refid="2074" relation="include">
+        </childnode>
+      </node>
+      <node id="2075">
+        <label>src/libsphinxbase/lm/lm_trie_quant.c</label>
+        <link refid="lm__trie__quant_8c_source"/>
+      </node>
+      <node id="2069">
+        <label>src/libsphinxbase/lm/lm_trie_quant.h</label>
+        <link refid="lm__trie__quant_8h_source"/>
+        <childnode refid="2070" relation="include">
+        </childnode>
+        <childnode refid="2071" relation="include">
+        </childnode>
+        <childnode refid="2075" relation="include">
+        </childnode>
+      </node>
+      <node id="2071">
+        <label>src/libsphinxbase/lm/lm_trie.c</label>
+        <link refid="lm__trie_8c_source"/>
+      </node>
+      <node id="2070">
+        <label>src/libsphinxbase/lm/lm_trie.h</label>
+        <link refid="lm__trie_8h_source"/>
+        <childnode refid="2071" relation="include">
+        </childnode>
+        <childnode refid="2072" relation="include">
+        </childnode>
+      </node>
+      <node id="2076">
+        <label>src/libsphinxbase/lm/ngrams_raw.c</label>
+        <link refid="ngrams__raw_8c_source"/>
+      </node>
+      <node id="2068">
+        <label>src/libsphinxbase/lm/ngrams_raw.h</label>
+        <link refid="ngrams__raw_8h"/>
+        <childnode refid="2069" relation="include">
+        </childnode>
+        <childnode refid="2076" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structngram__raw__s" prot="public">ngram_raw_s</innerclass>
+    <innerclass refid="structngram__raw__ord__s" prot="public">ngram_raw_ord_s</innerclass>
+    <innerclass refid="uniondmp__weight__t" prot="public">dmp_weight_t</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ngrams__raw_8h_1a299c2575dfe3a70fac45536ada4629a8" prot="public" static="no">
+        <type>struct <ref refid="structngram__raw__s" kindref="compound">ngram_raw_s</ref></type>
+        <definition>typedef struct ngram_raw_s  ngram_raw_t</definition>
+        <argsstring></argsstring>
+        <name>ngram_raw_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="ngrams__raw_8h_1abe601cc895feb1ec7bd09efc038aa930" prot="public" static="no">
+        <type>struct <ref refid="structngram__raw__ord__s" kindref="compound">ngram_raw_ord_s</ref></type>
+        <definition>typedef struct ngram_raw_ord_s  ngram_raw_ord_t</definition>
+        <argsstring></argsstring>
+        <name>ngram_raw_ord_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="55" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ngrams__raw_8h_1ad9b65b2469269b2db3080af4684be00c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ngram_comparator</definition>
+        <argsstring>(const void *first_void, const void *second_void)</argsstring>
+        <name>ngram_comparator</name>
+        <param>
+          <type>const void *</type>
+          <declname>first_void</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>second_void</declname>
+        </param>
+        <briefdescription>
+<para>Raw ngrams comparator. </para>        </briefdescription>
+        <detaileddescription>
+<para>Usage: <blockquote><para>ngram_comparator(NULL, &amp;order); - to set order of ngrams qsort(ngrams, count, sizeof(lm_ngram_t), &amp;ngram_comparator); - to sort ngrams in increasing order</para></blockquote></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="67" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.c" bodystart="52" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="ngrams__raw_8h_1a6b06c18a73b46b512f6222f64a02b1c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ngram_ord_comparator</definition>
+        <argsstring>(void *a_raw, void *b_raw)</argsstring>
+        <name>ngram_ord_comparator</name>
+        <param>
+          <type>void *</type>
+          <declname>a_raw</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>b_raw</declname>
+        </param>
+        <briefdescription>
+<para>Raw ordered ngrams comparator. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="72" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.c" bodystart="79" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="ngrams__raw_8h_1a1e4435db074872ba98ef1618951d1de8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref> **</type>
+        <definition>ngram_raw_t** ngrams_raw_read_arpa</definition>
+        <argsstring>(lineiter_t **li, logmath_t *lmath, uint32 *counts, int order, hash_table_t *wid)</argsstring>
+        <name>ngrams_raw_read_arpa</name>
+        <param>
+          <type><ref refid="structlineiter__t" kindref="compound">lineiter_t</ref> **</type>
+          <declname>li</declname>
+        </param>
+        <param>
+          <type><ref refid="logmath_8h_1ae613aa7db1dd40ff56a80a7dadb22cc8" kindref="member">logmath_t</ref> *</type>
+          <declname>lmath</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <param>
+          <type><ref refid="structhash__table__s" kindref="compound">hash_table_t</ref> *</type>
+          <declname>wid</declname>
+        </param>
+        <briefdescription>
+<para>Read ngrams of order &gt; 1 from ARPA file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>li</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] sphinxbase file line iterator that point to bigram description in ARPA file </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] hashtable that maps string word representation to id </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lmath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] log math used for log convertions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>counts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] amount of ngrams for each order </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] maximum order of ngrams </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>raw ngrams of order bigger than 1 </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="83" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.c" bodystart="200" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="ngrams__raw_8h_1ae6d8eeb6e9ff0725d3cfcfb272aadef6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref> **</type>
+        <definition>ngram_raw_t** ngrams_raw_read_dmp</definition>
+        <argsstring>(FILE *fp, logmath_t *lmath, uint32 *counts, int order, uint32 *unigram_next, uint8 do_swap)</argsstring>
+        <name>ngrams_raw_read_dmp</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="logmath_8h_1ae613aa7db1dd40ff56a80a7dadb22cc8" kindref="member">logmath_t</ref> *</type>
+          <declname>lmath</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>unigram_next</declname>
+        </param>
+        <param>
+          <type>uint8</type>
+          <declname>do_swap</declname>
+        </param>
+        <briefdescription>
+<para>Reads ngrams of order &gt; 1 from DMP file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] file to read from. Position in file corresponds to start of bigram description </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lmath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] log math used for log convertions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>counts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] amount of ngrams for each order </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] maximum order of ngrams </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>unigram_next</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] array of next word pointers for unigrams. Needed to define forst word of bigrams </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>do_swap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[in] wether to do swap of bits </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>raw ngrams of order bigger than 1 </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="97" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.c" bodystart="264" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="ngrams__raw_8h_1a13a477b8bdcdbecd7fd66994bf562b6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngrams_raw_fix_counts</definition>
+        <argsstring>(ngram_raw_t **raw_ngrams, uint32 *counts, uint32 *fixed_counts, int order)</argsstring>
+        <name>ngrams_raw_fix_counts</name>
+        <param>
+          <type><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref> **</type>
+          <declname>raw_ngrams</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>fixed_counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="101" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.c" bodystart="391" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="ngrams__raw_8h_1a132d88ec45af931090297f43d3206c28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ngrams_raw_free</definition>
+        <argsstring>(ngram_raw_t **raw_ngrams, uint32 *counts, int order)</argsstring>
+        <name>ngrams_raw_free</name>
+        <param>
+          <type><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref> **</type>
+          <declname>raw_ngrams</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngrams_raw.h" line="104" column="1" bodyfile="src/libsphinxbase/lm/ngrams_raw.c" bodystart="457" bodyend="470"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c-basic-offset:<sp/>4;<sp/>indent-tabs-mode:<sp/>nil<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2015<sp/>Carnegie<sp/>Mellon<sp/>University.<sp/><sp/>All<sp/>rights</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>1.<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.<sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>2.<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>distribution.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>This<sp/>work<sp/>was<sp/>supported<sp/>in<sp/>part<sp/>by<sp/>funding<sp/>from<sp/>the<sp/>Defense<sp/>Advanced<sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Research<sp/>Projects<sp/>Agency<sp/>and<sp/>the<sp/>National<sp/>Science<sp/>Foundation<sp/>of<sp/>the<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>United<sp/>States<sp/>of<sp/>America,<sp/>and<sp/>the<sp/>CMU<sp/>Sphinx<sp/>Speech<sp/>Consortium.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY<sp/>``AS<sp/>IS&apos;&apos;<sp/>AND<sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>ANY<sp/>EXPRESSED<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/><sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>NOR<sp/>ITS<sp/>EMPLOYEES<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__NGRAMS_RAW_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NGRAMS_RAW_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="hash__table_8h" kindref="compound">sphinxbase/hash_table.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="logmath_8h" kindref="compound">sphinxbase/logmath.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="prim__type_8h" kindref="compound">sphinxbase/prim_type.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="pio_8h" kindref="compound">sphinxbase/pio.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="err_8h" kindref="compound">sphinxbase/err.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="structngram__raw__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__raw__s" kindref="compound">ngram_raw_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>*words;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>array<sp/>of<sp/>word<sp/>indexes,<sp/>length<sp/>corresponds<sp/>to<sp/>ngram<sp/>order<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*weights;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>prob<sp/>and<sp/>backoff<sp/>or<sp/>just<sp/>prob<sp/>for<sp/>longest<sp/>order<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}<sp/><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="structngram__raw__ord__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structngram__raw__ord__s" kindref="compound">ngram_raw_ord_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref><sp/>instance;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}<sp/><ref refid="structngram__raw__ord__s" kindref="compound">ngram_raw_ord_t</ref>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="uniondmp__weight__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>float32<sp/>f;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>int32<sp/>l;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}<sp/><ref refid="uniondmp__weight__t" kindref="compound">dmp_weight_t</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ngram_comparator(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*first_void,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*second_void);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ngram_ord_comparator(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*a_raw,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*b_raw);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref><sp/>**ngrams_raw_read_arpa(<ref refid="structlineiter__t" kindref="compound">lineiter_t</ref><sp/>**<sp/>li,<sp/><ref refid="structlogmath__s" kindref="compound">logmath_t</ref><sp/>*<sp/>lmath,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32<sp/>*<sp/>counts,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhash__table__s" kindref="compound">hash_table_t</ref><sp/>*<sp/>wid);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref><sp/>**ngrams_raw_read_dmp(FILE<sp/>*<sp/>fp,<sp/><ref refid="structlogmath__s" kindref="compound">logmath_t</ref><sp/>*<sp/>lmath,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32<sp/>*<sp/>counts,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32<sp/>*<sp/>unigram_next,<sp/>uint8<sp/>do_swap);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ngrams_raw_fix_counts(<ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref><sp/>**<sp/>raw_ngrams,<sp/>uint32<sp/>*<sp/>counts,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32<sp/>*<sp/>fixed_counts,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ngrams_raw_free(<ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref><sp/>**<sp/>raw_ngrams,<sp/>uint32<sp/>*<sp/>counts,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>__LM_NGRAMS_RAW_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="src/libsphinxbase/lm/ngrams_raw.h"/>
+  </compounddef>
+</doxygen>

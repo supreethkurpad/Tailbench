@@ -1,0 +1,235 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: deadlock.6,v 1.1.2.3 2010/03/19 22:20:36 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# Test Upgrade deadlock detection
+#
+#    short_running depends on T1  but NOT on long_running
+#    T1 is in deadlock cycle and depends on long_running
+#    long_running depends on nothing but a sync.
+#    We want to be sure that T1's deadlock cycle is found so that short_running can
+#    finish before long_running.
+#
+#
+undef_named_sync 8 silent
+define_named_sync 8 8
+
+# make sure there is no overlap between the set of locks acquired by 
+# long_running and short_running
+# These are for long_running
+set LA "s(10.1)"
+
+# these are for short-running
+set SA "s(11.1)"
+
+# these are for the deadlock cycle: T1, T2, T3, T4
+set CA "s(12.1)"
+set CB "s(12.2)"
+set CC "s(12.3)"
+set CD "s(12.4)"
+set CE "s(12.5)"
+set CF "s(12.6)"
+set CG "s(12.7)"
+
+proc long_short {A nlong SA} {
+	# sm begin_xct lock-timeout
+	sm begin_xct 10000
+	set short [sm xct]
+	verbose short [sm xct_to_tid $short]
+	sm detach_xct $short
+
+
+	for {set i 1} {$i <= $nlong} {incr i} {
+	   sm begin_xct
+	   set long($i) [sm xct]
+	   set tid [sm xct_to_tid $long($i)]
+       sm lock $A SH LONG
+	   verbose $tid "long: acquired SH on " $A
+	   sm detach_xct $long($i)
+	}
+	verbose "{ long sync "
+    sync
+	verbose "long sync }"
+
+	for {set i 1} {$i <= $nlong} {incr i} {
+	   sm begin_xct
+	   set long2($i) [sm xct]
+	   set tid [sm xct_to_tid $long2($i)]
+       sm lock $A SH LONG
+	   verbose $tid "long: acquired SH on " $A
+	   sm detach_xct $long2($i)
+	}
+
+	# long isn't going anywhere until short finishes
+
+    sm attach_xct $short
+	sm lock_timeout 1000
+    set tid [sm xct_to_tid $short]
+    set caught [catch {sm lock $SA EX LONG} errorno]
+	if {$caught == 0} {
+		verbose $tid "short: acquired EX on " $SA
+		sm commit_xct
+		verbose "short committed -- SUCCESS"
+	} else {
+       verbose $tid "(EXPECTED E_LOCKTIMEOUT) error is $errorno"
+       assert {error_is $errorno E_LOCKTIMEOUT}
+       verbose $tid "committed - success iff something was aborted by deadlock"
+	   sm commit_xct
+    }
+
+	for {set i 1} {$i <= $nlong} {incr i} {
+		sm attach_xct $long($i)
+	    sm commit_xct
+		sm attach_xct $long2($i)
+	    sm commit_xct
+	}
+	verbose "longs committed"
+}
+
+# the problem here is that we don't know which one to make the short
+# wait for.  If we pick the wrong one, we could end up with a legit deadlock
+# involving our "waits-for" relationship here: cycle -> long -> short finishing 
+# -> that cycle xct.
+# If we make *all* the cycles acquire the SA lock, we are pretty likely to hit
+# a deadlock here.
+# The best we can do is make short wait on a timeout, and eventually finish; in this
+# case, success is determined by our having at least one abort.
+proc cycle {share1 share2 share3 excl} {
+    sm begin_xct
+	set tid [sm xct_to_tid [sm xct]]
+    sm lock $share1 SH LONG
+    verbose $tid "cycle: acquired SH on " $share1
+    sm lock $share2 SH LONG
+    verbose $tid "cycle: acquired SH on " $share2
+    sm lock $share3 SH LONG
+    verbose $tid "cycle: acquired SH on " $share3
+
+    named_sync 8 cycle-1
+
+    named_sync 8 cycle-2
+    verbose $tid "cycle: attempting to acquire EX on " $excl
+
+    # catch deadlock
+    verbose $tid "catch deadlock:"
+    set caught [catch {sm lock $excl EX LONG} errorno]
+	if {$caught == 0} {
+		verbose $tid "cycle: GOT EX on " $excl " committing"
+	   # verbose no error
+       sm commit_xct
+	} else {
+       verbose $tid "(EXPECTED E_DEADLOCK) error is $errorno"
+       assert {error_is $errorno E_DEADLOCK}
+       verbose $tid "aborting"
+	   sm abort_xct
+    }
+}
+
+set first [select_stat_value [sm gather_stats] abort_xct_cnt]
+
+if {0} {
+	set c1 [fork_thread cycle {$SA $LA $CA $CB}]
+	set c2 [fork_thread cycle {$SA $LA $CB $CC}]
+	set c3 [fork_thread cycle {$SA $LA $CC $CD}]
+	set c4 [fork_thread cycle {$SA $LA $CD $CE}]
+	set c5 [fork_thread cycle {$SA $LA $CE $CF}]
+	set c6 [fork_thread cycle {$SA $LA $CF $CG}]
+	set c7 [fork_thread cycle {$SA $LA $CG $CA}]
+
+	verbose named_sync for cycle
+	named_sync 8 "$c1 $c2 $c3 $c4 $c5 $c6 $c7"
+
+	verbose named_sync for cycle again
+	named_sync 8 "$c1 $c2 $c3 $c4 $c5 $c6 $c7"
+
+	join_thread $c1 $c2 $c3 $c4 $c5 $c6 $c7
+	unset c1 c2 c3 c4 c5 c6 c7
+}
+
+
+if {0} {
+	## Now try just long_short
+	set t1 [fork_thread long_short {$CA 4 $SA}]
+    # long_short started a bunch of xcts, they all 
+	# acquire CA in SH mode.
+
+	sync_thread $t1
+	join_thread $t1
+	unset t1 
+}
+
+if {1} {
+	## Now try this again with long_short
+	set t1 [fork_thread long_short {$CA 4 $SA}]
+    # long_short started a bunch of xcts, they all 
+	# acquire CA in SH mode.
+
+	set c1 [fork_thread cycle {$SA $LA $CA $CB}]
+	set c2 [fork_thread cycle {$SA $LA $CB $CC}]
+	set c3 [fork_thread cycle {$SA $LA $CC $CD}]
+	set c4 [fork_thread cycle {$SA $LA $CD $CE}]
+	set c5 [fork_thread cycle {$SA $LA $CE $CF}]
+	set c6 [fork_thread cycle {$SA $LA $CF $CG}]
+	set c7 [fork_thread cycle {$SA $LA $CG $CA}]
+
+	# cycle threads await 2nd sync. Put some long xcts in line behind
+	# one of them:
+	sync_thread $t1
+	# then it attaches short and short tries to acquire
+	# an EX lock on SA
+
+	# Now let the cycle be found. If it is found, the
+	# short xct can finish and so can the long one, as
+	# well as all but one of the cycle-threads
+	verbose named_sync for cycle
+	named_sync 8 "$c1 $c2 $c3 $c4 $c5 $c6 $c7"
+
+	verbose named_sync for cycle again
+	named_sync 8 "$c1 $c2 $c3 $c4 $c5 $c6 $c7"
+
+	join_thread $c1 $c2 $c3 $c4 $c5 $c6 $c7 $t1
+	unset t1 c1 c2 c3 c4 c5 c6 c7
+}
+
+
+set second [select_stat_value [sm gather_stats] abort_xct_cnt]
+set diff [expr { $second - $first }]
+if [expr {$diff > 0}] {
+    verbose SUCCESS
+} else {
+	# fail
+    assert {expr {$diff > 0} }
+}
+
+# echo [pnzstats [sm gather_stats]]
+
+unset SA LA CA CB CC CD CE CF CG
+
+echo unique: [select_stat_value [sm gather_stats] unique_fingerprints]
+echo nonunique: [select_stat_value [sm gather_stats] nonunique_fingerprints]
+
+unset first second diff

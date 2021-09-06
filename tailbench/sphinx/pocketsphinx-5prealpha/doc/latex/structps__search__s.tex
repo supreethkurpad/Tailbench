@@ -1,0 +1,286 @@
+\section{ps\+\_\+search\+\_\+s Struct Reference}
+\label{structps__search__s}\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+
+
+Base structure for search module.  
+
+
+
+
+{\ttfamily \#include $<$pocketsphinx\+\_\+internal.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ps\+\_\+searchfuncs\+\_\+t} $\ast$ \textbf{ vt}
+\begin{DoxyCompactList}\small\item\em V-\/table of search methods. \end{DoxyCompactList}\item 
+\mbox{\label{structps__search__s_a2f3a776232b9cc164924c415e6199eec}} 
+char $\ast$ {\bfseries type}
+\item 
+\mbox{\label{structps__search__s_ab2f99873dc24cee2cdfe9068d41f3617}} 
+char $\ast$ {\bfseries name}
+\item 
+\textbf{ ps\+\_\+search\+\_\+t} $\ast$ \textbf{ pls}
+\begin{DoxyCompactList}\small\item\em Phoneme loop for lookahead. \end{DoxyCompactList}\item 
+cmd\+\_\+ln\+\_\+t $\ast$ \textbf{ config}
+\begin{DoxyCompactList}\small\item\em Configuration. \end{DoxyCompactList}\item 
+\textbf{ acmod\+\_\+t} $\ast$ \textbf{ acmod}
+\begin{DoxyCompactList}\small\item\em Acoustic model. \end{DoxyCompactList}\item 
+\textbf{ dict\+\_\+t} $\ast$ \textbf{ dict}
+\begin{DoxyCompactList}\small\item\em Pronunciation dictionary. \end{DoxyCompactList}\item 
+\textbf{ dict2pid\+\_\+t} $\ast$ \textbf{ d2p}
+\begin{DoxyCompactList}\small\item\em Dictionary to senone mappings. \end{DoxyCompactList}\item 
+char $\ast$ \textbf{ hyp\+\_\+str}
+\begin{DoxyCompactList}\small\item\em Current hypothesis string. \end{DoxyCompactList}\item 
+\textbf{ ps\+\_\+lattice\+\_\+t} $\ast$ \textbf{ dag}
+\begin{DoxyCompactList}\small\item\em Current hypothesis word graph. \end{DoxyCompactList}\item 
+\textbf{ ps\+\_\+latlink\+\_\+t} $\ast$ \textbf{ last\+\_\+link}
+\begin{DoxyCompactList}\small\item\em Final link in best path. \end{DoxyCompactList}\item 
+int32 \textbf{ post}
+\begin{DoxyCompactList}\small\item\em Utterance posterior probability. \end{DoxyCompactList}\item 
+\mbox{\label{structps__search__s_ad4d98deb905bd664ec44313ea0065b1a}} 
+int32 \textbf{ n\+\_\+words}
+\begin{DoxyCompactList}\small\item\em Number of words known to search (may be less than in the dictionary) \end{DoxyCompactList}\item 
+int32 \textbf{ start\+\_\+wid}
+\begin{DoxyCompactList}\small\item\em Start word ID. \end{DoxyCompactList}\item 
+int32 \textbf{ silence\+\_\+wid}
+\begin{DoxyCompactList}\small\item\em Silence word ID. \end{DoxyCompactList}\item 
+int32 \textbf{ finish\+\_\+wid}
+\begin{DoxyCompactList}\small\item\em Finish word ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base structure for search module. 
+
+Definition at line 98 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structps__search__s_a0fdf6fe8c4d9c28f10c48c09517c6b91}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!acmod@{acmod}}
+\index{acmod@{acmod}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{acmod}
+{\footnotesize\ttfamily \textbf{ acmod\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::acmod}
+
+
+
+Acoustic model. 
+
+
+
+Definition at line 106 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+init\+\_\+search(), ps\+\_\+search\+\_\+init(), and ps\+\_\+seg\+\_\+frames().
+
+\mbox{\label{structps__search__s_aa6e3e18165bbc70084a06575d5703042}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!config@{config}}
+\index{config@{config}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{config}
+{\footnotesize\ttfamily cmd\+\_\+ln\+\_\+t$\ast$ ps\+\_\+search\+\_\+s\+::config}
+
+
+
+Configuration. 
+
+
+
+Definition at line 105 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+init\+\_\+search(), ps\+\_\+lattice\+\_\+read(), and ps\+\_\+search\+\_\+init().
+
+\mbox{\label{structps__search__s_a81b461e7ef3a080d046039e186134a15}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!d2p@{d2p}}
+\index{d2p@{d2p}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{d2p}
+{\footnotesize\ttfamily \textbf{ dict2pid\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::d2p}
+
+
+
+Dictionary to senone mappings. 
+
+
+
+Definition at line 108 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+search\+\_\+base\+\_\+free(), ps\+\_\+search\+\_\+base\+\_\+reinit(), and ps\+\_\+search\+\_\+init().
+
+\mbox{\label{structps__search__s_a897f46c55d17e817ff1364f555b31463}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!dag@{dag}}
+\index{dag@{dag}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{dag}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+lattice\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::dag}
+
+
+
+Current hypothesis word graph. 
+
+
+
+Definition at line 110 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+search\+\_\+base\+\_\+free(), and ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{structps__search__s_a918f243fa966e72c47f697fb9e60089d}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!dict@{dict}}
+\index{dict@{dict}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{dict}
+{\footnotesize\ttfamily \textbf{ dict\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::dict}
+
+
+
+Pronunciation dictionary. 
+
+
+
+Definition at line 107 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+lattice\+\_\+init\+\_\+search(), ps\+\_\+search\+\_\+base\+\_\+free(), ps\+\_\+search\+\_\+base\+\_\+reinit(), and ps\+\_\+search\+\_\+init().
+
+\mbox{\label{structps__search__s_a0fb4d79f1084bdbbc0a808513f7c1ca7}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!finish\+\_\+wid@{finish\+\_\+wid}}
+\index{finish\+\_\+wid@{finish\+\_\+wid}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{finish\+\_\+wid}
+{\footnotesize\ttfamily int32 ps\+\_\+search\+\_\+s\+::finish\+\_\+wid}
+
+
+
+Finish word ID. 
+
+
+
+Definition at line 119 of file pocketsphinx\+\_\+internal.\+h.
+
+\mbox{\label{structps__search__s_aa398c736a887af97e42b2a562359adc3}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!hyp\+\_\+str@{hyp\+\_\+str}}
+\index{hyp\+\_\+str@{hyp\+\_\+str}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{hyp\+\_\+str}
+{\footnotesize\ttfamily char$\ast$ ps\+\_\+search\+\_\+s\+::hyp\+\_\+str}
+
+
+
+Current hypothesis string. 
+
+
+
+Definition at line 109 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+search\+\_\+base\+\_\+free(), and ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{structps__search__s_aa3020ef7bd4e56713dfe2fbad52e6e4f}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!last\+\_\+link@{last\+\_\+link}}
+\index{last\+\_\+link@{last\+\_\+link}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{last\+\_\+link}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+latlink\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::last\+\_\+link}
+
+
+
+Final link in best path. 
+
+
+
+Definition at line 111 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{structps__search__s_a2a33b7698fb237b42e007788f65cd46c}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!pls@{pls}}
+\index{pls@{pls}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{pls}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+search\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::pls}
+
+
+
+Phoneme loop for lookahead. 
+
+
+
+Definition at line 104 of file pocketsphinx\+\_\+internal.\+h.
+
+\mbox{\label{structps__search__s_a721a656d0e34f7604ea8c52a1bdf14ff}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!post@{post}}
+\index{post@{post}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{post}
+{\footnotesize\ttfamily int32 ps\+\_\+search\+\_\+s\+::post}
+
+
+
+Utterance posterior probability. 
+
+
+
+Definition at line 112 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+start\+\_\+utt().
+
+\mbox{\label{structps__search__s_ab6851b4675f38ab6b3683d75521f000b}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!silence\+\_\+wid@{silence\+\_\+wid}}
+\index{silence\+\_\+wid@{silence\+\_\+wid}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{silence\+\_\+wid}
+{\footnotesize\ttfamily int32 ps\+\_\+search\+\_\+s\+::silence\+\_\+wid}
+
+
+
+Silence word ID. 
+
+
+
+Definition at line 118 of file pocketsphinx\+\_\+internal.\+h.
+
+\mbox{\label{structps__search__s_ae1a9fa33bfc851ec91ce96870714b3cc}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!start\+\_\+wid@{start\+\_\+wid}}
+\index{start\+\_\+wid@{start\+\_\+wid}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{start\+\_\+wid}
+{\footnotesize\ttfamily int32 ps\+\_\+search\+\_\+s\+::start\+\_\+wid}
+
+
+
+Start word ID. 
+
+
+
+Definition at line 117 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+search\+\_\+base\+\_\+reinit(), and ps\+\_\+search\+\_\+init().
+
+\mbox{\label{structps__search__s_aa51e88956bbe9c05359d32526180809b}} 
+\index{ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}!vt@{vt}}
+\index{vt@{vt}!ps\+\_\+search\+\_\+s@{ps\+\_\+search\+\_\+s}}
+\subsubsection{vt}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+searchfuncs\+\_\+t}$\ast$ ps\+\_\+search\+\_\+s\+::vt}
+
+
+
+V-\/table of search methods. 
+
+
+
+Definition at line 99 of file pocketsphinx\+\_\+internal.\+h.
+
+
+
+Referenced by ps\+\_\+search\+\_\+init().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ pocketsphinx\+\_\+internal.\+h}\end{DoxyCompactItemize}

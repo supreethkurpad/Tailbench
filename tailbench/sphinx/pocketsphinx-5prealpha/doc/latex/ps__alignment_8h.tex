@@ -1,0 +1,107 @@
+\section{src/libpocketsphinx/ps\+\_\+alignment.h File Reference}
+\label{ps__alignment_8h}\index{src/libpocketsphinx/ps\+\_\+alignment.\+h@{src/libpocketsphinx/ps\+\_\+alignment.\+h}}
+
+
+Multi-\/level alignment structure.  
+
+
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}dict2pid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hmm.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ ps\+\_\+alignment\+\_\+entry\+\_\+s}
+\item 
+struct \textbf{ ps\+\_\+alignment\+\_\+vector\+\_\+s}
+\item 
+struct \textbf{ ps\+\_\+alignment\+\_\+s}
+\item 
+struct \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__alignment_8h_aa6ddcfcd7598f1b50582dd5489e63e50}} 
+\#define {\bfseries P\+S\+\_\+\+A\+L\+I\+G\+N\+M\+E\+N\+T\+\_\+\+N\+O\+NE}~((uint16)0xffff)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__alignment_8h_abf89e73906a29024da48581f645e3c98}} 
+typedef struct \textbf{ ps\+\_\+alignment\+\_\+entry\+\_\+s} {\bfseries ps\+\_\+alignment\+\_\+entry\+\_\+t}
+\item 
+\mbox{\label{ps__alignment_8h_a57f06576e882630108c834e1a53a46d7}} 
+typedef struct \textbf{ ps\+\_\+alignment\+\_\+vector\+\_\+s} {\bfseries ps\+\_\+alignment\+\_\+vector\+\_\+t}
+\item 
+\mbox{\label{ps__alignment_8h_a62983def0c01226bda91e6794a7f61f1}} 
+typedef struct \textbf{ ps\+\_\+alignment\+\_\+s} {\bfseries ps\+\_\+alignment\+\_\+t}
+\item 
+\mbox{\label{ps__alignment_8h_afe48426a7d6bd0d7af628c4efc877ad8}} 
+typedef struct \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+s} {\bfseries ps\+\_\+alignment\+\_\+iter\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ps__alignment_8h_abe7668d9a53be1401896623ed42f02be}} 
+\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+init} (\textbf{ dict2pid\+\_\+t} $\ast$d2p)
+\begin{DoxyCompactList}\small\item\em Create a new, empty alignment. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_ab8fa505f155e38d7e6f8b7dbbd070282}} 
+int \textbf{ ps\+\_\+alignment\+\_\+free} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Release an alignment. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_ab6264685976a8270971c86deae7a488e}} 
+int \textbf{ ps\+\_\+alignment\+\_\+add\+\_\+word} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al, int32 wid, int duration)
+\begin{DoxyCompactList}\small\item\em Append a word. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a59e81853dad3d935755dcb309d8cc926}} 
+int \textbf{ ps\+\_\+alignment\+\_\+populate} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Populate lower layers using available word information. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_ae17f691c36070955e32a2c987910acde}} 
+int \textbf{ ps\+\_\+alignment\+\_\+populate\+\_\+ci} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Populate lower layers using context-\/independent phones. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_adc8ea5411f8500a0affcec636d65fa8d}} 
+int \textbf{ ps\+\_\+alignment\+\_\+propagate} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Propagate timing information up from state sequence. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a89fdf321c5a6ee6edeb9c2757d7509cf}} 
+int \textbf{ ps\+\_\+alignment\+\_\+n\+\_\+words} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Number of words. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_ab541dcf586611d20e84fd9ec562e7a52}} 
+int \textbf{ ps\+\_\+alignment\+\_\+n\+\_\+phones} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Number of phones. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_acfed230b07c1e09fae89eeb74c468460}} 
+int \textbf{ ps\+\_\+alignment\+\_\+n\+\_\+states} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Number of states. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a8d2b39bad3a4f6018155e9101dee63f8}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+words} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Iterate over the alignment starting at the first word. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a5d4fe03d7eef6a96ca8f1b21b9fd3a33}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+phones} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Iterate over the alignment starting at the first phone. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a8c6ba334f7dcf512f8485ca7a0b2d2c0}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+states} (\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$al)
+\begin{DoxyCompactList}\small\item\em Iterate over the alignment starting at the first state. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_aa2962940b54a4e2b73a9a4937d1b245a}} 
+\textbf{ ps\+\_\+alignment\+\_\+entry\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+get} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Get the alignment entry pointed to by an iterator. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a7cec3eabbedf8d94295d98541bbbaa10}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+goto} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor, int pos)
+\begin{DoxyCompactList}\small\item\em Move alignment iterator to given index. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_aa7fdb0dbac92be80e2182d340be8b8e1}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+next} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Move an alignment iterator forward. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a75e333f3b8a0d14b29d4853a7245b0f9}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+prev} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Move an alignment iterator back. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_ae546c5daf7bc78fe2924200b99187aa0}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+up} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Get a new iterator starting at the parent of the current node. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a6356f643a01e2071c6f00f8a5d56565a}} 
+\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$ \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+down} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Get a new iterator starting at the first child of the current node. \end{DoxyCompactList}\item 
+\mbox{\label{ps__alignment_8h_a80e0020539ea622706bf63883e24d301}} 
+int \textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+free} (\textbf{ ps\+\_\+alignment\+\_\+iter\+\_\+t} $\ast$itor)
+\begin{DoxyCompactList}\small\item\em Release an iterator before completing all iterations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Multi-\/level alignment structure. 
+

@@ -1,0 +1,5 @@
+import modules ;
+local TBENCH_PATH = [ modules.peek : TBENCH_PATH ] ;
+
+exe moses_chart : Main.cpp mbr.cpp IOWrapper.cpp TranslationAnalysis.cpp $(TBENCH_PATH)/client.o $(TBENCH_PATH)/tbench_server_integrated.o ../moses-cmd//client.o ../moses//moses ;
+

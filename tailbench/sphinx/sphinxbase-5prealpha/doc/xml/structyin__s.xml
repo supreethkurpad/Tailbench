@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structyin__s" kind="struct" language="C++" prot="public">
+    <compoundname>yin_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structyin__s_1a25a7e0400397ab1fcbf82f4d0568722a" prot="public" static="no" mutable="no">
+        <type>uint16</type>
+        <definition>uint16 yin_s::frame_size</definition>
+        <argsstring></argsstring>
+        <name>frame_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="52" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a48c5ec4512b28c565a6daee092dd87f3" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float yin_s::search_threshold</definition>
+        <argsstring></argsstring>
+        <name>search_threshold</name>
+        <briefdescription>
+<para>Size of analysis frame. </para>        </briefdescription>
+        <detaileddescription>
+<para>Threshold for finding period </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="54" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="54" bodyend="-1"/>
+        <referencedby refid="yin_8c_1adeaf7df902787daf9fa9d7453798c01e" compoundref="yin_8c" startline="164" endline="186">yin_init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a6dd2dda40ad048fa8be8a21cf59ca77b" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float yin_s::search_range</definition>
+        <argsstring></argsstring>
+        <name>search_range</name>
+        <briefdescription>
+<para>Range around best local estimate to search. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="55" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="55" bodyend="-1"/>
+        <referencedby refid="yin_8c_1adeaf7df902787daf9fa9d7453798c01e" compoundref="yin_8c" startline="164" endline="186">yin_init</referencedby>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1af4f11d14a36bbdc19863fa8335237423" prot="public" static="no" mutable="no">
+        <type>uint16</type>
+        <definition>uint16 yin_s::nfr</definition>
+        <argsstring></argsstring>
+        <name>nfr</name>
+        <briefdescription>
+<para>Number of frames read so far. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="60" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="60" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+        <referencedby refid="yin_8c_1aedb765d2c9f8f9d96f90b4971ed0f649" compoundref="yin_8c" startline="197" endline="202">yin_start</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a024d8e9d70f94a7f62457154fb5a4b03" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char yin_s::wsize</definition>
+        <argsstring></argsstring>
+        <name>wsize</name>
+        <briefdescription>
+<para>Size of smoothing window. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="62" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="62" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+        <referencedby refid="yin_8c_1ae272b1d9ce8ad45f69eb8b5f98f305b6" compoundref="yin_8c" startline="253" endline="277">yin_write</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a18481851da6db4df2a469b80c2c5704e" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char yin_s::wstart</definition>
+        <argsstring></argsstring>
+        <name>wstart</name>
+        <briefdescription>
+<para>First frame in window. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="63" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="63" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+        <referencedby refid="yin_8c_1aedb765d2c9f8f9d96f90b4971ed0f649" compoundref="yin_8c" startline="197" endline="202">yin_start</referencedby>
+        <referencedby refid="yin_8c_1ae272b1d9ce8ad45f69eb8b5f98f305b6" compoundref="yin_8c" startline="253" endline="277">yin_write</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1ab79376deb3761d5d3ae72f727ac25660" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char yin_s::wcur</definition>
+        <argsstring></argsstring>
+        <name>wcur</name>
+        <briefdescription>
+<para>Current frame of analysis. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="64" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="64" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a61ca0fc8444a1bdde10aca37dc9f0f56" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char yin_s::endut</definition>
+        <argsstring></argsstring>
+        <name>endut</name>
+        <briefdescription>
+<para>Hoch Hech! Are we at the utterance end? </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="65" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="65" bodyend="-1"/>
+        <referencedby refid="yin_8c_1aedb765d2c9f8f9d96f90b4971ed0f649" compoundref="yin_8c" startline="197" endline="202">yin_start</referencedby>
+        <referencedby refid="yin_8c_1abfe51d8b596f85941831b2727e49c181" compoundref="yin_8c" startline="205" endline="208">yin_end</referencedby>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a41981e290a7b03ae2dae834d4b6bf930" prot="public" static="no" mutable="no">
+        <type>float **</type>
+        <definition>float** yin_s::diff_window</definition>
+        <argsstring></argsstring>
+        <name>diff_window</name>
+        <briefdescription>
+<para>Window of difference function outputs. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="68" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="68" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a98f2ed13316b8ab9bf93feb4b6d3e7bd" compoundref="yin_8c" startline="189" endline="194">yin_free</referencedby>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1a1928cec127e250f6cd15249085bc9fc8" prot="public" static="no" mutable="no">
+        <type>uint16 *</type>
+        <definition>uint16* yin_s::period_window</definition>
+        <argsstring></argsstring>
+        <name>period_window</name>
+        <briefdescription>
+<para>Window of best period estimates. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="72" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="72" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a98f2ed13316b8ab9bf93feb4b6d3e7bd" compoundref="yin_8c" startline="189" endline="194">yin_free</referencedby>
+        <referencedby refid="yin_8c_1a3c7d0707cbe004fd7af824e58a46c55f" compoundref="yin_8c" startline="286" endline="412">yin_read</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structyin__s_1adb8a1fa6168286b87244f35361a64926" prot="public" static="no" mutable="no">
+        <type>int16 *</type>
+        <definition>int16* yin_s::frame</definition>
+        <argsstring></argsstring>
+        <name>frame</name>
+        <briefdescription>
+<para>Storage for frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/fe/yin.c" line="73" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="73" bodyend="-1"/>
+        <referencedby refid="yin_8c_1a022b6a34db2893b816dff9d4fcc5edfe" compoundref="yin_8c" startline="247" endline="250">yin_store</referencedby>
+        <referencedby refid="yin_8c_1aa0c6271991fbd9799ebb3703f8e34fcb" compoundref="yin_8c" startline="280" endline="283">yin_write_stored</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/fe/yin.c" line="51" column="1" bodyfile="src/libsphinxbase/fe/yin.c" bodystart="51" bodyend="74"/>
+    <listofallmembers>
+      <member refid="structyin__s_1a41981e290a7b03ae2dae834d4b6bf930" prot="public" virt="non-virtual"><scope>yin_s</scope><name>diff_window</name></member>
+      <member refid="structyin__s_1a61ca0fc8444a1bdde10aca37dc9f0f56" prot="public" virt="non-virtual"><scope>yin_s</scope><name>endut</name></member>
+      <member refid="structyin__s_1adb8a1fa6168286b87244f35361a64926" prot="public" virt="non-virtual"><scope>yin_s</scope><name>frame</name></member>
+      <member refid="structyin__s_1a25a7e0400397ab1fcbf82f4d0568722a" prot="public" virt="non-virtual"><scope>yin_s</scope><name>frame_size</name></member>
+      <member refid="structyin__s_1af4f11d14a36bbdc19863fa8335237423" prot="public" virt="non-virtual"><scope>yin_s</scope><name>nfr</name></member>
+      <member refid="structyin__s_1a1928cec127e250f6cd15249085bc9fc8" prot="public" virt="non-virtual"><scope>yin_s</scope><name>period_window</name></member>
+      <member refid="structyin__s_1a6dd2dda40ad048fa8be8a21cf59ca77b" prot="public" virt="non-virtual"><scope>yin_s</scope><name>search_range</name></member>
+      <member refid="structyin__s_1a48c5ec4512b28c565a6daee092dd87f3" prot="public" virt="non-virtual"><scope>yin_s</scope><name>search_threshold</name></member>
+      <member refid="structyin__s_1ab79376deb3761d5d3ae72f727ac25660" prot="public" virt="non-virtual"><scope>yin_s</scope><name>wcur</name></member>
+      <member refid="structyin__s_1a024d8e9d70f94a7f62457154fb5a4b03" prot="public" virt="non-virtual"><scope>yin_s</scope><name>wsize</name></member>
+      <member refid="structyin__s_1a18481851da6db4df2a469b80c2c5704e" prot="public" virt="non-virtual"><scope>yin_s</scope><name>wstart</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,67 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.very.2,v 1.5.4.1 2009/10/27 16:44:49 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test very large record (GBs) creation, 
+#	and large file (>4GB)  create and destroy
+#
+source $script_dir/vol.init
+
+set GB     1000000000
+set fourGB 4000000000
+
+set recsz $fourGB
+set nrecs 2
+
+set pgs_per_rec  [expr { ( $recsz / $lg_rec_page_space ) + 1 } ]
+verbose pages per rec $pgs_per_rec
+
+set pages_needed  [expr { $pgs_per_rec * $nrecs } ]
+verbose pages needed $pages_needed
+
+sm begin_xct
+set volinfo [sm get_volume_meta_stats $volid t_cc_none]
+sm commit_xct
+set ttl [select_stat $volinfo "total_pages"]
+
+set pages_in_volume [lindex $ttl 1]
+verbose pages in volume $pages_in_volume 
+
+set cluster_page  [expr {($pages_in_volume - $pages_needed) - 1}]
+verbose cluster page $cluster_page  
+
+if [ expr {$cluster_page<0}] {
+    echo "Volume not large enough. Run with -V to see how many pages needed."
+    exit 1
+}
+
+source $script_dir/lgrec.very.0
+
+unset recsz nrecs GB fourGB
+

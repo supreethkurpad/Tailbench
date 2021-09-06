@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structpriority__queue__s" kind="struct" language="C++" prot="public">
+    <compoundname>priority_queue_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structpriority__queue__s_1a2d83272d62f250d2f685f500d7b5a865" prot="public" static="no" mutable="no">
+        <type>void **</type>
+        <definition>void** priority_queue_s::pointers</definition>
+        <argsstring></argsstring>
+        <name>pointers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/priority_queue.c" line="47" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpriority__queue__s_1ae97c85552234938ef5bf84d2bbd06f75" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t priority_queue_s::alloc_size</definition>
+        <argsstring></argsstring>
+        <name>alloc_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/priority_queue.c" line="48" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpriority__queue__s_1a797e9b9767bae286b06d5b57e9f4a11a" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t priority_queue_s::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/priority_queue.c" line="49" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpriority__queue__s_1a805c395ea39df723cf6d6d9468f2a05e" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* priority_queue_s::max_element</definition>
+        <argsstring></argsstring>
+        <name>max_element</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/priority_queue.c" line="50" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpriority__queue__s_1ab8f043d83d49cf0daf0da317db2a5d4e" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* priority_queue_s::compare) (void *a, void *b)</definition>
+        <argsstring>)(void *a, void *b)</argsstring>
+        <name>compare</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/priority_queue.c" line="51" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/util/priority_queue.c" line="46" column="1" bodyfile="src/libsphinxbase/util/priority_queue.c" bodystart="46" bodyend="52"/>
+    <listofallmembers>
+      <member refid="structpriority__queue__s_1ae97c85552234938ef5bf84d2bbd06f75" prot="public" virt="non-virtual"><scope>priority_queue_s</scope><name>alloc_size</name></member>
+      <member refid="structpriority__queue__s_1ab8f043d83d49cf0daf0da317db2a5d4e" prot="public" virt="non-virtual"><scope>priority_queue_s</scope><name>compare</name></member>
+      <member refid="structpriority__queue__s_1a805c395ea39df723cf6d6d9468f2a05e" prot="public" virt="non-virtual"><scope>priority_queue_s</scope><name>max_element</name></member>
+      <member refid="structpriority__queue__s_1a2d83272d62f250d2f685f500d7b5a865" prot="public" virt="non-virtual"><scope>priority_queue_s</scope><name>pointers</name></member>
+      <member refid="structpriority__queue__s_1a797e9b9767bae286b06d5b57e9f4a11a" prot="public" virt="non-virtual"><scope>priority_queue_s</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

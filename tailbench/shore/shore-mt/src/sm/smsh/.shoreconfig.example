@@ -1,0 +1,91 @@
+# <std-header style='shell' orig-src='shore'>
+#
+#  $Id: .shoreconfig.example,v 1.18 2010/06/08 22:28:24 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# Example .shoreconfig file for smsh
+#
+# Edit a copy of this as you see fit, and save it as
+# ~/.shoreconfig or ./.shoreconfig.
+#
+
+# Options have the form:
+#		type.class.progname.option
+#
+# type = general type of program ("smsh" for the smsh server)
+# class = class of program within type (server or client or whatever
+#		application chooses)
+# progname = program executable name (don't use a.out)
+# option = specific name of option
+#
+# e.g., smsh.server.smsh.smsh_libdir  
+#
+
+#
+# STORAGE MANAGER OPTIONS
+#
+
+# if you want your log to be on a different device,
+# change sm_logdir or make log a link somewhere into
+# the desired device
+#
+*.server.*.sm_logdir: ./log
+
+# use sm_reformat_log to reinitialize a log that is a raw device
+*.server.*.sm_reformat_log: no
+
+# Need 100000 to get through the scripts with 32KB pages
+#
+# For the large record scripts in smsh, with volume size 150000(KB)
+# and with 45%-full log warn we need about 9 GB log.
+# This is too big for a 32-bit build and we have to decrease the
+# log size and the volume size for that platform.
+*.server.*.sm_logsize: 9000000
+
+# Specify the sm buffer pool size for any program
+# 400 pages, or 3.2 meg:
+*.server.*.sm_bufpoolsize: 3200
+
+# Warn VAS when log is this % full -- set low for testing purposes
+*.server.*.sm_log_warn: 45
+
+# Number of page writers. Should be at least as many as you have spindles.
+# Should benefit from some parallelism even if you don't have multiple
+# spindles.
+*.server.*.sm_num_page_writers: 2
+
+# set the logging level for the error log to info
+*.server.*.sm_errlog_level: info
+
+#
+# SSH OPTIONS
+#
+# This is the tcl library directory for smsh
+smsh.server.*.smsh_libdir: ./lib
+# location of the .smshrc file
+smsh.server.*.smsh_smshrc: ./.smshrc

@@ -1,0 +1,43 @@
+/*
+ * Define this if you want to use a different location for a
+ * Linux-based huge tlb filesystem.
+ */
+#define HUGETLBFS_PATH "/mnt/huge/SSM-BUFPOOL"
+
+/*
+ * Define this if you want to include crash test hooks in your
+ * executable.  (For use with ssh, really).
+ * A release executable should not be built with this unless you
+ * are a maintainer and want to test it.
+ */
+#define USE_SSMTEST
+
+
+/*
+ * Define these if you do not like the default lengths (in tid_t.h)
+ */
+#undef COMMON_GTID_LENGTH
+#undef COMMON_SERVER_HANDLE_LENGTH
+
+/* 
+ * Define this if you want to override the default number of
+ * log partitions that can be open at any one time.
+ */
+#undef SM_LOG_PARTITIONS
+
+
+/* Undefine this to fall back to protecting volume operations with a
+   full-blown mutex. This is probably undesirable as it will severely
+   limit scalability, but can be used to debug if bad behavior by
+   "readers" is suspected.
+*/
+#define VOLUME_OPS_USE_OCC 1
+
+
+/* FRJ: Define this to zero to remove log space accounting. This is
+   probably undesirable because it allows the log to become wedged and
+   the system unrecoverable. However, log space accounting does not
+   yet handle recovery of prepared transactions and therefore must be
+   disabled if the VAS will use 2PC.
+ */
+#define USE_LOG_RESERVATIONS 1

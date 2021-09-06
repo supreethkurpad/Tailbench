@@ -1,0 +1,10 @@
+value of ch = opaque[4]"COPY"
+length of ch = 4
+value of s = opaque[7]"ALIGNED"
+length of s = 7
+value of s = opaque[10]"NOTALIGNED"
+length of s = 10
+value of s = opaque[9]"BYTEORDER"
+length of s = 9
+hton bytes of s =  0 0 0 9
+ntoh length of s = 9

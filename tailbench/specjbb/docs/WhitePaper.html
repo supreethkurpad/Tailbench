@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>SPECjbb2005 Whitepaper</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.4  (Win32)">
+	<META NAME="CREATED" CONTENT="20050422;12181675">
+	<META NAME="CHANGED" CONTENT="20050602;13143703">
+	<META NAME="fdse-index-as" CONTENT="whitepaper.html">
+	<STYLE>
+	<!--
+		@page { size: 8.5in 11in }
+		TD P { color: #000000 }
+		H1 { color: #000000 }
+		P { color: #000000 }
+		H2 { color: #000000 }
+		A:link { color: #0000bb }
+		A:visited { color: #4c0077 }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" LINK="#0000bb" VLINK="#4c0077" BGCOLOR="#fefefe" DIR="LTR">
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=2 STYLE="page-break-before: always">
+	<TR VALIGN=TOP>
+		<TD>
+			<P STYLE="text-decoration: none"><A NAME="_x0000_i1025"></A><A HREF="http://www.spec.org/jbb2005/"><IMG SRC="spec-sm.gif" NAME="Graphic1" ALT="SPEC logo" ALIGN=BOTTOM WIDTH=57 HEIGHT=78 BORDER=0></A></P>
+		</TD>
+		<TD>
+			<H1>SPECjbb2005, a new Java Business Benchmark 
+			</H1>
+		</TD>
+	</TR>
+</TABLE>
+<HR>
+<H2 ALIGN=CENTER STYLE="font-weight: medium"><FONT SIZE=3>v1.03</FONT></H2>
+<H2>1.0 Overview 
+</H2>
+<P>&nbsp;SPECjbb2005 is a software benchmark product developed by the
+Standard Performance Evaluation Corporation (SPEC), a non-profit
+group of computer vendors, system integrators, universities, research
+organizations, publishers, and consultants. It is designed to measure
+a system's ability to run Java server applications. &nbsp;SPECjbb2005
+is closely based on SPECjbb2000, which was inspired by the TPC-C
+benchmark and loosely follows the TPC-C specification for its schema,
+input generation, and operation profile. SPECjbb2005 replaces
+database tables with Java classes and replaces data records with Java
+objects. The objects are held in memory as Java Collection instances
+or other Java data objects.</P>
+<P>SPECjbb2005 is implemented as a Java 5.0 application emulating a
+3-tier system with emphasis on the middle tier. All three tiers are
+implemented within the same JVM (though the benchmark may spawn
+several JVM instances).. 
+</P>
+<P>The system modeled is still a wholesale company, with warehouses
+that serve a number of districts. There are a set of operations that
+customers (also known as users) initiate, such as placing new orders
+or requesting the status of an existing order. Additional operations
+are generated within the company, such as processing orders for
+delivery, entering customer payments, checking stock levels, and
+requesting a report on recent activity by a given customer. &nbsp;There
+is only one user active per warehouse. A warehouse is a unit of
+stored data. It contains roughly 25 MB of data stored in Java
+Collection objects.&nbsp; Users map directly to Java threads. Each
+thread executes operations in sequence, with each operation selected
+from the operation mix using a probability distribution. As the
+number of warehouses increases during the full benchmark run, so does
+the number of threads. 
+</P>
+<P>SPECjbb2005 is totally self contained and self driving (generates
+its own data, generates its own multi-threaded operations, and does
+not depend on any package beyond the JRE). 
+</P>
+<P>SPECjbb2005 is memory resident, performs no I/O to disks, has only
+local network I/O, and has no think times. 
+</P>
+<P>SPECjbb2005 results are not comparable to results for either
+SPECjbb2000 or TPC-C.&nbsp; Comparisons to either &nbsp;would be a
+SERIOUS violation of SPEC's run and reporting rules and of TPC's
+&quot;fair use policy.&quot; Violations are subject to penalties. 
+</P>
+<H2><A NAME="Internals"></A>2.0 What&rsquo;s New in SPECjbb2005 
+</H2>
+<P>&nbsp;For details on the design of SPECjbb2000 refer to <A HREF="http://www.spec.org/jbb2000/docs/whitepaper.html">the
+SPECjbb2000 design document</A>. &nbsp;</P>
+<P>The database is now modeled, not as a BTree structure implemented
+in code in the benchmark itself, but in structures that are
+implemented as HashMaps, or TreeMaps in cases where some operations
+on the table requires sorting.&nbsp; The intention is for the
+benchmark to reflect the practice of Java developers to use libraries
+where they provide appropriate functionality, rather than to code
+implementations of their own.</P>
+<P>SPECjbb2005 now includes no System.GC calls in the main part of
+the benchmark.&nbsp; The intention is to reflect the behavior of
+long-running applications not interrupted by periodic System.GC
+calls.</P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><FONT FACE="Times New Roman, serif">In
+order to better match current application characteristics, the
+handling of all financial data and calculations was changed from
+float to BigDecimal. This matches current industry practice, and
+ensures that the financial amounts and calculations have correct
+decimal representation and rounding expected, and sometimes legally
+mandated, for currency calculations.</FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>The
+code was refactored in a number of places to better reflect
+object-oriented styles of programming.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><BR>
+</P>
+<P>The current Java level is now Java 5.0, and the benchmark includes
+several features from that language level.&nbsp; Several Collection
+data structures have been made generic, and the source code contains
+several uses of auto-boxing and enumeration types.</P>
+<P>The transaction logging is now done by building and writing DOM
+objects using the JAXP XML functionality of Java 5.0.</P>
+<P>The benchmark may also deploy several instances of the JRE, each
+independently handling the transaction load on its own data tables.&nbsp;
+</P>
+<H2><A NAME="Code_Structure"></A>&nbsp;3.0 Code Structure 
+</H2>
+<P>The benchmark code is shipped in jar files. In addition, source
+code is provided in the src subdirectory for reference. Please note
+<A HREF="RunRules.html#Benchmark_Binaries">section 2.2 of the run
+rules</A> prohibiting recompilation for published results. 
+</P>
+<P>The code contained in the jar files are: 
+</P>
+<UL TYPE=DISC>
+	<LI><P>jbb.jar: code related to the major processing activities, and
+	the post_processing of the benchmark;. 
+	</P>
+	<LI><P>check.jar: code for validity checking and verification. 
+	</P>
+</UL>
+<P><A NAME="performance"></A><FONT SIZE=3>The Java source is found in
+the <FONT COLOR="#0000ff">/src/spec</FONT> subdirectory. &nbsp;&nbsp;There
+are two subdirectories:&nbsp; <FONT COLOR="#0000ff">/jbb</FONT> and
+<FONT COLOR="#0000ff">/reporter</FONT>. </FONT>
+</P>
+<UL>
+	<LI><P><FONT SIZE=3>The /reporter subdirectory contains the files
+	for the SPECjbb2005 reporter, which formats the benchmark output
+	into a variety of possible reports.&nbsp; </FONT>
+	</P>
+	<LI><P><FONT SIZE=3>The /jbb directory has two subdirectories.</FONT></P>
+	<LI><P><FONT SIZE=3>The /jbb/validity subdirectory contains files
+	that do some limited checking of the conformance of the JVM to
+	language rules.</FONT></P>
+	<LI><P><FONT SIZE=3>The /jbb/infra/Util subdirectory contains code
+	that defines the Transaction Log objects, which are implemented as
+	XML DOM objects.</FONT></P>
+	<LI><P>The /jbb directory itself contains the main benchmark code.</P>
+</UL>
+<P><FONT SIZE=3>The underlying data structures for the fields in the
+tables simulating the company database are found in the files
+Item.java, Stock.java, Customer.java., Address.java.</FONT></P>
+<P><FONT SIZE=3>The database is that for one company, represented by
+an instance of the class defined in Company.java; it has a varying
+number of Warehouse objects, as defined in Warehouse.java, and each
+of these has a number of districts, defined in District.java.</FONT></P>
+<P><FONT SIZE=3>The Company has three major tables of data, the Item
+table, the CustomerTable, and the CustomerbyLastNameTable.&nbsp; Each
+Warehouse object has its own StockTable and HistoryTable.&nbsp; Each
+District has its own OrderTable and NewOrderTable.&nbsp; All the
+tables are instances of either JBBDataStorage or
+JBBSortedDataStorage.&nbsp; These latter classes are defined in
+&nbsp;JBBDataStorage.java, JBBSortedStorage.java,
+Infrastructure.java, MapStorage.java.</FONT></P>
+<P><FONT SIZE=3>Order.java and NewOrder.java define the order objects
+representing the orders that drive the transactions.</FONT></P>
+<P><FONT SIZE=3>There are six different types of transactions that
+are carried out, defined in NewOrderTransaction.java,
+OrderStatusTransaction.java, DeliveryTransaction.java,
+PaymentTransaction.java, StockLevelTransaction.java, and
+CustomerReportTransaction.java. </FONT>
+</P>
+<P><FONT SIZE=3>The main benchmark loop is run by a collection of
+user threads each running TransactionManager.go(), controlled by a
+main thread running Company.displayResultTotals.&nbsp; Each user
+thread is running a while loop carrying out a randomized series of
+transactions. When there is more than one JVM running in the
+benchmark there is an initial ramp-up period of 3 seconds, to make
+sure all threads are running before measurement of the transaction
+rate begins, and also a ramp-down period of 20 seconds. Measurements
+are done for 30 seconds for warehouses up to the expected peak, and
+for four minutes after that..&nbsp; Each thread collects and writes
+transaction data for future reference. In a single-JVM run with many
+warehouses, the start-up time is part of the measurmeent period and
+erratic results may be seen before the expected peak because of the
+shorter measurement interval.</FONT></P>
+<P>Class file diagrams for the various classes in the benchmark can
+be seen in <A HREF="#AppendixA">Appendix A</A> at the end.</P>
+<H2>4.0 Performance Metrics 
+</H2>
+<P>SPECjbb2005 has two performance metrics, bops (business operations
+per second), which is the overall rate at which business operations
+are performed per second, and bops/JVM, the first metric divided by
+the number of JVMs running during the benchmark, 
+</P>
+<P>The single-JVM metric is calculated as follows.</P>
+<P>A &quot;point&quot; represents a measurement period of work done
+at a given number of warehouses. A full benchmark run consists of a
+sequence of measurement points with an increasing number of
+warehouses (and thus an increasing number of threads). 
+</P>
+<P>The SPECjbb2005 metrics for a compliant run are calculated as
+follows: 
+</P>
+<UL TYPE=DISC>
+	<LI><P>All points (numbers of warehouses) are run, from 1 up to
+	MaxWh (the number specified by input.ending_number of warehouses in
+	SPECjbb.props) warehouses.. At a minimum all points from 1 to 8 must
+	be run. 
+	</P>
+	<LI><P>For numbers of warehouses from 1 to the expected peak number
+	M of warehouses (the number of warehouses at which the peak is
+	expected to be observed, either specified by a nonzero
+	input.expected_peak_warehouse in SPECjbb.props, or defined as
+	Runtime.getRuntime.availableProcessors() if the property is set to 0
+	), there is a 30-second measurement period.&nbsp; For larger numbers
+	of warehouses, the measurement period is four minutes. All JVM
+	instances run these measurement periods together.</P>
+	<LI><P>The total throughputs of all the instances for all the points
+	from M warehouses to 2*M inclusive warehouses are averaged. This
+	average is the SPECjbb2005 metric 'bops'. As explained in section
+	2.3 of the run and reporting rules, results from systems that do not
+	run all points up to 2*M warehouses are still considered valid. For
+	all the missing points in the range M+1 to 2*M, the throughput is
+	considered to be 0 bops in the metric computation. 
+	</P>
+	<LI><P>The second SPECjbb2005 metric, bops/JVM is obtained by
+	dividing value of bops for the run by the number of JVM instances
+	used in the run.</P>
+</UL>
+<P>The reporting tool contained within SPECjbb2005 produces a graph
+of the throughput at all the measured points with warehouses on the
+horizontal axis and throughputs on the vertical axis, totalled, and
+for each individual JVM. All points from 1 to the maximum of 8 and
+MaxWh are reported. Missing points in the range M+1 to 2*M will be
+reported to have a throughput of 0 bops. The points being
+averaged for the metric will be marked on the report. 
+</P>
+<H2><A NAME="conclusions"></A>5.0 Conclusions 
+</H2>
+<P>While SPECjbb2005 is not a full blown OLTP benchmark, it is a very
+good stand-in for a large business application. It is also a very
+good functional and performance test for Java platforms. It has been
+found to effectively exercise the implementation of the Java Virtual
+Machine (JVM), Just-in-time compiler (JIT), garbage collection,
+threads, parts of the Java library, and some aspects of the operating
+system. The benchmark measures the performance of CPUs, caches,
+memory hierarchy and the scalability of Shared Memory Processing
+Systems.</P>
+<HR SIZE=1 NOSHADE>
+<H2><A NAME="AppendixA"></A>Appendix A: UML Diagram</H2>
+<P STYLE="border-top: none; border-bottom: 1.00pt solid #808080; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1.00pt solid #808080; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in">
+<IMG SRC="SPECjBB2005_UML.jpeg" NAME="Class Diagram" ALIGN=RIGHT WIDTH=3043 HEIGHT=8242 BORDER=0><BR CLEAR=RIGHT><BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1.00pt solid #808080; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1.00pt solid #808080; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.02in; padding-left: 0in; padding-right: 0in">
+<BR><BR>
+</P>
+<P><A HREF="http://www.spec.org/">Home</A> - <A HREF="http://www.spec.org/spec/contact.html">Contact</A>
+- <A HREF="http://www.spec.org/contents.html">Site Map</A> - <A HREF="http://www.spec.org/spec/privacy_policy.html">Privacy</A>
+- <A HREF="http://www.spec.org/spec/">About SPEC</A> 
+</P>
+<HR SIZE=1 NOSHADE>
+<P><A HREF="mailto:webmaster@spec.org">webmaster@spec.org</A> Last
+updated: <I>Fri June 13 11:12:07 EDT 2005 </I><A HREF="http://www.spec.org/spec/copyright.html">Copyright</A>
+&copy; 1995 - 2005 Standard Performance Evaluation Corporation URL:
+<I>http://www.spec.org/jbb2005/docs/WhitePaper.html</I> 
+</P>
+</BODY>
+</HTML>

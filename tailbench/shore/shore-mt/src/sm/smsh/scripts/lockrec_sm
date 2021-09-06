@@ -1,0 +1,250 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lockrec_sm,v 1.13.4.1 2009/12/14 23:57:56 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  This script tests 2x2 (SH and EX) lock compatibility on record. 
+#
+#  The operations to set a SH lock on a record are
+#	sm read_rec
+#	sm read_rec_body
+#	sm print_rec
+#
+#  The operations to set an EX lock on a record are
+#	sm append_rec
+#	sm truncate_rec
+#	sm update_rec
+#	sm update_rec_hdr
+#
+
+proc req_lock { id type op } {
+    sm begin_xct
+
+    if { "$type" == "SH" } {
+	case $op in {
+	    read 	{ verbose [sm read_rec $id 0 0] }
+	    read_body 	{ verbose [sm read_rec_body $id 0 0] }
+	    print 	{ verbose [sm print_rec $id 0 0] }
+	}
+    }
+
+    if { "$type" == "EX" } {
+	case $op in {
+	    update 	{ sm update_rec $id 1 bbb }
+	    update_hdr 	{ sm update_rec_hdr $id 1 hhh }
+	    append 	{ sm append_rec $id zzz }
+	    truncate 	{ sm truncate_rec $id 3 }
+	}
+    }
+}
+
+proc rel_lock { args } {
+    sm commit_xct
+}
+
+proc holder { id type op me } {
+    global verbose_flag
+
+    verbose "$me: entering sync"
+    sync
+
+    verbose "$me: $type ($op) requesting lock on $id"
+    req_lock $id $type $op
+    verbose "$me: $type ($op) lock on $id granted"
+
+    verbose "$me: entering sync"
+    sync
+
+    verbose "$me: entering sync"
+    sync
+
+    verbose "$me: $type ($op) releasing lock on $id"
+    rel_lock
+}
+
+proc requester { id type op me } {
+    global verbose_flag
+
+    verbose "$me: entering sync"
+    sync
+
+    verbose "$me: entering sync"
+    sync
+
+    verbose "$me: $type ($op) requesting lock on $id"
+    req_lock $id $type $op
+    verbose "$me: $type ($op) lock on $id granted"
+
+    verbose "$me: entering sync"
+    sync
+
+    verbose "$me: $type ($op) releasing lock on $id"
+    rel_lock
+}
+
+proc sh_sh { id } {
+    global verbose_flag
+    global sh_ops
+
+    foreach i $sh_ops {
+    	foreach j $sh_ops {
+
+		verbose fork thread holder $id SH $i 1
+	    set x [ fork_thread holder $id SH $i 1 ]
+
+		verbose fork thread requester $id SH $j 2
+	    set y [ fork_thread requester $id SH $j 2 ]
+
+	    sync_thread $x $y
+	    sync_thread $x $y
+	    sync_thread $x $y
+	    join_thread $x $y
+	    verbose "----------------"
+	}
+    }
+}
+
+proc sh_ex { id } {
+    global verbose_flag
+    global sh_ops
+    global ex_ops
+
+    foreach i $sh_ops {
+	foreach j $ex_ops {
+
+		verbose fork thread holder $id SH $i 1
+	    set x [ fork_thread holder $id SH $i 1 ]
+
+		verbose fork thread requester $id EX $j 2
+	    set y [ fork_thread requester $id EX $j 2 ]
+
+		verbose sync_thread
+	    sync_thread $x $y
+
+		verbose sync_thread
+	    sync_thread $x $y
+
+		verbose sync_thread 1
+	    sync_thread $x 
+		verbose sync_thread 2
+	    sync_thread $y 
+
+		verbose join_thread
+	    join_thread $x $y
+	    verbose "----------------"
+	}
+    }
+}
+
+proc ex_sh { id } {
+    global verbose_flag
+    global sh_ops
+    global ex_ops
+
+    foreach i $ex_ops {
+    	foreach j $sh_ops {
+
+		verbose fork thread holder $id EX $j 1
+	    set x [ fork_thread holder $id EX $i 1 ]
+
+		verbose fork thread requester $id SH $j 2
+	    set y [ fork_thread requester $id SH $j 2 ]
+
+	    sync_thread $x $y
+	    sync_thread $x $y
+	    sync_thread $x
+	    sync_thread $y
+	    join_thread $x $y
+	    verbose "----------------"
+    	}
+    }
+}
+
+proc ex_ex {id} {
+    global verbose_flag
+    global ex_ops
+
+    foreach i $ex_ops {
+    	foreach j $ex_ops {
+
+		verbose fork thread holder $id EX $j 1
+	    set x [ fork_thread holder $id EX $i 1 ]
+
+		verbose fork thread requester $id EX $j 2
+	    set y [ fork_thread requester $id EX $j 2 ]
+
+	    sync_thread $x $y
+	    sync_thread $x $y
+	    sync_thread $x 
+	    sync_thread $y
+	    join_thread $x $y
+	    verbose "----------------"
+	}
+    }
+}
+
+####  global variables ####
+set sh_ops { read read_body print }
+set ex_ops { append truncate update update_hdr }
+
+##########  main  ########## 
+
+source $script_dir/vol.init
+
+sm begin_xct
+set fid [sm create_file $volid]
+set rid [sm create_rec $fid hdr12345 11 hellodata]
+sm commit_xct
+
+#verbose volid = $volid
+#verbose fid = $fid
+verbose rid = $rid
+
+verbose "TEST:\tRecord Locking with SM Record Operations  *******\n"
+
+verbose "==================   SH  SH  ====================="
+sh_sh $rid
+
+verbose "==================   SH  EX  ====================="
+sh_ex $rid
+
+verbose "==================   EX  SH  ====================="
+ex_sh $rid
+
+verbose "==================   EX  EX  ====================="
+ex_ex $rid
+
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct
+
+unset sh_ops
+unset ex_ops
+unset rid
+unset fid
+

@@ -1,0 +1,48 @@
+\section{include/sphinxbase/genrand.h File Reference}
+\label{genrand_8h}\index{include/sphinxbase/genrand.\+h@{include/sphinxbase/genrand.\+h}}
+
+
+High performance prortable random generator created by Takuji Nishimura and Makoto Matsumoto.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{genrand_8h_a29d6253e4a57e7c4d56cf7f6155b4007}} 
+\#define {\bfseries S3\+\_\+\+R\+A\+N\+D\+\_\+\+M\+A\+X\+\_\+\+I\+N\+T32}~0x7fffffff
+\item 
+\mbox{\label{genrand_8h_a88ed88daecb88e115d8559c1b0a09bb7}} 
+\#define \textbf{ s3\+\_\+rand\+\_\+seed}(s)~\textbf{ genrand\+\_\+seed}(s);
+\begin{DoxyCompactList}\small\item\em Macros to simplify calling of random generator function. \end{DoxyCompactList}\item 
+\mbox{\label{genrand_8h_a3dcc058023a95c0a0ca1f12d1fdec9b9}} 
+\#define {\bfseries s3\+\_\+rand\+\_\+int31}()~\textbf{ genrand\+\_\+int31}()
+\item 
+\mbox{\label{genrand_8h_a85a5844eace98dcbb4742d408a75d5e7}} 
+\#define {\bfseries s3\+\_\+rand\+\_\+real}()~\textbf{ genrand\+\_\+real3}()
+\item 
+\mbox{\label{genrand_8h_a226b9a1deec002aeb1f1775b830a3062}} 
+\#define {\bfseries s3\+\_\+rand\+\_\+res53}()~\textbf{ genrand\+\_\+res53}()
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{genrand_8h_a2881c7b606d9a2b2852e5946d71d32b7}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ genrand\+\_\+seed} (unsigned long s)
+\begin{DoxyCompactList}\small\item\em Initialize the seed of the random generator. \end{DoxyCompactList}\item 
+\mbox{\label{genrand_8h_a10263695978c84103fb3526fdae21d4c}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT long \textbf{ genrand\+\_\+int31} (void)
+\begin{DoxyCompactList}\small\item\em generates a random number on [0,0x7fffffff]-\/interval \end{DoxyCompactList}\item 
+\mbox{\label{genrand_8h_ad5fbfda1cb738d2beff277444bc71b1a}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT double \textbf{ genrand\+\_\+real3} (void)
+\begin{DoxyCompactList}\small\item\em generates a random number on (0,1)-\/real-\/interval \end{DoxyCompactList}\item 
+\mbox{\label{genrand_8h_a2fca03c5dad1835f55e09c6e66d3b960}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT double \textbf{ genrand\+\_\+res53} (void)
+\begin{DoxyCompactList}\small\item\em generates a random number on [0,1) with 53-\/bit resolution \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+High performance prortable random generator created by Takuji Nishimura and Makoto Matsumoto. 
+
+A high performance which applied Mersene twister primes to generate random number. If probably seeded, the random generator can achieve 19937-\/bits period. For technical detail. Please take a look at (F\+I\+X\+M\+E! Need to search for the web site.) {\tt http\+://www}. 

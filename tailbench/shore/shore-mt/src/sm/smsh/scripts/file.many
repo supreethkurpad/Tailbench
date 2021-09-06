@@ -1,0 +1,153 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: file.many,v 1.14.4.2 2009/10/27 16:44:48 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test expandable sdesc_cache_t structures.
+#       This is for partitioning a data set among a bunch of files.
+#
+source $script_dir/vol.init
+
+set nobjs 20
+set nfiles1 1
+set nfiles2 20
+set nfiles3 50
+set nfiles4 60
+
+set objsize 4000
+set hdr ""
+set id_body_width zvec%d
+set body [format $id_body_width $objsize]
+
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+verbose create phase 1 1-> $nfiles1
+
+for {set i 1} {$i <= $nfiles1} {incr i} {
+	set f($i) [sm create_file $volid regular]
+	verbose created file $i: $f($i)
+}
+
+#fill up input files
+set k 0
+for {set i 1} {$i <= $nfiles1} {incr i} {
+	for {set k 0} {$k < $nobjs} {incr k} {
+	set rec [sm create_rec $f($i) $hdr $objsize $body]
+	}
+}
+sm commit_xct
+
+proc doit { first last more } {
+	global f hdr objsize body volid
+
+	verbose doit $first $last $more
+
+	#create $more output files $last+1 -> $last+$more
+	for {set j [expr {$last+1}]} {$j <= [expr {$last+$more}]} {incr j} {
+	    set f($j) [sm create_file $volid tmp] 
+	    verbose (doit $first $last $more): created file $j: $f($j)
+	}
+	# read from input file(s) $first -> $last
+	for {set i $first} {$i <= $last} {incr i} {
+	    set scan($i) [sm scan_file_create $f($i) t_cc_record]
+	    verbose2 (doit $first $last $more): scan $i is $scan($i)
+	    set pin($i) [sm scan_file_next $scan($i) 0]
+	    verbose2 (doit $first $last $more): scanned $i  $pin($i)
+	}
+	# copy to each output file
+	verbose2 first = $first, pin($first) = $pin($first)
+
+    for {set i  $first} {$i <= $last} {incr i} {
+	if {[string compare $pin($i) "NULL"] == 0} { break }
+	verbose2 (doit $first $last $more): $i
+	for {set j [expr {$last+1}] } {$j <= [expr {$last + $more}]} {incr j} {
+		verbose2 (doit $first $last $more): writing to $f($j)
+		sm create_rec $f($j) $hdr $objsize $body
+	}
+	verbose2 (doit $first $last $more): $i
+	verbose2 pin($i) = $pin($i)
+	set rec [sm pin_rid $pin($i)]
+	# don't mess up context of scan
+	# sm pin_unpin $pin($i)
+	set pin([expr {$i+1}]) [sm scan_file_next $scan($i) 0]
+    }
+	for {set i $first} {$i <= $last } {incr i} {
+	verbose2 (doit $first $last $more): destroying scan $i  $scan($i)
+	sm scan_file_destroy $scan($i)
+	verbose2 (doit $first $last $more): destroyed $i  $scan($i)
+	}
+	verbose2 (doit $first $last $more): done
+}
+
+verbose phase 1...
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+
+# first last more
+doit 1 $nfiles1 [expr {$nfiles2-$nfiles1}]
+
+verbose cleaning up phase 1...  files 1 -> $nfiles1
+for {set i 1} {$i <= $nfiles1} {incr i} {
+	verbose sm destroying file $i: $f($i)
+	sm destroy_file $f($i)
+}
+
+# first last more
+doit [expr {$nfiles1+1}] $nfiles2  [expr {$nfiles3 - $nfiles2}]
+
+verbose cleaning up phase 2... [expr {$nfiles1+1}] -> $nfiles2
+for {set i [expr {$nfiles1+1}] } {$i <= $nfiles2} {incr i} {
+	verbose destroying file $i: $f($i)
+	sm destroy_file $f($i)
+}
+
+doit [expr {$nfiles2+1}] $nfiles3  [expr {$nfiles4 - $nfiles3}]
+verbose cleaning up phase 3... [expr {$nfiles2+1}] -> $nfiles3
+
+for {set i [expr {$nfiles2+1}] } {$i <= $nfiles3} {incr i} {
+	verbose destroying file $i: $f($i)
+	sm destroy_file $f($i)
+}
+
+verbose cleaning up phase rest
+for {set i [expr {$nfiles3+1}] } {$i <= $nfiles4} {incr i} {
+	verbose destroying file $i: $f($i)
+	sm destroy_file $f($i)
+}
+
+sm commit_xct
+
+unset f k i
+unset nfiles1 nfiles2 nfiles3 nfiles4 nobjs
+unset objsize
+
+unset hdr body
+unset rec
+
+# verbose [sm gather_stats]
+

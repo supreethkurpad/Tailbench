@@ -1,0 +1,19 @@
+#!/bin/sh 
+#
+#  This README.how-to-start is suitable for source-ing...
+#
+#  Copy .smshrc.example to .smhrc with changes as you see fit
+        echo cp .smshrc.example .smshrc
+        cp .smshrc.example .smshrc
+#  Copy .shoreconfig.example to .shoreconfig with changes as you see fit
+        echo cp .shoreconfig.example .shoreconfig
+        cp .shoreconfig.example .shoreconfig
+#  If using the config files as-is, then
+        echo mkdir -p log
+        mkdir -p log 
+        echo mkdir -p volumes
+        mkdir -p volumes
+# Then you can run various scripts, like this:
+        echo ./smsh -f scripts/vol.all
+        ./smsh -f scripts/vol.all
+

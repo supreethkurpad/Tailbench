@@ -1,0 +1,146 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: alloc.3,v 1.16 1999/06/07 19:05:07 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test allocation & deallocation of pages1
+#
+
+source $script_dir/vol.init
+
+# format for body size -- >= one page
+set formsize [expr { $lg_rec_page_space - 10} ]
+
+
+proc scanit { f } {
+    set scan [sm scan_file_create $f t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+	set rec [sm pin_rid $pin]
+	verbose rec: $rec
+	# definitely don't -- it screws up the context
+	# sm pin_unpin $pin
+	set pin [sm scan_file_next $scan 0]
+	set i [expr {$i+1} ]
+    }
+    sm scan_file_destroy $scan
+    verbose scan found $i records
+}
+proc t1 {} {
+    global volid  f0 r0 formsize
+    sm begin_xct
+    verbose xact [sm xct]
+    verbose t1-sync-1
+sync
+    verbose creating 10 more recs ...
+    for { set i 1} { $i <= 10} { incr i} {
+	set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i] ] 
+	verbose created rec $j
+    }
+    verbose created 10 recs file $f0 -- committing
+    sm commit_xct
+    verbose t1-sync-2
+sync
+}
+proc t2 {} {
+    global volid  f0 logging
+    sm begin_xct
+    verbose xact [sm xct]
+    verbose destroying all records ...
+    set scan [sm scan_file_create $f0 t_cc_record]
+    set pin [sm scan_file_next $scan 0]
+    set i 0
+    while {$pin != "NULL"} {
+	set rec [sm pin_rid $pin]
+	verbose about to destroy $rec
+	catch { sm destroy_rec $rec } err
+	verbose destroy $rec yields $err
+	catch {sm scan_file_next $scan 0} err
+	verbose scan_file_next yields $err
+	if {[string compare $err "{update success}"] != 0} {
+	   verbose Error: $err
+	   break
+	}
+	set pin [sm scan_file_cursor $scan ]
+	verbose scan_file_cursor yields $pin
+	set i [expr {$i+1} ]
+    }
+    sm scan_file_destroy $scan
+    verbose destroyed $i recs file $f0
+    verbose t2-sync-1
+sync
+    if {$logging==0} {
+	verbose Logging off: substituting commit for abort
+	sm commit_xct
+    } else {
+	verbose aborting...
+	sm abort_xct
+    }
+    verbose t2-sync-2
+sync
+}
+
+
+sm begin_xct
+set f0 [sm create_file $volid]]
+verbose created file $f0
+for { set i 1} { $i <= 10} { incr i} {
+    set j [sm create_rec $f0 h$i 1000 [formatlong 0 $formsize %010d $i] ]
+    verbose created rec $j
+}
+verbose created 10 recs file $f0
+verbose committing
+sm commit_xct
+
+verbose forking t1
+set y1 [fork_thread t1 {}]
+verbose forking t2
+set y2 [fork_thread t2 {}]
+
+verbose sync_thread $y1 $y2
+sync_thread $y1 $y2
+verbose sync_thread $y1 $y2
+sync_thread $y1 $y2
+verbose join_thread $y1 $y2
+join_thread $y1 $y2
+
+sm begin_xct
+scanit $f0
+sm commit_xct
+
+sm begin_xct
+dstats $volid
+sm destroy_file $f0
+dstats $volid
+sm commit_xct
+
+
+unset formsize f0 i j
+unset y1 y2
+

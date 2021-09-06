@@ -1,0 +1,180 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: free_page,v 1.19 1999/06/07 19:05:30 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+proc rid_to_pid { rec } {
+	set pid [string range $rec 0 [expr [string last "." $rec]-1] ]
+	set pid [string range $pid [expr [string last "." $pid]+1] end ]
+	return $pid
+}
+
+proc rem1 { rid  commit} {
+	sm begin_xct
+	sync
+	verbose destroying r1
+	sm destroy_rec $rid
+	verbose r1 destroyed
+	sync
+	if {$commit} {
+		sm commit_xct
+		verbose t1 committed
+	} else {
+		verbose t1 aborting
+		sm abort_xct
+		verbose t1 aborted
+	}
+}
+
+proc rem2 { rid  commit} {
+	sm begin_xct
+	sync
+	verbose destroying r2
+	sm destroy_rec $rid
+	verbose r2 destroyed
+	sync
+	if {$commit} {
+		sm commit_xct
+		verbose t2 committed
+	} else {
+		verbose t2 aborting
+		sm abort_xct
+		verbose t2 aborted
+	}
+}
+
+source $script_dir/vol.init
+
+if { $logging == 0 } {
+    echo "Logging off: script not run. "
+} else {
+    sm begin_xct
+
+    verbose creating file
+    set f1 [sm create_file $volid]
+
+    set PG_SZ       952
+
+    # Create 3 records: r0, r1 and r2. 
+    # r0 will be big enough to fill a whole page.
+    # r1 and r2 are placed in the second page of the file.
+
+    # change body width
+    set prefixlen  [expr {$PG_SZ * .60}]
+
+    verbose creating r0
+    set r0 [ sm create_rec $f1 "" 11 [formatlong 0 $prefixlen %d 0] ]
+    verbose $r0
+
+    verbose creating r1 and r2
+    set r1 [ sm create_rec $f1 "" 11 markos ]
+    set r2 [ sm create_rec $f1 "" 11 mike ]
+    verbose $r1 $r2
+
+    #Remember the pid of the page containing r1 and r2
+    set pid1 [rid_to_pid $r1 ]
+    verbose $pid1
+    set pid2 [rid_to_pid $r2]
+    verbose $pid2
+    assert {expr [string compare $pid1 $pid2] ==0 }
+
+    verbose du after creating r1 and r2
+    dstats $f1
+
+    sm commit_xct
+
+    # Create two transactions: t1 and t2.
+    # First t1 destroys r1 and then t2 destroys r2.
+    # Both xacts commit.
+
+    verbose forking 1
+    set t1 [ fork_thread rem1 $r1 1 ]
+    verbose forking 2
+    set t2 [ fork_thread rem2 $r2 1 ]
+
+    #destroy r1
+    sync_thread $t1
+    #destroy r2: t2 destroys r2 and tries to free page==>must wait until t1 commits
+    sync_thread $t2
+    #commit t1
+    sync_thread $t1
+    #commit t2
+    sync_thread $t2
+
+    join_thread $t1 $t2
+
+    # Re-create r1 and r2 
+    # Check that the same page is reused.
+
+    sm begin_xct
+
+    verbose du after destroying r1 and r2
+    dstats $f1
+
+    verbose re-creating recs r1 and r2
+
+    set r1 [ sm create_rec $f1 "" 11 markos ]
+    set r2 [ sm create_rec $f1 "" 11 mike ]
+    verbose $r1 $r2
+    assert {expr [string compare $pid1 [rid_to_pid $r1]] == 0}
+    assert {expr [string compare $pid2 [rid_to_pid $r2]] == 0}
+
+    verbose du after re-creating r1 and r2
+    dstats $f1
+
+    sm commit_xct
+
+    # Create two transactions: t1 and t2.
+    # First t1 destroys r1 and then t2 destroys r2.
+    # t1 will abort, t2 will commit.
+
+    verbose forking 1
+    set t1 [ fork_thread rem1 $r1 0 ]
+    verbose forking 2
+    set t2 [ fork_thread rem2 $r2 1 ]
+
+    sync_thread $t1
+    sync_thread $t2
+    sync_thread $t1
+    sync_thread $t2
+    join_thread $t1 $t2
+
+    sm begin_xct
+
+    dstats $f1
+
+    sm scan_recs $f1
+
+    sm destroy_file $f1
+
+    sm commit_xct
+
+    unset f1 PG_SZ  r0 r1 r2 
+    unset pid1 pid2 
+    unset t1 t2 prefixlen
+}
+

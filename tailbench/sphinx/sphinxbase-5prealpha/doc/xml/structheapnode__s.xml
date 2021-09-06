@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structheapnode__s" kind="struct" language="C++" prot="public">
+    <compoundname>heapnode_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structheapnode__s_1a2cac1684dd94b922db98de988232efeb" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* heapnode_s::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>Application data at this node. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/heap.c" line="78" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="78" bodyend="-1"/>
+        <referencedby refid="heap_8h_1a9bc21333ce58caaf58e802d8b0190efd" compoundref="heap_8c" startline="113" endline="117">heap_new</referencedby>
+        <referencedby refid="heap_8h_1ab12b1efd6392eb574d2da9c981e7320c" compoundref="heap_8c" startline="281" endline="292">heap_destroy</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structheapnode__s_1a02a74be7915860cf3fc436d5fed6fe7d" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 heapnode_s::val</definition>
+        <argsstring></argsstring>
+        <name>val</name>
+        <briefdescription>
+<para>Associated with above application data; according to which heap is sorted (in ascending order) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/heap.c" line="79" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="79" bodyend="-1"/>
+        <referencedby refid="heap_8h_1a9bc21333ce58caaf58e802d8b0190efd" compoundref="heap_8c" startline="113" endline="117">heap_new</referencedby>
+        <referencedby refid="heap_8h_1ab12b1efd6392eb574d2da9c981e7320c" compoundref="heap_8c" startline="281" endline="292">heap_destroy</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structheapnode__s_1a9fd3eb832298ae9ca73896835d38e6d5" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 heapnode_s::nl</definition>
+        <argsstring></argsstring>
+        <name>nl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/heap.c" line="81" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structheapnode__s_1ab5a21ee1a48ce5359bbcca1d416a51eb" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 heapnode_s::nr</definition>
+        <argsstring></argsstring>
+        <name>nr</name>
+        <briefdescription>
+<para>#left/right descendants of this node (for balancing heap) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/heap.c" line="81" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structheapnode__s_1af25b6bfb16162294dd35851e04ad6c6b" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structheapnode__s" kindref="compound">heapnode_s</ref> *</type>
+        <definition>struct heapnode_s* heapnode_s::l</definition>
+        <argsstring></argsstring>
+        <name>l</name>
+        <briefdescription>
+<para>Root of left descendant heap. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/heap.c" line="82" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="82" bodyend="-1"/>
+        <referencedby refid="heap_8h_1a9bc21333ce58caaf58e802d8b0190efd" compoundref="heap_8c" startline="113" endline="117">heap_new</referencedby>
+        <referencedby refid="heap_8h_1a64bcded2de5086c5d246ff760caa74a3" compoundref="heap_8c" startline="161" endline="165">heap_insert</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structheapnode__s_1a92c30e27e1ccdbaea15f28aa49b0f7ea" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structheapnode__s" kindref="compound">heapnode_s</ref> *</type>
+        <definition>struct heapnode_s* heapnode_s::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <briefdescription>
+<para>Root of right descendant heap. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/util/heap.c" line="83" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="83" bodyend="-1"/>
+        <referencedby refid="heap_8h_1a9bc21333ce58caaf58e802d8b0190efd" compoundref="heap_8c" startline="113" endline="117">heap_new</referencedby>
+        <referencedby refid="heap_8h_1a64bcded2de5086c5d246ff760caa74a3" compoundref="heap_8c" startline="161" endline="165">heap_insert</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>One node on the heap. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="109">
+        <label>heapnode_s</label>
+        <link refid="structheapnode__s"/>
+        <childnode refid="109" relation="usage">
+          <edgelabel>l</edgelabel>
+          <edgelabel>r</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/util/heap.c" line="77" column="1" bodyfile="src/libsphinxbase/util/heap.c" bodystart="77" bodyend="84"/>
+    <listofallmembers>
+      <member refid="structheapnode__s_1a2cac1684dd94b922db98de988232efeb" prot="public" virt="non-virtual"><scope>heapnode_s</scope><name>data</name></member>
+      <member refid="structheapnode__s_1af25b6bfb16162294dd35851e04ad6c6b" prot="public" virt="non-virtual"><scope>heapnode_s</scope><name>l</name></member>
+      <member refid="structheapnode__s_1a9fd3eb832298ae9ca73896835d38e6d5" prot="public" virt="non-virtual"><scope>heapnode_s</scope><name>nl</name></member>
+      <member refid="structheapnode__s_1ab5a21ee1a48ce5359bbcca1d416a51eb" prot="public" virt="non-virtual"><scope>heapnode_s</scope><name>nr</name></member>
+      <member refid="structheapnode__s_1a92c30e27e1ccdbaea15f28aa49b0f7ea" prot="public" virt="non-virtual"><scope>heapnode_s</scope><name>r</name></member>
+      <member refid="structheapnode__s_1a02a74be7915860cf3fc436d5fed6fe7d" prot="public" virt="non-virtual"><scope>heapnode_s</scope><name>val</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

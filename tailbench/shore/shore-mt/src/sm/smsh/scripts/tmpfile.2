@@ -1,0 +1,186 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: tmpfile.2,v 1.12.4.1 2009/06/23 01:01:46 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test Temp files
+#  Really, just a test to make sure that temp files are destroyed
+#  after a restart.
+#
+
+source $script_dir/vol.init
+
+if {$logging == 1} {
+
+proc verify {} {
+    global ntfid nfid tfid fid 
+
+    sm begin_xct
+    for {set i 0} {$i < $ntfid} {incr i} {
+	verbose verifying $tfid($i)
+	if [catch {sm scan_rids $tfid($i)} catcherr] {
+	    verbose (EXPECTED) scan_rids error: $catcherr
+	    assert {error_is $catcherr E_BADSTID}
+	} else {
+	    verbose EXPECTED ERROR, but didn't get one!
+	    verbose got: $catcherr
+	}
+    }
+
+    for {set i 0} {$i < $nfid} {incr i} {
+	# no error
+	verbose verifying $fid($i)
+	set scan [sm scan_file_create $fid($i) t_cc_record]
+	sm scan_file_destroy $scan
+    }
+    sm commit_xct
+}
+
+set num_rec 20
+set id_width %06d
+
+if [is_set rid] {
+   unset rid
+}
+
+verbose [sm get_volume_quota $volid]
+
+
+sm begin_xct
+set nfid 0
+set ntfid 0
+
+verbose tid [sm xct_to_tid [sm xct]]
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+set fid($nfid) [sm create_file $volid]
+incr nfid
+
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+set trid(0) $null_rid
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set trid($i) [
+	sm create_rec $tfid(0) [format $id_width $i] 10 data.[format %01000d $i]
+    ]
+}
+
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+set fid($nfid) [sm create_file $volid]
+incr nfid
+
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set trid($i) [
+	sm create_rec $tfid(0) [format $id_width $i] 10 data.[format %01000d $i]
+    ]
+}
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+set fid($nfid) [sm create_file $volid]
+incr nfid
+
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set trid($i) [
+	sm create_rec $tfid(0) [format $id_width $i] 10 data.[format %01000d $i]
+    ]
+}
+
+verbose [sm get_volume_quota $volid]
+sm commit_xct
+
+verbose [sm get_volume_quota $volid]
+
+restart
+# VERIFY tmpfiles are gone; others are there
+verify
+
+set ntfid 0
+
+verbose [sm get_volume_quota $volid]
+
+sm begin_xct
+
+verbose tid [sm xct_to_tid [sm xct]]
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+verbose after temp 1 [sm get_volume_quota $volid]
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+verbose after temp 2 [sm get_volume_quota $volid]
+
+sm commit_xct
+
+restart
+# VERIFY tmpfiles are gone; others are there
+verify
+set ntfid 0
+verbose after restart [sm get_volume_quota $volid]
+
+sm begin_xct
+verbose tid [sm xct_to_tid [sm xct]]
+
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+verbose after temp 1 [sm get_volume_quota $volid]
+
+set tfid($ntfid) [sm create_file $volid tmp]
+incr ntfid
+
+verbose after temp 2 [sm get_volume_quota $volid]
+sm commit_xct
+restart
+
+# VERIFY tmpfiles are gone; others are there
+verify
+verbose after restart [sm get_volume_quota $volid]
+
+# CLEAN UP 
+sm begin_xct
+for {set i 0} {$i < $nfid} {incr i} {
+    verbose destroying $fid($i)
+    sm destroy_file $fid($i) 
+}
+sm commit_xct
+
+unset tfid fid ntfid nfid i num_rec trid id_width
+} else {
+    echo tmpfile.1 cannot be run (since logging is turned off)
+}
+

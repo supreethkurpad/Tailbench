@@ -1,0 +1,191 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lock.hier_sm,v 1.18 1999/06/07 19:05:33 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  This script tests hierarchical locking.
+#
+#  The operations to set an SH lock on a record.
+#	sm read_rec
+#	sm read_rec_body
+#	sm print_rec
+#
+#  The operations to set an EX lock on a record.
+#	sm append_rec
+#	sm truncate_rec
+#	sm update_rec
+#	sm update_rec_hdr
+#
+#  The operations to set a SH lock on a file are
+#	sm scan_recs
+#
+#  The operations to set a SIX lock on a file are
+#	sm scan_recs, sm append_rec
+#	sm scan_recs, sm truncate_rec
+#	sm scan_recs, sm update_rec
+#	sm scan_recs, sm update_rec_hdr
+#
+#  The operations to set an EX lock on a file are
+#	sm destroy_file  (this is not yet implemented)
+#
+
+proc lock_rec { rid fid vid } {
+    global rec_modes
+    global rec_ops
+    global verbose_flag
+    global table
+
+    foreach lock $rec_modes {
+	foreach op $rec_ops($lock) {
+	    verbose "---" $op
+            sm begin_xct
+	    case $op in {
+		read 		{ verbose [sm read_rec $rid 0 0] }
+		read_body 	{ verbose [sm read_rec_body $rid 0 0] }
+		print 		{ verbose [sm print_rec $rid 0 0] }
+
+		update 		{ sm update_rec $rid 1 b }
+		update_hdr 	{ sm update_rec_hdr $rid 1 h }
+		append 		{ sm append_rec $rid z }
+		truncate 	{ sm truncate_rec $rid 1 }
+	   }
+	
+	   set rec_lock [ sm query_lock $rid ]
+	   set file_lock [ sm query_lock $fid ]
+	   set vol_lock [ sm query_lock $vid ]
+	   verbose "rec: $rec_lock\tfile: $file_lock\tvol: $vol_lock "
+	   assert { expr [string compare $rec_lock $lock ] == 0}
+	   assert { expr [string compare $file_lock $table($lock) ] == 0}
+	   assert { expr [string compare $vol_lock $table($lock) ] == 0}
+
+           sm commit_xct
+	}
+    }
+}
+
+proc lock_file { rid fid vid } {
+    global file_modes
+    global file_ops
+    global verbose_flag
+    global table
+
+    foreach lock $file_modes {
+	verbose "---"
+	foreach op $file_ops($lock) {
+	    sm begin_xct
+  	    case $op in {
+		read 		{ verbose [sm read_rec $rid 0 0] }
+		read_body 	{ verbose [sm read_rec_body $rid 0 0] }
+		print 		{ verbose [sm print_rec $rid 0 0] }
+
+		update 		{ sm update_rec $rid 1 b }
+		update_hdr 	{ sm update_rec_hdr $rid 1 h }
+		append 		{ sm append_rec $rid z }
+		truncate 	{ sm truncate_rec $rid 1 }
+
+		scan 		{ verbose [sm scan_recs $fid] }
+
+		scan_update 	{ verbose [sm scan_recs $fid]
+				  sm update_rec $rid 1 b }
+		scan_update_hdr	{ verbose [sm scan_recs $fid]
+				  sm update_rec_hdr $rid 1 h }
+		scan_append 	{ verbose [sm scan_recs $fid]
+				  sm append_rec $rid z }
+		scan_truncate 	{ verbose [sm scan_recs $fid]
+				  sm truncate_rec $rid 1 }
+
+		destroy 	{ sm destroy_file $fid }
+	   }
+	   set file_lock [ sm query_lock $fid ]
+	   set vol_lock [ sm query_lock $vid ]
+	   verbose "file: $file_lock\tvol: $vol_lock"
+	   assert { expr [string compare  $file_lock $lock ]== 0}
+	   assert { expr [string compare $vol_lock  $table($lock) ]== 0}
+
+    	   sm commit_xct
+	}
+    }
+}
+
+####  global variables ####
+
+set rec_size 5
+
+set rec_modes	 { SH EX } 
+# set file_modes	 { IS SH IX SIX EX } 
+set file_modes	 { IS IX SH SIX } 
+
+set rec_ops(SH)  { read read_body print }
+set rec_ops(EX)  { append truncate update update_hdr }
+
+set file_ops(IS)  { read read_body print }
+set file_ops(SH)  { scan }
+set file_ops(IX)  { append truncate update update_hdr }
+set file_ops(SIX) { scan_append scan_truncate scan_update scan_update_hdr }
+set file_ops(EX)  { destroy }
+
+set table(IS)   IS
+set table(IX)   IX
+set table(SH)   IS
+set table(SIX)  IX
+set table(UD)   IX
+set table(EX)   IX
+
+##########  main  ########## 
+
+source $script_dir/vol.init
+
+sm begin_xct
+set fid [ sm create_file $volid ]
+set data [format %0${rec_size}d 0]
+verbose data = $data;
+set rid [ sm create_rec $fid "" $rec_size $data]
+sm commit_xct
+
+verbose volid = $volid
+verbose fid = $fid
+verbose rid = $rid
+
+verbose "TEST:\tHierarchical Locking on Record and File Using SM File/Rec Operations"
+
+verbose "******  Lock set on record  ******"
+lock_rec $rid $fid $volid
+
+verbose "******  Lock set on file  ******"
+lock_file $rid $fid $volid
+
+verbose "STATUS:\tOK"
+
+sm begin_xct
+sm destroy_file $fid
+sm commit_xct
+
+unset fid data rid
+unset table file_ops rec_ops file_modes rec_modes
+unset rec_size
+

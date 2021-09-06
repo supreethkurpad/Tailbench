@@ -1,0 +1,1047 @@
+\section{include/sphinxbase/cmd\+\_\+ln.h File Reference}
+\label{cmd__ln_8h}\index{include/sphinxbase/cmd\+\_\+ln.\+h@{include/sphinxbase/cmd\+\_\+ln.\+h}}
+
+
+Command-\/line and other configurationparsing and handling.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ arg\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{cmd__ln_8h_a98a8fc7c21a0832cd44e3a6e10844b1e}} 
+\#define \textbf{ A\+R\+G\+\_\+\+S\+T\+R\+I\+N\+G\+I\+FY}(s)~A\+R\+G\+\_\+\+S\+T\+R\+I\+N\+G\+I\+F\+Y1(s)
+\begin{DoxyCompactList}\small\item\em Helper macro to stringify enums and other non-\/string values for default arguments. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_ae71d493fb63447033e8797f44fe7bb8d}} 
+\#define {\bfseries A\+R\+G\+\_\+\+S\+T\+R\+I\+N\+G\+I\+F\+Y1}(s)~\#s
+\item 
+\mbox{\label{cmd__ln_8h_a159e691c95089689cf9a8f85a67830a6}} 
+\#define \textbf{ cmd\+\_\+ln\+\_\+boolean\+\_\+r}(c,  n)~(\textbf{ cmd\+\_\+ln\+\_\+int\+\_\+r}(c,n) != 0)
+\begin{DoxyCompactList}\small\item\em Retrieve a boolean value from a command-\/line object. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_ad4984b45985a6c5e2b231cf1f9b44fe4}} 
+\#define \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+boolean\+\_\+r}(c,  n,  b)~(\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r}(c,n,(b)!=0))
+\begin{DoxyCompactList}\small\item\em Set a boolean value in a command-\/line object. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_a744cba615ad615a3bb0fc309e0bfb4c8}} 
+\#define {\bfseries cmd\+\_\+ln\+\_\+int32\+\_\+r}(c,  n)~(int32)\textbf{ cmd\+\_\+ln\+\_\+int\+\_\+r}(c,n)
+\item 
+\mbox{\label{cmd__ln_8h_aac984a3d645ca2293a711dc77e9441e6}} 
+\#define {\bfseries cmd\+\_\+ln\+\_\+float32\+\_\+r}(c,  n)~(float32)\textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r}(c,n)
+\item 
+\mbox{\label{cmd__ln_8h_ad1ef54ed340feb9aa6cc0a32d4fe041e}} 
+\#define {\bfseries cmd\+\_\+ln\+\_\+float64\+\_\+r}(c,  n)~(float64)\textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r}(c,n)
+\item 
+\mbox{\label{cmd__ln_8h_a4e2c787a885bf6dd5f17c2ba94670bb1}} 
+\#define {\bfseries cmd\+\_\+ln\+\_\+set\+\_\+int32\+\_\+r}(c,  n,  i)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r}(c,n,i)
+\item 
+\mbox{\label{cmd__ln_8h_ae6d8f136f938b0b997dbe4b5d4cbd7f6}} 
+\#define {\bfseries cmd\+\_\+ln\+\_\+set\+\_\+float32\+\_\+r}(c,  n,  f)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}(c,n,(double)f)
+\item 
+\mbox{\label{cmd__ln_8h_a2fc588ffad9586cad2bf4649a6a26269}} 
+\#define {\bfseries cmd\+\_\+ln\+\_\+set\+\_\+float64\+\_\+r}(c,  n,  f)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}(c,n,(double)f)
+\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+exists}(name)~\textbf{ cmd\+\_\+ln\+\_\+exists\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Test the existence of a command-\/line argument in the global set of definitions. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+access}(name)~\textbf{ cmd\+\_\+ln\+\_\+access\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Return a pointer to the previously parsed value for the given argument name. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+str}(name)~\textbf{ cmd\+\_\+ln\+\_\+str\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Retrieve a string from the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+str\+\_\+list}(name)~\textbf{ cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Retrieve an array of strings in the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+int32}(name)~(int32)\textbf{ cmd\+\_\+ln\+\_\+int\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Retrieve a 32-\/bit integer from the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+float32}(name)~(float32)\textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Retrieve a 32-\/bit float from the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+float64}(name)~(float64)\textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Retrieve a 64-\/bit float from the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+boolean}(name)~\textbf{ cmd\+\_\+ln\+\_\+boolean\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)
+\begin{DoxyCompactList}\small\item\em Retrieve a boolean from the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+str}(n,  s)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,s)
+\begin{DoxyCompactList}\small\item\em Set a string in the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+int32}(n,  i)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,i)
+\begin{DoxyCompactList}\small\item\em Set a 32-\/bit integer value in the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float32}(n,  f)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,f)
+\begin{DoxyCompactList}\small\item\em Set a 32-\/bit float in the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float64}(n,  f)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,f)
+\begin{DoxyCompactList}\small\item\em Set a 64-\/bit float in the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+boolean}(n,  b)~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+boolean\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,b)
+\begin{DoxyCompactList}\small\item\em Set a boolean value in the global command line. \end{DoxyCompactList}\item 
+\#define \textbf{ cmd\+\_\+ln\+\_\+print\+\_\+help}(f,  d)~\textbf{ cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),f,d)
+\begin{DoxyCompactList}\small\item\em Print a help message listing the valid argument names, and the associated attributes as given in defn. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Values for arg\+\_\+t\+:\+:type}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{cmd__ln_8h_ab1f031eb9c89fa1bcae95b1c7532fb3d}} 
+\#define \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED}~(1$<$$<$0)
+\begin{DoxyCompactList}\small\item\em Bit indicating a required argument. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_a59c01ad9c48f29ac877ba14dc90808de}} 
+\#define \textbf{ A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER}~(1$<$$<$1)
+\begin{DoxyCompactList}\small\item\em Integer argument (optional). \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_ac8a280a53349bdd41d15edb4fa37972f}} 
+\#define \textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG}~(1$<$$<$2)
+\begin{DoxyCompactList}\small\item\em Floating point argument (optional). \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_a4de5ed5fcf59a18b24bc9f6449cc9356}} 
+\#define \textbf{ A\+R\+G\+\_\+\+S\+T\+R\+I\+NG}~(1$<$$<$3)
+\begin{DoxyCompactList}\small\item\em String argument (optional). \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_ac7d08ff59bb6905c3375162e75913e88}} 
+\#define \textbf{ A\+R\+G\+\_\+\+B\+O\+O\+L\+E\+AN}~(1$<$$<$4)
+\begin{DoxyCompactList}\small\item\em Boolean (true/false) argument (optional). \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_a0698bd0586e83569c1c0d86f072cfe13}} 
+\#define \textbf{ A\+R\+G\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+I\+ST}~(1$<$$<$5)
+\begin{DoxyCompactList}\small\item\em Boolean (true/false) argument (optional). \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_a8186f2660ad6b63be15019598a8dbb36}} 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER}~(\textbf{ A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\begin{DoxyCompactList}\small\item\em Required integer argument. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_a92ac706b4ccd544ebea6e0ceaccf3873}} 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG}~(\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\begin{DoxyCompactList}\small\item\em Required floating point argument. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_abaf37a6c677dde76bb1a211b818541bb}} 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+S\+T\+R\+I\+NG}~(\textbf{ A\+R\+G\+\_\+\+S\+T\+R\+I\+NG} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\begin{DoxyCompactList}\small\item\em Required string argument. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_ac98546cfe85afea642248ae3063c2258}} 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+B\+O\+O\+L\+E\+AN}~(\textbf{ A\+R\+G\+\_\+\+B\+O\+O\+L\+E\+AN} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\begin{DoxyCompactList}\small\item\em Required boolean argument. \end{DoxyCompactList}\item 
+\#define \textbf{ A\+R\+G\+\_\+\+I\+N\+T32}~\textbf{ A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER}
+\item 
+\#define \textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}~\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG}
+\item 
+\#define \textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}~\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG}
+\item 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32}~(\textbf{ A\+R\+G\+\_\+\+I\+N\+T32} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\item 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}~(\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T32} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\item 
+\#define \textbf{ R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}~(\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T64} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{cmd__ln_8h_a7555950a1a9a65eee866083bd8ce4301}} 
+typedef struct \textbf{ arg\+\_\+s} {\bfseries arg\+\_\+t}
+\item 
+\mbox{\label{cmd__ln_8h_a0c78d3d751be17a8c2d58ee81ae21182}} 
+typedef struct \textbf{ cmd\+\_\+ln\+\_\+s} {\bfseries cmd\+\_\+ln\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ cmd\+\_\+ln\+\_\+init} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$inout\+\_\+cmdln, \textbf{ arg\+\_\+t} const $\ast$defn, int32 strict,...)
+\begin{DoxyCompactList}\small\item\em Create a \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} from N\+U\+L\+L-\/terminated list of arguments. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ cmd\+\_\+ln\+\_\+retain} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln)
+\begin{DoxyCompactList}\small\item\em Retain ownership of a command-\/line argument set. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ cmd\+\_\+ln\+\_\+free\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln)
+\begin{DoxyCompactList}\small\item\em Release a command-\/line argument set and all associated strings. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ cmd\+\_\+ln\+\_\+parse\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$inout\+\_\+cmdln, \textbf{ arg\+\_\+t} const $\ast$defn, int32 argc, char $\ast$argv[$\,$], int32 strict)
+\begin{DoxyCompactList}\small\item\em Parse a list of strings into argumetns. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$inout\+\_\+cmdln, \textbf{ arg\+\_\+t} const $\ast$defn, char const $\ast$filename, int32 strict)
+\begin{DoxyCompactList}\small\item\em Parse an arguments file by deliminating on \char`\"{} \textbackslash{}r\textbackslash{}t\textbackslash{}n\char`\"{} and putting each tokens into an argv[] for \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. \end{DoxyCompactList}\item 
+\mbox{\label{cmd__ln_8h_ac8d204103a24e39efefda608db8d81f7}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ anytype\+\_\+t} $\ast$ \textbf{ cmd\+\_\+ln\+\_\+access\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Access the generic type union for a command line argument. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$ \textbf{ cmd\+\_\+ln\+\_\+str\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Retrieve a string from a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char const  $\ast$$\ast$ \textbf{ cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Retrieve an array of strings from a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT long \textbf{ cmd\+\_\+ln\+\_\+int\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Retrieve an integer from a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT double \textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Retrieve a floating-\/point number from a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name, char const $\ast$str)
+\begin{DoxyCompactList}\small\item\em Set a string in a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name, long iv)
+\begin{DoxyCompactList}\small\item\em Set an integer in a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name, double fv)
+\begin{DoxyCompactList}\small\item\em Set a floating-\/point number in a command-\/line object. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int \textbf{ cmd\+\_\+ln\+\_\+exists\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Re-\/entrant version of \doxyref{cmd\+\_\+ln\+\_\+exists()}{p.}{cmd__ln_8h_a35020ed4f3aae151fc654dea22dda028}. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, F\+I\+LE $\ast$fp, const \textbf{ arg\+\_\+t} $\ast$defn)
+\begin{DoxyCompactList}\small\item\em Print a help message listing the valid argument names, and the associated attributes as given in defn. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r} (\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$cmdln, F\+I\+LE $\ast$fp, const \textbf{ arg\+\_\+t} $\ast$defn)
+\begin{DoxyCompactList}\small\item\em Print current configuration values and defaults. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ cmd\+\_\+ln\+\_\+parse} (const \textbf{ arg\+\_\+t} $\ast$defn, int32 argc, char $\ast$argv[$\,$], int32 strict)
+\begin{DoxyCompactList}\small\item\em Non-\/reentrant version of \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ cmd\+\_\+ln\+\_\+parse\+\_\+file} (const \textbf{ arg\+\_\+t} $\ast$defn, char const $\ast$filename, int32 strict)
+\begin{DoxyCompactList}\small\item\em Parse an arguments file by deliminating on \char`\"{} \textbackslash{}r\textbackslash{}t\textbackslash{}n\char`\"{} and putting each tokens into an argv[] for \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+appl\+\_\+enter} (int argc, char $\ast$argv[$\,$], char const $\ast$default\+\_\+argfn, const \textbf{ arg\+\_\+t} $\ast$defn)
+\begin{DoxyCompactList}\small\item\em Old application initialization routine for Sphinx3 code. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+appl\+\_\+exit} (void)
+\begin{DoxyCompactList}\small\item\em Finalization routine corresponding to \doxyref{cmd\+\_\+ln\+\_\+appl\+\_\+enter()}{p.}{cmd__ln_8h_a7b06faa9f83eb8a2b045f8cfb6b67d36}. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t} $\ast$ \textbf{ cmd\+\_\+ln\+\_\+get} (void)
+\begin{DoxyCompactList}\small\item\em Retrieve the global \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} object used by non-\/re-\/entrant functions. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ cmd\+\_\+ln\+\_\+free} (void)
+\begin{DoxyCompactList}\small\item\em Free the global command line, if any exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Command-\/line and other configurationparsing and handling. 
+
+Configuration parameters, optionally parsed from the command line. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{cmd__ln_8h_ad9b1952e4f1def9ee6a88791375b3901}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!A\+R\+G\+\_\+\+F\+L\+O\+A\+T32@{A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}}
+\index{A\+R\+G\+\_\+\+F\+L\+O\+A\+T32@{A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}
+{\footnotesize\ttfamily \#define A\+R\+G\+\_\+\+F\+L\+O\+A\+T32~\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG}}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG instead.\end{DoxyRefDesc}
+
+
+Definition at line 148 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_aceb617c8572cf5ad6257b35e6d8919e7}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!A\+R\+G\+\_\+\+F\+L\+O\+A\+T64@{A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}}
+\index{A\+R\+G\+\_\+\+F\+L\+O\+A\+T64@{A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}
+{\footnotesize\ttfamily \#define A\+R\+G\+\_\+\+F\+L\+O\+A\+T64~\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG}}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG instead.\end{DoxyRefDesc}
+
+
+Definition at line 152 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a7ca1061dca6e8d4e7882bcefe1d15722}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!A\+R\+G\+\_\+\+I\+N\+T32@{A\+R\+G\+\_\+\+I\+N\+T32}}
+\index{A\+R\+G\+\_\+\+I\+N\+T32@{A\+R\+G\+\_\+\+I\+N\+T32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{A\+R\+G\+\_\+\+I\+N\+T32}
+{\footnotesize\ttfamily \#define A\+R\+G\+\_\+\+I\+N\+T32~\textbf{ A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER}}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER instead.\end{DoxyRefDesc}
+
+
+Definition at line 144 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_aa332e626631dfa1b7d93267d1b2384ba}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+access@{cmd\+\_\+ln\+\_\+access}}
+\index{cmd\+\_\+ln\+\_\+access@{cmd\+\_\+ln\+\_\+access}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+access}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+access(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+access\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Return a pointer to the previously parsed value for the given argument name. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+access\+\_\+r()}{p.}{cmd__ln_8h_ac8d204103a24e39efefda608db8d81f7}. \end{DoxyRefDesc}
+
+
+Definition at line 490 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a168e6f2cf367471406614a70d2b42ae8}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+boolean@{cmd\+\_\+ln\+\_\+boolean}}
+\index{cmd\+\_\+ln\+\_\+boolean@{cmd\+\_\+ln\+\_\+boolean}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+boolean}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+boolean(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+boolean\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Retrieve a boolean from the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+boolean\+\_\+r()}{p.}{cmd__ln_8h_a159e691c95089689cf9a8f85a67830a6}. \end{DoxyRefDesc}
+
+
+Definition at line 535 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a35020ed4f3aae151fc654dea22dda028}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+exists@{cmd\+\_\+ln\+\_\+exists}}
+\index{cmd\+\_\+ln\+\_\+exists@{cmd\+\_\+ln\+\_\+exists}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+exists}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+exists(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+exists\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Test the existence of a command-\/line argument in the global set of definitions. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+exists\+\_\+r()}{p.}{cmd__ln_8h_ab4ad5ae130e3c2c042590b41768635e3}.\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+True if the command line argument exists (i.\+e. it was one of the arguments defined in the call to \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. 
+\end{DoxyReturn}
+
+
+Definition at line 482 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a95b9ea6b4ef4a6ae9718b7df5fffdde8}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+float32@{cmd\+\_\+ln\+\_\+float32}}
+\index{cmd\+\_\+ln\+\_\+float32@{cmd\+\_\+ln\+\_\+float32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+float32}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+float32(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~(float32)\textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Retrieve a 32-\/bit float from the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+float\+\_\+r()}{p.}{cmd__ln_8h_a2deca68514704cafbb7ec594b8ff38fe}. \end{DoxyRefDesc}
+
+
+Definition at line 521 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a3468b03e9089e4b9b4ccd5b9e4347a9c}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+float64@{cmd\+\_\+ln\+\_\+float64}}
+\index{cmd\+\_\+ln\+\_\+float64@{cmd\+\_\+ln\+\_\+float64}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+float64}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+float64(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~(float64)\textbf{ cmd\+\_\+ln\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Retrieve a 64-\/bit float from the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+float\+\_\+r()}{p.}{cmd__ln_8h_a2deca68514704cafbb7ec594b8ff38fe}. \end{DoxyRefDesc}
+
+
+Definition at line 528 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_ad3c5abaaeda4f3fd4462a24d41db7589}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+int32@{cmd\+\_\+ln\+\_\+int32}}
+\index{cmd\+\_\+ln\+\_\+int32@{cmd\+\_\+ln\+\_\+int32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+int32}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+int32(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~(int32)\textbf{ cmd\+\_\+ln\+\_\+int\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Retrieve a 32-\/bit integer from the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+int\+\_\+r()}{p.}{cmd__ln_8h_a3bf86d597effc163148fddf14c0d117a}. \end{DoxyRefDesc}
+
+
+Definition at line 514 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_aac4bb58af379a71fad4e1adc7fb4d476}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+print\+\_\+help@{cmd\+\_\+ln\+\_\+print\+\_\+help}}
+\index{cmd\+\_\+ln\+\_\+print\+\_\+help@{cmd\+\_\+ln\+\_\+print\+\_\+help}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+print\+\_\+help}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+print\+\_\+help(\begin{DoxyParamCaption}\item[{}]{f,  }\item[{}]{d }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),f,d)}
+
+
+
+Print a help message listing the valid argument names, and the associated attributes as given in defn. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r()}{p.}{cmd__ln_8h_a103dabd597830caf65ec4ef3fdc71a1a}. \end{DoxyRefDesc}
+
+
+Definition at line 580 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_aa6ee66099aca6807d03c70a9d3e5f2a3}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+boolean@{cmd\+\_\+ln\+\_\+set\+\_\+boolean}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+boolean@{cmd\+\_\+ln\+\_\+set\+\_\+boolean}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+boolean}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+set\+\_\+boolean(\begin{DoxyParamCaption}\item[{}]{n,  }\item[{}]{b }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+boolean\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,b)}
+
+
+
+Set a boolean value in the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+set\+\_\+boolean\+\_\+r()}{p.}{cmd__ln_8h_ad4984b45985a6c5e2b231cf1f9b44fe4}. \end{DoxyRefDesc}
+
+
+Definition at line 571 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a2642012877117ba59dec59d5bfdbbed1}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+float32@{cmd\+\_\+ln\+\_\+set\+\_\+float32}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+float32@{cmd\+\_\+ln\+\_\+set\+\_\+float32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+float32}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+set\+\_\+float32(\begin{DoxyParamCaption}\item[{}]{n,  }\item[{}]{f }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,f)}
+
+
+
+Set a 32-\/bit float in the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r()}{p.}{cmd__ln_8h_a71c02d36c1db0c1d4e6349bd253d9b59}. \end{DoxyRefDesc}
+
+
+Definition at line 557 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_ae9b20503ea67f45dc43312d13068a127}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+float64@{cmd\+\_\+ln\+\_\+set\+\_\+float64}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+float64@{cmd\+\_\+ln\+\_\+set\+\_\+float64}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+float64}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+set\+\_\+float64(\begin{DoxyParamCaption}\item[{}]{n,  }\item[{}]{f }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,f)}
+
+
+
+Set a 64-\/bit float in the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r()}{p.}{cmd__ln_8h_a71c02d36c1db0c1d4e6349bd253d9b59}. \end{DoxyRefDesc}
+
+
+Definition at line 564 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_ab63087898153823d7a7041669d60cfae}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+int32@{cmd\+\_\+ln\+\_\+set\+\_\+int32}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+int32@{cmd\+\_\+ln\+\_\+set\+\_\+int32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+int32}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+set\+\_\+int32(\begin{DoxyParamCaption}\item[{}]{n,  }\item[{}]{i }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,i)}
+
+
+
+Set a 32-\/bit integer value in the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r()}{p.}{cmd__ln_8h_afd5eef797f4786d7a1ddf4a64018cc7d}. \end{DoxyRefDesc}
+
+
+Definition at line 550 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_add9cb281562711418b6c795f5a6eb206}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+str@{cmd\+\_\+ln\+\_\+set\+\_\+str}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+str@{cmd\+\_\+ln\+\_\+set\+\_\+str}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+str}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+set\+\_\+str(\begin{DoxyParamCaption}\item[{}]{n,  }\item[{}]{s }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(),n,s)}
+
+
+
+Set a string in the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r()}{p.}{cmd__ln_8h_a3868b219fd3eaf64e902db38145c1c59}. \end{DoxyRefDesc}
+
+
+Definition at line 543 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_ab5bd3d0b7f28a485411da21a5e3984b3}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+str@{cmd\+\_\+ln\+\_\+str}}
+\index{cmd\+\_\+ln\+\_\+str@{cmd\+\_\+ln\+\_\+str}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+str}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+str(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+str\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Retrieve a string from the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+str\+\_\+r()}{p.}{cmd__ln_8h_af0aa15288e06fc8271298e4fa7cdc91a}. \end{DoxyRefDesc}
+
+
+Definition at line 498 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a5061e894a4b65597c046a49b2c61f28b}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+str\+\_\+list@{cmd\+\_\+ln\+\_\+str\+\_\+list}}
+\index{cmd\+\_\+ln\+\_\+str\+\_\+list@{cmd\+\_\+ln\+\_\+str\+\_\+list}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+str\+\_\+list}
+{\footnotesize\ttfamily \#define cmd\+\_\+ln\+\_\+str\+\_\+list(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\textbf{ cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r}(\textbf{ cmd\+\_\+ln\+\_\+get}(), name)}
+
+
+
+Retrieve an array of strings in the global command line. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r()}{p.}{cmd__ln_8h_a8ef7df4f5749b5517f3a655566104a10}. \end{DoxyRefDesc}
+
+
+Definition at line 506 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a46a5db6810b67a506c6074a76f003798}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32@{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}}
+\index{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32@{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32}
+{\footnotesize\ttfamily \#define R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T32~(\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T32} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG instead.\end{DoxyRefDesc}
+
+
+Definition at line 160 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a501b468ee6e97644b9ca75e4bf9cd1a8}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64@{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}}
+\index{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64@{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64}
+{\footnotesize\ttfamily \#define R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T64~(\textbf{ A\+R\+G\+\_\+\+F\+L\+O\+A\+T64} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use R\+E\+Q\+A\+R\+G\+\_\+\+F\+L\+O\+A\+T\+I\+NG instead.\end{DoxyRefDesc}
+
+
+Definition at line 164 of file cmd\+\_\+ln.\+h.
+
+\mbox{\label{cmd__ln_8h_a49a6267bbca65099157aad7c2adc52b3}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32@{R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32}}
+\index{R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32@{R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32}
+{\footnotesize\ttfamily \#define R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T32~(\textbf{ A\+R\+G\+\_\+\+I\+N\+T32} $\vert$ \textbf{ A\+R\+G\+\_\+\+R\+E\+Q\+U\+I\+R\+ED})}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use R\+E\+Q\+A\+R\+G\+\_\+\+I\+N\+T\+E\+G\+ER instead.\end{DoxyRefDesc}
+
+
+Definition at line 156 of file cmd\+\_\+ln.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{cmd__ln_8h_a7b06faa9f83eb8a2b045f8cfb6b67d36}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+appl\+\_\+enter@{cmd\+\_\+ln\+\_\+appl\+\_\+enter}}
+\index{cmd\+\_\+ln\+\_\+appl\+\_\+enter@{cmd\+\_\+ln\+\_\+appl\+\_\+enter}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+appl\+\_\+enter()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+appl\+\_\+enter (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv[$\,$],  }\item[{char const $\ast$}]{default\+\_\+argfn,  }\item[{const \textbf{ arg\+\_\+t} $\ast$}]{defn }\end{DoxyParamCaption})}
+
+
+
+Old application initialization routine for Sphinx3 code. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI. \end{DoxyRefDesc}
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & In\+: Number of actual arguments \\
+\hline
+{\em argv} & In\+: Number of actual arguments \\
+\hline
+{\em default\+\_\+argfn} & In\+: default argument file name \\
+\hline
+{\em defn} & Command-\/line argument definition \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 496 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_a97d5edba5ad53d97a159ac8ab9234de7}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+appl\+\_\+exit@{cmd\+\_\+ln\+\_\+appl\+\_\+exit}}
+\index{cmd\+\_\+ln\+\_\+appl\+\_\+exit@{cmd\+\_\+ln\+\_\+appl\+\_\+exit}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+appl\+\_\+exit()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+appl\+\_\+exit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Finalization routine corresponding to \doxyref{cmd\+\_\+ln\+\_\+appl\+\_\+enter()}{p.}{cmd__ln_8h_a7b06faa9f83eb8a2b045f8cfb6b67d36}. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI. \end{DoxyRefDesc}
+
+
+Definition at line 546 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+free().
+
+\mbox{\label{cmd__ln_8h_ab4ad5ae130e3c2c042590b41768635e3}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+exists\+\_\+r@{cmd\+\_\+ln\+\_\+exists\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+exists\+\_\+r@{cmd\+\_\+ln\+\_\+exists\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+exists\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int cmd\+\_\+ln\+\_\+exists\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Re-\/entrant version of \doxyref{cmd\+\_\+ln\+\_\+exists()}{p.}{cmd__ln_8h_a35020ed4f3aae151fc654dea22dda028}. 
+
+\begin{DoxyReturn}{Returns}
+True if the command line argument exists (i.\+e. it was one of the arguments defined in the call to \doxyref{cmd\+\_\+ln\+\_\+parse\+\_\+r()}{p.}{cmd__ln_8h_aa5a3a9e49198d8fd0dd3424fb880b6b6}. 
+\end{DoxyReturn}
+
+
+Definition at line 925 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_a2deca68514704cafbb7ec594b8ff38fe}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+float\+\_\+r@{cmd\+\_\+ln\+\_\+float\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+float\+\_\+r@{cmd\+\_\+ln\+\_\+float\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+float\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT double cmd\+\_\+ln\+\_\+float\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Retrieve a floating-\/point number from a command-\/line object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & the command-\/line flag to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the float value associated with {\ttfamily name}, or 0.\+0 if {\ttfamily name} does not exist. You must use \doxyref{cmd\+\_\+ln\+\_\+exists\+\_\+r()}{p.}{cmd__ln_8h_ab4ad5ae130e3c2c042590b41768635e3} to distinguish between cases where a value is legitimately zero and where the corresponding flag is unknown. 
+\end{DoxyReturn}
+
+
+Definition at line 975 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_a439d3f832f92ae655f1028445aa91602}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+free@{cmd\+\_\+ln\+\_\+free}}
+\index{cmd\+\_\+ln\+\_\+free@{cmd\+\_\+ln\+\_\+free}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+free()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+free (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Free the global command line, if any exists. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Use the re-\/entrant A\+PI instead. \end{DoxyRefDesc}
+
+
+Definition at line 1068 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+free\+\_\+r().
+
+
+
+Referenced by cmd\+\_\+ln\+\_\+appl\+\_\+exit().
+
+\mbox{\label{cmd__ln_8h_a26707fc85e87d8999e368a680e7873cd}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+free\+\_\+r@{cmd\+\_\+ln\+\_\+free\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+free\+\_\+r@{cmd\+\_\+ln\+\_\+free\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+free\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int cmd\+\_\+ln\+\_\+free\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln }\end{DoxyParamCaption})}
+
+
+
+Release a command-\/line argument set and all associated strings. 
+
+\begin{DoxyReturn}{Returns}
+new reference count (0 if freed completely) 
+\end{DoxyReturn}
+
+
+Definition at line 1032 of file cmd\+\_\+ln.\+c.
+
+
+
+Referenced by cmd\+\_\+ln\+\_\+free().
+
+\mbox{\label{cmd__ln_8h_a6e10003b5e86ec317c1b78c0655972af}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+get@{cmd\+\_\+ln\+\_\+get}}
+\index{cmd\+\_\+ln\+\_\+get@{cmd\+\_\+ln\+\_\+get}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+get()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t}$\ast$ cmd\+\_\+ln\+\_\+get (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Retrieve the global \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} object used by non-\/re-\/entrant functions. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI. \end{DoxyRefDesc}
+\begin{DoxyReturn}{Returns}
+global \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} object. 
+\end{DoxyReturn}
+
+
+Definition at line 490 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_afdba0ab4dfe8a3ad9d49a6732bd62c42}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+init@{cmd\+\_\+ln\+\_\+init}}
+\index{cmd\+\_\+ln\+\_\+init@{cmd\+\_\+ln\+\_\+init}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+init()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t}$\ast$ cmd\+\_\+ln\+\_\+init (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{inout\+\_\+cmdln,  }\item[{\textbf{ arg\+\_\+t} const $\ast$}]{defn,  }\item[{int32}]{strict,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Create a \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} from N\+U\+L\+L-\/terminated list of arguments. 
+
+This function creates a \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} from a N\+U\+L\+L-\/terminated list of argument strings. For example, to create the equivalent of passing \char`\"{}-\/hmm foodir -\/dsratio 2 -\/lm bar.\+lm\char`\"{} on the command-\/line\+:
+
+config = cmd\+\_\+ln\+\_\+init(N\+U\+LL, defs, T\+R\+UE, \char`\"{}-\/hmm\char`\"{}, \char`\"{}foodir\char`\"{}, \char`\"{}-\/dsratio\char`\"{}, \char`\"{}2\char`\"{}, \char`\"{}-\/lm\char`\"{}, \char`\"{}bar.\+lm\char`\"{}, N\+U\+LL);
+
+Note that for simplicity, {\bfseries all} arguments are passed as strings, regardless of the actual underlying type.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+cmdln} & Previous command-\/line to update, or N\+U\+LL to create a new one. \\
+\hline
+{\em defn} & Array of argument name definitions, or N\+U\+LL to allow any arguments. \\
+\hline
+{\em strict} & Whether to fail on duplicate or unknown arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A cmd\+\_\+ln\+\_\+t$\ast$ containing the results of command line parsing, or N\+U\+LL on failure. 
+\end{DoxyReturn}
+
+
+Definition at line 706 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_a3bf86d597effc163148fddf14c0d117a}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+int\+\_\+r@{cmd\+\_\+ln\+\_\+int\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+int\+\_\+r@{cmd\+\_\+ln\+\_\+int\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+int\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT long cmd\+\_\+ln\+\_\+int\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Retrieve an integer from a command-\/line object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & the command-\/line flag to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the integer value associated with {\ttfamily name}, or 0 if {\ttfamily name} does not exist. You must use \doxyref{cmd\+\_\+ln\+\_\+exists\+\_\+r()}{p.}{cmd__ln_8h_ab4ad5ae130e3c2c042590b41768635e3} to distinguish between cases where a value is legitimately zero and where the corresponding flag is unknown. 
+\end{DoxyReturn}
+
+
+Definition at line 965 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+parse@{cmd\+\_\+ln\+\_\+parse}}
+\index{cmd\+\_\+ln\+\_\+parse@{cmd\+\_\+ln\+\_\+parse}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+parse()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 cmd\+\_\+ln\+\_\+parse (\begin{DoxyParamCaption}\item[{const \textbf{ arg\+\_\+t} $\ast$}]{defn,  }\item[{int32}]{argc,  }\item[{char $\ast$}]{argv[$\,$],  }\item[{int32}]{strict }\end{DoxyParamCaption})}
+
+
+
+Non-\/reentrant version of \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+parse\+\_\+r()}{p.}{cmd__ln_8h_aa5a3a9e49198d8fd0dd3424fb880b6b6}. \end{DoxyRefDesc}
+\begin{DoxyReturn}{Returns}
+0 if successful, $<$0 if error. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em defn} & In\+: Array of argument name definitions \\
+\hline
+{\em argc} & In\+: Number of actual arguments \\
+\hline
+{\em argv} & In\+: Actual arguments \\
+\hline
+{\em strict} & In\+: Fail on duplicate or unknown arguments, or no arguments? \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 743 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+parse\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_ab7970c08288fae94d211a4252381bc61}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+parse\+\_\+file@{cmd\+\_\+ln\+\_\+parse\+\_\+file}}
+\index{cmd\+\_\+ln\+\_\+parse\+\_\+file@{cmd\+\_\+ln\+\_\+parse\+\_\+file}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+parse\+\_\+file()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 cmd\+\_\+ln\+\_\+parse\+\_\+file (\begin{DoxyParamCaption}\item[{const \textbf{ arg\+\_\+t} $\ast$}]{defn,  }\item[{char const $\ast$}]{filename,  }\item[{int32}]{strict }\end{DoxyParamCaption})}
+
+
+
+Parse an arguments file by deliminating on \char`\"{} \textbackslash{}r\textbackslash{}t\textbackslash{}n\char`\"{} and putting each tokens into an argv[] for \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]This is deprecated in favor of the re-\/entrant A\+PI function \doxyref{cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r()}{p.}{cmd__ln_8h_a57f54649952a07b8bef888af4e416550}.\end{DoxyRefDesc}
+
+
+\begin{DoxyReturn}{Returns}
+0 if successful, $<$0 on error. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em defn} & In\+: Array of argument name definitions \\
+\hline
+{\em filename} & In\+: A file that contains all the arguments \\
+\hline
+{\em strict} & In\+: Fail on duplicate or unknown arguments, or no arguments? \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 891 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_a57f54649952a07b8bef888af4e416550}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r@{cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r@{cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t}$\ast$ cmd\+\_\+ln\+\_\+parse\+\_\+file\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{inout\+\_\+cmdln,  }\item[{\textbf{ arg\+\_\+t} const $\ast$}]{defn,  }\item[{char const $\ast$}]{filename,  }\item[{int32}]{strict }\end{DoxyParamCaption})}
+
+
+
+Parse an arguments file by deliminating on \char`\"{} \textbackslash{}r\textbackslash{}t\textbackslash{}n\char`\"{} and putting each tokens into an argv[] for \doxyref{cmd\+\_\+ln\+\_\+parse()}{p.}{cmd__ln_8h_a42447819b47aab58ee53f4745244f7f7}. 
+
+\begin{DoxyReturn}{Returns}
+A \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} containing the results of command line parsing, or N\+U\+LL on failure. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+cmdln} & In/\+Out\+: Previous command-\/line to update, or N\+U\+LL to create a new one. \\
+\hline
+{\em defn} & In\+: Array of argument name definitions \\
+\hline
+{\em filename} & In\+: A file that contains all the arguments \\
+\hline
+{\em strict} & In\+: Fail on duplicate or unknown arguments, or no arguments? \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 761 of file cmd\+\_\+ln.\+c.
+
+
+
+Referenced by cmd\+\_\+ln\+\_\+parse\+\_\+file().
+
+\mbox{\label{cmd__ln_8h_aa5a3a9e49198d8fd0dd3424fb880b6b6}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+parse\+\_\+r@{cmd\+\_\+ln\+\_\+parse\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+parse\+\_\+r@{cmd\+\_\+ln\+\_\+parse\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+parse\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t}$\ast$ cmd\+\_\+ln\+\_\+parse\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{inout\+\_\+cmdln,  }\item[{\textbf{ arg\+\_\+t} const $\ast$}]{defn,  }\item[{int32}]{argc,  }\item[{char $\ast$}]{argv[$\,$],  }\item[{int32}]{strict }\end{DoxyParamCaption})}
+
+
+
+Parse a list of strings into argumetns. 
+
+Parse the given list of arguments (name-\/value pairs) according to the given definitions. Argument values can be retrieved in future using \doxyref{cmd\+\_\+ln\+\_\+access()}{p.}{cmd__ln_8h_aa332e626631dfa1b7d93267d1b2384ba}. argv[0] is assumed to be the program name and skipped. Any unknown argument name causes a fatal error. The routine also prints the prevailing argument values (to stderr) after parsing.
+
+\begin{DoxyNote}{Note}
+It is currently assumed that the strings in argv are allocated statically, or at least that they will be valid as long as the \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} returned from this function. Unpredictable behaviour will result if they are freed or otherwise become invalidated.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+A \doxyref{cmd\+\_\+ln\+\_\+t}{p.}{structcmd__ln__t} containing the results of command line parsing, or N\+U\+LL on failure. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em inout\+\_\+cmdln} & In/\+Out\+: Previous command-\/line to update, or N\+U\+LL to create a new one. \\
+\hline
+{\em defn} & In\+: Array of argument name definitions \\
+\hline
+{\em argc} & In\+: Number of actual arguments \\
+\hline
+{\em argv} & In\+: Actual arguments \\
+\hline
+{\em strict} & In\+: Fail on duplicate or unknown arguments, or no arguments? \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 553 of file cmd\+\_\+ln.\+c.
+
+
+
+Referenced by cmd\+\_\+ln\+\_\+parse().
+
+\mbox{\label{cmd__ln_8h_a103dabd597830caf65ec4ef3fdc71a1a}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r@{cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r@{cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+print\+\_\+help\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{F\+I\+LE $\ast$}]{fp,  }\item[{const \textbf{ arg\+\_\+t} $\ast$}]{defn }\end{DoxyParamCaption})}
+
+
+
+Print a help message listing the valid argument names, and the associated attributes as given in defn. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & output stream \\
+\hline
+{\em defn} & Array of argument name definitions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 907 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_a05ab6a9457fed40ce1a1ef659e88fe79}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r@{cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r@{cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+print\+\_\+values\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{F\+I\+LE $\ast$}]{fp,  }\item[{const \textbf{ arg\+\_\+t} $\ast$}]{defn }\end{DoxyParamCaption})}
+
+
+
+Print current configuration values and defaults. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & output stream \\
+\hline
+{\em defn} & Array of argument name definitions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 916 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_a975f5bf7b6f4fc95f426d1979281f73b}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+retain@{cmd\+\_\+ln\+\_\+retain}}
+\index{cmd\+\_\+ln\+\_\+retain@{cmd\+\_\+ln\+\_\+retain}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+retain()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ cmd\+\_\+ln\+\_\+t}$\ast$ cmd\+\_\+ln\+\_\+retain (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln }\end{DoxyParamCaption})}
+
+
+
+Retain ownership of a command-\/line argument set. 
+
+\begin{DoxyReturn}{Returns}
+pointer to retained command-\/line argument set. 
+\end{DoxyReturn}
+
+
+Definition at line 1025 of file cmd\+\_\+ln.\+c.
+
+\mbox{\label{cmd__ln_8h_a71c02d36c1db0c1d4e6349bd253d9b59}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r@{cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r@{cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+set\+\_\+float\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name,  }\item[{double}]{fv }\end{DoxyParamCaption})}
+
+
+
+Set a floating-\/point number in a command-\/line object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & The command-\/line flag to set. \\
+\hline
+{\em fv} & Integer value to set. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1013 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_afd5eef797f4786d7a1ddf4a64018cc7d}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r@{cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r@{cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+set\+\_\+int\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name,  }\item[{long}]{iv }\end{DoxyParamCaption})}
+
+
+
+Set an integer in a command-\/line object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & The command-\/line flag to set. \\
+\hline
+{\em iv} & Integer value to set. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1001 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_a3868b219fd3eaf64e902db38145c1c59}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r@{cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r@{cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void cmd\+\_\+ln\+\_\+set\+\_\+str\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name,  }\item[{char const $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+
+Set a string in a command-\/line object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & The command-\/line flag to set. \\
+\hline
+{\em str} & String value to set. The command-\/line object does not retain ownership of this pointer. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 985 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_a8ef7df4f5749b5517f3a655566104a10}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r@{cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r@{cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char const$\ast$$\ast$ cmd\+\_\+ln\+\_\+str\+\_\+list\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Retrieve an array of strings from a command-\/line object. 
+
+The command-\/line object retains ownership of this array, so you should not attempt to free it manually.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & the command-\/line flag to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the array of strings associated with {\ttfamily name}, or N\+U\+LL if {\ttfamily name} does not exist. You must use \doxyref{cmd\+\_\+ln\+\_\+exists\+\_\+r()}{p.}{cmd__ln_8h_ab4ad5ae130e3c2c042590b41768635e3} to distinguish between cases where a value is legitimately N\+U\+LL and where the corresponding flag is unknown. 
+\end{DoxyReturn}
+
+
+Definition at line 955 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+
+\mbox{\label{cmd__ln_8h_af0aa15288e06fc8271298e4fa7cdc91a}} 
+\index{cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}!cmd\+\_\+ln\+\_\+str\+\_\+r@{cmd\+\_\+ln\+\_\+str\+\_\+r}}
+\index{cmd\+\_\+ln\+\_\+str\+\_\+r@{cmd\+\_\+ln\+\_\+str\+\_\+r}!cmd\+\_\+ln.\+h@{cmd\+\_\+ln.\+h}}
+\subsubsection{cmd\+\_\+ln\+\_\+str\+\_\+r()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT char const$\ast$ cmd\+\_\+ln\+\_\+str\+\_\+r (\begin{DoxyParamCaption}\item[{\textbf{ cmd\+\_\+ln\+\_\+t} $\ast$}]{cmdln,  }\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Retrieve a string from a command-\/line object. 
+
+The command-\/line object retains ownership of this string, so you should not attempt to free it manually.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmdln} & Command-\/line object. \\
+\hline
+{\em name} & the command-\/line flag to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the string value associated with {\ttfamily name}, or N\+U\+LL if {\ttfamily name} does not exist. You must use \doxyref{cmd\+\_\+ln\+\_\+exists\+\_\+r()}{p.}{cmd__ln_8h_ab4ad5ae130e3c2c042590b41768635e3} to distinguish between cases where a value is legitimately N\+U\+LL and where the corresponding flag is unknown. 
+\end{DoxyReturn}
+
+
+Definition at line 945 of file cmd\+\_\+ln.\+c.
+
+
+
+References cmd\+\_\+ln\+\_\+access\+\_\+r().
+

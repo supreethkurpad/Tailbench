@@ -1,0 +1,170 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.33,v 1.8.2.4 2010/01/12 02:01:59 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This script demonstrates many xcts causing SMOs
+# by inserting and removing large entries into btrees
+# At some point, if we crash or abort, and if -y flag is
+# used, this should demonstrate recovery's effort to order
+# the undone xcts so that the one(s) in the middle of SMOs
+# get run first.
+#
+# NB: this is for use with runtests.pl (crash testing)
+#
+
+source $script_dir/vol.init
+
+set ntries 500
+set nxct 10
+
+set mx [expr $max_btree_entry_size / 2]
+set elem [format "zvec%d" $mx]
+
+proc go_go_gadget {threadname ndx seed} {
+    global ntries volid nxct short_form cc tx elem
+    sync
+    for {set j 1} {$j <= $nxct} {incr j} {
+		sm begin_xct
+		verbose [sm xct_to_tid [sm xct]]
+		for {set i 1} {$i <= $ntries} {incr i} {
+			# sm sleep 1
+			set key [expr {$j + ($i * $nxct) + $seed}]
+			# verbose thread $threadname: creating entry size $key
+			if [catch {sm create_assoc $ndx [format $short_form $key] $elem} err] {
+				if [error_is $err E_DEADLOCK] {
+					verbose ************************************ DEADLOCK
+					if { [string compare $cc t_cc_modkvl] == 0 } {
+						assert { 0 }
+					}
+				} else {
+					assert {error_is $err E_DUPLICATE}
+				}
+			} else {
+			   verbose thread $threadname: created entry $key size 
+			}
+		}
+        set dummy [sm gather_xct_stats reset]
+        verbose  [pnzstats $dummy]
+		sm commit_xct
+    }
+}
+
+proc B_go_go_gadget { threadname ndx seed} {
+    global ntries volid nxct short_form cc tx
+    sync
+    for {set j $nxct} {$j >= 1} {set j [expr {$j - 1}] } {
+	sm begin_xct
+	verbose [sm xct_to_tid [sm xct]]
+	for {set i $ntries} {$i >= 1} {set i [expr {$i - 1}] } {
+	    # sm sleep 1
+	    set key [expr {$j + ($i * $nxct) + $seed} ]
+	    # verbose thread $threadname: destroying entry $key 
+	    if [catch {sm destroy_all_assoc $ndx [format $short_form $key]} err ] {
+		if [error_is $err E_DEADLOCK] {
+		    verbose ************************************ DEADLOCK!
+		    if { [string compare $cc t_cc_modkvl] == 0 } {
+			assert { 0 }
+		    }
+		} else {
+		    assert {error_is $err FC_NOTFOUND}
+		}
+	    } else {
+		verbose thread $threadname: destroyed entry $key 
+	    }
+	}
+	sm commit_xct
+    }
+}
+
+set nthreads 5
+
+proc doit {nthreads} {
+    sm gather_stats reset
+    global t ntries volid nxct short_form cc tx ndx verbose_flag elem
+
+
+    set half [expr {$nthreads/2}]
+    set half $nthreads
+    set sync_list { }
+    for {set i 1} {$i <= $half} {incr i} {
+		set q "t$i"
+		set t($i) [fork_thread go_go_gadget $q $ndx $i ]
+		lappend sync_list $t($i)
+		verbose $i: forked thread $t($i)
+    }
+    for {set k $half} {$i <= $nthreads} {incr i} {
+		set name "B$i"
+		set t($i) [fork_thread B_go_go_gadget $name $ndx $i]
+		lappend sync_list $t($i)
+		verbose $i: forked thread $t($i)
+    }
+    set cmd "sync_thread $sync_list"
+    verbose $cmd
+    eval $cmd
+
+    set cmd "join_thread $sync_list"
+    verbose $cmd
+    eval $cmd
+
+    # set save_verbose_flag $verbose_flag
+    # set verbose_flag 1
+    # dstats $volid
+    # set verbose_flag $save_verbose_flag
+}
+
+# # verbose $nthreads: elem is $elem
+# # verbose $nthreads: short_form is  $short_form
+
+foreach cc {t_cc_im t_cc_kvl t_cc_modkvl t_cc_none} {
+    sm begin_xct
+	verbose [sm xct_to_tid [sm xct]] cc $cc
+    set ndx [sm create_index $volid btree regular b*1000 $cc]
+    sm commit_xct
+
+    set tx 0
+    verbose **********************************************
+    verbose $cc $nthreads transactions
+    verbose **********************************************
+    doit $nthreads
+
+    sm begin_xct
+	verbose [sm xct_to_tid [sm xct]] cc $cc
+    sm destroy_index $ndx
+    sm commit_xct
+}
+
+verbose GLOBAL STATS
+set dummy [sm gather_stats]
+verbose [pnzstats $dummy]
+
+verbose threads done
+
+unset t mx elem
+unset ntries nxct ndx tx nthreads dummy cc
+

@@ -1,0 +1,901 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="ps__search_8h" kind="file" language="C++">
+    <compoundname>ps_search.h</compoundname>
+    <includes local="no">sphinxbase/fsg_model.h</includes>
+    <includes local="no">sphinxbase/ngram_model.h</includes>
+    <includedby refid="pocketsphinx_8h" local="no">include/pocketsphinx.h</includedby>
+    <incdepgraph>
+      <node id="223">
+        <label>sphinxbase/ngram_model.h</label>
+      </node>
+      <node id="221">
+        <label>include/ps_search.h</label>
+        <link refid="ps__search_8h"/>
+        <childnode refid="222" relation="include">
+        </childnode>
+        <childnode refid="223" relation="include">
+        </childnode>
+      </node>
+      <node id="222">
+        <label>sphinxbase/fsg_model.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="243">
+        <label>src/libpocketsphinx/fsg_search.c</label>
+        <link refid="fsg__search_8c_source"/>
+      </node>
+      <node id="238">
+        <label>src/libpocketsphinx/allphone_search.c</label>
+        <link refid="allphone__search_8c_source"/>
+      </node>
+      <node id="239">
+        <label>src/libpocketsphinx/allphone_search.h</label>
+        <link refid="allphone__search_8h_source"/>
+        <childnode refid="238" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="240">
+        <label>src/libpocketsphinx/pocketsphinx.c</label>
+        <link refid="pocketsphinx_8c_source"/>
+      </node>
+      <node id="241">
+        <label>src/libpocketsphinx/fsg_search_internal.h</label>
+        <link refid="fsg__search__internal_8h_source"/>
+        <childnode refid="242" relation="include">
+        </childnode>
+        <childnode refid="243" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="229">
+        <label>src/libpocketsphinx/acmod.c</label>
+        <link refid="acmod_8c"/>
+      </node>
+      <node id="254">
+        <label>src/libpocketsphinx/ps_lattice.c</label>
+        <link refid="ps__lattice_8c"/>
+      </node>
+      <node id="242">
+        <label>src/libpocketsphinx/fsg_history.c</label>
+        <link refid="fsg__history_8c_source"/>
+      </node>
+      <node id="256">
+        <label>src/libpocketsphinx/phone_loop_search.c</label>
+        <link refid="phone__loop__search_8c_source"/>
+      </node>
+      <node id="255">
+        <label>src/libpocketsphinx/phone_loop_search.h</label>
+        <link refid="phone__loop__search_8h"/>
+        <childnode refid="251" relation="include">
+        </childnode>
+        <childnode refid="256" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="245">
+        <label>src/libpocketsphinx/kws_detections.c</label>
+        <link refid="kws__detections_8c_source"/>
+      </node>
+      <node id="244">
+        <label>src/libpocketsphinx/kws_detections.h</label>
+        <link refid="kws__detections_8h_source"/>
+        <childnode refid="245" relation="include">
+        </childnode>
+        <childnode refid="246" relation="include">
+        </childnode>
+      </node>
+      <node id="248">
+        <label>src/libpocketsphinx/ngram_search.c</label>
+        <link refid="ngram__search_8c"/>
+      </node>
+      <node id="249">
+        <label>src/libpocketsphinx/ngram_search.h</label>
+        <link refid="ngram__search_8h"/>
+        <childnode refid="248" relation="include">
+        </childnode>
+        <childnode refid="250" relation="include">
+        </childnode>
+        <childnode refid="252" relation="include">
+        </childnode>
+        <childnode refid="253" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+        <childnode refid="254" relation="include">
+        </childnode>
+      </node>
+      <node id="258">
+        <label>src/libpocketsphinx/state_align_search.c</label>
+        <link refid="state__align__search_8c"/>
+      </node>
+      <node id="257">
+        <label>src/libpocketsphinx/state_align_search.h</label>
+        <link refid="state__align__search_8h"/>
+        <childnode refid="258" relation="include">
+        </childnode>
+      </node>
+      <node id="251">
+        <label>src/libpocketsphinx/ngram_search_fwdtree.c</label>
+        <link refid="ngram__search__fwdtree_8c"/>
+      </node>
+      <node id="250">
+        <label>src/libpocketsphinx/ngram_search_fwdtree.h</label>
+        <link refid="ngram__search__fwdtree_8h"/>
+        <childnode refid="248" relation="include">
+        </childnode>
+        <childnode refid="251" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="232">
+        <label>src/libpocketsphinx/ptm_mgau.c</label>
+        <link refid="ptm__mgau_8c_source"/>
+      </node>
+      <node id="231">
+        <label>src/libpocketsphinx/ptm_mgau.h</label>
+        <link refid="ptm__mgau_8h"/>
+        <childnode refid="229" relation="include">
+        </childnode>
+        <childnode refid="232" relation="include">
+        </childnode>
+      </node>
+      <node id="236">
+        <label>src/libpocketsphinx/ms_senone.c</label>
+        <link refid="ms__senone_8c_source"/>
+      </node>
+      <node id="235">
+        <label>src/libpocketsphinx/ms_senone.h</label>
+        <link refid="ms__senone_8h"/>
+        <childnode refid="233" relation="include">
+        </childnode>
+        <childnode refid="236" relation="include">
+        </childnode>
+      </node>
+      <node id="230">
+        <label>src/libpocketsphinx/s2_semi_mgau.c</label>
+        <link refid="s2__semi__mgau_8c_source"/>
+      </node>
+      <node id="228">
+        <label>src/libpocketsphinx/s2_semi_mgau.h</label>
+        <link refid="s2__semi__mgau_8h_source"/>
+        <childnode refid="229" relation="include">
+        </childnode>
+        <childnode refid="230" relation="include">
+        </childnode>
+      </node>
+      <node id="237">
+        <label>src/libpocketsphinx/ms_gauden.c</label>
+        <link refid="ms__gauden_8c_source"/>
+      </node>
+      <node id="227">
+        <label>src/libpocketsphinx/ms_gauden.h</label>
+        <link refid="ms__gauden_8h"/>
+        <childnode refid="228" relation="include">
+        </childnode>
+        <childnode refid="231" relation="include">
+        </childnode>
+        <childnode refid="233" relation="include">
+        </childnode>
+        <childnode refid="235" relation="include">
+        </childnode>
+        <childnode refid="237" relation="include">
+        </childnode>
+      </node>
+      <node id="225">
+        <label>include/pocketsphinx.h</label>
+        <link refid="pocketsphinx_8h"/>
+        <childnode refid="226" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="253">
+        <label>src/libpocketsphinx/ngram_search_fwdflat.c</label>
+        <link refid="ngram__search__fwdflat_8c"/>
+      </node>
+      <node id="252">
+        <label>src/libpocketsphinx/ngram_search_fwdflat.h</label>
+        <link refid="ngram__search__fwdflat_8h"/>
+        <childnode refid="248" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="247">
+        <label>src/libpocketsphinx/kws_search.c</label>
+        <link refid="kws__search_8c_source"/>
+      </node>
+      <node id="246">
+        <label>src/libpocketsphinx/kws_search.h</label>
+        <link refid="kws__search_8h_source"/>
+        <childnode refid="247" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+      </node>
+      <node id="224">
+        <label>include/ps_search.h</label>
+        <link refid="ps__search_8h"/>
+        <childnode refid="225" relation="include">
+        </childnode>
+      </node>
+      <node id="226">
+        <label>src/libpocketsphinx/pocketsphinx_internal.h</label>
+        <link refid="pocketsphinx__internal_8h"/>
+        <childnode refid="227" relation="include">
+        </childnode>
+        <childnode refid="238" relation="include">
+        </childnode>
+        <childnode refid="239" relation="include">
+        </childnode>
+        <childnode refid="241" relation="include">
+        </childnode>
+        <childnode refid="243" relation="include">
+        </childnode>
+        <childnode refid="244" relation="include">
+        </childnode>
+        <childnode refid="247" relation="include">
+        </childnode>
+        <childnode refid="246" relation="include">
+        </childnode>
+        <childnode refid="248" relation="include">
+        </childnode>
+        <childnode refid="249" relation="include">
+        </childnode>
+        <childnode refid="255" relation="include">
+        </childnode>
+        <childnode refid="240" relation="include">
+        </childnode>
+        <childnode refid="254" relation="include">
+        </childnode>
+        <childnode refid="257" relation="include">
+        </childnode>
+      </node>
+      <node id="234">
+        <label>src/libpocketsphinx/ms_mgau.c</label>
+        <link refid="ms__mgau_8c_source"/>
+      </node>
+      <node id="233">
+        <label>src/libpocketsphinx/ms_mgau.h</label>
+        <link refid="ms__mgau_8h"/>
+        <childnode refid="229" relation="include">
+        </childnode>
+        <childnode refid="234" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" prot="public" static="no">
+        <type>struct <ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_s</ref></type>
+        <definition>typedef struct ps_search_iter_s ps_search_iter_t</definition>
+        <argsstring></argsstring>
+        <name>ps_search_iter_t</name>
+        <briefdescription>
+<para>PocketSphinx search iterator. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="73" column="1" bodyfile="include/ps_search.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_search</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name)</argsstring>
+        <name>ps_set_search</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Actives search with the provided name. </para>        </briefdescription>
+        <detaileddescription>
+<para>Activates search with the provided name. The search must be added before using either <ref refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" kindref="member">ps_set_fsg()</ref>, <ref refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" kindref="member">ps_set_lm()</ref> or <ref refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" kindref="member">ps_set_kws()</ref>.</para><para><simplesect kind="return"><para>0 on success, -1 on failure </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="93" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="483" bodyend="498"/>
+        <references refid="structps__decoder__s_1ad337270efc93613cf8dd7594f6515799" compoundref="pocketsphinx__internal_8h" startline="216">ps_decoder_s::search</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1ae2b728c9b05e733605d33fa19472ef8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT const char *</type>
+        <definition>POCKETSPHINX_EXPORT const char* ps_get_search</definition>
+        <argsstring>(ps_decoder_t *ps)</argsstring>
+        <name>ps_get_search</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <briefdescription>
+<para>Returns name of curent search in decoder. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="101" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="501" bodyend="513"/>
+        <references refid="structps__decoder__s_1ad337270efc93613cf8dd7594f6515799" compoundref="pocketsphinx__internal_8h" startline="216">ps_decoder_s::search</references>
+        <references refid="structps__decoder__s_1a43bca42790684eefb8d01a0aef6fa530" compoundref="pocketsphinx__internal_8h" startline="213">ps_decoder_s::searches</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a300fd82f4b1621663a0d870da61497b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_unset_search</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name)</argsstring>
+        <name>ps_unset_search</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Unsets the search and releases related resources. </para>        </briefdescription>
+        <detaileddescription>
+<para>Unsets the search previously added with using either <ref refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" kindref="member">ps_set_fsg()</ref>, <ref refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" kindref="member">ps_set_lm()</ref> or <ref refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" kindref="member">ps_set_kws()</ref>.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" kindref="member">ps_set_fsg</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" kindref="member">ps_set_lm</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" kindref="member">ps_set_kws</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="114" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="516" bodyend="525"/>
+        <references refid="structps__decoder__s_1ad337270efc93613cf8dd7594f6515799" compoundref="pocketsphinx__internal_8h" startline="216">ps_decoder_s::search</references>
+        <references refid="structps__decoder__s_1a43bca42790684eefb8d01a0aef6fa530" compoundref="pocketsphinx__internal_8h" startline="213">ps_decoder_s::searches</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a661c72707484ec2528319c9f6976fb7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT <ref refid="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" kindref="member">ps_search_iter_t</ref> *</type>
+        <definition>POCKETSPHINX_EXPORT ps_search_iter_t* ps_search_iter</definition>
+        <argsstring>(ps_decoder_t *ps)</argsstring>
+        <name>ps_search_iter</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <briefdescription>
+<para>Returns iterator over current searches. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="122" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="528" bodyend="531"/>
+        <references refid="structps__decoder__s_1a43bca42790684eefb8d01a0aef6fa530" compoundref="pocketsphinx__internal_8h" startline="213">ps_decoder_s::searches</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a4bd6d4f2b19be2351987c11694eaec9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT <ref refid="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" kindref="member">ps_search_iter_t</ref> *</type>
+        <definition>POCKETSPHINX_EXPORT ps_search_iter_t* ps_search_iter_next</definition>
+        <argsstring>(ps_search_iter_t *itor)</argsstring>
+        <name>ps_search_iter_next</name>
+        <param>
+          <type><ref refid="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" kindref="member">ps_search_iter_t</ref> *</type>
+          <declname>itor</declname>
+        </param>
+        <briefdescription>
+<para>Updates search iterator to point to the next position. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function automatically frees the iterator object upon reaching the final entry. <simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="132" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="534" bodyend="537"/>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a86d9b5968b9fe317a6335345fb9a2dd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT const char *</type>
+        <definition>POCKETSPHINX_EXPORT const char * ps_search_iter_val</definition>
+        <argsstring>(ps_search_iter_t *itor)</argsstring>
+        <name>ps_search_iter_val</name>
+        <param>
+          <type><ref refid="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" kindref="member">ps_search_iter_t</ref> *</type>
+          <declname>itor</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the name of the search the iterator points to. </para>        </briefdescription>
+        <detaileddescription>
+<para>Updates search iterator to point to the next position.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref></para></simplesect>
+This function automatically frees the iterator object upon reaching the final entry. <simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="140" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="540" bodyend="543"/>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a41e404de59cbd7bfc32f2da3ec7e6137" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT void</type>
+        <definition>POCKETSPHINX_EXPORT void ps_search_iter_free</definition>
+        <argsstring>(ps_search_iter_t *itor)</argsstring>
+        <name>ps_search_iter_free</name>
+        <param>
+          <type><ref refid="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" kindref="member">ps_search_iter_t</ref> *</type>
+          <declname>itor</declname>
+        </param>
+        <briefdescription>
+<para>Delete an unfinished search iterator. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="148" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="546" bodyend="549"/>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1af55ad6ec21a7e67845f3c74149a34b1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT ngram_model_t *</type>
+        <definition>POCKETSPHINX_EXPORT ngram_model_t* ps_get_lm</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name)</argsstring>
+        <name>ps_get_lm</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Get the language model set object for this decoder. </para>        </briefdescription>
+        <detaileddescription>
+<para>If N-Gram decoding is not enabled, this will return NULL. You will need to enable it using ps_set_lmset().</para><para><simplesect kind="return"><para>The language model set object for this decoder. The decoder retains ownership of this pointer, so you should not attempt to free it manually. Use ngram_model_retain() if you wish to reuse it elsewhere. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="173" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="552" bodyend="558"/>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_lm</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, ngram_model_t *lm)</argsstring>
+        <name>ps_set_lm</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>ngram_model_t *</type>
+          <declname>lm</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search based on N-gram language model. </para>        </briefdescription>
+        <detaileddescription>
+<para>Associates N-gram search with the provided name. The search can be activated using <ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search()</ref>.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="184" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="595" bodyend="600"/>
+        <references refid="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" compoundref="pocketsphinx__internal_8h" startline="207">ps_decoder_s::acmod</references>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" compoundref="pocketsphinx__internal_8h" startline="209">ps_decoder_s::d2p</references>
+        <references refid="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" compoundref="pocketsphinx__internal_8h" startline="208">ps_decoder_s::dict</references>
+        <references refid="ngram__search_8c_1a04f80b377c847026254fb85596e2f43c" compoundref="ngram__search_8c" startline="140" endline="237">ngram_search_init</references>
+        <referencedby refid="ps__search_8h_1a78372effd2aa6bddf7b71d6e2e9c3776" compoundref="pocketsphinx_8c" startline="603" endline="615">ps_set_lm_file</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a78372effd2aa6bddf7b71d6e2e9c3776" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_lm_file</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, const char *path)</argsstring>
+        <name>ps_set_lm_file</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search based on N-gram language model. </para>        </briefdescription>
+        <detaileddescription>
+<para>Convenient method to load N-gram model and create a search.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" kindref="member">ps_set_lm</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="194" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="603" bodyend="615"/>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1abd17fe329f2fb219c5a534f3217c5b95" compoundref="pocketsphinx__internal_8h" startline="210">ps_decoder_s::lmath</references>
+        <references refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" compoundref="pocketsphinx_8c" startline="595" endline="600">ps_set_lm</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a3a15f664d2d004d610e999adb4339dbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT fsg_model_t *</type>
+        <definition>POCKETSPHINX_EXPORT fsg_model_t* ps_get_fsg</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name)</argsstring>
+        <name>ps_get_fsg</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Get the finite-state grammar set object for this decoder. </para>        </briefdescription>
+        <detaileddescription>
+<para>If FSG decoding is not enabled, this returns NULL. Call ps_set_fsgset() to enable it.</para><para><simplesect kind="return"><para>The current FSG set object for this decoder, or NULL if none is available. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="206" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="561" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_fsg</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, fsg_model_t *fsg)</argsstring>
+        <name>ps_set_fsg</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>fsg_model_t *</type>
+          <declname>fsg</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search based on finite state grammar. </para>        </briefdescription>
+        <detaileddescription>
+<para>Associates FSG search with the provided name. The search can be activated using <ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search()</ref>.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="217" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="657" bodyend="662"/>
+        <references refid="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" compoundref="pocketsphinx__internal_8h" startline="207">ps_decoder_s::acmod</references>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" compoundref="pocketsphinx__internal_8h" startline="209">ps_decoder_s::d2p</references>
+        <references refid="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" compoundref="pocketsphinx__internal_8h" startline="208">ps_decoder_s::dict</references>
+        <referencedby refid="ps__search_8h_1ae845bbf6a3e5b859e833f6cc0d1ba55f" compoundref="pocketsphinx_8c" startline="665" endline="701">ps_set_jsgf_file</referencedby>
+        <referencedby refid="ps__search_8h_1a3c51b0eab27ac9df20ee54e1d87b3ca3" compoundref="pocketsphinx_8c" startline="704" endline="737">ps_set_jsgf_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1ae845bbf6a3e5b859e833f6cc0d1ba55f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_jsgf_file</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, const char *path)</argsstring>
+        <name>ps_set_jsgf_file</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search using JSGF model. </para>        </briefdescription>
+        <detaileddescription>
+<para>Convenient method to load JSGF model and create a search.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" kindref="member">ps_set_fsg</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="227" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="665" bodyend="701"/>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1abd17fe329f2fb219c5a534f3217c5b95" compoundref="pocketsphinx__internal_8h" startline="210">ps_decoder_s::lmath</references>
+        <references refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" compoundref="pocketsphinx_8c" startline="657" endline="662">ps_set_fsg</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a3c51b0eab27ac9df20ee54e1d87b3ca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_jsgf_string</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, const char *jsgf_string)</argsstring>
+        <name>ps_set_jsgf_string</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>jsgf_string</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search using JSGF model. </para>        </briefdescription>
+        <detaileddescription>
+<para>Convenience method to parse JSGF model from string and create a search.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" kindref="member">ps_set_fsg</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="237" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="704" bodyend="737"/>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1abd17fe329f2fb219c5a534f3217c5b95" compoundref="pocketsphinx__internal_8h" startline="210">ps_decoder_s::lmath</references>
+        <references refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" compoundref="pocketsphinx_8c" startline="657" endline="662">ps_set_fsg</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a8e2e66391b7c1e6cd1aac24d635ed3ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT const char *</type>
+        <definition>POCKETSPHINX_EXPORT const char* ps_get_kws</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name)</argsstring>
+        <name>ps_get_kws</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Get the current Key phrase to spot. </para>        </briefdescription>
+        <detaileddescription>
+<para>If KWS is not enabled, this returns NULL. Call ps_update_kws() to enable it.</para><para><simplesect kind="return"><para>The current keyphrase to spot </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="248" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="570" bodyend="576"/>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_kws</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, const char *keyfile)</argsstring>
+        <name>ps_set_kws</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>keyfile</declname>
+        </param>
+        <briefdescription>
+<para>Adds keywords from a file to spotting. </para>        </briefdescription>
+        <detaileddescription>
+<para>Associates KWS search with the provided name. The search can be activated using <ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search()</ref>.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="259" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="641" bodyend="646"/>
+        <references refid="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" compoundref="pocketsphinx__internal_8h" startline="207">ps_decoder_s::acmod</references>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" compoundref="pocketsphinx__internal_8h" startline="209">ps_decoder_s::d2p</references>
+        <references refid="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" compoundref="pocketsphinx__internal_8h" startline="208">ps_decoder_s::dict</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a7965534ad5e48f0b46f326d7da186a2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_keyphrase</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, const char *keyphrase)</argsstring>
+        <name>ps_set_keyphrase</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>keyphrase</declname>
+        </param>
+        <briefdescription>
+<para>Adds new keyword to spot. </para>        </briefdescription>
+        <detaileddescription>
+<para>Associates KWS search with the provided name. The search can be activated using <ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search()</ref>.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="270" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="649" bodyend="654"/>
+        <references refid="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" compoundref="pocketsphinx__internal_8h" startline="207">ps_decoder_s::acmod</references>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" compoundref="pocketsphinx__internal_8h" startline="209">ps_decoder_s::d2p</references>
+        <references refid="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" compoundref="pocketsphinx__internal_8h" startline="208">ps_decoder_s::dict</references>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_allphone</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, ngram_model_t *lm)</argsstring>
+        <name>ps_set_allphone</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>ngram_model_t *</type>
+          <declname>lm</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search based on phone N-gram language model. </para>        </briefdescription>
+        <detaileddescription>
+<para>Associates N-gram search with the provided name. The search can be activated using <ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search()</ref>.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="281" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="618" bodyend="623"/>
+        <references refid="structps__decoder__s_1af834d2bc1d44c1d9ef607b025413a0b8" compoundref="pocketsphinx__internal_8h" startline="207">ps_decoder_s::acmod</references>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1ae6515cbc261686f3f3bbd95719f79793" compoundref="pocketsphinx__internal_8h" startline="209">ps_decoder_s::d2p</references>
+        <references refid="structps__decoder__s_1aef6228c17907cc1d0cef835b238b5d91" compoundref="pocketsphinx__internal_8h" startline="208">ps_decoder_s::dict</references>
+        <referencedby refid="ps__search_8h_1a66bebfccb8ece9e7bff411329f25ee5e" compoundref="pocketsphinx_8c" startline="626" endline="638">ps_set_allphone_file</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="ps__search_8h_1a66bebfccb8ece9e7bff411329f25ee5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>POCKETSPHINX_EXPORT int</type>
+        <definition>POCKETSPHINX_EXPORT int ps_set_allphone_file</definition>
+        <argsstring>(ps_decoder_t *ps, const char *name, const char *path)</argsstring>
+        <name>ps_set_allphone_file</name>
+        <param>
+          <type><ref refid="pocketsphinx_8h_1ac6ba825b5a9e1c9003b257221eb6e055" kindref="member">ps_decoder_t</ref> *</type>
+          <declname>ps</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>Adds new search based on phone N-gram language model. </para>        </briefdescription>
+        <detaileddescription>
+<para>Convenient method to load N-gram model and create a search.</para><para><simplesect kind="see"><para><ref refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" kindref="member">ps_set_allphone</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ps_search.h" line="291" column="1" bodyfile="src/libpocketsphinx/pocketsphinx.c" bodystart="626" bodyend="638"/>
+        <references refid="structps__decoder__s_1a0565ed97b32408bd05c8104f020cef05" compoundref="pocketsphinx__internal_8h" startline="203">ps_decoder_s::config</references>
+        <references refid="structps__decoder__s_1abd17fe329f2fb219c5a534f3217c5b95" compoundref="pocketsphinx__internal_8h" startline="210">ps_decoder_s::lmath</references>
+        <references refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" compoundref="pocketsphinx_8c" startline="618" endline="623">ps_set_allphone</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>User can configure several &quot;search&quot; objects with different grammars and langauge models and switch them in runtime to provide interactive experience for the user. </para>    </briefdescription>
+    <detaileddescription>
+<para>There are different possible search modes:</para><para><itemizedlist>
+<listitem>
+<para>keyword - efficiently looks for keyphrase and ignores other speech. allows to configure detection threshold. </para></listitem>
+<listitem>
+<para>grammar - recognizes speech according to JSGF grammar. Unlike keyphrase grammar search doesn&apos;t ignore words which are not in grammar but tries to recognize them. </para></listitem>
+<listitem>
+<para>ngram/lm - recognizes natural speech with a language model. </para></listitem>
+<listitem>
+<para>allphone - recognizes phonemes with a phonetic language model. </para></listitem>
+</itemizedlist>
+</para><para>Each search has a name and can be referenced by a name, names are application-specific. The function ps_set_search allows to activate the search previously added by a name. Only single search can be activated at time.</para><para>To add the search one needs to point to the grammar/language model describing the search. The location of the grammar is specific to the application.</para><para>The exact design of a searches depends on your application. For example, you might want to listen for activation keyword first and once keyword is recognized switch to ngram search to recognize actual command. Once you recognized the command you can switch to grammar search to recognize the confirmation and then switch back to keyword listening mode to wait for another command.</para><para>If only a simple recognition is required it is sufficient to add a single search or just configure the required mode with configuration options. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c-basic-offset:4;<sp/>indent-tabs-mode:<sp/>nil<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2014<sp/>Alpha<sp/>Cephei<sp/>Inc..<sp/><sp/>All<sp/>rights</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>1.<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.<sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>2.<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>distribution.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>ALPHA<sp/>CEPHEI<sp/>INC.<sp/>``AS<sp/>IS&apos;&apos;<sp/>AND<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>ANY<sp/>EXPRESSED<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/></highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/><sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>NOR<sp/>ITS<sp/>EMPLOYEES<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*/</highlight></codeline>
+<codeline lineno="68"><highlight class="preprocessor">#ifndef<sp/>__PS_SEARCH_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__PS_SEARCH_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sphinxbase/fsg_model.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sphinxbase/ngram_model.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="ps__search_8h_1ae3fe90e6eb1fa74e30783e20468280c1" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_s</ref><sp/><ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref>;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a4072a93e8ce9a4229d17c9bce6ad1083" kindref="member">ps_set_search</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal">POCKETSPHINX_EXPORT<sp/></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="ps__search_8h_1ae2b728c9b05e733605d33fa19472ef8e" kindref="member">ps_get_search</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a300fd82f4b1621663a0d870da61497b0" kindref="member">ps_unset_search</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref><sp/>*<ref refid="ps__search_8h_1a661c72707484ec2528319c9f6976fb7c" kindref="member">ps_search_iter</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref><sp/>*<ref refid="ps__search_8h_1a4bd6d4f2b19be2351987c11694eaec9a" kindref="member">ps_search_iter_next</ref>(<ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref><sp/>*itor);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="ps__search_8h_1a86d9b5968b9fe317a6335345fb9a2dd0" kindref="member">ps_search_iter_val</ref>(<ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref><sp/>*itor);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a41e404de59cbd7bfc32f2da3ec7e6137" kindref="member">ps_search_iter_free</ref>(<ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref><sp/>*itor);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="ps__search_8h_1a86d9b5968b9fe317a6335345fb9a2dd0" kindref="member">ps_search_iter_val</ref>(<ref refid="structps__search__iter__s" kindref="compound">ps_search_iter_t</ref><sp/>*itor);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal">POCKETSPHINX_EXPORT<sp/></highlight></codeline>
+<codeline lineno="173"><highlight class="normal">ngram_model_t<sp/>*<ref refid="ps__search_8h_1af55ad6ec21a7e67845f3c74149a34b1a" kindref="member">ps_get_lm</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1aa76b495c63c665a21a49d7cb51c66d74" kindref="member">ps_set_lm</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/>ngram_model_t<sp/>*lm);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a78372effd2aa6bddf7b71d6e2e9c3776" kindref="member">ps_set_lm_file</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="206"><highlight class="normal">fsg_model_t<sp/>*<ref refid="ps__search_8h_1a3a15f664d2d004d610e999adb4339dbe" kindref="member">ps_get_fsg</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1afde3539cbbf8c67cb98a02ca779055af" kindref="member">ps_set_fsg</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/>fsg_model_t<sp/>*fsg);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1ae845bbf6a3e5b859e833f6cc0d1ba55f" kindref="member">ps_set_jsgf_file</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a3c51b0eab27ac9df20ee54e1d87b3ca3" kindref="member">ps_set_jsgf_string</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*jsgf_string);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal">POCKETSPHINX_EXPORT<sp/></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="ps__search_8h_1a8e2e66391b7c1e6cd1aac24d635ed3ea" kindref="member">ps_get_kws</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal">POCKETSPHINX_EXPORT<sp/></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a0780564ad3f12179b0291ac87774cea1" kindref="member">ps_set_kws</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*keyfile);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal">POCKETSPHINX_EXPORT<sp/></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a7965534ad5e48f0b46f326d7da186a2a" kindref="member">ps_set_keyphrase</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*keyphrase);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1aa38c96913dd3a06cbab54ce834af5141" kindref="member">ps_set_allphone</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/>ngram_model_t<sp/>*lm);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal">POCKETSPHINX_EXPORT</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="ps__search_8h_1a66bebfccb8ece9e7bff411329f25ee5e" kindref="member">ps_set_allphone_file</ref>(<ref refid="structps__decoder__s" kindref="compound">ps_decoder_t</ref><sp/>*ps,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>__PS_SEARCH_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="include/ps_search.h"/>
+  </compounddef>
+</doxygen>

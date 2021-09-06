@@ -1,0 +1,42 @@
+
+ i=-2 j=-2   valid=true file=65534 rba=281474976710654 mask=281474976710655
+ i=-2 j=-1   valid=true file=65534 rba=281474976710655 mask=281474976710655
+ i=-2 j=0   valid=true file=65534 rba=0 mask=281474976710655
+ i=-2 j=1   valid=true file=65534 rba=1 mask=281474976710655
+ i=-2 j=2   valid=true file=65534 rba=2 mask=281474976710655
+ i=-2 j=3   valid=true file=65534 rba=3 mask=281474976710655
+
+ i=-1 j=-2   valid=true file=65535 rba=281474976710654 mask=281474976710655
+ i=-1 j=-1   valid=true file=65535 rba=281474976710655 mask=281474976710655
+ i=-1 j=0   valid=true file=65535 rba=0 mask=281474976710655
+ i=-1 j=1   valid=true file=65535 rba=1 mask=281474976710655
+ i=-1 j=2   valid=true file=65535 rba=2 mask=281474976710655
+ i=-1 j=3   valid=true file=65535 rba=3 mask=281474976710655
+
+ i=0 j=-2   valid=false file=0 rba=281474976710654 mask=281474976710655
+ i=0 j=-1   valid=false file=0 rba=281474976710655 mask=281474976710655
+ i=0 j=0   valid=false file=0 rba=0 mask=281474976710655
+ i=0 j=1   valid=false file=0 rba=1 mask=281474976710655
+ i=0 j=2   valid=false file=0 rba=2 mask=281474976710655
+ i=0 j=3   valid=false file=0 rba=3 mask=281474976710655
+
+ i=1 j=-2   valid=true file=1 rba=281474976710654 mask=281474976710655
+ i=1 j=-1   valid=true file=1 rba=281474976710655 mask=281474976710655
+ i=1 j=0   valid=true file=1 rba=0 mask=281474976710655
+ i=1 j=1   valid=true file=1 rba=1 mask=281474976710655
+ i=1 j=2   valid=true file=1 rba=2 mask=281474976710655
+ i=1 j=3   valid=true file=1 rba=3 mask=281474976710655
+
+ i=2 j=-2   valid=true file=2 rba=281474976710654 mask=281474976710655
+ i=2 j=-1   valid=true file=2 rba=281474976710655 mask=281474976710655
+ i=2 j=0   valid=true file=2 rba=0 mask=281474976710655
+ i=2 j=1   valid=true file=2 rba=1 mask=281474976710655
+ i=2 j=2   valid=true file=2 rba=2 mask=281474976710655
+ i=2 j=3   valid=true file=2 rba=3 mask=281474976710655
+
+ i=3 j=-2   valid=true file=3 rba=281474976710654 mask=281474976710655
+ i=3 j=-1   valid=true file=3 rba=281474976710655 mask=281474976710655
+ i=3 j=0   valid=true file=3 rba=0 mask=281474976710655
+ i=3 j=1   valid=true file=3 rba=1 mask=281474976710655
+ i=3 j=2   valid=true file=3 rba=2 mask=281474976710655
+ i=3 j=3   valid=true file=3 rba=3 mask=281474976710655

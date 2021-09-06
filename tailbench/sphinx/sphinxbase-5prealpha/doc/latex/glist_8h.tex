@@ -1,0 +1,443 @@
+\section{include/sphinxbase/glist.h File Reference}
+\label{glist_8h}\index{include/sphinxbase/glist.\+h@{include/sphinxbase/glist.\+h}}
+
+
+Generic linked-\/lists maintenance.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/sphinxbase\+\_\+export.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/prim\+\_\+type.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ gnode\+\_\+s}
+\begin{DoxyCompactList}\small\item\em A node in a generic list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ gnode\+\_\+ptr}(g)~((g)-\/$>$data.\+ptr)
+\begin{DoxyCompactList}\small\item\em Head of a list of gnodes. \end{DoxyCompactList}\item 
+\mbox{\label{glist_8h_a7daab0205c40d1b449529ee4cc54522b}} 
+\#define {\bfseries gnode\+\_\+int32}(g)~((g)-\/$>$data.\+i)
+\item 
+\mbox{\label{glist_8h_a3af0cc8d5d612e85fa433ac3edf42fd6}} 
+\#define {\bfseries gnode\+\_\+uint32}(g)~((g)-\/$>$data.\+ui)
+\item 
+\mbox{\label{glist_8h_aaf6a2bdc69642303426c20fc0bdfa5f6}} 
+\#define {\bfseries gnode\+\_\+float32}(g)~((float32)(g)-\/$>$data.\+fl)
+\item 
+\mbox{\label{glist_8h_abfea8eee77afc1e3046ef33ae6c0f5b4}} 
+\#define {\bfseries gnode\+\_\+float64}(g)~((g)-\/$>$data.\+fl)
+\item 
+\mbox{\label{glist_8h_a33fc794db097ba2a5a36eba12c418993}} 
+\#define {\bfseries gnode\+\_\+next}(g)~((g)-\/$>$next)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{glist_8h_a35eee566c2974c9a3e3055daf1611793}} 
+typedef struct \textbf{ gnode\+\_\+s} \textbf{ gnode\+\_\+t}
+\begin{DoxyCompactList}\small\item\em A node in a generic list. \end{DoxyCompactList}\item 
+\mbox{\label{glist_8h_a576a9ce77a5af8b912e75b32bce607f2}} 
+typedef \textbf{ gnode\+\_\+t} $\ast$ {\bfseries glist\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} \textbf{ glist\+\_\+add\+\_\+ptr} (\textbf{ glist\+\_\+t} g, void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Create and prepend a new list node, with the given user-\/defined data, at the H\+E\+AD of the given generic list. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} \textbf{ glist\+\_\+add\+\_\+int32} (\textbf{ glist\+\_\+t} g, int32 val)
+\begin{DoxyCompactList}\small\item\em Create and prepend a new list node containing an integer. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} \textbf{ glist\+\_\+add\+\_\+uint32} (\textbf{ glist\+\_\+t} g, uint32 val)
+\begin{DoxyCompactList}\small\item\em Create and prepend a new list node containing an unsigned integer. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} \textbf{ glist\+\_\+add\+\_\+float32} (\textbf{ glist\+\_\+t} g, float32 val)
+\begin{DoxyCompactList}\small\item\em Create and prepend a new list node containing a single-\/precision float. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} \textbf{ glist\+\_\+add\+\_\+float64} (\textbf{ glist\+\_\+t} g, float64 val)
+\begin{DoxyCompactList}\small\item\em Create and prepend a new list node containing a double-\/precision float. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ glist\+\_\+insert\+\_\+ptr} (\textbf{ gnode\+\_\+t} $\ast$gn, void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Create and insert a new list node, with the given user-\/defined data, after the given generic node gn. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ glist\+\_\+insert\+\_\+int32} (\textbf{ gnode\+\_\+t} $\ast$gn, int32 val)
+\begin{DoxyCompactList}\small\item\em Create and insert a new list node containing an integer. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ glist\+\_\+insert\+\_\+uint32} (\textbf{ gnode\+\_\+t} $\ast$gn, uint32 val)
+\begin{DoxyCompactList}\small\item\em Create and insert a new list node containing an unsigned integer. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ glist\+\_\+insert\+\_\+float32} (\textbf{ gnode\+\_\+t} $\ast$gn, float32 val)
+\begin{DoxyCompactList}\small\item\em Create and insert a new list node containing a single-\/precision float. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ glist\+\_\+insert\+\_\+float64} (\textbf{ gnode\+\_\+t} $\ast$gn, float64 val)
+\begin{DoxyCompactList}\small\item\em Create and insert a new list node containing a double-\/precision float. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} \textbf{ glist\+\_\+reverse} (\textbf{ glist\+\_\+t} g)
+\begin{DoxyCompactList}\small\item\em Reverse the order of the given glist. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 \textbf{ glist\+\_\+count} (\textbf{ glist\+\_\+t} g)
+\begin{DoxyCompactList}\small\item\em Count the number of element in a given link list. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void \textbf{ glist\+\_\+free} (\textbf{ glist\+\_\+t} g)
+\begin{DoxyCompactList}\small\item\em Free the given generic list; user-\/defined data contained within is not automatically freed. \end{DoxyCompactList}\item 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ gnode\+\_\+free} (\textbf{ gnode\+\_\+t} $\ast$gn, \textbf{ gnode\+\_\+t} $\ast$pred)
+\begin{DoxyCompactList}\small\item\em Free the given node, gn, of a glist, pred being its predecessor in the list. \end{DoxyCompactList}\item 
+\mbox{\label{glist_8h_a6921d6b8b11cb9e05fadeaa091e89234}} 
+S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t} $\ast$ \textbf{ glist\+\_\+tail} (\textbf{ glist\+\_\+t} g)
+\begin{DoxyCompactList}\small\item\em Return the last node in the given list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Generic linked-\/lists maintenance. 
+
+Only insert at the head of the list. A convenient little linked-\/list package, but a double-\/edged sword\+: the user must keep track of the data type within the linked list elements. When it was first written, there was no selective deletions except to destroy the entire list. This is modified in later version.
+
+(C++ would be good for this, but that\textquotesingle{}s a double-\/edged sword as well.) 
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{glist_8h_ace56682f14d84cc456c805d26fd86734}} 
+\index{glist.\+h@{glist.\+h}!gnode\+\_\+ptr@{gnode\+\_\+ptr}}
+\index{gnode\+\_\+ptr@{gnode\+\_\+ptr}!glist.\+h@{glist.\+h}}
+\subsubsection{gnode\+\_\+ptr}
+{\footnotesize\ttfamily \#define gnode\+\_\+ptr(\begin{DoxyParamCaption}\item[{}]{g }\end{DoxyParamCaption})~((g)-\/$>$data.\+ptr)}
+
+
+
+Head of a list of gnodes. 
+
+Access macros, for convenience 
+
+Definition at line 109 of file glist.\+h.
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{glist_8h_a4fc4db2fbebd7b659554227d411f6737}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+add\+\_\+float32@{glist\+\_\+add\+\_\+float32}}
+\index{glist\+\_\+add\+\_\+float32@{glist\+\_\+add\+\_\+float32}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+add\+\_\+float32()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} glist\+\_\+add\+\_\+float32 (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g,  }\item[{float32}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and prepend a new list node containing a single-\/precision float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & a link list \\
+\hline
+{\em val} & a float32 vlaue \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 110 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a5bdd11639ef5846abb7ceb6caf059f4e}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+add\+\_\+float64@{glist\+\_\+add\+\_\+float64}}
+\index{glist\+\_\+add\+\_\+float64@{glist\+\_\+add\+\_\+float64}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+add\+\_\+float64()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} glist\+\_\+add\+\_\+float64 (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g,  }\item[{float64}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and prepend a new list node containing a double-\/precision float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & a link list \\
+\hline
+{\em val} & a float64 vlaue \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 122 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a28adfcc24a784aaed1a0b3c4c4de4c42}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+add\+\_\+int32@{glist\+\_\+add\+\_\+int32}}
+\index{glist\+\_\+add\+\_\+int32@{glist\+\_\+add\+\_\+int32}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+add\+\_\+int32()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} glist\+\_\+add\+\_\+int32 (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g,  }\item[{int32}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and prepend a new list node containing an integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & a link list \\
+\hline
+{\em val} & an integer value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 86 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a77a9c20b7df5a289477af405ab778377}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+add\+\_\+ptr@{glist\+\_\+add\+\_\+ptr}}
+\index{glist\+\_\+add\+\_\+ptr@{glist\+\_\+add\+\_\+ptr}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+add\+\_\+ptr()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} glist\+\_\+add\+\_\+ptr (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g,  }\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+
+
+Create and prepend a new list node, with the given user-\/defined data, at the H\+E\+AD of the given generic list. 
+
+Return the new list thus formed. g may be N\+U\+LL to indicate an initially empty list. 
+\begin{DoxyParams}{Parameters}
+{\em g} & a link list \\
+\hline
+{\em ptr} & a pointer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 74 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_aeb741d435322f34df5e5d3a99abf00de}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+add\+\_\+uint32@{glist\+\_\+add\+\_\+uint32}}
+\index{glist\+\_\+add\+\_\+uint32@{glist\+\_\+add\+\_\+uint32}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+add\+\_\+uint32()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} glist\+\_\+add\+\_\+uint32 (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g,  }\item[{uint32}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and prepend a new list node containing an unsigned integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & a link list \\
+\hline
+{\em val} & an unsigned integer value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_aeb046e39c540d2f5f792119ea0d24c48}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+count@{glist\+\_\+count}}
+\index{glist\+\_\+count@{glist\+\_\+count}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+count()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT int32 glist\+\_\+count (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g }\end{DoxyParamCaption})}
+
+
+
+Count the number of element in a given link list. 
+
+\begin{DoxyReturn}{Returns}
+the number of elements in the given glist\+\_\+t 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g} & input link list \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 145 of file glist.\+c.
+
+
+
+References gnode\+\_\+s\+::next.
+
+
+
+Referenced by ngram\+\_\+model\+\_\+add\+\_\+word().
+
+\mbox{\label{glist_8h_a45380e15d2c33afc554fd60a8828580c}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+free@{glist\+\_\+free}}
+\index{glist\+\_\+free@{glist\+\_\+free}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+free()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT void glist\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g }\end{DoxyParamCaption})}
+
+
+
+Free the given generic list; user-\/defined data contained within is not automatically freed. 
+
+The caller must have done that already. 
+
+Definition at line 133 of file glist.\+c.
+
+
+
+References ckd\+\_\+free(), and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_aff08aed022168872fc9d30cd299df2ce}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+insert\+\_\+float32@{glist\+\_\+insert\+\_\+float32}}
+\index{glist\+\_\+insert\+\_\+float32@{glist\+\_\+insert\+\_\+float32}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+insert\+\_\+float32()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t}$\ast$ glist\+\_\+insert\+\_\+float32 (\begin{DoxyParamCaption}\item[{\textbf{ gnode\+\_\+t} $\ast$}]{gn,  }\item[{float32}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and insert a new list node containing a single-\/precision float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gn} & a generic node which a value will be inserted after it \\
+\hline
+{\em val} & float32 inserted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 230 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a97a682e38319dd8f67765732467110f9}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+insert\+\_\+float64@{glist\+\_\+insert\+\_\+float64}}
+\index{glist\+\_\+insert\+\_\+float64@{glist\+\_\+insert\+\_\+float64}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+insert\+\_\+float64()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t}$\ast$ glist\+\_\+insert\+\_\+float64 (\begin{DoxyParamCaption}\item[{\textbf{ gnode\+\_\+t} $\ast$}]{gn,  }\item[{float64}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and insert a new list node containing a double-\/precision float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gn} & a generic node which a value will be inserted after it \\
+\hline
+{\em val} & float64 inserted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 244 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a327b6478ee05ac17e3c3b3189579413e}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+insert\+\_\+int32@{glist\+\_\+insert\+\_\+int32}}
+\index{glist\+\_\+insert\+\_\+int32@{glist\+\_\+insert\+\_\+int32}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+insert\+\_\+int32()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t}$\ast$ glist\+\_\+insert\+\_\+int32 (\begin{DoxyParamCaption}\item[{\textbf{ gnode\+\_\+t} $\ast$}]{gn,  }\item[{int32}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and insert a new list node containing an integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gn} & a generic node which a value will be inserted after it \\
+\hline
+{\em val} & int32 inserted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 201 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a2d641da6b349c1c939e3b954382513ba}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+insert\+\_\+ptr@{glist\+\_\+insert\+\_\+ptr}}
+\index{glist\+\_\+insert\+\_\+ptr@{glist\+\_\+insert\+\_\+ptr}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+insert\+\_\+ptr()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t}$\ast$ glist\+\_\+insert\+\_\+ptr (\begin{DoxyParamCaption}\item[{\textbf{ gnode\+\_\+t} $\ast$}]{gn,  }\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+
+
+Create and insert a new list node, with the given user-\/defined data, after the given generic node gn. 
+
+gn cannot be N\+U\+LL. Return ptr to the newly created gnode\+\_\+t. 
+\begin{DoxyParams}{Parameters}
+{\em gn} & a generic node which ptr will be inserted after it \\
+\hline
+{\em ptr} & pointer inserted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 187 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_ab7e58ee641d3648f047eef70a20a4647}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+insert\+\_\+uint32@{glist\+\_\+insert\+\_\+uint32}}
+\index{glist\+\_\+insert\+\_\+uint32@{glist\+\_\+insert\+\_\+uint32}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+insert\+\_\+uint32()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t}$\ast$ glist\+\_\+insert\+\_\+uint32 (\begin{DoxyParamCaption}\item[{\textbf{ gnode\+\_\+t} $\ast$}]{gn,  }\item[{uint32}]{val }\end{DoxyParamCaption})}
+
+
+
+Create and insert a new list node containing an unsigned integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gn} & a generic node which a value will be inserted after it \\
+\hline
+{\em val} & uint32 inserted \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 215 of file glist.\+c.
+
+
+
+References ckd\+\_\+calloc, and gnode\+\_\+s\+::next.
+
+\mbox{\label{glist_8h_a399a2a093c6c4ce1012762e4c25c8185}} 
+\index{glist.\+h@{glist.\+h}!glist\+\_\+reverse@{glist\+\_\+reverse}}
+\index{glist\+\_\+reverse@{glist\+\_\+reverse}!glist.\+h@{glist.\+h}}
+\subsubsection{glist\+\_\+reverse()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ glist\+\_\+t} glist\+\_\+reverse (\begin{DoxyParamCaption}\item[{\textbf{ glist\+\_\+t}}]{g }\end{DoxyParamCaption})}
+
+
+
+Reverse the order of the given glist. 
+
+(glist\+\_\+add() adds to the head; one might ultimately want the reverse of that.) N\+O\+TE\+: The list is reversed \char`\"{}in place\char`\"{}; i.\+e., no new memory is allocated. \begin{DoxyReturn}{Returns}
+\+: The head of the new list. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g} & input link list \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 169 of file glist.\+c.
+
+\mbox{\label{glist_8h_a68b51aea4de463b284a19668a713d502}} 
+\index{glist.\+h@{glist.\+h}!gnode\+\_\+free@{gnode\+\_\+free}}
+\index{gnode\+\_\+free@{gnode\+\_\+free}!glist.\+h@{glist.\+h}}
+\subsubsection{gnode\+\_\+free()}
+{\footnotesize\ttfamily S\+P\+H\+I\+N\+X\+B\+A\+S\+E\+\_\+\+E\+X\+P\+O\+RT \textbf{ gnode\+\_\+t}$\ast$ gnode\+\_\+free (\begin{DoxyParamCaption}\item[{\textbf{ gnode\+\_\+t} $\ast$}]{gn,  }\item[{\textbf{ gnode\+\_\+t} $\ast$}]{pred }\end{DoxyParamCaption})}
+
+
+
+Free the given node, gn, of a glist, pred being its predecessor in the list. 
+
+Return ptr to the next node in the list after the freed node. 
+
+Definition at line 257 of file glist.\+c.
+
+
+
+References ckd\+\_\+free(), and gnode\+\_\+s\+::next.
+

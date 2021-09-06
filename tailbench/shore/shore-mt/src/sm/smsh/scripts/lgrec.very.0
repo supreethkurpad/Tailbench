@@ -1,0 +1,230 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: lgrec.very.0,v 1.5.4.4 2010/01/28 04:54:35 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Helper script for lgrec.very.n, where n > 0
+#	This does the work; the calling scripts set nrecs and recsz
+#
+#	We create the file starting about at the page given by $cluster_page
+#
+
+
+if { $logging==0 } {
+    echo "Logging off: script not run. "
+} else {
+
+verbose gathering volume stats
+dstats $volid
+sm check_volume $volid
+
+## Create the file
+#Files w/these two store_properties get converted to
+#regular on commit.
+set kind load_file
+# set kind insert_file
+# 
+# This does NOT get converted to regular on commit.
+# Thus, the abort cannot restore the file.
+# set kind tmp
+# 
+# set kind regular
+
+sm begin_xct
+# create a tmp file.  NOT LOGGED
+	set f1 [sm create_file $volid $kind $cluster_page]
+	verbose f1 = $f1 
+	verbose dstats after create
+	dstats $f1
+	set data zvec$recsz
+	set last_few 10
+	set near_end [expr {$recsz - $last_few}]
+	verbose recsz=$recsz last_few=$last_few near_end=$near_end
+# echo CHECK VOLUME BEFORE $f1 CREATION COMMITS
+# sm check_volume $volid
+sm commit_xct
+## file is tmp and will not be converted on commit. If we crash,
+## it will be removed on mount/dismount
+#
+# echo CHECK VOLUME AFTER $f1 CREATED and committed
+# sm check_volume $volid
+
+## Populate the file, 1 xct per record
+## this should get logged
+for {set i 1} {$i <= $nrecs} {incr i} {
+    sm begin_xct
+    verbose creating record number $i of size $recsz
+    set r($i) [sm create_rec $f1 hdr1 $recsz $data]
+    verbose created $i = $r($i)
+
+    verbose reading $last_few bytes from $near_end 
+    set read_result [sm read_rec $r($i) $near_end $last_few]
+    verbose read of $r($i) : $read_result
+    sm commit_xct
+}
+
+# echo CHECK VOLUME AFTER $f1 populated and committed
+# sm check_volume $volid
+
+## Append to each record, 1 xct per record
+## these should be logged
+for {set i 1} {$i <= $nrecs} {incr i} {
+    sm begin_xct
+		verbose appending to record number $i = $r($i)
+		sm append_rec $r($i) abcd
+		set last_few [expr { $last_few + 4 } ]
+		verbose reading $last_few bytes from $near_end 
+		verbose check of append $r($i): [sm read_rec $r($i) $near_end $last_few]
+    sm commit_xct
+}
+
+# echo CHECK VOLUME AFTER $f1 expanded and committed
+# sm check_volume $volid
+
+## Scan
+sm begin_xct
+	verbose Attempting scan ...
+	set scan [sm scan_file_create $f1 t_cc_record]
+	set pin [sm scan_file_next $scan 0]
+	while {$pin != "NULL"} {
+		verbose found record [sm pin_rid $pin]
+		set pin [sm scan_file_next $scan 0]
+	}
+	sm scan_file_destroy $scan
+	verbose scan done
+	dstats $f1
+sm commit_xct
+
+
+# get du stats
+sm begin_xct
+	set catcherr 1
+	catch {sm get_du_statistics $f1} 
+sm commit_xct
+
+# Destroy records in the midst of a scan
+# use the scan to find the rids
+sm begin_xct
+	verbose destroying all records through a scan...
+	set scan [sm scan_file_create $f1 t_cc_record]
+	verbose scan $scan
+	set pin [sm scan_file_next $scan 0]
+
+	while {$pin != "NULL"} {
+		verbose pin $pin
+		set rid [sm pin_rid $pin]
+	    verbose rid $rid
+		set caught "OK"
+		set err    "OK"
+		set err [catch {set pin [sm scan_file_next $scan 0] } caught]
+		if {$err} {
+		   echo scan_file_next failed: $err $caught
+		   break
+		}
+		verbose A: err $err caught $caught pin $pin
+
+		verbose destroying record $rid
+		set err [catch {sm destroy_rec $rid} caught]
+		if {$err} {
+		   echo destroy record $rid in scan failed: $err $caught
+		   break
+		}
+		verbose B: err $err caught $caught pin $pin
+
+		# must repin to make sure the lsn in the  
+		# pin_i is up-to-date
+		# after the destroy
+		set err [catch {sm pin_repin $pin} caught]
+		if {$err} {
+		   verbose repin failed: $err $caught
+		   break
+		}
+		verbose C: err $err caught $caught pin $pin
+	}
+	sm scan_file_destroy $scan
+
+	# destroy file as well
+	sm destroy_file $f1
+	verbose Verifying file destroy -- THIS SHOULD GENERATE 2 ERRORS
+
+# try to scan again (file is destroyed)
+	verbose calling scan_recs $f1 after $f1 is destroyed
+	catch {sm scan_recs $f1} catcherr
+	verbose (EXPECTED) scan_recs error: $catcherr
+
+# try to read record (file is destroyed)
+	verbose calling read_rec $r(2) after $f1 is destroyed
+	catch {sm read_rec $r(2) 0 0} catcherr
+	verbose (EXPECTED) read_rec error: $catcherr
+
+	verbose aborting file destroy
+sm abort_xct
+# should restore entire file
+
+# echo CHECK VOLUME AFTER $f1 destroy file aborted
+# sm check_volume $volid
+
+
+#  new xct: the file-destroy should be aborted so we
+#  should be able to scan and find every record there.
+verbose "re-scanning file"
+
+sm begin_xct
+catch {sm scan_recs $f1} catcherr
+# destroy and commit
+sm destroy_file $f1
+verbose committing file destroy
+sm commit_xct
+
+# Now file is no longer there
+sm begin_xct
+	verbose Verifying file destroy -- THIS SHOULD GENERATE 2 ERRORS
+# so scan should get error
+	verbose calling scan_recs $f1 after $f1 is destroyed
+	catch {sm scan_recs $f1} catcherr
+	verbose (EXPECTED) scan_recs error: $catcherr
+# and read rec should get error
+	verbose calling read_rec $r(2) after $f1 is destroyed
+	catch {sm read_rec $r(2) 0 0} catcherr
+	verbose (EXPECTED) read_rec error: $catcherr
+sm commit_xct
+
+# echo CHECK VOLUME AFTER $f1 destroy file aborted
+# sm check_volume $volid
+
+verbose committed last xct
+
+unset i r 
+unset read_result
+unset pin scan
+unset f1
+unset catcherr
+unset last_few near_end data
+}
+
+

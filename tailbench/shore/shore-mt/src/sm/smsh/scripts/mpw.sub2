@@ -1,0 +1,154 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: mpw.sub2,v 1.2 2010/05/26 01:21:12 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Time writing with append_file_i
+#   Parameters: 
+#   	        size of objects written 
+#		(write size== whole object)
+#		logging on or off
+#
+#
+# NB: the first time you run this on a new volume, you will get some 
+# multiple of 100 objects created; the transaction creating the last 100
+# will run out of disk space and abort.  Thereafter, you must set
+# the value of fid" to indicate that the file already exists.
+#
+# This is called by mpw
+#
+if {$STARTOVER == 1} {
+	set fid 0
+	set STARTOVER 0
+} else {
+	set dont_force_reformat 1
+}
+
+set dev 0
+set size 0
+set vol 0
+set quota 0
+set vol_list 0
+
+
+if {$volid == 0} {
+	foreach i $smsh_device_list {
+
+	set dev  [lindex $i 0]
+	set size [lindex $i 1]
+	set vol  [lindex $i 2]
+
+	verbose mount $dev $vol
+	sm mount_dev $dev $vol
+
+	set vol_list [sm list_volumes $dev]
+	verbose vol_list $vol_list
+
+	if { [llength $vol_list] == 0 } {
+		set quota [sm get_device_quota $dev]
+		verbose creating volume $vol size $size on $dev
+		sm create_vol $dev $vol $size
+	}
+
+	set quota [sm get_device_quota $dev]
+	verbose device quota $quota
+	set quota [sm get_volume_quota $vol]
+	verbose volume quota $quota
+
+	set vol_list [sm list_volumes $dev]
+	assert {expr [llength $vol_list] == 1}
+
+	assert {expr [string compare [lindex $vol_list 0] $vol.0.0.0:0] == 0}
+
+	}
+}
+if {$volid == 0} {
+	set volid [lindex [lindex $smsh_device_list 0] 2]
+}
+
+verbose mounted everything....
+
+set volsize [lindex [sm get_volume_quota $volid] 0]
+set used [lindex [sm get_volume_quota $volid] 1]
+set volsize [expr {$volsize - $used} ]
+# set objksize [expr {$objsize / 1024} ]
+# set nobjs [expr {$volsize / $objksize} ]
+# set nobjs [expr { 200000000 / $objsize } ]
+#unset objksize
+
+set hdr "" 
+set body [format "%0*s" $objsize a]
+
+
+# 
+# create a huge file
+#
+set dummy 0
+if {$fid==0} {
+	sm begin_xct
+	set fid [sm create_file $volid tmp ]
+	sm commit_xct
+	verbose fid=$fid
+	set dummy [sm gather_stats reset]
+}
+verbose creating $nobjs objects of size $objsize 
+sm begin_xct
+sm lock $volid EX LONG 0
+set wtime [ time {
+sm create_multi_recs $fid $hdr $objsize $body $nobjs
+} 1 ]
+sm commit_xct
+verbose done creating...
+pstats
+
+set dummy [sm gather_stats reset]
+#   clear the buffer pool, invalidate 
+sm begin_xct
+set ftime [ time {
+sm force_buffers true
+} 1 ]
+sm commit_xct
+pstats
+
+verbose
+verbose Write time = $wtime  Force time = $ftime
+verbose
+
+unset dev 
+unset size 
+unset vol 
+unset quota 
+unset vol_list 
+unset dummy 
+unset hdr 
+unset body
+unset volsize 
+unset used
+unset wtime 
+unset ftime
+

@@ -1,0 +1,641 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="lm__trie_8h" kind="file" language="C++">
+    <compoundname>lm_trie.h</compoundname>
+    <includes refid="pio_8h" local="no">sphinxbase/pio.h</includes>
+    <includes refid="bitarr_8h" local="no">sphinxbase/bitarr.h</includes>
+    <includes refid="ngram__model__internal_8h" local="yes">ngram_model_internal.h</includes>
+    <includes refid="lm__trie__quant_8h" local="yes">lm_trie_quant.h</includes>
+    <includedby refid="lm__trie_8c" local="yes">src/libsphinxbase/lm/lm_trie.c</includedby>
+    <includedby refid="ngram__model__trie_8h" local="yes">src/libsphinxbase/lm/ngram_model_trie.h</includedby>
+    <incdepgraph>
+      <node id="1792">
+        <label>sys/stat.h</label>
+      </node>
+      <node id="1793">
+        <label>sphinxbase/sphinxbase_export.h</label>
+        <link refid="sphinxbase__export_8h_source"/>
+      </node>
+      <node id="1802">
+        <label>stdarg.h</label>
+      </node>
+      <node id="1801">
+        <label>sphinxbase/ngram_model.h</label>
+        <link refid="ngram__model_8h"/>
+        <childnode refid="1802" relation="include">
+        </childnode>
+        <childnode refid="1793" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+        <childnode refid="1803" relation="include">
+        </childnode>
+        <childnode refid="1804" relation="include">
+        </childnode>
+        <childnode refid="1805" relation="include">
+        </childnode>
+      </node>
+      <node id="1797">
+        <label>assert.h</label>
+      </node>
+      <node id="1799">
+        <label>stdint.h</label>
+      </node>
+      <node id="1808">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1806">
+        <label>sphinxbase/hash_table.h</label>
+        <link refid="hash__table_8h"/>
+        <childnode refid="1793" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+        <childnode refid="1807" relation="include">
+        </childnode>
+      </node>
+      <node id="1812">
+        <label>errno.h</label>
+      </node>
+      <node id="1805">
+        <label>sphinxbase/mmio.h</label>
+        <link refid="mmio_8h"/>
+        <childnode refid="1793" relation="include">
+        </childnode>
+      </node>
+      <node id="1794">
+        <label>sphinxbase/prim_type.h</label>
+        <link refid="prim__type_8h"/>
+        <childnode refid="1795" relation="include">
+        </childnode>
+      </node>
+      <node id="1804">
+        <label>sphinxbase/logmath.h</label>
+        <link refid="logmath_8h"/>
+        <childnode refid="1793" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+        <childnode refid="1803" relation="include">
+        </childnode>
+      </node>
+      <node id="1803">
+        <label>sphinxbase/cmd_ln.h</label>
+        <link refid="cmd__ln_8h"/>
+        <childnode refid="1791" relation="include">
+        </childnode>
+        <childnode refid="1802" relation="include">
+        </childnode>
+        <childnode refid="1793" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+      </node>
+      <node id="1795">
+        <label>sphinx_config.h</label>
+      </node>
+      <node id="1807">
+        <label>sphinxbase/glist.h</label>
+        <link refid="glist_8h"/>
+        <childnode refid="1808" relation="include">
+        </childnode>
+        <childnode refid="1793" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+      </node>
+      <node id="1798">
+        <label>string.h</label>
+      </node>
+      <node id="1809">
+        <label>lm_trie_quant.h</label>
+        <link refid="lm__trie__quant_8h_source"/>
+        <childnode refid="1796" relation="include">
+        </childnode>
+        <childnode refid="1810" relation="include">
+        </childnode>
+      </node>
+      <node id="1796">
+        <label>sphinxbase/bitarr.h</label>
+        <link refid="bitarr_8h"/>
+        <childnode refid="1797" relation="include">
+        </childnode>
+        <childnode refid="1798" relation="include">
+        </childnode>
+        <childnode refid="1799" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+        <childnode refid="1793" relation="include">
+        </childnode>
+      </node>
+      <node id="1811">
+        <label>sphinxbase/err.h</label>
+        <link refid="err_8h"/>
+        <childnode refid="1802" relation="include">
+        </childnode>
+        <childnode refid="1791" relation="include">
+        </childnode>
+        <childnode refid="1808" relation="include">
+        </childnode>
+        <childnode refid="1812" relation="include">
+        </childnode>
+        <childnode refid="1793" relation="include">
+        </childnode>
+      </node>
+      <node id="1789">
+        <label>src/libsphinxbase/lm/lm_trie.h</label>
+        <link refid="lm__trie_8h"/>
+        <childnode refid="1790" relation="include">
+        </childnode>
+        <childnode refid="1796" relation="include">
+        </childnode>
+        <childnode refid="1800" relation="include">
+        </childnode>
+        <childnode refid="1809" relation="include">
+        </childnode>
+      </node>
+      <node id="1800">
+        <label>ngram_model_internal.h</label>
+        <link refid="ngram__model__internal_8h_source"/>
+        <childnode refid="1801" relation="include">
+        </childnode>
+        <childnode refid="1806" relation="include">
+        </childnode>
+      </node>
+      <node id="1790">
+        <label>sphinxbase/pio.h</label>
+        <link refid="pio_8h"/>
+        <childnode refid="1791" relation="include">
+        </childnode>
+        <childnode refid="1792" relation="include">
+        </childnode>
+        <childnode refid="1793" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+      </node>
+      <node id="1791">
+        <label>stdio.h</label>
+      </node>
+      <node id="1810">
+        <label>ngrams_raw.h</label>
+        <link refid="ngrams__raw_8h_source"/>
+        <childnode refid="1806" relation="include">
+        </childnode>
+        <childnode refid="1804" relation="include">
+        </childnode>
+        <childnode refid="1794" relation="include">
+        </childnode>
+        <childnode refid="1790" relation="include">
+        </childnode>
+        <childnode refid="1811" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1816">
+        <label>src/libsphinxbase/lm/ngram_model.c</label>
+        <link refid="ngram__model_8c_source"/>
+      </node>
+      <node id="1817">
+        <label>src/libsphinxbase/lm/ngram_model_trie.c</label>
+        <link refid="ngram__model__trie_8c_source"/>
+      </node>
+      <node id="1815">
+        <label>src/libsphinxbase/lm/ngram_model_trie.h</label>
+        <link refid="ngram__model__trie_8h_source"/>
+        <childnode refid="1816" relation="include">
+        </childnode>
+        <childnode refid="1817" relation="include">
+        </childnode>
+      </node>
+      <node id="1814">
+        <label>src/libsphinxbase/lm/lm_trie.c</label>
+        <link refid="lm__trie_8c_source"/>
+      </node>
+      <node id="1813">
+        <label>src/libsphinxbase/lm/lm_trie.h</label>
+        <link refid="lm__trie_8h"/>
+        <childnode refid="1814" relation="include">
+        </childnode>
+        <childnode refid="1815" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structunigram__s" prot="public">unigram_s</innerclass>
+    <innerclass refid="structnode__range__s" prot="public">node_range_s</innerclass>
+    <innerclass refid="structbase__s" prot="public">base_s</innerclass>
+    <innerclass refid="structmiddle__s" prot="public">middle_s</innerclass>
+    <innerclass refid="structlongest__s" prot="public">longest_s</innerclass>
+    <innerclass refid="structlm__trie__s" prot="public">lm_trie_s</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="lm__trie_8h_1a5d1ecf53bbe8af439e844d6fe21662f6" prot="public" static="no">
+        <type>struct <ref refid="structunigram__s" kindref="compound">unigram_s</ref></type>
+        <definition>typedef struct unigram_s  unigram_t</definition>
+        <argsstring></argsstring>
+        <name>unigram_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="51" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="lm__trie_8h_1a4d2cd4536492c799ea7720db183004a1" prot="public" static="no">
+        <type>struct <ref refid="structnode__range__s" kindref="compound">node_range_s</ref></type>
+        <definition>typedef struct node_range_s  node_range_t</definition>
+        <argsstring></argsstring>
+        <name>node_range_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="lm__trie_8h_1af9b7ef293d74865541baa4fc8097d2d6" prot="public" static="no">
+        <type>struct <ref refid="structbase__s" kindref="compound">base_s</ref></type>
+        <definition>typedef struct base_s  base_t</definition>
+        <argsstring></argsstring>
+        <name>base_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="65" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="lm__trie_8h_1a6a4e4efe17fddf505c9de50475caadcb" prot="public" static="no">
+        <type>struct <ref refid="structmiddle__s" kindref="compound">middle_s</ref></type>
+        <definition>typedef struct middle_s  middle_t</definition>
+        <argsstring></argsstring>
+        <name>middle_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="72" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="lm__trie_8h_1a495158d2ef6b9bdb403fd0b1d8b42588" prot="public" static="no">
+        <type>struct <ref refid="structlongest__s" kindref="compound">longest_s</ref></type>
+        <definition>typedef struct longest_s  longest_t</definition>
+        <argsstring></argsstring>
+        <name>longest_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="77" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="lm__trie_8h_1a9c0055dffa47dc7f39392e6e7e925d40" prot="public" static="no">
+        <type>struct <ref refid="structlm__trie__s" kindref="compound">lm_trie_s</ref></type>
+        <definition>typedef struct lm_trie_s  lm_trie_t</definition>
+        <argsstring></argsstring>
+        <name>lm_trie_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="90" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="lm__trie_8h_1aca844c851369fa01477ed80583a6d7e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+        <definition>lm_trie_t* lm_trie_create</definition>
+        <argsstring>(uint32 unigram_count, lm_trie_quant_type_t quant_type, int order)</argsstring>
+        <name>lm_trie_create</name>
+        <param>
+          <type>uint32</type>
+          <declname>unigram_count</declname>
+        </param>
+        <param>
+          <type>lm_trie_quant_type_t</type>
+          <declname>quant_type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <briefdescription>
+<para>Creates lm_trie structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>Fills it if binary file with correspondent data is provided </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="95" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="297" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1a4a2cd50cfd86cf26cdea96c1f7bb03be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+        <definition>lm_trie_t* lm_trie_read_bin</definition>
+        <argsstring>(uint32 *counts, int order, FILE *fp)</argsstring>
+        <name>lm_trie_read_bin</name>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="98" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="307" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1aa1f5b3f4dd21b060e3384a5b7f0938d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_trie_write_bin</definition>
+        <argsstring>(lm_trie_t *trie, uint32 unigram_count, FILE *fp)</argsstring>
+        <name>lm_trie_write_bin</name>
+        <param>
+          <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+          <declname>trie</declname>
+        </param>
+        <param>
+          <type>uint32</type>
+          <declname>unigram_count</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="100" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="320" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1abce40e0a0c1ce874f6a3fc23dea9b251" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_trie_free</definition>
+        <argsstring>(lm_trie_t *trie)</argsstring>
+        <name>lm_trie_free</name>
+        <param>
+          <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+          <declname>trie</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="102" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="332" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1ad3663cd2a0634f794a171ebb4de9e6d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_trie_alloc_ngram</definition>
+        <argsstring>(lm_trie_t *trie, uint32 *counts, int order)</argsstring>
+        <name>lm_trie_alloc_ngram</name>
+        <param>
+          <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+          <declname>trie</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="104" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="346" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1a0a0f696927d3ce5a668d5d1b123552f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_trie_build</definition>
+        <argsstring>(lm_trie_t *trie, ngram_raw_t **raw_ngrams, uint32 *counts, int order)</argsstring>
+        <name>lm_trie_build</name>
+        <param>
+          <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+          <declname>trie</declname>
+        </param>
+        <param>
+          <type><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref> **</type>
+          <declname>raw_ngrams</declname>
+        </param>
+        <param>
+          <type>uint32 *</type>
+          <declname>counts</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="106" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="394" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1acbeea0ad733727ec17b9464a082daecb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structunigram__s" kindref="compound">unigram_t</ref> *</type>
+        <definition>unigram_t* unigram_find</definition>
+        <argsstring>(unigram_t *u, uint32 word, node_range_t *next)</argsstring>
+        <name>unigram_find</name>
+        <param>
+          <type><ref refid="structunigram__s" kindref="compound">unigram_t</ref> *</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>uint32</type>
+          <declname>word</declname>
+        </param>
+        <param>
+          <type><ref refid="structnode__range__s" kindref="compound">node_range_t</ref> *</type>
+          <declname>next</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="109" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="426" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="lm__trie_8h_1af90896d5350ed885c3aa48e4dd2afa7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float lm_trie_score</definition>
+        <argsstring>(lm_trie_t *trie, int order, int32 wid, int32 *hist, int32 n_hist, int32 *n_used)</argsstring>
+        <name>lm_trie_score</name>
+        <param>
+          <type><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref> *</type>
+          <declname>trie</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>wid</declname>
+        </param>
+        <param>
+          <type>int32 *</type>
+          <declname>hist</declname>
+        </param>
+        <param>
+          <type>int32</type>
+          <declname>n_hist</declname>
+        </param>
+        <param>
+          <type>int32 *</type>
+          <declname>n_used</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="111" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.c" bodystart="684" bodyend="697"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>-*-<sp/>c-basic-offset:<sp/>4;<sp/>indent-tabs-mode:<sp/>nil<sp/>-*-<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2015<sp/>Carnegie<sp/>Mellon<sp/>University.<sp/><sp/>All<sp/>rights</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>1.<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.<sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>2.<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>distribution.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>This<sp/>work<sp/>was<sp/>supported<sp/>in<sp/>part<sp/>by<sp/>funding<sp/>from<sp/>the<sp/>Defense<sp/>Advanced<sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>Research<sp/>Projects<sp/>Agency<sp/>and<sp/>the<sp/>National<sp/>Science<sp/>Foundation<sp/>of<sp/>the<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>United<sp/>States<sp/>of<sp/>America,<sp/>and<sp/>the<sp/>CMU<sp/>Sphinx<sp/>Speech<sp/>Consortium.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY<sp/>``AS<sp/>IS&apos;&apos;<sp/>AND<sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>ANY<sp/>EXPRESSED<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/><sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>CARNEGIE<sp/>MELLON<sp/>UNIVERSITY</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>NOR<sp/>ITS<sp/>EMPLOYEES<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/>====================================================================</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__LM_TRIE_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__LM_TRIE_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="pio_8h" kindref="compound">sphinxbase/pio.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="bitarr_8h" kindref="compound">sphinxbase/bitarr.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ngram_model_internal.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lm_trie_quant.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="structunigram__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structunigram__s" kindref="compound">unigram_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>prob;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bo;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>next;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}<sp/><ref refid="structunigram__s" kindref="compound">unigram_t</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="structnode__range__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnode__range__s" kindref="compound">node_range_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>begin;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>end;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}<sp/><ref refid="structnode__range__s" kindref="compound">node_range_t</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="structbase__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structbase__s" kindref="compound">base_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/>word_bits;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/>total_bits;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>word_mask;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/>*base;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>insert_index;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>max_vocab;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}<sp/><ref refid="structbase__s" kindref="compound">base_t</ref>;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="structmiddle__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmiddle__s" kindref="compound">middle_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structbase__s" kindref="compound">base_t</ref><sp/>base;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structbitarr__mask__s" kindref="compound">bitarr_mask_t</ref><sp/>next_mask;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/>quant_bits;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*next_source;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}<sp/><ref refid="structmiddle__s" kindref="compound">middle_t</ref>;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="structlongest__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlongest__s" kindref="compound">longest_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structbase__s" kindref="compound">base_t</ref><sp/>base;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/>quant_bits;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal">}<sp/><ref refid="structlongest__s" kindref="compound">longest_t</ref>;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="structlm__trie__s" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlm__trie__s" kindref="compound">lm_trie_s</ref><sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8<sp/>*ngram_mem;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>ngram_mem_size;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structunigram__s" kindref="compound">unigram_t</ref><sp/>*unigrams;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structmiddle__s" kindref="compound">middle_t</ref><sp/>*middle_begin;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structmiddle__s" kindref="compound">middle_t</ref><sp/>*middle_end;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlongest__s" kindref="compound">longest_t</ref><sp/>*longest;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlm__trie__quant__s" kindref="compound">lm_trie_quant_t</ref><sp/>*quant;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>backoff[NGRAM_MAX_ORDER];</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32<sp/>prev_hist[NGRAM_MAX_ORDER<sp/>-<sp/>1];</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">}<sp/><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref>;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*lm_trie_create(uint32<sp/>unigram_count,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lm_trie_quant_type_t<sp/>quant_type,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*lm_trie_read_bin(uint32<sp/>*<sp/>counts,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order,<sp/>FILE<sp/>*<sp/>fp);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lm_trie_write_bin(<ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*<sp/>trie,<sp/>uint32<sp/>unigram_count,<sp/>FILE<sp/>*<sp/>fp);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lm_trie_free(<ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*<sp/>trie);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lm_trie_alloc_ngram(<ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*<sp/>trie,<sp/>uint32<sp/>*<sp/>counts,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lm_trie_build(<ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*<sp/>trie,<sp/><ref refid="structngram__raw__s" kindref="compound">ngram_raw_t</ref><sp/>**<sp/>raw_ngrams,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32<sp/>*<sp/>counts,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><ref refid="structunigram__s" kindref="compound">unigram_t</ref><sp/>*unigram_find(<ref refid="structunigram__s" kindref="compound">unigram_t</ref><sp/>*<sp/>u,<sp/>uint32<sp/>word,<sp/><ref refid="structnode__range__s" kindref="compound">node_range_t</ref><sp/>*<sp/>next);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lm_trie_score(<ref refid="structlm__trie__s" kindref="compound">lm_trie_t</ref><sp/>*<sp/>trie,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>order,<sp/>int32<sp/>wid,<sp/>int32<sp/>*<sp/>hist,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32<sp/>n_hist,<sp/>int32<sp/>*<sp/>n_used);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>__LM_TRIE_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="src/libsphinxbase/lm/lm_trie.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,135 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: pin.1,v 1.27.4.3 2010/03/25 18:05:30 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#    Test file create and destroy
+#
+
+proc compare_pin_counts { msg doassert } {
+	verbose Compare pin count with unpin count at $msg...
+	# clear stats after gathering existing stats; return existing
+	set st [clearstats]
+	# get index of rec_pin_cnt
+	set     i_pin [expr [lsearch $st rec_pin_cnt] + 1]
+	echo i_pin = [lindex $st $i_pin]
+	# get index of rec_unpin_cnt
+	set     i_unpin [expr [lsearch $st rec_unpin_cnt] + 1]
+	echo i_unpin = [lindex $st $i_unpin]
+
+	if [expr [lindex $st $i_pin] != [lindex $st $i_unpin]] {
+		echo pin count $i_pin but unpin count $i_unpin at $msg
+	}
+	if [expr $doassert != 0] {
+		assert {expr [lindex $st $i_pin] == [lindex $st $i_unpin]}
+	}
+}
+# before we start the script, unpin/unfix counts might be > pin/fix counts
+# legitimately, so we clear stats before we start this script
+clearstats 
+
+compare_pin_counts "before vol.init" 0
+source $script_dir/vol.init
+compare_pin_counts "after vol.init" 0
+# clear stats
+
+compare_pin_counts "start" 1
+
+sm begin_xct
+set f1 [sm create_file $volid]
+verbose f1 = $f1
+
+set r1 [sm create_rec $f1 hdr12345 11 hellodata]
+verbose r1 = $r1
+set read_result [sm read_rec $r1 0 0]
+# verbose read of $r1: $read_result
+
+verbose doing repin
+set pin [sm pin_create]
+sm pin_pin $pin $r1 0
+sm pin_repin $pin
+verbose check of pin_repin $r1: [sm pin_body $pin]
+
+#check error detection
+#sm pin_update_rec $pin 20 DEFG
+#sm pin_update_rec $pin 6 DEFG
+
+sm pin_update_rec $pin 3 DEFG
+verbose check of pin_update_rec $r1 3 DEFG: [sm pin_body $pin]
+
+sm pin_update_rec_hdr $pin 2 DEF
+verbose check of pin_update_rec_hdr $r1 2 DEF: [sm pin_hdr $pin]
+
+sm pin_append_rec $pin 12345
+verbose check of pin_append_rec $r1 12345: [sm pin_body $pin]
+
+sm pin_truncate_rec $pin 4
+verbose check of pin_truncate_rec $r1 4: [sm pin_body $pin]
+
+sm pin_unpin $pin
+sm pin_destroy $pin
+
+sm commit_xct
+
+compare_pin_counts "end" 1
+
+sm begin_xct
+    verbose pinning 10 
+    for {set i 0} {$i < 10} {incr i} {
+        set p($i) [sm pin_create]
+        sm pin_pin $p($i) $r1 0
+    }
+    for {set i 0} {$i < 10} {incr i} { sm pin_destroy $p($i) }
+sm commit_xct
+
+compare_pin_counts "end2" 1
+
+sm begin_xct
+sm destroy_file $f1
+sm commit_xct
+
+# verbose [sm get_volume_quota $volid]
+# nb: this checking of pin counts is done by checkstats
+# also -- could just call that
+set st [sm gather_stats]
+pstats
+
+# make sure pin and unpin counts match
+set i_pin [expr [lsearch $st rec_pin_cnt] + 1]
+verbose i_pin = [lindex $st $i_pin]
+
+set     i_unpin [expr [lsearch $st rec_unpin_cnt] + 1]
+verbose i_unpin = [lindex $st $i_unpin]
+
+assert {expr [lindex $st $i_pin] == [lindex $st $i_unpin]}
+
+
+unset pin i_pin p i_unpin r1 read_result st
+unset f1 i
+
+verbose end of pin.1

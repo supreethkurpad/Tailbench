@@ -1,0 +1,164 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: multi.3,v 1.11.2.8 2010/03/19 22:20:36 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This script demonstrates a bug which occurs
+# when two threads try creating a file at the
+# same time. The problem is that one thread holds
+# a latch on the last log record, which the other
+# thread deadlocks on.
+#
+# Depending upon optimization and DEBUG modes,
+# 'ntries' may have to be increased to demonstrate
+# the problem.
+#
+# bolo, 30 October 1995
+#
+# If it can't demonstrate the problem, it might very well run out of
+# space on the volume trying.
+# nhall Nov 16 2009
+# This is b/c we use one tx to do all these create and destroy files,
+# and for some reason we don't allow the tx to re-use the
+# xcts it freed.
+#
+
+set_config_info
+
+source $script_dir/vol.init
+
+set go 0
+if {$multi_threaded_xct == 0 } {
+	echo "Not configured for multi-threaded xcts"
+} else {
+	set go 1
+}
+if {$go == 1} {
+set ntries 400
+set nxct 100
+
+# attach to xct "t'
+# create pairs of file, destroying both if successful
+# give up if we run out of space
+# 
+proc ggg {name t nxct ntries named_sync} {
+    global volid 
+    sm attach_xct $t
+	set caught 0
+    for {set j 1} {$j <= $nxct} {incr j} {
+		for {set i 1} {$i <= $ntries} {incr i} {
+			verbose $name ":" $i
+			set caught [catch {sm create_file $volid} f0]
+			if {$caught==0} {
+				verbose $name created ":" $f0
+				set caught [catch {sm create_file $volid} f1]
+				if {$caught==0} {
+					verbose $name created ":" $f1
+					sm sleep 1
+
+					verbose $name destroy ":" $f0
+					set caught [catch {sm destroy_file $f0} err]
+					if {$caught==1} {
+					   verbose $name: could not destroy file $f0 : $err
+					}
+
+					verbose $name destroy ":" $f1
+					set caught [catch {sm destroy_file $f1} err]
+					if {$caught==1} {
+					   verbose $name: could not destroy file $f1 : $err
+					}
+
+				} else {
+					verbose A: $name $caught $f1 
+
+					verbose $name destroy ":" $f0
+					set caught [catch {sm destroy_file $f0} err]
+					if {$caught==1} {
+					   verbose $name: could not destroy file $f0 : $err
+					}
+
+					break
+				}
+			} else {
+				verbose B: $name $caught $f0 
+			    break
+			}
+
+		}
+		if {$caught==1} {
+			verbose C: $name $caught 
+		    break
+		}
+    }
+    sm detach_xct $t
+	named_sync $named_sync
+}
+
+set n 2
+
+sm begin_xct
+set tid [sm xct]
+verbose tid $tid nxct $nxct ntries $ntries
+verbose starting $n threads
+if {$n==2} {
+    set named_sync [expr {$n + 1}]
+	set t1 [fork_thread ggg "t1" $tid $nxct $ntries $named_sync] 
+	set t2 [fork_thread ggg "t2" $tid $nxct $ntries $named_sync ]
+	verbose waiting for $n threads
+	named_sync $named_sync "$t1 $t2"
+	join_thread $t1 $t2
+	unset t2 
+}
+if {$n==1} {
+	set t1 [fork_thread ggg "t1" $tid $nxct $ntries $named_sync ]
+	verbose waiting for $n threads
+	named_sync $named_sync "$t1"
+	join_thread $t1
+}
+verbose $n threads done
+unset n named_sync
+
+set do_commit 1
+if {$do_commit} {
+	echo DSTATS BEFORE COMMIT
+	dstatsnoaudit $volid
+	sm commit_xct
+	echo DSTATS AFTER COMMIT
+	dstats $volid
+} else {
+	echo DSTATS BEFORE ABORT
+	dstatsnoaudit $volid
+	sm abort_xct
+	echo DSTATS AFTER ABORT
+	dstats $volid
+}
+unset do_commit
+unset t1 tid
+}
+
+unset go ntries nxct

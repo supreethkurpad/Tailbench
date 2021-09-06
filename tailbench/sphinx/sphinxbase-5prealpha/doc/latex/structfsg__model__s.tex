@@ -1,0 +1,164 @@
+\section{fsg\+\_\+model\+\_\+s Struct Reference}
+\label{structfsg__model__s}\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+
+
+Word level F\+SG definition.  
+
+
+
+
+{\ttfamily \#include $<$fsg\+\_\+model.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ refcount}
+\begin{DoxyCompactList}\small\item\em Reference count. \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_ab23ae2c362f1a3b18bbe135b97dfb467}} 
+char $\ast$ \textbf{ name}
+\begin{DoxyCompactList}\small\item\em A unique string identifier for this F\+SG. \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_a99ed2894f7690a960d11e1590d11a6b9}} 
+int32 \textbf{ n\+\_\+word}
+\begin{DoxyCompactList}\small\item\em Number of unique words in this F\+SG. \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_a329ae88c26111df8cd64657b46b9108f}} 
+int32 \textbf{ n\+\_\+word\+\_\+alloc}
+\begin{DoxyCompactList}\small\item\em Number of words allocated in vocab. \end{DoxyCompactList}\item 
+char $\ast$$\ast$ \textbf{ vocab}
+\begin{DoxyCompactList}\small\item\em Vocabulary for this F\+SG. \end{DoxyCompactList}\item 
+bitvec\+\_\+t $\ast$ \textbf{ silwords}
+\begin{DoxyCompactList}\small\item\em Indicates which words are silence/fillers. \end{DoxyCompactList}\item 
+bitvec\+\_\+t $\ast$ \textbf{ altwords}
+\begin{DoxyCompactList}\small\item\em Indicates which words are pronunciation alternates. \end{DoxyCompactList}\item 
+\textbf{ logmath\+\_\+t} $\ast$ \textbf{ lmath}
+\begin{DoxyCompactList}\small\item\em Pointer to log math computation object. \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_a80cdb0b5e7463221ce14135c9f5a3b01}} 
+int32 \textbf{ n\+\_\+state}
+\begin{DoxyCompactList}\small\item\em number of states in F\+SG \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_a4ff49da3938ecc236d45a68d009f97b9}} 
+int32 \textbf{ start\+\_\+state}
+\begin{DoxyCompactList}\small\item\em Must be in the range [0..n\+\_\+state-\/1]. \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_ada19c76db4f1fc89c8b5cd674ec865da}} 
+int32 \textbf{ final\+\_\+state}
+\begin{DoxyCompactList}\small\item\em Must be in the range [0..n\+\_\+state-\/1]. \end{DoxyCompactList}\item 
+\mbox{\label{structfsg__model__s_aeaff529953d494b9891dbc0fdac8e97f}} 
+float32 \textbf{ lw}
+\begin{DoxyCompactList}\small\item\em Language weight that\textquotesingle{}s been applied to transition logprobs. \end{DoxyCompactList}\item 
+\textbf{ trans\+\_\+list\+\_\+t} $\ast$ \textbf{ trans}
+\begin{DoxyCompactList}\small\item\em Transitions out of each state, if any. \end{DoxyCompactList}\item 
+\textbf{ listelem\+\_\+alloc\+\_\+t} $\ast$ \textbf{ link\+\_\+alloc}
+\begin{DoxyCompactList}\small\item\em Allocator for F\+SG links. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Word level F\+SG definition. 
+
+States are simply integers 0..n\+\_\+state-\/1. A transition emits a word and has a given probability of being taken. There can also be null or epsilon transitions, with no associated emitted word. 
+
+Definition at line 91 of file fsg\+\_\+model.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structfsg__model__s_adb51d840853d7ef3315bd833cddeb748}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!altwords@{altwords}}
+\index{altwords@{altwords}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{altwords}
+{\footnotesize\ttfamily bitvec\+\_\+t$\ast$ fsg\+\_\+model\+\_\+s\+::altwords}
+
+
+
+Indicates which words are pronunciation alternates. 
+
+
+
+Definition at line 98 of file fsg\+\_\+model.\+h.
+
+\mbox{\label{structfsg__model__s_ac4e2a36305bbe62a5c7468588eb058b1}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!link\+\_\+alloc@{link\+\_\+alloc}}
+\index{link\+\_\+alloc@{link\+\_\+alloc}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{link\+\_\+alloc}
+{\footnotesize\ttfamily \textbf{ listelem\+\_\+alloc\+\_\+t}$\ast$ fsg\+\_\+model\+\_\+s\+::link\+\_\+alloc}
+
+
+
+Allocator for F\+SG links. 
+
+
+
+Definition at line 106 of file fsg\+\_\+model.\+h.
+
+\mbox{\label{structfsg__model__s_ab0b22dadb593ee1901829f89c4a47fe2}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!lmath@{lmath}}
+\index{lmath@{lmath}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{lmath}
+{\footnotesize\ttfamily \textbf{ logmath\+\_\+t}$\ast$ fsg\+\_\+model\+\_\+s\+::lmath}
+
+
+
+Pointer to log math computation object. 
+
+
+
+Definition at line 99 of file fsg\+\_\+model.\+h.
+
+\mbox{\label{structfsg__model__s_af329127556a42f6ea3b27f41a99a0b17}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!refcount@{refcount}}
+\index{refcount@{refcount}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{refcount}
+{\footnotesize\ttfamily int fsg\+\_\+model\+\_\+s\+::refcount}
+
+
+
+Reference count. 
+
+
+
+Definition at line 92 of file fsg\+\_\+model.\+h.
+
+\mbox{\label{structfsg__model__s_ab5709e67c1b7506ab024f2060d50331c}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!silwords@{silwords}}
+\index{silwords@{silwords}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{silwords}
+{\footnotesize\ttfamily bitvec\+\_\+t$\ast$ fsg\+\_\+model\+\_\+s\+::silwords}
+
+
+
+Indicates which words are silence/fillers. 
+
+
+
+Definition at line 97 of file fsg\+\_\+model.\+h.
+
+\mbox{\label{structfsg__model__s_ac5cd4b72818b7a9f2dc543d6a6ac9cc7}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!trans@{trans}}
+\index{trans@{trans}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{trans}
+{\footnotesize\ttfamily \textbf{ trans\+\_\+list\+\_\+t}$\ast$ fsg\+\_\+model\+\_\+s\+::trans}
+
+
+
+Transitions out of each state, if any. 
+
+
+
+Definition at line 105 of file fsg\+\_\+model.\+h.
+
+\mbox{\label{structfsg__model__s_a6bbfce2d672624d792ff964200a64031}} 
+\index{fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}!vocab@{vocab}}
+\index{vocab@{vocab}!fsg\+\_\+model\+\_\+s@{fsg\+\_\+model\+\_\+s}}
+\subsubsection{vocab}
+{\footnotesize\ttfamily char$\ast$$\ast$ fsg\+\_\+model\+\_\+s\+::vocab}
+
+
+
+Vocabulary for this F\+SG. 
+
+
+
+Definition at line 96 of file fsg\+\_\+model.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/sphinxbase/fsg\+\_\+model.\+h\end{DoxyCompactItemize}

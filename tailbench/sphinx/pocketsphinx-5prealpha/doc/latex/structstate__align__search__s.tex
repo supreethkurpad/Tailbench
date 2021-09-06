@@ -1,0 +1,176 @@
+\section{state\+\_\+align\+\_\+search\+\_\+s Struct Reference}
+\label{structstate__align__search__s}\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+
+
+Phone loop search structure.  
+
+
+
+
+{\ttfamily \#include $<$state\+\_\+align\+\_\+search.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ps\+\_\+search\+\_\+t} \textbf{ base}
+\begin{DoxyCompactList}\small\item\em Base search structure. \end{DoxyCompactList}\item 
+\textbf{ hmm\+\_\+context\+\_\+t} $\ast$ \textbf{ hmmctx}
+\begin{DoxyCompactList}\small\item\em H\+MM context structure. \end{DoxyCompactList}\item 
+\textbf{ ps\+\_\+alignment\+\_\+t} $\ast$ \textbf{ al}
+\begin{DoxyCompactList}\small\item\em Alignment structure being operated on. \end{DoxyCompactList}\item 
+\textbf{ hmm\+\_\+t} $\ast$ \textbf{ hmms}
+\begin{DoxyCompactList}\small\item\em Vector of H\+M\+Ms corresponding to phone level. \end{DoxyCompactList}\item 
+int \textbf{ n\+\_\+phones}
+\begin{DoxyCompactList}\small\item\em Number of H\+M\+Ms (phones). \end{DoxyCompactList}\item 
+int \textbf{ frame}
+\begin{DoxyCompactList}\small\item\em Current frame being processed. \end{DoxyCompactList}\item 
+int32 \textbf{ best\+\_\+score}
+\begin{DoxyCompactList}\small\item\em Best score in current frame. \end{DoxyCompactList}\item 
+\mbox{\label{structstate__align__search__s_a80c74bac917a8203bb74f5738621ce83}} 
+int \textbf{ n\+\_\+emit\+\_\+state}
+\begin{DoxyCompactList}\small\item\em Number of emitting states (tokens per frame) \end{DoxyCompactList}\item 
+\textbf{ state\+\_\+align\+\_\+hist\+\_\+t} $\ast$ \textbf{ tokens}
+\begin{DoxyCompactList}\small\item\em Tokens (backpointers) for state alignment. \end{DoxyCompactList}\item 
+int \textbf{ n\+\_\+fr\+\_\+alloc}
+\begin{DoxyCompactList}\small\item\em Number of frames of tokens allocated. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Phone loop search structure. 
+
+Definition at line 66 of file state\+\_\+align\+\_\+search.\+h.
+
+
+
+\subsection{Field Documentation}
+\mbox{\label{structstate__align__search__s_a47b9b509c7416f8952ee452d8ce7dda6}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!al@{al}}
+\index{al@{al}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{al}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+alignment\+\_\+t}$\ast$ state\+\_\+align\+\_\+search\+\_\+s\+::al}
+
+
+
+Alignment structure being operated on. 
+
+
+
+Definition at line 69 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_ab2a596d687e113c88a271d1397b8d9c5}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!base@{base}}
+\index{base@{base}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{base}
+{\footnotesize\ttfamily \textbf{ ps\+\_\+search\+\_\+t} state\+\_\+align\+\_\+search\+\_\+s\+::base}
+
+
+
+Base search structure. 
+
+
+
+Definition at line 67 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_a1810f343c6ae382f5ed0a5eb02d33037}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!best\+\_\+score@{best\+\_\+score}}
+\index{best\+\_\+score@{best\+\_\+score}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{best\+\_\+score}
+{\footnotesize\ttfamily int32 state\+\_\+align\+\_\+search\+\_\+s\+::best\+\_\+score}
+
+
+
+Best score in current frame. 
+
+
+
+Definition at line 74 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_aa520abfdb4d0bca2b769f281839637a9}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!frame@{frame}}
+\index{frame@{frame}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{frame}
+{\footnotesize\ttfamily int state\+\_\+align\+\_\+search\+\_\+s\+::frame}
+
+
+
+Current frame being processed. 
+
+
+
+Definition at line 73 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_a683e76dbcc87cde89ca5d45b4b91c1e9}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!hmmctx@{hmmctx}}
+\index{hmmctx@{hmmctx}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{hmmctx}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+context\+\_\+t}$\ast$ state\+\_\+align\+\_\+search\+\_\+s\+::hmmctx}
+
+
+
+H\+MM context structure. 
+
+
+
+Definition at line 68 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_a78ea3ffae6ecc3c004ff60707dc225b0}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!hmms@{hmms}}
+\index{hmms@{hmms}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{hmms}
+{\footnotesize\ttfamily \textbf{ hmm\+\_\+t}$\ast$ state\+\_\+align\+\_\+search\+\_\+s\+::hmms}
+
+
+
+Vector of H\+M\+Ms corresponding to phone level. 
+
+
+
+Definition at line 70 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_a97956b4924cba2b37470ff17f29c37bb}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!n\+\_\+fr\+\_\+alloc@{n\+\_\+fr\+\_\+alloc}}
+\index{n\+\_\+fr\+\_\+alloc@{n\+\_\+fr\+\_\+alloc}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{n\+\_\+fr\+\_\+alloc}
+{\footnotesize\ttfamily int state\+\_\+align\+\_\+search\+\_\+s\+::n\+\_\+fr\+\_\+alloc}
+
+
+
+Number of frames of tokens allocated. 
+
+
+
+Definition at line 78 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_ab248827613cdbc892e35e57d5c43c7c3}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!n\+\_\+phones@{n\+\_\+phones}}
+\index{n\+\_\+phones@{n\+\_\+phones}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{n\+\_\+phones}
+{\footnotesize\ttfamily int state\+\_\+align\+\_\+search\+\_\+s\+::n\+\_\+phones}
+
+
+
+Number of H\+M\+Ms (phones). 
+
+
+
+Definition at line 71 of file state\+\_\+align\+\_\+search.\+h.
+
+\mbox{\label{structstate__align__search__s_a2fae207533462fe6efe19c8a2a3a64e0}} 
+\index{state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}!tokens@{tokens}}
+\index{tokens@{tokens}!state\+\_\+align\+\_\+search\+\_\+s@{state\+\_\+align\+\_\+search\+\_\+s}}
+\subsubsection{tokens}
+{\footnotesize\ttfamily \textbf{ state\+\_\+align\+\_\+hist\+\_\+t}$\ast$ state\+\_\+align\+\_\+search\+\_\+s\+::tokens}
+
+
+
+Tokens (backpointers) for state alignment. 
+
+
+
+Definition at line 77 of file state\+\_\+align\+\_\+search.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ state\+\_\+align\+\_\+search.\+h}\end{DoxyCompactItemize}

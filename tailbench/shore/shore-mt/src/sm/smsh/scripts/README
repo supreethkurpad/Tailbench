@@ -1,0 +1,139 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: README,v 1.8.2.3 2009/12/03 00:21:05 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+These scripts are collected into groups by function,
+and by purpose.
+
+bugs/* are scripts that need to be debugged. I don't know if the
+	scripts are buggy or the sm is buggy. Some of these are
+	possibly obsolete.
+
+*.perf - useful for performance. Some are also useful for regression
+	testing, but some use so much space, they might NOT be useful	
+	for the latter.
+
+long.all: especially long-running scripts; might want to keep them
+	out of the regression tests by default.
+
+2PC-related scripts - are not included in the regression tests:
+coord*
+subord*
+trans.3
+
+*.st -- obsolete and once used when ssh was configured with -DUSE_VERIFY
+
+cleanup.all -- for cleaning up Tcl variables
+
+empty --  empty script -- for use with some test shell scripts
+
+all --  for normal "regression" testing.
+	if you want to include the long tests, edit "all" and
+	set the variable at the top, as indicated by the comment
+	there.
+
+	Runs:
+		vol.all  -- volume tests
+			Runs:
+				vol.[123]
+
+		lock.all -- lock tests
+			Runs:
+				deadlock.[1234]
+				lock.1 
+				lock.hier 
+				lock.hier_sm 
+				lock.upgrade 
+				lockrec_pin 
+				lockrec_sm 
+				lockfile_sm 
+
+		quark.all -- tests quarks (releasable locks)
+			Runs:
+				quark.1
+		btree.all 
+			Runs:
+				btree.[1-9],10,30
+				    (btree.10 uses btree.1) 
+				    (btree.20 uses btree.2) 
+				bt.insert.[1-4] -- uses bt.insert.0
+				bt.remove.[1-4] -- uses bt.remove.0
+					(bt.remove.0 uses bt.insertremove.0)
+				btree_split.1
+				bt.insert.5
+
+
+				(bt.tcl is used by bt.*)
+
+		rtree.all -- r* trees
+			Runs:
+				rtree.[1-3]
+
+		sort.all  -- sorted files for use with bulk-loading
+			Runs:
+				sort.[1-4]
+
+		pin.all  -- pin_i tests
+			Runs:
+				pin.[1-3]
+
+		file.all  -- files and records
+			Runs:
+				file.[1-8]
+					(file.7 uses file.5a)
+				tmpfile.1 
+				space_recovery
+
+		lgrec.all  -- large records
+			Runs:
+				lgrec.[1-3]
+
+		trans.all  -- external 2pc and transactions
+			Runs:
+				trans.[12]
+				prepare.1
+
+		alloc.all -- page allocation
+			Runs:
+				alloc.[1,3]
+				alloc.2 tickles a bug**************
+				and is in bugs/
+
+		free.all --
+			Runs:
+				free_ext
+				free_page
+
+
+all.perf -- for getting some performance statistics. 
+	Runs:
+		write.perf
+		random.perf
+		destroy.perf
+		create.perf
+

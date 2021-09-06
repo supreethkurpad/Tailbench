@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structlm__trie__s" kind="struct" language="C++" prot="public">
+    <compoundname>lm_trie_s</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlm__trie__s_1a58167a5c232538cebd3e083a097a9a1b" prot="public" static="no" mutable="no">
+        <type>uint8 *</type>
+        <definition>uint8* lm_trie_s::ngram_mem</definition>
+        <argsstring></argsstring>
+        <name>ngram_mem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="80" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1af256466f3eff8c3b665f10200815ba1d" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t lm_trie_s::ngram_mem_size</definition>
+        <argsstring></argsstring>
+        <name>ngram_mem_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="81" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1a22667bd186be6bf3804a3a597c96bd93" prot="public" static="no" mutable="no">
+        <type><ref refid="structunigram__s" kindref="compound">unigram_t</ref> *</type>
+        <definition>unigram_t* lm_trie_s::unigrams</definition>
+        <argsstring></argsstring>
+        <name>unigrams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="82" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1aa4a224213e7c1f5fcdb8b15169c237de" prot="public" static="no" mutable="no">
+        <type><ref refid="structmiddle__s" kindref="compound">middle_t</ref> *</type>
+        <definition>middle_t* lm_trie_s::middle_begin</definition>
+        <argsstring></argsstring>
+        <name>middle_begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="83" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1a7f39ce792b398ba89e5db14a895189e9" prot="public" static="no" mutable="no">
+        <type><ref refid="structmiddle__s" kindref="compound">middle_t</ref> *</type>
+        <definition>middle_t* lm_trie_s::middle_end</definition>
+        <argsstring></argsstring>
+        <name>middle_end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="84" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1ade570f476da0d4fb1d865a7eb4285a3b" prot="public" static="no" mutable="no">
+        <type><ref refid="structlongest__s" kindref="compound">longest_t</ref> *</type>
+        <definition>longest_t* lm_trie_s::longest</definition>
+        <argsstring></argsstring>
+        <name>longest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="85" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1a0a25fcb4269d21eba7596524b4f39bbd" prot="public" static="no" mutable="no">
+        <type><ref refid="structlm__trie__quant__s" kindref="compound">lm_trie_quant_t</ref> *</type>
+        <definition>lm_trie_quant_t* lm_trie_s::quant</definition>
+        <argsstring></argsstring>
+        <name>quant</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="86" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1a467064aa205c77cd01be1d3a4fdd1e6d" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float lm_trie_s::backoff[NGRAM_MAX_ORDER]</definition>
+        <argsstring>[NGRAM_MAX_ORDER]</argsstring>
+        <name>backoff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="88" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlm__trie__s_1a6fa20cf38b39cdb469d6bfc84a3cd927" prot="public" static="no" mutable="no">
+        <type>uint32</type>
+        <definition>uint32 lm_trie_s::prev_hist[NGRAM_MAX_ORDER - 1]</definition>
+        <argsstring>[NGRAM_MAX_ORDER - 1]</argsstring>
+        <name>prev_hist</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/lm_trie.h" line="89" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="165">
+        <label>lm_trie_quant_s</label>
+        <link refid="structlm__trie__quant__s"/>
+        <childnode refid="166" relation="usage">
+          <edgelabel>tables</edgelabel>
+          <edgelabel>longest</edgelabel>
+        </childnode>
+      </node>
+      <node id="166">
+        <label>bins_s</label>
+        <link refid="structbins__s"/>
+      </node>
+      <node id="169">
+        <label>unigram_s</label>
+        <link refid="structunigram__s"/>
+      </node>
+      <node id="167">
+        <label>longest_s</label>
+        <link refid="structlongest__s"/>
+        <childnode refid="168" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+      <node id="168">
+        <label>base_s</label>
+        <link refid="structbase__s"/>
+      </node>
+      <node id="164">
+        <label>lm_trie_s</label>
+        <link refid="structlm__trie__s"/>
+        <childnode refid="165" relation="usage">
+          <edgelabel>quant</edgelabel>
+        </childnode>
+        <childnode refid="167" relation="usage">
+          <edgelabel>longest</edgelabel>
+        </childnode>
+        <childnode refid="169" relation="usage">
+          <edgelabel>unigrams</edgelabel>
+        </childnode>
+        <childnode refid="170" relation="usage">
+          <edgelabel>middle_begin</edgelabel>
+          <edgelabel>middle_end</edgelabel>
+        </childnode>
+      </node>
+      <node id="171">
+        <label>bitarr_mask_s</label>
+        <link refid="structbitarr__mask__s"/>
+      </node>
+      <node id="170">
+        <label>middle_s</label>
+        <link refid="structmiddle__s"/>
+        <childnode refid="171" relation="usage">
+          <edgelabel>next_mask</edgelabel>
+        </childnode>
+        <childnode refid="168" relation="usage">
+          <edgelabel>base</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/libsphinxbase/lm/lm_trie.h" line="79" column="1" bodyfile="src/libsphinxbase/lm/lm_trie.h" bodystart="79" bodyend="90"/>
+    <listofallmembers>
+      <member refid="structlm__trie__s_1a467064aa205c77cd01be1d3a4fdd1e6d" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>backoff</name></member>
+      <member refid="structlm__trie__s_1ade570f476da0d4fb1d865a7eb4285a3b" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>longest</name></member>
+      <member refid="structlm__trie__s_1aa4a224213e7c1f5fcdb8b15169c237de" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>middle_begin</name></member>
+      <member refid="structlm__trie__s_1a7f39ce792b398ba89e5db14a895189e9" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>middle_end</name></member>
+      <member refid="structlm__trie__s_1a58167a5c232538cebd3e083a097a9a1b" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>ngram_mem</name></member>
+      <member refid="structlm__trie__s_1af256466f3eff8c3b665f10200815ba1d" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>ngram_mem_size</name></member>
+      <member refid="structlm__trie__s_1a6fa20cf38b39cdb469d6bfc84a3cd927" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>prev_hist</name></member>
+      <member refid="structlm__trie__s_1a0a25fcb4269d21eba7596524b4f39bbd" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>quant</name></member>
+      <member refid="structlm__trie__s_1a22667bd186be6bf3804a3a597c96bd93" prot="public" virt="non-virtual"><scope>lm_trie_s</scope><name>unigrams</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

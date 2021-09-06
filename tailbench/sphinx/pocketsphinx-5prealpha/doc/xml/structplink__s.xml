@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structplink__s" kind="struct" language="C++" prot="public">
+    <compoundname>plink_s</compoundname>
+    <includes refid="allphone__search_8h" local="no">allphone_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structplink__s_1a6499a81fb81dd9c295318ad323a0740f" prot="public" static="no" mutable="no">
+        <type><ref refid="structphmm__s" kindref="compound">phmm_t</ref> *</type>
+        <definition>phmm_t* plink_s::phmm</definition>
+        <argsstring></argsstring>
+        <name>phmm</name>
+        <briefdescription>
+<para>Successor PHMM node. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="74" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structplink__s_1a835ba35ee1605a314eefbef9db68c033" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structplink__s" kindref="compound">plink_s</ref> *</type>
+        <definition>struct plink_s* plink_s::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+<para>Next link for parent PHMM node. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="75" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>List of links from a PHMM node to its successors; one link per successor. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="418">
+        <label>plink_s</label>
+        <link refid="structplink__s"/>
+        <childnode refid="418" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="419" relation="usage">
+          <edgelabel>phmm</edgelabel>
+        </childnode>
+      </node>
+      <node id="419">
+        <label>phmm_s</label>
+        <link refid="structphmm__s"/>
+        <childnode refid="418" relation="usage">
+          <edgelabel>succlist</edgelabel>
+        </childnode>
+        <childnode refid="420" relation="usage">
+          <edgelabel>hmm</edgelabel>
+        </childnode>
+        <childnode refid="419" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="420">
+        <label>hmm_s</label>
+        <link refid="structhmm__s"/>
+        <childnode refid="421" relation="usage">
+          <edgelabel>ctx</edgelabel>
+        </childnode>
+      </node>
+      <node id="421">
+        <label>hmm_context_t</label>
+        <link refid="structhmm__context__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/libpocketsphinx/allphone_search.h" line="73" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="73" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structplink__s_1a835ba35ee1605a314eefbef9db68c033" prot="public" virt="non-virtual"><scope>plink_s</scope><name>next</name></member>
+      <member refid="structplink__s_1a6499a81fb81dd9c295318ad323a0740f" prot="public" virt="non-virtual"><scope>plink_s</scope><name>phmm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

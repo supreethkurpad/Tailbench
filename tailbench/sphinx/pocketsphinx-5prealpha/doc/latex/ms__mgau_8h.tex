@@ -1,0 +1,54 @@
+\section{src/libpocketsphinx/ms\+\_\+mgau.h File Reference}
+\label{ms__mgau_8h}\index{src/libpocketsphinx/ms\+\_\+mgau.\+h@{src/libpocketsphinx/ms\+\_\+mgau.\+h}}
+
+
+(Sphinx 3.\+0 specific) A module that wraps up the code of gauden and senone because they are closely related.  
+
+
+{\ttfamily \#include $<$sphinxbase/cmd\+\_\+ln.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/logmath.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/feat.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}acmod.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bin\+\_\+mdef.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ms\+\_\+gauden.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ms\+\_\+senone.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ ms\+\_\+mgau\+\_\+model\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ms__mgau_8h_a95f75d32387d89eb6fa2bc65e032d34c}} 
+\#define {\bfseries ms\+\_\+mgau\+\_\+gauden}(msg)~(msg-\/$>$g)
+\item 
+\mbox{\label{ms__mgau_8h_a182da1c0e7872e853566f7728001d00c}} 
+\#define {\bfseries ms\+\_\+mgau\+\_\+senone}(msg)~(msg-\/$>$s)
+\item 
+\mbox{\label{ms__mgau_8h_acad38d81d6485f2aad5176f8f4283579}} 
+\#define {\bfseries ms\+\_\+mgau\+\_\+topn}(msg)~(msg-\/$>$topn)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ms__mgau_8h_a7dbdcb8e1901665b955e324eefdfeea3}} 
+\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$ {\bfseries ms\+\_\+mgau\+\_\+init} (\textbf{ acmod\+\_\+t} $\ast$acmod, logmath\+\_\+t $\ast$lmath, \textbf{ bin\+\_\+mdef\+\_\+t} $\ast$mdef)
+\item 
+\mbox{\label{ms__mgau_8h_ae553fda1fe6082d50cb95b06a85b2be6}} 
+void {\bfseries ms\+\_\+mgau\+\_\+free} (\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$g)
+\item 
+\mbox{\label{ms__mgau_8h_ab1f5637b68fdc1a4d24e4d6275353216}} 
+int32 {\bfseries ms\+\_\+cont\+\_\+mgau\+\_\+frame\+\_\+eval} (\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$msg, int16 $\ast$senscr, uint8 $\ast$senone\+\_\+active, int32 n\+\_\+senone\+\_\+active, mfcc\+\_\+t $\ast$$\ast$feat, int32 frame, int32 compallsen)
+\item 
+\mbox{\label{ms__mgau_8h_ad3fe464ff15e735bfef15e628c5433fc}} 
+int32 {\bfseries ms\+\_\+mgau\+\_\+mllr\+\_\+transform} (\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$s, \textbf{ ps\+\_\+mllr\+\_\+t} $\ast$mllr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+(Sphinx 3.\+0 specific) A module that wraps up the code of gauden and senone because they are closely related. 
+
+At the time at Sphinx 3.\+1 to 3.\+2, Ravi has decided to rewrite only single-\/stream part of the code into cont\+\_\+mgau.[ch]. This marks the beginning of historical problem of having two sets of Gaussian distribution computation routine, one for single-\/stream and one of multi-\/stream.
+
+In Sphinx 3.\+5, when we figure out that it is possible to allow both 3.\+0 family of tools and 3.\+x family of tools to coexist. This becomes one problem we found that very hard to reconcile. That is why we currently allow two versions of the code in the code base. This is likely to change in the future. 

@@ -1,0 +1,528 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>SPECjbb2005 Run and Reporting Rules</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.4  (Win32)">
+	<META NAME="CREATED" CONTENT="20050602;8491445">
+	<META NAME="CHANGED" CONTENT="20050608;16205315">
+	<META NAME="ProgId" CONTENT="FrontPage.Editor.Document">
+	<META HTTP-EQUIV="Content-Language" CONTENT="en-us">
+	<STYLE>
+	<!--
+		A:link { color: #0000ff }
+		A:visited { color: #0000ff }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" LINK="#0000ff" VLINK="#0000ff" BGCOLOR="#ffffff" DIR="LTR">
+<H1 ALIGN=CENTER><A NAME="_Toc102806097"></A>SPECjbb2005 Run and
+Reporting Rules</H1>
+<P ALIGN=CENTER>Version 1.03<BR>Last modified: June 9, 2005</P>
+<HR>
+<H2><A HREF="#_Toc102806098">1.0 Introduction</A></H2>
+<H3><A HREF="#_Toc102806099">1.1 Applicability</A></H3>
+<H3><A HREF="#_Toc102806100">1.2 Philosophy</A></H3>
+<H3><A HREF="#_Toc102806101">1.3 Caveat</A></H3>
+<H2><A HREF="#_Toc102806102">2.0 Running the SPECjbb2005 Release 1.0
+Benchmark</A></H2>
+<H3><A HREF="#_Toc102806103">2.1 Java Specifications</A></H3>
+<H3><A HREF="#_Toc102806104">2.2 Benchmark Binaries and Recompilation</A></H3>
+<H3><A HREF="#_Toc102806105">2.3 Sequence of Points to Run</A></H3>
+<H3><A HREF="#_Toc102806106">2.4 Runtime Checks</A></H3>
+<H3><A HREF="#_Toc102806107">2.5 Configuration of System Under Test
+(SUT)</A></H3>
+<H3><A HREF="#_Toc102806108">2.6 Optimization Flags</A></H3>
+<H2><A HREF="#_Toc102806109">3.0 Results from the Benchmark</A></H2>
+<H3><A HREF="#3.1 Metrics">3.1 Metrics</A></H3>
+<H3><A HREF="#_Toc102806110">3.2 Validity</A></H3>
+<H3><A HREF="#_Toc102806111">3.3 General Availability</A></H3>
+<H3><A HREF="#_Toc102806112">3.4 Configuration Disclosure</A></H3>
+<H3><A HREF="#_Toc102806113">3.5 Tuning Information and Other Notes</A></H3>
+<H2><A HREF="#_Toc102806114">4.0 Results Disclosure, Usage, and
+Submission</A></H2>
+<H3><A HREF="#_Toc102806115">4.1 Compliance</A></H3>
+<H3><A HREF="#_Toc102806116">4.2 Submission Requirements for
+SPECjbb2005</A></H3>
+<H3><A HREF="#_Toc102806117">4.3 Estimates</A></H3>
+<H3><A HREF="#_Toc102806118">4.4 Comparison to Other Benchmarks</A></H3>
+<H3><A HREF="#_Toc102806119">4.5 Fair Use</A></H3>
+<H2><A HREF="#_Toc102806120">5.0 Research and Academic Usage of
+SPECjbb2005</A></H2>
+<HR SIZE=3>
+<H2><A NAME="Introduction"></A><A NAME="_Toc102806098"></A>1.0
+Introduction</H2>
+<P>This document specifies how Release 1.0 of the SPECjbb2005
+benchmark is to be run for measuring and publicly reporting
+performance results. These rules abide by the norms laid down by
+SPEC. This ensures that results generated with this benchmark are
+meaningful, comparable to other generated results, and are repeatable
+(with documentation covering factors pertinent to duplicating the
+results). 
+</P>
+<P>Per the SPEC license agreement, all results publicly disclosed
+must adhere to these Run and Reporting Rules. 
+</P>
+<H3><A NAME="Applicability"></A><A NAME="_Toc102806099"></A>1.1
+Applicability</H3>
+<P>SPEC intends that this benchmark measure the overall performance
+of systems that provide environments for running server-side Java
+applications. It<FONT COLOR="#ff0000"> </FONT>is not a J2EE benchmark
+and therefore it<FONT COLOR="#ff0000"> </FONT>does not measure
+Enterprise Java Beans (EJBs), servlets, Java Server Pages (JSPs),
+etc. 
+</P>
+<H3><A NAME="Philosophy"></A><A NAME="_Toc102806100"></A>1.2
+Philosophy</H3>
+<P>The general philosophy behind the rules for running the
+SPECjbb2005 benchmark is to ensure that an independent party can
+reproduce the reported results.</P>
+<P>For results to be publishable, SPEC expects: 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Proper use of the SPEC benchmark
+	tools as provided. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">&nbsp;Availability of an
+	appropriate full disclosure report. 
+	</P>
+	<LI><P>&nbsp;Support for all of the appropriate APIs. 
+	</P>
+</UL>
+<P>SPEC is aware of the importance of optimizations in producing the
+best system performance. SPEC is also aware that it is sometimes hard
+to draw an exact line between legitimate optimizations that happen to
+benefit SPEC benchmarks and optimizations that specifically target
+the SPEC benchmarks. However, with the rules below, SPEC wants to
+increase the awareness by implementors and end users of issues of
+unwanted benchmark-specific optimizations that would be incompatible
+with SPEC's goal of fair benchmarking. 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Hardware and software used to run
+	the SPECjbb2005 benchmark must provide a suitable environment for
+	running typical server-side Java programs. (Note that this may be
+	different from a typical environment for client Java programs.) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">&nbsp;Optimizations must generate
+	correct code for a class of programs, where the class of programs
+	must be larger than a single SPEC benchmark. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">&nbsp;Optimizations must improve
+	performance for a class of programs, where the class of programs
+	must be larger than a single SPEC benchmark. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">&nbsp;The vendor encourages the
+	implementation for general use. 
+	</P>
+	<LI><P>&nbsp;The implementation is generally available, documented
+	and supported by the providing vendor. 
+	</P>
+</UL>
+<P>Furthermore, SPEC expects that any public use of results from this
+benchmark shall be for configurations that are appropriate for public
+consumption and comparison. 
+</P>
+<P>In the case where it appears that the above guidelines have not
+been followed, SPEC may investigate such a claim and request that the
+offending optimization (e.g. a SPEC-benchmark specific pattern
+matching) be backed off and the results resubmitted. Or, SPEC may
+request that the vendor correct the deficiency (e.g. make the
+optimization more general purpose or correct problems with code
+generation) before submitting results based on the optimization.</P>
+<H3><A NAME="Caveat"></A><A NAME="_Toc102806101"></A>1.3 Caveat</H3>
+<P>SPEC reserves the right to adapt the benchmark codes, workloads,
+and rules of SPECjbb2005 as deemed necessary to preserve the goal of
+fair benchmarking. SPEC will notify members and licensees whenever it
+makes changes to the benchmark and may rename the metrics. In the
+event that the workload or metric is changed, SPEC reserves the right
+to republish in summary form &quot;adapted&quot; results for
+previously published systems, converted to the new metric. In the
+case of other changes, a republication may necessitate retesting and
+may require support from the original test sponsor.</P>
+<H2><A NAME="Running"></A><A NAME="_Toc102806102"></A>2.0 Running the
+SPECjbb2005 Release 1.0 Benchmark</H2>
+<H3><A NAME="Standards"></A><A NAME="_Toc102806103"></A>2.1 Java
+Specifications</H3>
+<P>Tested systems must provide an environment suitable for running
+typical server-side J2SE 5.0 applications and must be generally
+available for that purpose. Any tested system must include an
+implementation of the Java (tm) Virtual Machine as described by the
+following references, or as amended by SPEC for later Java versions: 
+</P>
+<UL>
+	<LI><P>&nbsp; Java Virtual Machine Specification (ISBN: 0201633.4X) 
+	</P>
+</UL>
+<P>The following are specifically allowed, within the bounds of the
+Java Platform: 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Precompilation and on-disk storage
+	of compiled executables are specifically allowed. However, support
+	for dynamic loading is required. Additional rules are defined in
+	<A HREF="#Feedback_Optimization">section 2.1.1</A>. See <A HREF="#_Toc102806106">section
+	2.4</A> for details about allowable flags for compilation. 
+	</P>
+	<LI><P>Using 80-bit intermediate floating point values is
+	specifically allowed. However, this benchmark has minimal
+	floating-point computation. 
+	</P>
+</UL>
+<P><A NAME="APIs"></A>The system must include a complete
+implementation of those classes that are referenced by this benchmark
+as in the <A HREF="http://java.sun.com/j2se/1.5.0">J2SE 5.0
+specification</A><B><I>.</I></B></P>
+<P>SPEC does not intend to check for implementation of APIs not used
+in the benchmark. For example, the benchmark does not use AWT, and
+SPEC does not intend to check for implementation of AWT. 
+</P>
+<H4><A NAME="Feedback_Optimization"></A>2.1.1 Feedback Optimization
+and Precompilation</H4>
+<P>Feedback directed optimization and precompilation from the Java<FONT COLOR="#ff0000">
+</FONT>bytecodes<FONT COLOR="#ff0000"> </FONT>are allowed, subject to
+the restrictions regarding benchmark-specific optimizations in
+section 1.2. Precompilation and feedback-optimization before the
+measured invocation of the benchmark are allowed. Such optimizations
+must be fully disclosed (see <A HREF="#_Toc102806113">section 3.5</A>).</P>
+<H3><A NAME="Benchmark_Binaries"></A><A NAME="_Toc102806104"></A>2.2
+Benchmark Binaries and Recompilation</H3>
+<P>The SPECjbb2005 benchmark binaries are provided in jar files
+containing the Java classes. Valid runs must use the provided jar
+files and these files must not be updated or modified in any way.
+While the source code of the benchmark is provided for reference, the
+benchmarker must not recompile any of the provided .java files. Any
+runs that used recompiled class files are not valid and can not be
+reported or published. 
+</P>
+<H3><A NAME="Sequence"></A><A NAME="_Toc102806105"></A>2.3 Sequence
+of Points to Run</H3>
+<P>A set of sequential points is run starting at 1 warehouse up
+through the minimum of 8 warehouses or 2 * N warehouses, whichever is
+higher. N is the expected peak number of warehouses, which by default
+is the value returned by the
+java.lang.Runtime.getRuntime.availableProcessors API. N may be
+overridden by setting the input.expected_peak_warehouse property,
+provided that the result is submitted to SPEC for review and an
+acceptable reason is given in the config.sw.notes section. An example
+of an acceptable reason to override the default value of N would be
+if System.availableProcessors() does not return an accurate or valid
+value for the hardware architecture of the SUT. An example of an
+unacceptable reason would be decreasing the value of N from the
+default to hide scalability problems and artificially obtain a higher
+score.</P>
+<P>The sequence must increment by 1. The test may be configured to
+run beyond 2 * N warehouses by setting the
+input.ending_number_warehouses property. The points beyond the 2 * N
+point will appear in the report and on the graph, but will not be
+used to calculate the metric.</P>
+<P>In some cases, the system under test may not be able to run all
+the points up to 2*N. If the system is able to run up to M
+warehouses, where N &lt; M &lt; 2*N, the test will still be marked
+valid and the missing points from M+1 to 2*N will be considered to
+have a throughput of 0 bops for the purposes of metric computation.
+In this situation, the tester is strongly encouraged to contact the
+HW and SW vendors for fixes that would allow the system to run to
+2*N. If such fixes are not available, the tester also has the option
+of disabling some CPUs and rerunning the test. Since the location of
+the peak, N, is strongly correlated to the number of CPUs in the
+system, reducing the number of CPUs will reduce N, and
+correspondingly, 2*N. 
+</P>
+<H3><A NAME="Validity"></A><A NAME="_Toc102806106"></A>2.4 Runtime
+Checks</H3>
+<P>The following are required for a valid run and are automatically
+checked: 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">The Java environment must pass the
+	partial conformance testing done by the benchmark prior to running
+	any points. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">&nbsp;Contains all required points
+	as defined in the <A HREF="#_Toc102806105">previous section</A>. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">&nbsp;The actual measurement
+	interval for each warehouse iteration must be no less than 238.8
+	seconds and no greater than 264 seconds. (Note: the measurement
+	interval specified in the properties file must be 240 seconds. This
+	rule only allows for some variation in communicating the end of
+	measurement to the threads.) 
+	</P>
+	<LI><P>For each warehouse iteration, the start of the measurement
+	interval of the first instance must be greater than or equal to the
+	start of the rampup interval of the last instance and the end of the
+	measurement interval of every instance must be less than or equal to
+	the end of the rampdown interval of the instance that ended first.
+	Comment: the intent of this requirement is to ensure that the
+	measurement interval for all instances occurs during the time all
+	instances are running. 
+	</P>
+</UL>
+<H3><A NAME="System_Configuration"></A><A NAME="_Toc102806107"></A>2.5
+Configuration of System Under Test (SUT) 
+</H3>
+<P>The SPECjbb2005 benchmark runs on one machine (in a single OS
+image) as one or more instances of a single Java application. Use of
+clusters or aggregations of machines is specifically disallowed. No
+network, database, or web server components are required, only a Java
+environment. 
+</P>
+<H4><A NAME="OS_Tuning"></A>2.5.2 Operating System Tuning</H4>
+<P>Any deviations from the standard, default configuration for the
+SUT will need to be documented so an independent party would be able
+to reproduce the result without further assistance. 
+</P>
+<P>These changes must be &quot;generally available&quot;, i.e.,
+available, supported and documented. For example, if a special tool
+is needed to change the OS state, it must be provided to users and
+documented. 
+</P>
+<H4><A NAME="parameters"></A>2.5.3 Benchmark Parameters</H4>
+<P>There are a number of parameters, in two properties files, that
+control the operation of SPECjbb2005. Parameter usage is explained in
+the SPECjbb2005 User Guide. The properties in the &quot;Fixed Input
+Parameters&quot; section of the file &quot;SPECjbb.props&quot; must
+not be changed from the values as provided by SPEC. The properties in
+the &quot;Changeable Input Parameters&quot; section may be set to the
+appropriate values for a valid run.</P>
+<P>All benchmark settings must be reported, as well as the command
+line used for the reported run, and for precompilation, if any. 
+</P>
+<H3><A NAME="Optimization_Flags"></A><A NAME="_Toc102806108"></A>2.6
+Optimization Flags</H3>
+<P>Both JVMs and native compilers are capable of modifying their
+behavior based on flags. Flags which do not break conformance to
+<A HREF="#_Toc102806103">section 2.1</A> are allowed. 
+</P>
+<H3><A NAME="Results"></A><A NAME="_Toc102806109"></A>3.0 Results
+from the Benchmark</H3>
+<H3><A NAME="3.1 Metrics"></A>3.1 Metrics</H3>
+<P><FONT COLOR="#000000">SPECjbb2005 produces two throughput metrics,
+as follows: </FONT>
+</P>
+<P><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The
+total throughput measurement, bops</FONT></P>
+<P><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The
+average throughput per JVM instance, bops/JVM</FONT></P>
+<P>The throughput metrics are calculated as follows:</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For each JVM instance,
+all points (numbers of warehouses) are run, from 1 up to at least
+twice the number N of warehouses expected to produce the peak
+throughput. At a minimum all points from 1 to 8 must be run. 
+</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For all points from N
+to 2*N warehouses, the scores for the individual JVM instances are
+added.</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The summed throughputs
+for all the points from N warehouses to 2*N inclusive warehouses are
+averaged (arithmetic mean is used). This average is the SPECjbb2005
+bops metric. As explained in section 2.3, results from systems that
+are unable to run all points up to 2*N warehouses are still
+considered valid. For any missing points in the range N to 2*N, the
+throughput is considered to be 0 bops in the metric computation. 
+</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The bops/JVM is
+obtained by dividing the SPECjbb2005 bops metric by the number of JVM
+instances.</P>
+<P>The reporting tool contained within SPECjbb2005 produces a graph
+of the throughput at all the measured points with warehouses on the
+horizontal axis and the summed throughputs on the vertical axis. All
+points from 1 to the minimum of 8 or 2*N are required to be run and
+reported. Missing points in the range N to 2*N will be reported to
+have a throughput of 0 bops. The points being averaged for the metric
+will be marked on the report.</P>
+<H3><A NAME="Results_Validity"></A><A NAME="_Toc102806110"></A>3.2
+Validity</H3>
+<P>The run must meet all requirements described in <A HREF="#_Toc102806106">section
+2.4</A> to be a valid run. 
+</P>
+<H3><A NAME="Availability"></A><A NAME="_Toc102806111"></A>3.3
+General Availability</H3>
+<P>All components, both hardware and software, must be generally
+available within 3 months of the publication date in order to be a
+valid publication. However, if JVM licensing issues cause a change in
+software availability date after publication date, the change will be
+allowed to be made without penalty, subject to subcommittee review. 
+</P>
+<P>If pre-release hardware or software is tested, then the test
+sponsor represents that the performance measured is generally
+representative of the performance to be expected on the same
+configuration of the released system. If the sponsor later finds the
+performance of the released system to be 5% lower than that reported
+for the pre-release system, then the sponsor is requested to report a
+corrected test result. 
+</P>
+<H3><A NAME="Disclosure"></A><A NAME="_Toc102806112"></A>3.4
+Configuration Disclosure</H3>
+<P>All configuration properties contained in the descriptive
+properties file must be accurate. 
+</P>
+<H3><A NAME="Tuning_Information"></A><A NAME="_Toc102806113"></A>3.5
+Tuning Information and Other Notes</H3>
+<P>The descriptive properties file contains a parameter
+<I>config.sw.tuning</I> which should be used to <FONT COLOR="#000000">document
+any system tuning information. SPEC is aware that mechanisms for
+doing this include environment flags, command line flags,
+configuration files, registries, etc. Whatever the mechanism, it must
+be fully disclosed here in sufficient detail to enable the results to
+be reproduced. Examples of tuning information which should be
+documented include, but are not limited to: </FONT>
+</P>
+<P><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Description of System Tuning (includes any special OS parameters set,
+changes to standard daemons (services for Microsoft Windows)) </FONT>
+</P>
+<P><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+List of flags used </FONT>
+</P>
+<P><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Precompilation or feedback optimization employed </FONT>
+</P>
+<P><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any special per-JVM tuning for multi-JVM
+running (e.g. pinning JVMs to specific processors) </FONT>
+</P>
+<P><FONT FACE="Times New Roman"><FONT SIZE=3>SPEC is aware that
+sometimes the spelling of command line switches or environment
+variables, or even their presence, changes between beta releases and
+final releases. For example, suppose that during a product beta the
+tester specifies:</FONT></FONT></P>
+<PRE STYLE="margin-bottom: 0.2in">         java -XX:fast -XX:architecture_level=3 -XX:unroll 16</PRE><P>
+but the tester knows that in the final release the architecture level
+will be automatically set by -XX:fast, and the product is going to
+change to set the default unroll level to 16. In that case, the
+actual command line used for the run should be recorded in the
+command-line parameter, <I>config.command_line</I>, and the final
+form of the command line should be reported in the <I>config.sw.tuning</I>
+parameter of the descriptive properties file. 
+</P>
+<P>The tester is expected to exercise due diligence regarding such
+flag reporting, to ensure that the disclosure correctly records the
+intended final product. 
+</P>
+<H2><A NAME="_Toc102806114"></A>4.0 Results Disclosure, Usage, and
+Submission</H2>
+<P>In order to publicly disclose SPECjbb2005 results, the tester must
+adhere to these reporting rules in addition to having followed the
+run rules above. The goal of the reporting rules is to ensure the
+system under test is sufficiently documented such that someone could
+reproduce the test and its results. 
+</P>
+<H3><A NAME="Compliance"></A><A NAME="_Toc102806115"></A>4.1
+Compliance</H3>
+<P>Any SPECjbb2005 result produced in compliance with these run and
+reporting rules may be publicly disclosed and represented as valid
+SPECjbb2005 results. 
+</P>
+<P>Any test result not in full compliance with the run and reporting
+rules must not be represented using the SPECjbb2005 metrics. 
+</P>
+<P>Results for which the value of the input.expected_peak_warehouse
+property has been set must be submitted and reviewed by SPEC to
+determine compliance with <A HREF="#Sequence">section 2.3</A>. 
+</P>
+<H3><A NAME="Submission"></A><A NAME="_Toc102806116"></A>4.2
+Submission Requirements for SPECjbb2005</H3>
+<P>Once you have a compliant run and wish to submit it to SPEC for
+review, you will need to provide the raw file(s) created by the run. 
+</P>
+<P>Once you have the submission ready, please e-mail it to
+<A HREF="mailto:subjbb2005@spec.org">subjbb2005@spec.org</A> 
+</P>
+<P>SPEC encourages the submission of results to SPEC for review by
+the relevant subcommittee and subsequent publication on SPEC's
+website. Vendors may publish compliant results independently,
+provided the input.expected_peak_warehouse property has not been set.
+However any SPEC member may request a full disclosure report for that
+result and the tester must comply within 10 business days. Issues
+raised concerning a result's compliance to the run and reporting
+rules will be taken up by the relevant subcommittee regardless of
+whether or not the result was formally submitted to SPEC. 
+</P>
+<H3><A NAME="Estimates"></A><A NAME="_Toc102806117"></A>4.3 Estimates</H3>
+<P>Estimated results are not allowed to be publically disclosed.</P>
+<H3><A NAME="Comparison_to_other_benchmarks"></A><A NAME="_Toc102806118"></A>
+4.4 Comparison to Other Benchmarks</H3>
+<P>SPECjbb2005 results must not be publicly compared to results from
+any other benchmark. This would be a violation of the SPECjbb2005
+reporting rules and, in the case of the TPC benchmarks, a serious
+violation of the TPC &quot;fair use policy.&quot; 
+</P>
+<H3><A NAME="Fair_Use"></A><A NAME="_Toc102806119"></A>4.5 Fair Use</H3>
+<P>Consistency and fairness are guiding principles for SPEC. To
+assure these principles are sustained, the following guidelines have
+been created with the intent that they serve as specific guidance for
+any organization (or individual) who chooses to make public
+comparisons using SPEC benchmark results. 
+</P>
+<P>When any organization or individual makes public claims using SPEC
+benchmark results, SPEC requires that the following guidelines be
+observed: 
+</P>
+<BLOCKQUOTE>[<B>1</B>] Reference is made to the SPEC trademark. Such
+reference may be included in a notes section with other trademark
+references (see <A HREF="http://www.spec.org/spec/trademarks.html"><FONT COLOR="#000000">http://www.spec.org/spec/trademarks.html</FONT>
+</A>for all SPEC trademarks and service marks). 
+</BLOCKQUOTE>
+<BLOCKQUOTE>[<B>2</B>] The SPEC web site (<A HREF="http://www.spec.org/">http://www.spec.org</A>)
+or a suitable sub page is noted as the source for more information. 
+</BLOCKQUOTE>
+<BLOCKQUOTE>[<B>3</B>] If competitive comparisons are made the
+following rules apply:</BLOCKQUOTE>
+<BLOCKQUOTE STYLE="margin-left: 1.18in; margin-right: 1.18in"><B>a.</B>
+the results compared must utilize SPEC metrics and be compliant with
+that SPEC benchmark's run and reporting rules, 
+</BLOCKQUOTE>
+<BLOCKQUOTE STYLE="margin-left: 1.18in; margin-right: 1.18in"><B>b.</B>
+the basis for comparison must be stated, 
+</BLOCKQUOTE>
+<BLOCKQUOTE STYLE="margin-left: 1.18in; margin-right: 1.18in"><B>c.</B>
+the source of the competitive data must be stated, and the licensee
+(tester) must be identified or be clearly identifiable from the
+source, 
+</BLOCKQUOTE>
+<BLOCKQUOTE STYLE="margin-left: 1.18in; margin-right: 1.18in"><B>d.</B>
+the date competitive data was retrieved must be stated, 
+</BLOCKQUOTE>
+<BLOCKQUOTE STYLE="margin-left: 1.18in; margin-right: 1.18in"><B>e.</B>
+All data used in comparisons must be publicly available (from SPEC or
+elsewhere)</BLOCKQUOTE>
+<BLOCKQUOTE>[<B>4</B>] Comparisons with or between non-compliant test
+results can only be made within academic or research documents where
+the deviations from the rules for any non-compliant results have been
+disclosed.</BLOCKQUOTE>
+<P>The following paragraph is an example of acceptable language when
+publicly using SPEC benchmarks for competitive comparisons: 
+</P>
+<P><B>Example:</B> 
+</P>
+<P>SPEC and the benchmark name SPECjbb are trademarks of the Standard
+Performance Evaluation Corporation. Competitive benchmark results
+stated above reflect results published on www.spec.org as of June 8,
+2005. The comparison presented above is based on the best performing
+4-cpu servers currently shipping by Vendor 1, Vendor 2 and Vendor 3.
+For the latest SPECjbb2005 benchmark results, visit
+<A HREF="http://www.spec.org/jbb2005/results/">http://www.spec.org/jbb2005/results/</A>.</P>
+<H2><A NAME="Research_Use"></A><A NAME="_Toc102806120"></A>5.0
+Research and Academic Usage of SPECjbb2005</H2>
+<P>SPEC encourages use of the SPECjbb2005 benchmark in academic and
+research environments. It is understood that experiments in such
+environments may be conducted in a less formal fashion than that
+demanded of licensees submitting to the SPEC web site. For example, a
+research environment may use early prototype hardware that simply
+cannot be expected to stay up for the length of time required to run
+the required number of points, or may use research compilers that are
+unsupported and are not generally available. 
+</P>
+<P>Nevertheless, SPEC encourages researchers to obey as many of the
+run rules as practical, even for informal research. SPEC respectfully
+suggests that following the rules will improve the clarity,
+reproducibility, and comparability of research results. Where the
+rules cannot be followed, SPEC requires the results be clearly
+distinguished from results officially submitted to SPEC, by
+disclosing the deviations from the rules.</P>
+<HR>
+<P>Copyright 2005 Standard Performance Evaluation Corporation 
+</P>
+</BODY>
+</HTML>

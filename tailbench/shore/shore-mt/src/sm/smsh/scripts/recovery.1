@@ -1,0 +1,94 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: recovery.1,v 1.10 1999/06/07 19:05:43 kupsch Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#	Test Create, Destroy, Read of Records
+#
+
+source $script_dir/vol.init
+
+
+set num_rec 15
+set id_width %07d
+
+set s [format data 1]
+
+sm begin_xct
+set fid [sm create_file $volid regular]
+verbose created file $fid
+sm commit_xct
+
+###############################################
+#   insert num_rec records
+#
+sm begin_xct
+
+verbose creating $num_rec in file $fid
+
+set rid(0) $null_rid
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set rid($i) [
+	sm create_rec $fid [format $id_width $i] 10 data.[format %07d $i]
+    ]
+    verbose $rid($i)
+}
+
+verbose "aborting ..."
+
+sm abort_xct
+
+sm begin_xct
+
+verbose creating $num_rec in file $fid
+
+set rid(0) $null_rid
+for {set i 1} {$i <= $num_rec} {incr i} {
+    set rid($i) [
+	sm create_rec $fid [format $id_width $i] 10 data.[format %08d $i]
+    ]
+    verbose $rid($i)
+}
+
+verbose "committing ..."
+sm commit_xct
+
+verbose "restarting"
+restart 
+
+verbose "recovered ..."
+
+sm begin_xct
+verbose destroying file $fid
+sm destroy_file $fid
+sm commit_xct
+
+verbose "Done with recovery.1"
+unset s id_width num_rec  
+unset fid rid i
+

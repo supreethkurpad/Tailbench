@@ -1,0 +1,25 @@
+
+Before building or running applications, please update the variables in
+configs.sh to appropriate values.
+
+The build.sh script at the top level can be used to build all or some of the
+applications in a batch. The list of applications to build can be passed as
+command line arguments. E.g., './build.sh img-dnn xapian' would build img-dnn
+and xapian. Note that if the harness needs to be built, it should always be the
+first argument. With no arguments, all applications as well as the harness are
+built.
+
+Alternatively, each application has its own build.sh that can be invoked from
+the top level directory of that application to build it. Each application
+directory also has a clean.sh script for cleaning the build state.
+
+For each application, the build produces three binaries: 
+ - *_integrated can be used to run the application in the integrated harness
+   configuration
+ - *_server_networked and *_client_networked can be used to run the application
+   in either the networked or the loopback harness configurations. Note that the
+   loopback configuration simply uses localhost as the server IP (see README for
+   more information on the three configurations).
+
+Each application directory has run.sh and run_networked.sh scripts that
+demonstrate how to run the application in these configurations.

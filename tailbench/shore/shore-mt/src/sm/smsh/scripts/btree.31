@@ -1,0 +1,266 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.31,v 1.16 2010/06/08 22:28:28 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+# This script demonstrates a bug which occurs
+# when multiple threads of the same xct 
+# try inserting entries to 
+# the same btree at the same time, with locality
+# and maybe duplicates
+# GNATS 69.
+# This functionality cannot be supported now.
+# We can expect any number of read-only threads and at most
+# one updating thread in an transaction.
+#
+
+# WARNING: this runs for a long time 
+# If you want it to run in geologic time, try ntries 50, nxct 100
+# If you want it to run in < 3 minutes, try ntries 5, nxct 10, nthreads 9
+#
+source $script_dir/vol.init
+if {$multi_threaded_xct == 0 } {
+    echo "Not configured for multi-threaded xcts"
+} else {
+
+	set KEYTYPE B*1000
+
+	proc SCANNER {threadname ndx seed KEYTYPE} {
+		global ntries volid nxct short_form cc tx
+		sync
+		for {set j 1} {$j <= $nxct} {incr j} {
+			if {$tx == 0} {
+				sm begin_xct
+			} else {
+				sm attach_xct $tx
+			}
+			set tid [sm xct_to_tid [sm xct]]
+	verbose $tid
+			for {set i 1} {$i <= $ntries} {incr i} {
+				# sm sleep 1
+				set key [expr {$j + ($i * $nxct) + $seed} ]
+				verbose thread $threadname: scanning for $key 
+				set scan [sm create_scan $ndx == $key == $key]
+				verbose "{" CREATED_SCAN $scan
+				set r "OK"
+				for {set k 1} {$k <= $ntries} {incr k} {
+					catch {sm scan_next $scan} r
+					verbose "  USED_SCAN" $scan result $r
+					if {[string compare $r eof] == 0} then { break }
+					if {[string compare $r E_DEADLOCK] == 0} then { 
+					   set tid [sm xct_to_tid [sm xct]]
+					   verbose SCANNER $tid $r
+					   break 
+					}
+					# verbose "scanned ($r)"
+				}
+				# verbose thread $threadname: scanned $key 
+				verbose DESTROY_SCAN $scan "}"
+				sm destroy_scan $scan "SCANNER ntries $ntries tx $tx r $r"
+			}
+			if {$tx == 0 } {
+			verbose committing xct $tx F
+				sm commit_xct
+			} else {
+				sm detach_xct $tx
+			}
+		}
+	}
+
+	proc UP_UPDATER {threadname ndx seed KEYTYPE} {
+		global ntries volid nxct short_form cc tx
+		sync
+		for {set j 1} {$j <= $nxct} {incr j} {
+			if {$tx == 0} {
+				sm begin_xct
+			} else {
+				sm attach_xct $tx
+			}
+			set tid [sm xct_to_tid [sm xct]]
+			verbose $tid
+			for {set i 1} {$i <= $ntries} {incr i} {
+				# sm sleep 1
+				set key [expr {$j + ($i * $nxct) + $seed} ]
+				verbose thread $threadname: UP_UPDATER creating entry $key "->" $threadname $KEYTYPE
+				catch {sm create_assoc $ndx [format $short_form $key ] $threadname $KEYTYPE} err
+				if {[string compare $err E_DEADLOCK] == 0} then { 
+				   set tid [sm xct_to_tid [sm xct]]
+				   verbose UP_UPDATER $tid $err
+				   break 
+				}
+				# verbose thread $threadname: created entry $key "->" $threadname 
+			}
+			if {$tx == 0 } {
+				verbose committing xct $tx G
+				sm commit_xct
+			} else {
+				sm detach_xct $tx
+			}
+		}
+	}
+
+	proc DOWN_UPDATER { threadname ndx seed KEYTYPE} {
+		global ntries volid nxct short_form cc tx 
+		sync
+		for {set j $nxct} {$j >= 1} {set j [expr {$j - 1}] } {
+			if {$tx == 0} {
+				sm begin_xct
+			} else {
+				sm attach_xct $tx
+			}
+			set tid [sm xct_to_tid [sm xct]]
+			verbose $tid
+			for {set i $ntries} {$i >= 1} {set i [expr {$i - 1}] } {
+				# sm sleep 1
+				set key [expr {$j + ($i * $nxct) + $seed} ]
+				verbose thread $threadname: DOWN_UPDATER creating entry $key "->" $threadname $KEYTYPE
+				catch {sm create_assoc $ndx [format $short_form $key ] $threadname $KEYTYPE} err
+				if {[string compare $err E_DEADLOCK] == 0} then { 
+				   set tid [sm xct_to_tid [sm xct]]
+				   verbose DOWN_UPDATER $tid $err
+				   break 
+				}
+				# verbose thread $threadname: created entry $key "->" $threadname 
+			}
+			if {$tx == 0} {
+				verbose committing xct $tx H
+				sm commit_xct
+			} else {
+				sm detach_xct $tx
+			}
+		}
+	}
+
+	proc doit {nthreads} {
+		sm gather_stats reset
+		global t ntries volid nxct short_form cc tx ndx verbose_flag KEYTYPE
+
+		set third [expr {$nthreads/3}]
+		set twothirds [expr {$third * 2} ]
+
+		for {set i 1} {$i < $third} {incr i} {
+			set q "t$i"
+			set t($i) [fork_thread SCANNER $q $ndx $i $KEYTYPE ]
+			verbose $i: forked thread $t($i)
+		}
+		for {set i $third} {$i < $twothirds} {incr i} {
+			set q "t$i"
+			set t($i) [fork_thread UP_UPDATER $q $ndx $i $KEYTYPE]
+			verbose $i: forked thread $t($i)
+		}
+		for {set k $twothirds} {$i <= $nthreads} {incr i} {
+			set name "B$i"
+			set t($i) [fork_thread DOWN_UPDATER $name $ndx $i $KEYTYPE ]
+			verbose $i: forked thread $t($i)
+		}
+		verbose syncing threads
+
+		for {set k 1} {$k <= $nthreads} {incr k} {
+			set q $t($k)
+			verbose sync_thread  $q
+			sync_thread  $q
+		}
+
+		verbose waiting for threads
+		for {set l 1} {$l <= $nthreads} {incr l} {
+			verbose join_thread  $t($l)
+			join_thread  $t($l)
+		}
+		set dummy [sm gather_stats reset]
+		verbose [pnzstats $dummy]
+		set save_verbose_flag $verbose_flag
+		# set verbose_flag 1
+		# dstats $volid
+		# set verbose_flag $save_verbose_flag
+		#
+	    verbose END DOIT $nthreads
+	}
+
+    set ntries 5
+    set nxct 20
+    set nthreads 10
+    set tx 0
+
+    # foreach cc {t_cc_kvl} 
+    foreach cc {t_cc_im t_cc_kvl t_cc_modkvl t_cc_none}  {
+        sm begin_xct
+		set tid [sm xct_to_tid [sm xct]]
+		verbose $tid
+        set ndx [sm create_index $volid btree regular $KEYTYPE $cc]
+		verbose committing xct $tid A
+        sm commit_xct
+
+        set tx 0
+        verbose **********************************************
+        verbose $cc separate transactions
+        verbose **********************************************
+        doit $nthreads
+
+        sm begin_xct
+		set tid [sm xct_to_tid [sm xct]]
+        sm destroy_index $ndx
+		verbose committing xct $tid B
+        sm commit_xct
+    }
+
+    if { 1 } {
+	echo "EXPECT LATCH-MUTEX DEADLOCK"
+        # NB: this gets into latch-mutex deadlock: see PR 345(?)
+        foreach cc {t_cc_im t_cc_kvl t_cc_modkvl t_cc_none} {
+
+        sm begin_xct
+		set tid [sm xct_to_tid [sm xct]] 
+		verbose $tid with cc $cc
+        set ndx [sm create_index $volid btree regular $KEYTYPE $cc]
+		verbose committing xct $tid C
+        sm commit_xct
+
+        sm begin_xct
+		set tid [sm xct_to_tid [sm xct]] 
+verbose $tid  with cc $cc
+            set tx [sm xct]
+            verbose **********************************************
+            verbose $cc one multi-threaded transaction
+            verbose **********************************************
+            doit $nthreads
+			verbose committing xct $tid D
+        sm commit_xct
+
+        sm begin_xct
+		set tid [sm xct_to_tid [sm xct]]
+        sm destroy_index $ndx
+		verbose committing xct $tid E
+        sm commit_xct
+        }
+    }
+
+    unset t
+	unset ntries nxct ndx cc tx nthreads 
+	unset KEYTYPE
+}
+

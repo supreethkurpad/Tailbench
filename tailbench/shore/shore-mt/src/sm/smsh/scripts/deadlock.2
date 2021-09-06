@@ -1,0 +1,110 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: deadlock.2,v 1.19.4.3 2009/11/23 22:34:44 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+# Test Upgrade deadlock detection
+#
+#    t1: {SH(A), EX(B)} --> EX(A)(upgrade)
+#    t2: {SH(A)} --> SH(B)
+#
+#    deadlock.5 does the same thing but with records and
+#    sm commands that would grab the locks to read/update the records.
+#
+
+set A "s(10.1)"
+set B "s(20.2)"
+
+proc t1 {} {
+    global A B
+    sm begin_xct
+	# step 1: get SH lock on A, EX lock on B
+    sm lock $A SH LONG
+    sm lock $B EX LONG
+    verbose "t1: acquired SH on $A, EX on $B"
+    verbose "{ t1: sync B"
+    sync
+    verbose "t1: sync B }"
+	# step 2: try to upgrade to EX on A
+    verbose "t1: attempting to acquire EX on $A"
+    # catch deadlock
+    verbose catch deadlock:
+	if [catch {sm lock $A EX LONG} errorno] {
+		verbose "(EXPECTED E_DEADLOCK) error is $errorno"
+		assert {error_is $errorno E_DEADLOCK}
+	}
+	sm abort_xct
+}
+
+proc t2 {} {
+    global A B
+    sm begin_xct
+	# step 1:  get SH on A
+    sm lock $A SH LONG
+    verbose "t2: acquired SH on $A"
+    verbose "{ t2: sync B"
+    sync
+    verbose "t2: sync  B}"
+    verbose "{ t2: sync C"
+    sync
+    verbose "t2: sync  C}"
+
+	# step 2:  try to get SH lock on B
+    verbose "t2: attempting to acquire SH on $B"
+    # catch deadlock
+    verbose catch deadlock:
+	if [catch {sm lock $B SH LONG} errorno] {
+		verbose "(EXPECTED E_DEADLOCK) error is $errorno"
+		assert {error_is $errorno E_DEADLOCK}
+	}
+    sm commit_xct
+}
+
+####  main  ####
+
+source $script_dir/vol.init
+
+set x1 [fork_thread t1 {}]
+verbose t1 $x1
+set x2 [fork_thread t2 {}]
+verbose x2 $x2
+
+
+verbose "{ sync_thread $x1 $x2 B "
+sync_thread $x1 $x2
+verbose "sync_thread $x1 $x2 }"
+
+
+verbose "{ sync_thread $x2  C"
+sync_thread $x2
+verbose "sync_thread $x2 }"
+
+verbose join_thread $x1 $x2
+join_thread $x1 $x2
+
+unset A B x1 x2
+

@@ -1,0 +1,58 @@
+\section{src/libpocketsphinx/ptm\+\_\+mgau.h File Reference}
+\label{ptm__mgau_8h}\index{src/libpocketsphinx/ptm\+\_\+mgau.\+h@{src/libpocketsphinx/ptm\+\_\+mgau.\+h}}
+
+
+Fast phonetically-\/tied mixture evaluation.  
+
+
+{\ttfamily \#include $<$sphinxbase/fe.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/logmath.\+h$>$}\newline
+{\ttfamily \#include $<$sphinxbase/mmio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}acmod.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hmm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bin\+\_\+mdef.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ms\+\_\+gauden.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ ptm\+\_\+topn\+\_\+s}
+\item 
+struct \textbf{ ptm\+\_\+fast\+\_\+eval\+\_\+s}
+\item 
+struct \textbf{ ptm\+\_\+mgau\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ptm__mgau_8h_ab1e3230da8b59628476ecdf70e97ec9a}} 
+typedef struct \textbf{ ptm\+\_\+mgau\+\_\+s} {\bfseries ptm\+\_\+mgau\+\_\+t}
+\item 
+\mbox{\label{ptm__mgau_8h_a4542a2b38a0c0b8ea62432f63fa3c921}} 
+typedef struct \textbf{ ptm\+\_\+topn\+\_\+s} {\bfseries ptm\+\_\+topn\+\_\+t}
+\item 
+\mbox{\label{ptm__mgau_8h_af870ed22578ba58631d06a1c01752ced}} 
+typedef struct \textbf{ ptm\+\_\+fast\+\_\+eval\+\_\+s} {\bfseries ptm\+\_\+fast\+\_\+eval\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{ptm__mgau_8h_a712679ca84e5b9f7351d969abbe1021a}} 
+\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$ {\bfseries ptm\+\_\+mgau\+\_\+init} (\textbf{ acmod\+\_\+t} $\ast$acmod, \textbf{ bin\+\_\+mdef\+\_\+t} $\ast$mdef)
+\item 
+\mbox{\label{ptm__mgau_8h_ac202aeb266594ab9c98294a73e16f00a}} 
+void {\bfseries ptm\+\_\+mgau\+\_\+free} (\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$s)
+\item 
+\mbox{\label{ptm__mgau_8h_ae9fb76ef388e6541bd6c1b20fe8bc094}} 
+int \textbf{ ptm\+\_\+mgau\+\_\+frame\+\_\+eval} (\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$s, int16 $\ast$senone\+\_\+scores, uint8 $\ast$senone\+\_\+active, int32 n\+\_\+senone\+\_\+active, mfcc\+\_\+t $\ast$$\ast$featbuf, int32 frame, int32 compallsen)
+\begin{DoxyCompactList}\small\item\em Compute senone scores for the active senones. \end{DoxyCompactList}\item 
+\mbox{\label{ptm__mgau_8h_ad619b68c9db5e2fed688f62ea4468c4e}} 
+int {\bfseries ptm\+\_\+mgau\+\_\+mllr\+\_\+transform} (\textbf{ ps\+\_\+mgau\+\_\+t} $\ast$s, \textbf{ ps\+\_\+mllr\+\_\+t} $\ast$mllr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fast phonetically-\/tied mixture evaluation. 
+
+\begin{DoxyAuthor}{Author}
+David Huggins-\/\+Daines {\tt dhuggins@cs.\+cmu.\+edu} 
+\end{DoxyAuthor}

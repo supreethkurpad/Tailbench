@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structad__rec__t" kind="struct" language="C++" prot="public">
+    <compoundname>ad_rec_t</compoundname>
+    <briefdescription>
+<para>Audio recording structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxad/ad_oss.c" line="80" column="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

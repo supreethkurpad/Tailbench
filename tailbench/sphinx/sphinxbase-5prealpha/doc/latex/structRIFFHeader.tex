@@ -1,0 +1,60 @@
+\section{R\+I\+F\+F\+Header Struct Reference}
+\label{structRIFFHeader}\index{R\+I\+F\+F\+Header@{R\+I\+F\+F\+Header}}
+
+
+R\+I\+FF 44-\/byte header structure for MS wav files.  
+
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structRIFFHeader_a41ad222f7a391957baebb72b520ca313}} 
+char {\bfseries rifftag} [4]
+\item 
+\mbox{\label{structRIFFHeader_a0432c23ba2c7421bc1a918e813e89b74}} 
+int32 {\bfseries Total\+Length}
+\item 
+\mbox{\label{structRIFFHeader_ab02082cd826cc18e14bf1509936d96d6}} 
+char {\bfseries wavefmttag} [8]
+\item 
+\mbox{\label{structRIFFHeader_a4f124bd29a8d7a36de8281d2bc836353}} 
+int32 {\bfseries Remaining\+Length}
+\item 
+\mbox{\label{structRIFFHeader_a6d51315afb5ee7c17ec42fed06ef72df}} 
+int16 {\bfseries data\+\_\+format}
+\item 
+\mbox{\label{structRIFFHeader_ab639e289d0009f82f7860edd8e324daf}} 
+int16 {\bfseries numchannels}
+\item 
+\mbox{\label{structRIFFHeader_a7723e76cc1ff383b0f4f7a053f43d31f}} 
+int32 {\bfseries Sampling\+Freq}
+\item 
+\mbox{\label{structRIFFHeader_a003ffd3a4cc8cd55c7b4031723c5bac1}} 
+int32 {\bfseries Bytes\+Per\+Sec}
+\item 
+\mbox{\label{structRIFFHeader_a88c8a1a0cc69b955eada53fd28078497}} 
+int16 {\bfseries Block\+Align}
+\item 
+\mbox{\label{structRIFFHeader_ad7a6f7b03f79a574ba5edd47e9a3451c}} 
+int16 {\bfseries Bits\+Per\+Sample}
+\item 
+\mbox{\label{structRIFFHeader_ad8c58fa74d6d52637aa6f674a3a9482d}} 
+char {\bfseries datatag} [4]
+\item 
+\mbox{\label{structRIFFHeader_a8900896018b1277439d20d824d8c3aba}} 
+int32 {\bfseries datalength}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+R\+I\+FF 44-\/byte header structure for MS wav files. 
+
+
+
+Definition at line 91 of file sphinx\+\_\+fe.\+c.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/sphinx\+\_\+fe/sphinx\+\_\+fe.\+c\end{DoxyCompactItemize}

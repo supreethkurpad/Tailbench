@@ -1,0 +1,62 @@
+\section{dict\+\_\+t Struct Reference}
+\label{structdict__t}\index{dict\+\_\+t@{dict\+\_\+t}}
+
+
+a structure for a dictionary.  
+
+
+
+
+{\ttfamily \#include $<$dict.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structdict__t_a5fab69be1205a6c84ec93a4b08924d3c}} 
+int {\bfseries refcnt}
+\item 
+\mbox{\label{structdict__t_a3a01eb5a3ebda5652d434be26e0cfdd2}} 
+\textbf{ bin\+\_\+mdef\+\_\+t} $\ast$ \textbf{ mdef}
+\begin{DoxyCompactList}\small\item\em Model definition used for phone I\+Ds; N\+U\+LL if none used. \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_a9e6636bbe45936a03381fea430addd31}} 
+\textbf{ dictword\+\_\+t} $\ast$ \textbf{ word}
+\begin{DoxyCompactList}\small\item\em Array of entries in dictionary. \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_a7205aae4fbeef3aaa53f94b6af529af2}} 
+hash\+\_\+table\+\_\+t $\ast$ \textbf{ ht}
+\begin{DoxyCompactList}\small\item\em Hash table for mapping word strings to word ids. \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_af6142600cef73f846b58ba9bc36b02ac}} 
+int32 \textbf{ max\+\_\+words}
+\begin{DoxyCompactList}\small\item\em \#\+Entries allocated in dict, including empty slots \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_af00f60319a7025361e291af5addb6b31}} 
+int32 \textbf{ n\+\_\+word}
+\begin{DoxyCompactList}\small\item\em \#\+Occupied entries in dict; ie, excluding empty slots \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_abd48fdafaaa68a8df2fd82163c51a95c}} 
+int32 \textbf{ filler\+\_\+start}
+\begin{DoxyCompactList}\small\item\em First filler word id (read from filler dict) \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_a77c6692e56308968804add1292275cb7}} 
+int32 \textbf{ filler\+\_\+end}
+\begin{DoxyCompactList}\small\item\em Last filler word id (read from filler dict) \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_a22bc6c52ce9e04c4f3f7d0ba1972ee51}} 
+s3wid\+\_\+t \textbf{ startwid}
+\begin{DoxyCompactList}\small\item\em F\+OR I\+N\+T\+E\+R\+N\+A\+L-\/\+U\+SE O\+N\+LY. \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_a3875be5336e2d9888f6d5cb83ded82c5}} 
+s3wid\+\_\+t \textbf{ finishwid}
+\begin{DoxyCompactList}\small\item\em F\+OR I\+N\+T\+E\+R\+N\+A\+L-\/\+U\+SE O\+N\+LY. \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_aad07b22b94c360923f151c02890f6e68}} 
+s3wid\+\_\+t \textbf{ silwid}
+\begin{DoxyCompactList}\small\item\em F\+OR I\+N\+T\+E\+R\+N\+A\+L-\/\+U\+SE O\+N\+LY. \end{DoxyCompactList}\item 
+\mbox{\label{structdict__t_a2240400afe39fbee593ff7e33f97008c}} 
+int {\bfseries nocase}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+a structure for a dictionary. 
+
+Definition at line 76 of file dict.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/libpocketsphinx/\textbf{ dict.\+h}\end{DoxyCompactItemize}

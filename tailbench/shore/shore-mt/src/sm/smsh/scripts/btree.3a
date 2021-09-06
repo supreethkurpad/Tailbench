@@ -1,0 +1,169 @@
+# <std-header style='tcl' orig-src='shore'>
+#
+#  $Id: btree.3a,v 1.13.4.1 2010/01/12 02:01:59 nhall Exp $
+#
+# SHORE -- Scalable Heterogeneous Object REpository
+#
+# Copyright (c) 1994-99 Computer Sciences Department, University of
+#                       Wisconsin -- Madison
+# All Rights Reserved.
+#
+# Permission to use, copy, modify and distribute this software and its
+# documentation is hereby granted, provided that both the copyright
+# notice and this permission notice appear in all copies of the
+# software, derivative works or modified versions, and any portions
+# thereof, and that both notices appear in supporting documentation.
+#
+# THE AUTHORS AND THE COMPUTER SCIENCES DEPARTMENT OF THE UNIVERSITY
+# OF WISCONSIN - MADISON ALLOW FREE USE OF THIS SOFTWARE IN ITS
+# "AS IS" CONDITION, AND THEY DISCLAIM ANY LIABILITY OF ANY KIND
+# FOR ANY DAMAGES WHATSOEVER RESULTING FROM THE USE OF THIS SOFTWARE.
+#
+# This software was developed with support by the Advanced Research
+# Project Agency, ARPA order number 018 (formerly 8230), monitored by
+# the U.S. Army Research Laboratory under contract DAAB07-91-C-Q518.
+# Further funding for this work was provided by DARPA through
+# Rome Research Laboratory Contract No. F30602-97-2-0247.
+#
+#   -- do not edit anything above this line --   </std-header>
+
+#
+#  test btree bulk load - this script is called by btree.3 and 
+# is strictly subordinate to that script
+# 
+# It assumes that ktype and property is defined by the calling script
+#
+
+
+#
+# create file of <key, el> pair (to be sorted later in blkld)
+#
+sm begin_xct
+set tid [sm xct_to_tid [sm xct]]
+verbose tid $tid
+set f1 [sm create_file $volid]
+for {set i $nrec} {$i > 0} {set i [ expr {$i - 1} ]} {
+    verbose2 sm create_typed_hdr_rec $f1 $i 10 $i $ktype 
+    sm create_typed_hdr_rec $f1 $i 10 $i $ktype 
+}
+verbose BTREE.3a: $tid created file $f1
+sm commit_xct
+
+verbose audit before bulk load
+verbose2 [dstats $volid]
+
+#
+# create index and load it up 
+#
+sm begin_xct
+set tid [sm xct_to_tid [sm xct]]
+verbose tid $tid
+set ndx [sm create_index $volid btree $property $ktype]
+verbose BTREE.3a: $tid created index $ndx
+
+set stat [sm blkld_ndx $ndx 1 $f1 $ktype]
+verbose BTREE.3a: $tid bulk-loaded $ndx from $f1
+# verbose bulk-loaded index $ndx
+# verbose stats: $stat
+
+if {$logging==0} {
+    verbose "Logging off: sm abort_xct not done.  Committing instead."
+    sm destroy_index $ndx
+    sm commit_xct 
+} else {
+    verbose BTREE.3a: $tid ABORTING
+    sm abort_xct 
+}
+
+# have to do after xct is ended, if we're to audit:
+verbose bulk-loaded index $ndx
+verbose2 [dstats $volid]
+
+sm begin_xct
+set tid [sm xct_to_tid [sm xct]]
+verbose tid $tid
+set ndx [sm create_index $volid btree $property $ktype]
+verbose BTREE.3a: $tid created index $ndx
+set stat [sm blkld_ndx $ndx 1 $f1 $ktype]
+verbose BTREE.3a: $tid bulk-loaded $ndx from $f1
+# verbose bulk-loaded index $ndx again
+# verbose stats: $stat
+#sm print_index $ndx
+verbose BTREE.3a: $tid bulk-loaded $ndx from $f1
+verbose BTREE.3a: $tid COMMITTING
+sm commit_xct
+
+verbose bulk-loaded index $ndx again
+verbose2 [dstats $volid]
+
+
+#
+# verify ascending
+#
+verbose "scan up:"
+sm begin_xct
+set tid [sm xct_to_tid [sm xct]]
+verbose tid $tid
+set scan [sm create_scan $ndx >= neg_inf <= pos_inf]
+for {set i 1} {$i <= $nrec} {incr i}  {
+    set r [sm scan_next $scan $ktype]
+    if {[string compare $r eof] == 0} then { break }
+    verbose "scanned ($r)"
+    set key [string trimleft [lindex $r 0] 0]
+    set el [lindex $r 1]
+    verbose "scanned ($key,$el)"
+    switch $ktype {
+	f4 {
+	    verbose2 checking $ktype i=$i el=$el
+	    assert {expr {[string compare $i $el] == 0}}
+	}
+	f8 { 
+	    verbose2 checking $ktype i=$i el=$el
+	    assert {expr {[string compare $i $el] == 0}}
+	}
+	b*1000 {
+	    verbose checking $ktype i=$i el=$el key=$key
+	    assert {expr {[string compare $key $el] == 0}}
+	    # key != i because lexicographic order is 1,10,2,...
+	}
+	default {
+	    verbose2 checking --$ktype-- i=$i el=$el key=$key
+	    assert {expr {[string compare $key $i] == 0}}
+	    assert {expr {[string compare $el $i] == 0}}
+	}
+    }
+}
+
+assert {expr $i > $nrec}
+assert {expr [string compare [sm scan_next $scan $ktype] eof] == 0}
+sm destroy_scan $scan
+verbose "---- successful -- $ktype"
+
+for {set i 1} {$i <= $nrec} {incr i} {
+    verbose "xxxx probe: $ktype $i"
+    if [catch { set el [sm find_assoc_typed $ndx $i $ktype] } err] {
+	verbose caught error: $err
+	verbose $err
+    }
+    verbose "xxxx probe $ktype got $el"
+    assert {expr $i == $el}
+    verbose probed $i
+}
+sm commit_xct
+
+verbose "---- successful -- $ktype"
+
+sm begin_xct
+set tid [sm xct_to_tid [sm xct]]
+verbose tid $tid
+verbose sm destroy_index $ndx
+sm destroy_index $ndx
+verbose sm destroy_file $f1
+sm destroy_file $f1
+sm commit_xct
+verbose [sm gather_stats]
+
+
+unset tid
+unset f1 stat key scan i r el ndx err
+

@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structphseg__s" kind="struct" language="C++" prot="public">
+    <compoundname>phseg_s</compoundname>
+    <includes refid="allphone__search_8h" local="no">allphone_search.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structphseg__s_1af5f7284a68f194d1aa2ca76e28b1dea9" prot="public" static="no" mutable="no">
+        <type><ref refid="s3types_8h_1ae5f70241ce62a79747f0611029a6409d" kindref="member">s3cipid_t</ref></type>
+        <definition>s3cipid_t phseg_s::ci</definition>
+        <argsstring></argsstring>
+        <name>ci</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="93" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphseg__s_1a82ba17fadb468176f5bfc741fffee991" prot="public" static="no" mutable="no">
+        <type><ref refid="hmm_8h_1ac9c9bae34d05f32736ae1743316737ef" kindref="member">frame_idx_t</ref></type>
+        <definition>frame_idx_t phseg_s::sf</definition>
+        <argsstring></argsstring>
+        <name>sf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="94" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphseg__s_1a478a1e355e8304bcb82008c8e4780a07" prot="public" static="no" mutable="no">
+        <type><ref refid="hmm_8h_1ac9c9bae34d05f32736ae1743316737ef" kindref="member">frame_idx_t</ref></type>
+        <definition>frame_idx_t phseg_s::ef</definition>
+        <argsstring></argsstring>
+        <name>ef</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="94" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphseg__s_1a6ae2b5307a7cad3a5f2dad8b00824889" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 phseg_s::score</definition>
+        <argsstring></argsstring>
+        <name>score</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="95" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structphseg__s_1a9e8752871085308730328f50ef5cb420" prot="public" static="no" mutable="no">
+        <type>int32</type>
+        <definition>int32 phseg_s::tscore</definition>
+        <argsstring></argsstring>
+        <name>tscore</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libpocketsphinx/allphone_search.h" line="96" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Phone level segmentation information. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libpocketsphinx/allphone_search.h" line="92" column="1" bodyfile="src/libpocketsphinx/allphone_search.h" bodystart="92" bodyend="97"/>
+    <listofallmembers>
+      <member refid="structphseg__s_1af5f7284a68f194d1aa2ca76e28b1dea9" prot="public" virt="non-virtual"><scope>phseg_s</scope><name>ci</name></member>
+      <member refid="structphseg__s_1a478a1e355e8304bcb82008c8e4780a07" prot="public" virt="non-virtual"><scope>phseg_s</scope><name>ef</name></member>
+      <member refid="structphseg__s_1a6ae2b5307a7cad3a5f2dad8b00824889" prot="public" virt="non-virtual"><scope>phseg_s</scope><name>score</name></member>
+      <member refid="structphseg__s_1a82ba17fadb468176f5bfc741fffee991" prot="public" virt="non-virtual"><scope>phseg_s</scope><name>sf</name></member>
+      <member refid="structphseg__s_1a9e8752871085308730328f50ef5cb420" prot="public" virt="non-virtual"><scope>phseg_s</scope><name>tscore</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

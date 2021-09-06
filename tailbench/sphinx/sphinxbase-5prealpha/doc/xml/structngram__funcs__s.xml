@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structngram__funcs__s" kind="struct" language="C++" prot="public">
+    <compoundname>ngram_funcs_s</compoundname>
+    <includes refid="ngram__model__internal_8h" local="no">ngram_model_internal.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structngram__funcs__s_1ae13797f51aee31ddde0f150c1bbe1570" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* ngram_funcs_s::free) (ngram_model_t *model)</definition>
+        <argsstring>)(ngram_model_t *model)</argsstring>
+        <name>free</name>
+        <briefdescription>
+<para>Implementation-specific function for freeing an ngram_model_t. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="114" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__funcs__s_1ae3cc072e20e6c1556c91b783ec061a4a" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* ngram_funcs_s::apply_weights) (ngram_model_t *model, float32 lw, float32 wip)</definition>
+        <argsstring>)(ngram_model_t *model, float32 lw, float32 wip)</argsstring>
+        <name>apply_weights</name>
+        <briefdescription>
+<para>Implementation-specific function for applying language model weights. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="118" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="118" bodyend="-1"/>
+        <referencedby refid="ngram__model_8h_1a50f00497f61c104cea77180129d93126" compoundref="ngram__model_8c" startline="360" endline="363">ngram_model_apply_weights</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__funcs__s_1ab74c094f1e88465559fdd29859bf4395" prot="public" static="no" mutable="no">
+        <type>int32(*</type>
+        <definition>int32(* ngram_funcs_s::score) (ngram_model_t *model, int32 wid, int32 *history, int32 n_hist, int32 *n_used)</definition>
+        <argsstring>)(ngram_model_t *model, int32 wid, int32 *history, int32 n_hist, int32 *n_used)</argsstring>
+        <name>score</name>
+        <briefdescription>
+<para>Implementation-specific function for querying language model score. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="122" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="122" bodyend="-1"/>
+        <referencedby refid="ngram__model_8h_1a6ac5799e78ea4ad82a11e2439016471e" compoundref="ngram__model_8c" startline="375" endline="404">ngram_ng_score</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__funcs__s_1a9c9f83dc5151495a21b7eff16ad747d3" prot="public" static="no" mutable="no">
+        <type>int32(*</type>
+        <definition>int32(* ngram_funcs_s::raw_score) (ngram_model_t *model, int32 wid, int32 *history, int32 n_hist, int32 *n_used)</definition>
+        <argsstring>)(ngram_model_t *model, int32 wid, int32 *history, int32 n_hist, int32 *n_used)</argsstring>
+        <name>raw_score</name>
+        <briefdescription>
+<para>Implementation-specific function for querying raw language model probability. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="129" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="129" bodyend="-1"/>
+        <referencedby refid="ngram__model_8h_1a218d8d140b93d3d8008f8933f9e04ec6" compoundref="ngram__model_8c" startline="454" endline="483">ngram_ng_prob</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__funcs__s_1aec7921e64c7cc778fa2267d6717482c3" prot="public" static="no" mutable="no">
+        <type>int32(*</type>
+        <definition>int32(* ngram_funcs_s::add_ug) (ngram_model_t *model, int32 wid, int32 lweight)</definition>
+        <argsstring>)(ngram_model_t *model, int32 wid, int32 lweight)</argsstring>
+        <name>add_ug</name>
+        <briefdescription>
+<para>Implementation-specific function for adding unigrams. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function updates the internal structures of a language model to add the given unigram with the given weight (defined as a log-factor applied to the uniform distribution). This includes reallocating or otherwise resizing the set of unigrams.</para><para><simplesect kind="return"><para>The language model score (not raw log-probability) of the new word, or 0 for failure. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="143" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="143" bodyend="-1"/>
+        <referencedby refid="ngram__model_8h_1a38e034d58ee0d6a4c0dd6f852cb71c3c" compoundref="ngram__model_8c" startline="649" endline="674">ngram_model_add_word</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structngram__funcs__s_1af1ab9c61d3b9fa4a4782b8df3089baa6" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* ngram_funcs_s::flush) (ngram_model_t *model)</definition>
+        <argsstring>)(ngram_model_t *model)</argsstring>
+        <name>flush</name>
+        <briefdescription>
+<para>Implementation-specific function for purging N-Gram cache. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="148" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="148" bodyend="-1"/>
+        <referencedby refid="ngram__model_8h_1a8304f56d82278824b0a94c254d7235aa" compoundref="ngram__model_8c" startline="256" endline="260">ngram_model_flush</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation-specific functions for operating on ngram_model_t objects. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/libsphinxbase/lm/ngram_model_internal.h" line="110" column="1" bodyfile="src/libsphinxbase/lm/ngram_model_internal.h" bodystart="110" bodyend="149"/>
+    <listofallmembers>
+      <member refid="structngram__funcs__s_1aec7921e64c7cc778fa2267d6717482c3" prot="public" virt="non-virtual"><scope>ngram_funcs_s</scope><name>add_ug</name></member>
+      <member refid="structngram__funcs__s_1ae3cc072e20e6c1556c91b783ec061a4a" prot="public" virt="non-virtual"><scope>ngram_funcs_s</scope><name>apply_weights</name></member>
+      <member refid="structngram__funcs__s_1af1ab9c61d3b9fa4a4782b8df3089baa6" prot="public" virt="non-virtual"><scope>ngram_funcs_s</scope><name>flush</name></member>
+      <member refid="structngram__funcs__s_1ae13797f51aee31ddde0f150c1bbe1570" prot="public" virt="non-virtual"><scope>ngram_funcs_s</scope><name>free</name></member>
+      <member refid="structngram__funcs__s_1a9c9f83dc5151495a21b7eff16ad747d3" prot="public" virt="non-virtual"><scope>ngram_funcs_s</scope><name>raw_score</name></member>
+      <member refid="structngram__funcs__s_1ab74c094f1e88465559fdd29859bf4395" prot="public" virt="non-virtual"><scope>ngram_funcs_s</scope><name>score</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
