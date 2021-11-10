@@ -1,0 +1,2 @@
+svc: mean 0.646 ms | p95 1.602 ms | p99 2.096 ms | max 2.528 ms
+end2end: mean 0.737 ms | p95 1.693 ms | p99 2.210 ms | max 2.608 ms

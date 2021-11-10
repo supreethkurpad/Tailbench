@@ -1,0 +1,16 @@
+ 77085 root      rt   0  555492  34676   5144 R  5.0  0.4   0:00.15 xapian_integrat
+ 77081 root      rt   0  555492  34676   5144 S  4.6  0.4   0:00.14 xapian_integrat
+ 77083 root      rt   0  555492  34676   5144 S  4.6  0.4   0:00.14 xapian_integrat
+ 77084 root      rt   0  555492  34676   5144 S  4.6  0.4   0:00.14 xapian_integrat
+ 77087 root      rt   0  555492  34676   5144 S  4.6  0.4   0:00.14 xapian_integrat
+ 77082 root      rt   0  555492  34676   5144 S  4.3  0.4   0:00.13 xapian_integrat
+ 77086 root      rt   0  555492  34676   5144 S  4.3  0.4   0:00.13 xapian_integrat
+ 77088 root      rt   0  555492  34676   5144 S  4.3  0.4   0:00.13 xapian_integrat
+ 77081 root      rt   0  555492  34676   5144 S  5.0  0.4   0:00.29 xapian_integrat
+ 77083 root      rt   0  555492  34676   5144 S  5.0  0.4   0:00.29 xapian_integrat
+ 77086 root      rt   0  555492  34676   5144 S  5.0  0.4   0:00.28 xapian_integrat
+ 77087 root      rt   0  555492  34676   5144 S  5.0  0.4   0:00.29 xapian_integrat
+ 77088 root      rt   0  555492  34676   5144 S  5.0  0.4   0:00.28 xapian_integrat
+ 77084 root      rt   0  555492  34676   5144 S  4.6  0.4   0:00.28 xapian_integrat
+ 77085 root      rt   0  555492  34676   5144 S  4.6  0.4   0:00.29 xapian_integrat
+ 77082 root      rt   0  555492  34676   5144 S  4.0  0.4   0:00.25 xapian_integrat

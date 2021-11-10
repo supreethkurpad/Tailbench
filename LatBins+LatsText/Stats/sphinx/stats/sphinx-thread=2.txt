@@ -1,0 +1,12 @@
+ 76097 root      20   0  288016 213184  14440 R 29.1  2.6   0:00.88 decoder_integra
+ 76098 root      20   0  288016 213184  14440 S 27.5  2.6   0:00.83 decoder_integra
+ 76096 root      20   0  288016 213184  14440 S  0.0  2.6   0:00.00 decoder_integra
+ 76097 root      20   0  288016 214944  14440 R 30.5  2.6   0:01.80 decoder_integra
+ 76098 root      20   0  288016 214944  14440 S 28.1  2.6   0:01.68 decoder_integra
+ 76096 root      20   0  288016 214944  14440 S  0.0  2.6   0:00.00 decoder_integra
+ 76098 root      20   0  288016 214944  14440 S 22.5  2.6   0:02.36 decoder_integra
+ 76097 root      20   0  288016 214944  14440 R 13.2  2.6   0:02.20 decoder_integra
+ 76096 root      20   0  288016 214944  14440 S  0.0  2.6   0:00.00 decoder_integra
+ 76097 root      20   0  288016 215956  14440 S 45.0  2.7   0:03.56 decoder_integra
+ 76098 root      20   0  288016 215956  14440 S 29.1  2.7   0:03.24 decoder_integra
+ 76096 root      20   0  288016 215956  14440 S  0.0  2.7   0:00.00 decoder_integra
